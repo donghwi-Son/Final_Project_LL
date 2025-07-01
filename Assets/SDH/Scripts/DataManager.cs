@@ -144,8 +144,6 @@ public class DataManager : MonoBehaviour
     [Header("설정")]
     [SerializeField] private int maxSaveSlots = 3;
     [SerializeField] private bool enableDebugLog = true;
-    [SerializeField] private bool autoSave = true;
-    [SerializeField] private float autoSaveInterval = 300f;
 
     public GameData currentGameData;
     private GameData gameDataforGlobal;
@@ -158,11 +156,11 @@ public class DataManager : MonoBehaviour
     private const string GLOBAL_STATS_FILE = "GlobalGameStats.json";
 
     // 이벤트 시스템
-    public event Action<Achievement> OnAchievementUnlocked;
-    public event Action<int> OnLevelUp;
+    //public event Action<Achievement> OnAchievementUnlocked;
+    //public event Action<int> OnLevelUp;
     public event Action OnDataLoaded;
     public event Action OnDataSaved;
-    public event Action<string> OnStatUpdated;
+    //public event Action<string> OnStatUpdated;
 
     private void Awake()
     {
@@ -338,7 +336,7 @@ public class DataManager : MonoBehaviour
             string json = JsonUtility.ToJson(currentGameData.settings, true);
             string filePath = Path.Combine(saveFolderPath, SETTINGS_FILE);
             File.WriteAllText(filePath, json);
-            if(enableDebugLog)
+            if (enableDebugLog)
                 Debug.Log("Settings saved successfully to " + filePath);
         }
         catch (Exception e)
