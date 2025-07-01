@@ -9,15 +9,15 @@ public class PlayerState
         this.psm = psm;
     }
 
-    public void EnterState()
+    public virtual void EnterState()
     {
     }
 
-    public void UpdateState()
+    public virtual void UpdateState()
     {
     }
 
-    public void ExitState()
+    public virtual void ExitState()
     {
     }
 
