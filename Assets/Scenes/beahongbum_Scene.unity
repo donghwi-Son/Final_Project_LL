@@ -146,12 +146,16 @@ AudioListener:
   m_GameObject: {fileID: 151261501}
   m_Enabled: 1
 --- !u!20 &151261503
+  m_GameObject: {fileID: 759602257}
+  m_Enabled: 1
+--- !u!20 &759602259
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151261501}
+  m_GameObject: {fileID: 759602257}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
