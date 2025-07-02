@@ -1,21 +1,25 @@
 using UnityEngine;
 
-public class PlayerSpecialAttackState : PlayerState
+public class PlayerAirAttState : PlayerState
 {
     PlayerController player => psm.player;
-    public PlayerSpecialAttackState(PlayerStateMachine psm) : base(psm)
+
+    public PlayerAirAttState(PlayerStateMachine psm) : base(psm)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-       // player.anim.SetTrigger("SpecialAttack");
+        player.CanDoubleJump = false;
+        player.CanAirAttack = false;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
+        if(player.rb.linearVelocityY < 0 )
+            psm.ChangeState(player.FallingState);
     }
 
     public override void ExitState()

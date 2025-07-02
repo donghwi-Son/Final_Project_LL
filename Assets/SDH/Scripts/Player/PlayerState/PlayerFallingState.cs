@@ -1,17 +1,16 @@
 using UnityEngine;
 
-public class PlayerJumpState : PlayerState
+public class PlayerFallingState : PlayerState
 {
     PlayerController player => psm.player;
-    public PlayerJumpState(PlayerStateMachine psm) : base(psm)
+    public PlayerFallingState(PlayerStateMachine psm) : base(psm)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        Jump();
-        player.anim.SetBool("isJumping", true);
+        player.anim.SetBool("isFalling", true);
     }
 
     public override void UpdateState()
@@ -26,23 +25,21 @@ public class PlayerJumpState : PlayerState
         {
             psm.ChangeState(player.AirAttState);
         }
-        else if (player.rb.linearVelocityY < 0)
+        else if (player.IsGrounded)
         {
-            psm.ChangeState(player.FallingState);
+            if(player.DoubleJumpActive && !player.CanDoubleJump)
+            {
+                player.CanDoubleJump = true;
+            }
+            player.CanAirAttack = true;
+           // player.anim.SetBool("isGround", true);
+            psm.ChangeState(player.IdleState);
         }
     }
- 
 
     public override void ExitState()
     {
         base.ExitState();
-        player.anim.SetBool("isJumping", false);
-
+        player.anim.SetBool("isFalling", false);
     }
-
-    void Jump()
-    {
-        player.rb.AddForce(new Vector2(0, player.jumpForce), ForceMode2D.Impulse);
-    }
-
 }

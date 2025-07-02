@@ -1,10 +1,9 @@
-
-
+using UnityEngine;
 
 public class PlayerState
 {
     protected PlayerStateMachine psm;
-    protected PlayerState(PlayerStateMachine psm)
+    public PlayerState(PlayerStateMachine psm)
     {
         this.psm = psm;
     }

@@ -4,94 +4,28 @@ using System.IO;
 using UnityEngine;
 
 [Serializable]
-public class GlobalGameStats
+public class GlobalGameRecord
 {
     public float totalPlayTime;
     public int totalDeaths;
     public int totalMonsterKills;
-    public float totalFoodConsumed;
-    public float totalWaterConsumed;
-    public int totalItemsCrafted;
-    public float totalDistanceTraveled;
+    public int totalUsedMoney;
+    //public List<Artifact> artifacts = new List<Artifact>();
 }
 [Serializable]
-public class SurvivalStats
+public class SingleGameRecord
 {
-    // 생존 통계
-    public float totalSurvivedTime;
-    public int totalDayCount;
-    public int totalDeaths;
-    public int gamesPlayed;
-    public float totalDistanceTraveled;
-
-    // 전투 통계
-    public int totalMonsterKills;
-    public int totalDamageTaken;
-    public int totalDamageDealt;
-
-    // 자원 소비 통계
-    public float totalFoodConsumed;
-    public float totalWaterConsumed;
-    public int totalItemsCrafted;
-
-    // 기타 통계
-    // 업적 퀘스트같은거 생기면 추가?
+    public float playTime;
+    public int monsterKills;
+    public int usedMoney;
 }
 
 [Serializable]
 public class PlayerInfo
 {
-    public float transformX;
-    public float transformY;
-    public float transformZ;
-    public float currentHealth;
-    public float currentHunger;
-    public float currentThirst;
-    public bool isHungerDebuffed;
-    public bool isThirstDebuffed;
-    public int playerLevel;
-    public float experience;
-    public int skillPoints;
-    public int money;
-}
-
-[Serializable]
-public class Achievement
-{
-    public string id;
-    public string title;
-    public string description;
-    public AchievementType type;
-    public float targetValue;
-    public float currentProgress;
-    public bool isUnlocked;
-    public string unlockedDate;
-    public int rewardMoney;
-    public int rewardSkillPoints;
-
-    public Achievement(string id, string title, string description, AchievementType type, float targetValue, int rewardMoney, int rewardSkillPoints)
-    {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.type = type;
-        this.targetValue = targetValue;
-        this.rewardMoney = rewardMoney;
-        this.rewardSkillPoints = rewardSkillPoints;
-        this.currentProgress = 0f;
-        this.isUnlocked = false;
-        this.unlockedDate = string.Empty;
-    }
-}
-
-public enum AchievementType
-{
-    Survival,      // 생존
-    Combat,        // 전투
-    Crafting,      // 제작
-    Exploration,   // 탐험
-    Collection,    // 수집
-    Special        // 특수
+    public int RoomID;
+    public AttackMode attackMode;
+    //public List<ItemData> items = new();
 }
 
 [Serializable]
@@ -119,18 +53,14 @@ public class SaveSlotInfo
     public bool isEmpty;
     public string saveName;
     public string lastSaved;
-    public int playerLevel;
-    public int currentDay;
-    public float totalPlayTime;
     public string previewImagePath;
 }
 
 [Serializable]
 public class GameData
 {
-    public SurvivalStats stats = new();
+    public SingleGameRecord singleGameRecord = new();
     public PlayerInfo player = new();
-    public List<Achievement> achievements = new();
     public GameSettings settings = new();
     public List<SaveSlotInfo> saveSlots = new();
     public string lastSaved;
@@ -147,13 +77,13 @@ public class DataManager : MonoBehaviour
 
     public GameData currentGameData;
     private GameData gameDataforGlobal;
-    private GlobalGameStats globalStats;
+    private GlobalGameRecord globalGameRecord;
     private string saveFolderPath;
     private const string SAVE_FOLDER = "SaveData";
     private const string SAVE_FILE_NAME = "GameSave_Slot_";
     private const string SAVE_FILE_EXTENSION = ".json";
     private const string SETTINGS_FILE = "GameSettings.json";
-    private const string GLOBAL_STATS_FILE = "GlobalGameStats.json";
+    private const string GLOBAL_STATS_FILE = "GlobalGameRecord.json";
 
     // 이벤트 시스템
     //public event Action<Achievement> OnAchievementUnlocked;
@@ -201,9 +131,6 @@ public class DataManager : MonoBehaviour
                 isEmpty = true,
                 saveName = $"Save Slot {i + 1}",
                 lastSaved = string.Empty,
-                playerLevel = 1,
-                currentDay = 1,
-                totalPlayTime = 0f,
                 previewImagePath = string.Empty
             });
         }
@@ -221,9 +148,6 @@ public class DataManager : MonoBehaviour
             SaveSlotInfo slotInfo = currentGameData.saveSlots[slotIndex];
             slotInfo.isEmpty = false;
             slotInfo.lastSaved = currentGameData.lastSaved;
-            slotInfo.playerLevel = currentGameData.player.playerLevel;
-            slotInfo.currentDay = currentGameData.stats.totalDayCount;
-            slotInfo.totalPlayTime = currentGameData.stats.totalSurvivedTime;
 
             string jsonData = JsonUtility.ToJson(currentGameData, true);
             string filePath = Path.Combine(saveFolderPath, SAVE_FILE_NAME + slotIndex + SAVE_FILE_EXTENSION);
@@ -279,9 +203,6 @@ public class DataManager : MonoBehaviour
                 File.Delete(filePath);
                 currentGameData.saveSlots[slotIndex].isEmpty = true;
                 currentGameData.saveSlots[slotIndex].lastSaved = string.Empty;
-                currentGameData.saveSlots[slotIndex].playerLevel = 1;
-                currentGameData.saveSlots[slotIndex].currentDay = 1;
-                currentGameData.saveSlots[slotIndex].totalPlayTime = 0f;
                 currentGameData.saveSlots[slotIndex].previewImagePath = string.Empty;
                 if (enableDebugLog)
                     Debug.Log($"[DataManager] 저장 슬롯 {slotIndex}이(가) 삭제되었습니다.");
@@ -383,11 +304,11 @@ public class DataManager : MonoBehaviour
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-                globalStats = JsonUtility.FromJson<GlobalGameStats>(json);
+                globalGameRecord = JsonUtility.FromJson<GlobalGameRecord>(json);
             }
             else
             {
-                globalStats = new GlobalGameStats();
+                globalGameRecord = new GlobalGameRecord();
             }
         }
         catch (Exception e)
@@ -398,10 +319,10 @@ public class DataManager : MonoBehaviour
 
     public void SaveGlobalStats()
     {
-        if (globalStats == null) return;
+        if (globalGameRecord == null) return;
         try
         {
-            string json = JsonUtility.ToJson(globalStats, true);
+            string json = JsonUtility.ToJson(globalGameRecord, true);
             string filePath = Path.Combine(saveFolderPath, GLOBAL_STATS_FILE);
             File.WriteAllText(filePath, json);
         }
@@ -413,13 +334,6 @@ public class DataManager : MonoBehaviour
 
     public void UpdateGlobalStats()
     {
-        globalStats.totalPlayTime += gameDataforGlobal.stats.totalSurvivedTime;
-        globalStats.totalDeaths += gameDataforGlobal.stats.totalDeaths;
-        globalStats.totalMonsterKills += gameDataforGlobal.stats.totalMonsterKills;
-        globalStats.totalFoodConsumed += gameDataforGlobal.stats.totalSurvivedTime;
-        globalStats.totalWaterConsumed += gameDataforGlobal.stats.totalSurvivedTime;
-        globalStats.totalItemsCrafted += gameDataforGlobal.stats.totalItemsCrafted;
-        globalStats.totalDistanceTraveled += gameDataforGlobal.stats.totalDistanceTraveled;
         SaveGlobalStats();
     }
 
@@ -428,8 +342,5 @@ public class DataManager : MonoBehaviour
         if (currentGameData == null || currentGameData.player == null) return;
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject == null) return;
-        currentGameData.player.transformX = playerObject.transform.position.x;
-        currentGameData.player.transformY = playerObject.transform.position.y;
-        currentGameData.player.transformZ = playerObject.transform.position.z;
     }
 }

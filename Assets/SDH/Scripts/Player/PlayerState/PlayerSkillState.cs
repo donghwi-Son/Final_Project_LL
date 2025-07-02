@@ -1,16 +1,25 @@
 using UnityEngine;
 
-public class PlayerSkillState : MonoBehaviour
+public class PlayerSkillState : PlayerState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    PlayerController player => psm.player;
+    public PlayerSkillState(PlayerStateMachine psm) : base(psm)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void EnterState()
     {
-        
+        base.EnterState();
+        //player.anim.SetTrigger("Skill");
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
     }
 }

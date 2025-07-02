@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class PlayerSpecialAttackState : PlayerState
+public class PlayerDashAttState : PlayerState
 {
     PlayerController player => psm.player;
-    public PlayerSpecialAttackState(PlayerStateMachine psm) : base(psm)
+
+    public PlayerDashAttState(PlayerStateMachine psm) : base(psm)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-       // player.anim.SetTrigger("SpecialAttack");
     }
 
     public override void UpdateState()
