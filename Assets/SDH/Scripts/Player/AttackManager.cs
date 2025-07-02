@@ -1,12 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-public enum AttackType
-{
-    Basic,
-    Special,
-    Skill
-}
 
 public enum AttackMode
 {
@@ -14,19 +8,6 @@ public enum AttackMode
     Ranged
 }
 
-public enum EnhancementType
-{
-    Damage,
-    Speed,
-    Range,
-    Penetration,
-    Explosion,
-    Chain,
-    Poison,
-    Fire,
-    Ice,
-    Lightning
-}
 
 public class AttackManager : MonoBehaviour
 {
