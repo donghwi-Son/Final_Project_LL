@@ -21,7 +21,7 @@ public class ItemDatabase : MonoBehaviour
 
     void LoadDefinitions()
     {
-        var rows = CSVReader.Read("Item/ItemCSV");
+        var rows = CSVReader.Read("DataTable/ItemCSV");
         _defs = new Dictionary<int, ItemDefinition>();
 
         foreach (var row in rows)
@@ -37,9 +37,18 @@ public class ItemDatabase : MonoBehaviour
                     typeof(ItemInfo.ItemUpgradeType),
                     row["UpgradeType"].ToString(), true),
                 description = row["Description"].ToString(),
-                iconName    = row["IconName"].ToString()
+                iconName    = row["IconName"].ToString(),
+                //itemTag = (ItemInfo.ItemTag)Enum.Parse(
+                    //typeof(ItemInfo.ItemTag),
+                    //row["ItemTag"].ToString(), true)
             };
-            def.icon = Resources.Load<Sprite>($"Icons/{def.iconName}");
+            if (row.TryGetValue("ItemTag", out var tagsObj) && tagsObj is string tagsStr)
+            {
+                foreach (var s in tagsStr.Split(','))
+                    if (Enum.TryParse<ItemInfo.ItemTag>(s.Trim(), true, out var tag))
+                        def.tags.Add(tag);
+            }
+            def.icon = Resources.Load<Sprite>($"ItemIcons/{def.iconName}");
             if (def.icon == null)
                 Debug.LogWarning($"Icon '{def.iconName}' not found for item {def.name}");
 

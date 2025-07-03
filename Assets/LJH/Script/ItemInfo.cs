@@ -37,6 +37,7 @@ public class ItemInfo : ScriptableObject
     
     public enum AttackEnhanceType
     {
+        No,
         AttackRange,             //근접, 공격범위
         Stun,                    //근접, 스턴 효과(확률적으로 스턴)
         Penetrate,               //원거리, 관통 효과
@@ -44,11 +45,26 @@ public class ItemInfo : ScriptableObject
         Poison,                  //공통, 독(지속 딜)
         Ice                      //공통, 슬로우
     }
-
+    
     public enum SkillType
     {
-        
+        No,
+        Swing
     }
+
+    public enum SubAttackType
+    {
+        No,
+        Boom
+    }
+    
+    public enum ItemTag
+    {
+        Tag01,
+        Tag02
+    }
+
+    
 
     [Header("Item Info")] 
     public int itemIndex;

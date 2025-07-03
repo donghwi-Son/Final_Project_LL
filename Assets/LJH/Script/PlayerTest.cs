@@ -6,11 +6,12 @@ public class PlayerTest : MonoBehaviour
     private HashSet<int> acquired = new HashSet<int>();
     
     public static PlayerTest Instance { get; private set; }
+    
+    private float maxHealth = 50f;
 
     void Awake()
     {
         Instance = this;
-        // (선택) 저장된 획득 기록 불러와서 재적용
     }
 
     void Update()
@@ -34,6 +35,7 @@ public class PlayerTest : MonoBehaviour
         // 정의 꺼내서 효과 적용
         var def = ItemDatabase.Instance.GetDefinition(idx);
         ItemEffectFactory.ApplyEffect(def);
+        SynergyManager.Instance.OnItemAcquired(def);
     
         // 획득 목록 저장
         SaveAcquiredSet();
@@ -42,5 +44,31 @@ public class PlayerTest : MonoBehaviour
     private void SaveAcquiredSet()
     {
         // PlayerPrefs 방식으로 acquired 저장, 저장 필요 없으면 안할듯
+    }
+
+    public void AddHealth(float amount)
+    {
+        maxHealth += amount;
+        Debug.Log(maxHealth);
+    }
+
+    public void AttackEnhance(ItemInfo.AttackEnhanceType enhanceType)
+    {
+        //공격 강화
+    }
+
+    public void AddSkill(ItemInfo.SkillType skilltype)
+    {
+        //기존 스킬에서 얻은 스킬로 변경
+    }
+
+    public void SubAttackRegister(ItemInfo.SubAttackType subType)
+    {
+        //서브 공격 동작
+    }
+
+    public void EnableDoubleJump()
+    {
+        //더블점프 활성화
     }
 }
