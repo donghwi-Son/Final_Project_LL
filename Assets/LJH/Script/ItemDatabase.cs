@@ -21,7 +21,7 @@ public class ItemDatabase : MonoBehaviour
 
     void LoadDefinitions()
     {
-        var rows = CSVReader.Read("Item/ItemCSV");
+        var rows = CSVReader.Read("DataTable/ItemCSV");
         _defs = new Dictionary<int, ItemDefinition>();
 
         foreach (var row in rows)
@@ -48,7 +48,7 @@ public class ItemDatabase : MonoBehaviour
                     if (Enum.TryParse<ItemInfo.ItemTag>(s.Trim(), true, out var tag))
                         def.tags.Add(tag);
             }
-            def.icon = Resources.Load<Sprite>($"Icons/{def.iconName}");
+            def.icon = Resources.Load<Sprite>($"ItemIcons/{def.iconName}");
             if (def.icon == null)
                 Debug.LogWarning($"Icon '{def.iconName}' not found for item {def.name}");
 

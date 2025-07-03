@@ -8,7 +8,7 @@ public class ItemEffectFactory : MonoBehaviour
     static ItemEffectConfig _cfg;
     [RuntimeInitializeOnLoadMethod]
     static void Init()
-        => _cfg = Resources.Load<ItemEffectConfig>("Item/Item Effect Config");
+        => _cfg = Resources.Load<ItemEffectConfig>("ItemSO/Item Effect Config");
     
     public static void ApplyEffect(ItemDefinition def)
     {

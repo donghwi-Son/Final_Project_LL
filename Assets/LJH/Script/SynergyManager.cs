@@ -14,7 +14,7 @@ public class SynergyManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        tagConfig = Resources.Load<TagSynergyConfig>("Item/TagSynergyConfig");
+        tagConfig = Resources.Load<TagSynergyConfig>("ItemSO/TagSynergyConfig");
     }
     
     public void OnItemAcquired(ItemDefinition def)
