@@ -20,6 +20,7 @@ public class UserDataManager : SingletonComponent<UserDataManager>
     protected override bool InitInstance()
     {     
         UserDataList.Add(new UserSettingsData());
+        UserDataList.Add(new UserPlayData());
         return true;
     }
 
