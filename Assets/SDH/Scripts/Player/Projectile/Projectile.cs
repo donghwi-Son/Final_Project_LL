@@ -15,8 +15,7 @@ public enum ProjectileEffectType
     None,
     Homing,
     Explosive,
-    Piercing,
-    Bouncing
+    Piercing
 }
 
 public interface IProjectileEffect
@@ -36,8 +35,6 @@ public class Projectile : MonoBehaviour
     public float speed = 10f;
     public float damage = 20f;
     public float lifeTime = 5f;
-
-    [Header("효과 플래그들")]
     private int piercingCount = 0;
 
     [Header("컴포넌트")]
@@ -52,22 +49,28 @@ public class Projectile : MonoBehaviour
             rb = gameObject.AddComponent<Rigidbody2D>();
         }
 
-        // 초기 속도 설정
-        rb.linearVelocity = transform.right * speed;
 
-        // 수명 설정
-        Destroy(gameObject, lifeTime);
-
-        Debug.Log($"투사체 생성: {projectileType}, 속도: {speed}, 데미지: {damage}");
     }
 
     void Update()
     {
-        // 모든 효과의 업데이트 실행
+        lifeTime -= Time.deltaTime;
         foreach (var effect in effects)
         {
             effect.UpdateEffect(this);
         }
+
+        if (lifeTime <= 0f)
+        {
+            DestroyProjectile();
+        }
+    }
+
+    public void InitProjectile(Vector2 dir, Vector2 pos)
+    {
+        // 초기 위치 설정
+        transform.position = pos;
+        rb.linearVelocity = dir.normalized * speed;
     }
 
     // 효과 관리 메소드들
@@ -86,6 +89,10 @@ public class Projectile : MonoBehaviour
             effects.Remove(effect);
         }
     }
+    public void SetPiercingCount(int val)
+    {
+        piercingCount = val;
+    }
 
     // 관통 횟수 감소
     public void DecreasePiercingCount()
@@ -93,10 +100,15 @@ public class Projectile : MonoBehaviour
         piercingCount--;
     }
 
-    // 투사체 파괴
+    // 투사체 파괴(풀링용 active false)
     public void DestroyProjectile()
     {
-        Destroy(gameObject);
+        // 모든 효과의 파괴 처리 실행
+        foreach (var effect in effects)
+        {
+            effect.OnDestroy(this);
+        }
+        gameObject.SetActive(false);
     }
 
     // 충돌 처리
@@ -105,7 +117,6 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             // 기본 데미지 적용
-            
 
             // 모든 효과의 충돌 처리 실행
             foreach (var effect in effects)

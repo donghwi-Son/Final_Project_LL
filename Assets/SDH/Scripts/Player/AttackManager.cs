@@ -20,7 +20,18 @@ public class AttackManager : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+
     }
+
+    private void Update()
+    {
+    }
+
+    void InitializeProjectiles()
+    {
+
+    }
+
 
     public void Attack(AttackMode attmode)
     {
@@ -31,6 +42,7 @@ public class AttackManager : MonoBehaviour
                 break;
             case AttackMode.Ranged:
                 anim.SetTrigger("Att");
+                
                 break;
         }
     }
