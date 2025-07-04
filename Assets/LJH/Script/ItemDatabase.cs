@@ -38,9 +38,6 @@ public class ItemDatabase : MonoBehaviour
                     row["UpgradeType"].ToString(), true),
                 description = row["Description"].ToString(),
                 iconName    = row["IconName"].ToString(),
-                //itemTag = (ItemInfo.ItemTag)Enum.Parse(
-                    //typeof(ItemInfo.ItemTag),
-                    //row["ItemTag"].ToString(), true)
             };
             if (row.TryGetValue("ItemTag", out var tagsObj) && tagsObj is string tagsStr)
             {

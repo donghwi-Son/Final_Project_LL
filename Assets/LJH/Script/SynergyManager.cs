@@ -19,7 +19,6 @@ public class SynergyManager : MonoBehaviour
     
     public void OnItemAcquired(ItemDefinition def)
     {
-        Debug.Log("시너지 아이템 획득 성공");
         foreach (var tag in def.tags)
         {
             tagCounts[tag] = tagCounts.GetValueOrDefault(tag) + 1;
@@ -29,7 +28,6 @@ public class SynergyManager : MonoBehaviour
 
     void TryApplyTagSynergy(ItemInfo.ItemTag tag)
     {
-        Debug.Log("시너지 적용 시도");
         if (activeTagSynergy.Contains(tag)) return;
         if (!tagConfig.TryGetSynergy(tag, out var entry)) return;
 
@@ -63,7 +61,7 @@ public class SynergyManager : MonoBehaviour
                 break;
 
             case TagSynergyConfig.SynergyType.Utility:
-                // 유틸 효과 EX)더블 점프 활성화
+                    // 유틸 효과 EX)더블 점프 활성화
                     PlayerTest.Instance.EnableDoubleJump();
                     Debug.Log("유틸 획득");
                 break;

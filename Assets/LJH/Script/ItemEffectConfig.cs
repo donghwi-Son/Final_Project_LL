@@ -27,8 +27,6 @@ public class ItemEffectConfig : ScriptableObject
         
         // Utility 활성화
         public bool enableDoubleJump;
-        
-        //public ItemInfo.ItemTag itemTag;
     }
 
     public Entry[] entries;
