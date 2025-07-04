@@ -63,32 +63,4 @@ public class ItemInfo : ScriptableObject
         Tag01,
         Tag02
     }
-
-    
-
-    [Header("Item Info")] 
-    public int itemIndex;
-    public string itemName;
-    public ItemRarity itemRarity;
-    public ItemUpgradeType itemUpgradeType;
-    public string itemDescription;
-    public Sprite itemIcon;
-    
-    [System.Serializable]
-    public class EffectData
-    {
-        public ItemUpgradeType type;
-    
-        // 스탯 증가
-        public float statAmount;                //증가량
-        public StatType statType;               //스탯 종류
-    
-        // 공격 강화 부분은 스킬 보고 해야할 듯
-    
-        // 서브 어택
-        public GameObject subAttackPrefab;          //보조 공격 수단 프리펩
-        public float subAttackCooldown;             //클타임
-    
-        // 유틸도 이후에 진행
-    }
 }
