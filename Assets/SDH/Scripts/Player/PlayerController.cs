@@ -205,5 +205,15 @@ public class PlayerController : MonoBehaviour
         StateMachine.ChangeState(IdleState);
     }
 
+    // 7월 3일 추가 부분 : 플레이어가 Finish 태그를 가진 오브젝트와 충돌하면, StageManager의 Onfinish() 발동
+    public StageManager stageManager;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            stageManager.OnFinish();
+        }
+    }
 
 }

@@ -1,0 +1,7 @@
+Index,ItemName,ItemGrade,UpgradeType,IconName,ItemTag,Description
+0,StatsTest,Common,StatIncrease,test01,Tag01,AttackStats+1
+1,AttackTest,Uncommon,AttackEnhance,test02,Tag01,EnhanceNotmalAttack
+2,SkillTest,Rare,SkillUpgrade,test03,Tag01,Skill Upgrade
+3,SubTest,Epic,SubAttack,test04,Tag02,Create SubAttack
+4,UtilityTest,Legendary,Utility,test05,Tag02,Upgrade Utility
+5,BossItem,Boss,SkillUpgrade,test06,Tag02,Unknown
