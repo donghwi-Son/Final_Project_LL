@@ -5,6 +5,8 @@ public class PlayerTest : MonoBehaviour
 {
     private HashSet<int> acquired = new HashSet<int>();
     
+    private List<ItemDefinition> acquiredDefs = new List<ItemDefinition>();
+    
     public static PlayerTest Instance { get; private set; }
     
     private float maxHealth = 50f;
@@ -34,6 +36,7 @@ public class PlayerTest : MonoBehaviour
     
         // 정의 꺼내서 효과 적용
         var def = ItemDatabase.Instance.GetDefinition(idx);
+        acquiredDefs.Add(def); 
         ItemEffectFactory.ApplyEffect(def);
         SynergyManager.Instance.OnItemAcquired(def);
     
@@ -41,10 +44,17 @@ public class PlayerTest : MonoBehaviour
         SaveAcquiredSet();
     }
     
+    
     private void SaveAcquiredSet()
     {
         // PlayerPrefs 방식으로 acquired 저장, 저장 필요 없으면 안할듯
     }
+    
+    public IReadOnlyList<ItemDefinition> GetAllAcquired()
+    {
+        return acquiredDefs;
+    }
+
 
     public void AddHealth(float amount)
     {

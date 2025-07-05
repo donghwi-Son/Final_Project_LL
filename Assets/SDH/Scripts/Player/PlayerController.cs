@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         StateMachine.InitState(IdleState);
+        originmoveSpeed = moveSpeed; // 7월 3일 추가 : 초기 지정 속도 저장
     }
 
     private void Update()
@@ -208,13 +209,23 @@ public class PlayerController : MonoBehaviour
 
     // 7월 3일 추가 부분 : 플레이어가 Finish 태그를 가진 오브젝트와 충돌하면, StageManager의 Onfinish() 발동
     public StageManager stageManager;
+    private float originmoveSpeed;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Finish"))
         {
+            rb.linearVelocity = Vector2.zero;
+            moveSpeed = 0f;
             stageManager.OnFinish();
         }
     }
 
+    // Finish 도달 시 멈춰진 속도를 다음 스테이지에서 다시 원래대로
+    public void ResetSpeed()
+    {
+        rb.linearVelocity = Vector2.zero;
+        moveSpeed = originmoveSpeed;
+        enabled = true;
+    }
 }

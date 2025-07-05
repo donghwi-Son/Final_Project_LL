@@ -44,23 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49ff0f7132a1cc468498e545ddfdcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  stageIndex: 0
   player: {fileID: 0}
-  stageselect:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  stageOptionIndices: 0000000000000000
+  playerController: {fileID: 0}
   stageChoicePanel: {fileID: 0}
-  PlayerController: {fileID: 0}
+  stopPanel: {fileID: 0}
+  stageIndex: 0
   stageCounter: 0
+  Stages: []
+  startButton: {fileID: 0}
+  bossButton: {fileID: 0}
+  stageButtons: []
