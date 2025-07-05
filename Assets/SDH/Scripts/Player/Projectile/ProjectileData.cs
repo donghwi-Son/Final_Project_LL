@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New ProjectileData", menuName = "Game/ProjectileData")]
+[CreateAssetMenu(fileName = "New ProjectileData", menuName = "ScriptableObject/ProjectileData")]
 public class ProjectileData : ScriptableObject
 {
     [Header("기본 정보")]
@@ -8,8 +8,8 @@ public class ProjectileData : ScriptableObject
     public string projectileName;
 
     [Header("기본 스탯")]
-    public float baseDamage = 5f;
-    public float baseSpeed = 10f;
-    public float baseLifeTime = 5f;
-    public int basePiercingCount = 0;
+    public float damageMultiplier = 1f;
+    public float speed = 10f;
+    public float rateMultiplier = 1f;
+    public int piercingCount = 0;
 }

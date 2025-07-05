@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class HomingEffect : IProjectileEffect
 {
@@ -13,6 +14,7 @@ public class HomingEffect : IProjectileEffect
         {
             Vector3 direction = (nearestEnemy.transform.position - projectile.transform.position).normalized;
             projectile.GetComponent<Rigidbody2D>().AddForce(direction * homingStrength);
+            projectile.transform.up =  Vector3.Lerp(projectile.transform.up, direction, 3f * Time.deltaTime);
         }
     }
 

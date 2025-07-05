@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public PlayerDashAttState DashAttState;
     public PlayerFallingState FallingState;
     public AttackManager AttackManager;
+    public PlayerStatus stat;
 
     //컴포넌트
     public Rigidbody2D rb;

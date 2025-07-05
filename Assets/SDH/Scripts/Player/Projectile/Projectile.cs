@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Rendering.CameraUI;
@@ -19,7 +20,7 @@ public enum ProjectileEffectType
 }
 
 public interface IProjectileEffect
-{ 
+{
 
     void UpdateEffect(Projectile projectile);
 
@@ -30,47 +31,57 @@ public interface IProjectileEffect
 
 public class Projectile : MonoBehaviour
 {
-    [Header("기본 속성")]
-    public ProjectileType projectileType;
-    public float speed = 10f;
-    public float damage = 20f;
-    public float lifeTime = 5f;
-    private int piercingCount = 0;
+
+    public ProjectileData projectileData;
+    public event Action<Projectile> OnProjectiledestroyed;
+    float finalDamage;
+    float finalSpeed;
+    float finalLifeTime;
+    float piercingCount;
+
 
     [Header("컴포넌트")]
     private Rigidbody2D rb;
     private List<IProjectileEffect> effects = new List<IProjectileEffect>();
 
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            rb = gameObject.AddComponent<Rigidbody2D>();
-        }
-
-
     }
 
     void Update()
     {
-        lifeTime -= Time.deltaTime;
+        finalLifeTime -= Time.deltaTime;
+        if(rb.linearVelocity.magnitude > projectileData.speed)
+        {
+            rb.linearVelocity = rb.linearVelocity.normalized * projectileData.speed;
+        }
+        // 모든 효과의 업데이트 처리 실행
         foreach (var effect in effects)
         {
             effect.UpdateEffect(this);
         }
 
-        if (lifeTime <= 0f)
+        if (finalLifeTime <= 0f)
         {
             DestroyProjectile();
         }
     }
 
-    public void InitProjectile(Vector2 dir, Vector2 pos)
+
+    void CalculateFinalStat(float statdmg, float statlf, float speed)
     {
-        // 초기 위치 설정
+        finalDamage = projectileData.damageMultiplier * statdmg;
+        finalLifeTime = statlf;
+    }
+
+    public void Fire(Vector2 pos, Vector2 dir, float statdmg, float statlf, float speed)
+    {
+        CalculateFinalStat(statdmg, statlf, speed);
         transform.position = pos;
-        rb.linearVelocity = dir.normalized * speed;
+        transform.up = dir;
+        gameObject.SetActive(true);
+        rb.linearVelocity = dir.normalized * projectileData.speed;
     }
 
     // 효과 관리 메소드들
@@ -100,15 +111,9 @@ public class Projectile : MonoBehaviour
         piercingCount--;
     }
 
-    // 투사체 파괴(풀링용 active false)
     public void DestroyProjectile()
     {
-        // 모든 효과의 파괴 처리 실행
-        foreach (var effect in effects)
-        {
-            effect.OnDestroy(this);
-        }
-        gameObject.SetActive(false);
+        OnProjectiledestroyed?.Invoke(this);
     }
 
     // 충돌 처리

@@ -11,11 +11,11 @@ public class ExplosiveEffect : IProjectileEffect
         Collider2D[] colliders = Physics2D.OverlapCircleAll(projectile.transform.position, explosionRadius);
         foreach (var collider in colliders)
         {
-            
+            Debug.Log("폭발!");
         }
 
         // 폭발 이펙트 생성
-        GameObject.Instantiate(Resources.Load("ExplosionEffect"), projectile.transform.position, Quaternion.identity);
+
     }
 
     public void OnDestroy(Projectile projectile) { }
