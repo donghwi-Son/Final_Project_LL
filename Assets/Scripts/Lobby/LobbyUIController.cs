@@ -49,8 +49,8 @@ public class LobbyUIController : MonoBehaviour
     public void OnClickSettingsButton()
     {
         // 설정 UI 열기
-        //var uiData = new UIBaseData();
-        //UIManager.Instance.OpenUI<SettingsUI>(uiData);
+        var uiData = new UIBaseData();
+        UIManager.Instance.OpenUI<SettingsUI>(uiData);
     }
 
     public void OnClickQuitButton()
