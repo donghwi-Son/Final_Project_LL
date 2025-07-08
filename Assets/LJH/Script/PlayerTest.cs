@@ -54,6 +54,11 @@ public class PlayerTest : MonoBehaviour
     {
         return acquiredDefs;
     }
+    
+    public bool HasAcquired(int idx)
+    {
+        return acquired.Contains(idx);
+    }
 
 
     public void AddHealth(float amount)
