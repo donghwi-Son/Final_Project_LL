@@ -80,7 +80,7 @@ public class SettingsUI : UIBase
         {
             userSettingsData.Music_Volume = MusicSlider.value;
             userSettingsData.SaveData();
-            //AudioManager.Instance.SetVolume(userSettingsData);
+            AudioManager.Instance.SetMusicVolume(userSettingsData.Music_Volume);
         }
     }
 
@@ -91,7 +91,7 @@ public class SettingsUI : UIBase
         {
             userSettingsData.SFX_Volume = SFXSlider.value;
             userSettingsData.SaveData();
-            //AudioManager.Instance.SetVolume(userSettingsData);
+            AudioManager.Instance.SetSFXVolume(userSettingsData.SFX_Volume);
         }
     }
 }
