@@ -11,13 +11,6 @@ public enum ProjectileType
     CCC
 }
 
-public enum ProjectileEffectType
-{
-    None,
-    Homing,
-    Explosive,
-    Piercing
-}
 
 public interface IProjectileEffect
 {

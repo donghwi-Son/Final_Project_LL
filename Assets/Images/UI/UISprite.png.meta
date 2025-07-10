@@ -56,6 +56,12 @@ TextureImporter:
   - first:
       213: -2888822428792537953
     second: UISprite_17
+  - first:
+      213: -4579632794964523722
+    second: UISprite_18
+  - first:
+      213: 267355776008153216
+    second: UISprite_19
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -413,10 +419,10 @@ TextureImporter:
       name: UISprite_10
       rect:
         serializedVersion: 2
-        x: 305
-        y: 487
-        width: 53
-        height: 7
+        x: 278
+        y: 483
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -435,10 +441,10 @@ TextureImporter:
       name: UISprite_11
       rect:
         serializedVersion: 2
-        x: 207
-        y: 459
-        width: 66
-        height: 18
+        x: 305
+        y: 487
+        width: 53
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -479,10 +485,10 @@ TextureImporter:
       name: UISprite_13
       rect:
         serializedVersion: 2
-        x: 4
-        y: 231
-        width: 218
-        height: 223
+        x: 305
+        y: 479
+        width: 53
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -501,10 +507,10 @@ TextureImporter:
       name: UISprite_14
       rect:
         serializedVersion: 2
-        x: 239
-        y: 415
-        width: 130
-        height: 34
+        x: 57
+        y: 425
+        width: 50
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -524,7 +530,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 239
-        y: 367
+        y: 415
         width: 130
         height: 34
       alignment: 0
@@ -545,10 +551,10 @@ TextureImporter:
       name: UISprite_16
       rect:
         serializedVersion: 2
-        x: 239
-        y: 319
-        width: 130
-        height: 34
+        x: 4
+        y: 231
+        width: 218
+        height: 164
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -567,6 +573,50 @@ TextureImporter:
       name: UISprite_17
       rect:
         serializedVersion: 2
+        x: 239
+        y: 367
+        width: 130
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9cb3a08e47d8e7d0800000000000000
+      internalID: -2888822428792537953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UISprite_18
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 319
+        width: 130
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6350966ac30e170c0800000000000000
+      internalID: -4579632794964523722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UISprite_19
+      rect:
+        serializedVersion: 2
         x: 240
         y: 272
         width: 129
@@ -579,8 +629,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f9cb3a08e47d8e7d0800000000000000
-      internalID: -2888822428792537953
+      spriteID: 0886d9969a6d5b300800000000000000
+      internalID: 267355776008153216
       vertices: []
       indices: 
       edges: []
@@ -598,7 +648,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UISprite_0: -7039278036542493594
+      UISprite_1: -5551083720047672995
+      UISprite_10: -5291051713414902621
+      UISprite_11: 4280211716573651247
+      UISprite_12: 4953155891259474736
+      UISprite_13: -2873450439533561124
+      UISprite_14: 82146563501875287
+      UISprite_15: 5796633646872042464
+      UISprite_16: -1497861240071450413
+      UISprite_17: -2888822428792537953
+      UISprite_2: 7690824269795830559
+      UISprite_3: 3068757142155030363
+      UISprite_4: -3731450349067041433
+      UISprite_5: 5666370372913619140
+      UISprite_6: 8646562429103647828
+      UISprite_7: 2901559807424179428
+      UISprite_8: 6514417398518891740
+      UISprite_9: 3543829753800550933
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

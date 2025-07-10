@@ -9,7 +9,7 @@ public class SynergyManager : MonoBehaviour
     
     private HashSet<ItemInfo.ItemTag> activeTagSynergy = new();
 
-    TagSynergyConfig  tagConfig;
+    private TagSynergyConfig  tagConfig;
 
     void Awake()
     {

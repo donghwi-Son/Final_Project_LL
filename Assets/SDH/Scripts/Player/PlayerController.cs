@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     public bool CanDoubleJump = false;
     public bool IsRolling { get; private set; }
     public bool IsDefending { get; private set; }
-    public bool isFacingRight { get; private set; } = true;
+    public bool IsFacingRight { get; private set; } = true;
 
     //타이머
     float lastAttackTime;
@@ -162,8 +162,8 @@ public class PlayerController : MonoBehaviour
     void FlipByMouse()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        isFacingRight = mousePosition.x > transform.position.x;
-        if(isFacingRight)
+        IsFacingRight = mousePosition.x > transform.position.x;
+        if(IsFacingRight)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
