@@ -13,7 +13,7 @@ public class PlayerAttackState : PlayerState
         base.EnterState();
         Debug.Log("Player Attack State Entered");
         player.rb.linearVelocityX = 0f;
-        player.AttackManager.Attack(player.attackMode);
+        player.AttackManager.Attack(player.attackMode, player.IsFacingRight);
         player.CanFlip = false;
     }
 
@@ -22,7 +22,7 @@ public class PlayerAttackState : PlayerState
         base.UpdateState();
         if (player.AttackInput)
         {
-            player.AttackManager.Attack(player.attackMode);
+            player.AttackManager.Attack(player.attackMode, player.IsFacingRight);
         }    
     }
 

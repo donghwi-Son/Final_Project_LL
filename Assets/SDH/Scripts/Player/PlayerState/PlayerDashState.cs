@@ -43,7 +43,7 @@ public class PlayerDashState : PlayerState
     {
         if(player.XInput == 0)
         {
-            player.rb.AddForce(new Vector2(player.isFacingRight ? player.dashPower : -player.dashPower, 0), ForceMode2D.Impulse);
+            player.rb.AddForce(new Vector2(player.IsFacingRight ? player.dashPower : -player.dashPower, 0), ForceMode2D.Impulse);
         }    
         player.rb.AddForce(new Vector2(player.XInput * player.dashPower, 0), ForceMode2D.Impulse);
     }
