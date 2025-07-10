@@ -15,6 +15,10 @@ MonoBehaviour:
   projectileType: 1
   projectileName: AAA
   damageMultiplier: 1
-  speed: 10
+  speedMultiplier: 1
   rateMultiplier: 1
-  piercingCount: 0
+  piercingCount: 5
+  projectileSprite: {fileID: 6951114633567200485, guid: f2bd80c4dffc7574cb25a6c10d1d53e7, type: 3}
+  iceSprite: {fileID: -7732569738864306783, guid: f2bd80c4dffc7574cb25a6c10d1d53e7, type: 3}
+  fireSprite: {fileID: -6007857137893288414, guid: f2bd80c4dffc7574cb25a6c10d1d53e7, type: 3}
+  poisonSprite: {fileID: -7812539098719814344, guid: f2bd80c4dffc7574cb25a6c10d1d53e7, type: 3}

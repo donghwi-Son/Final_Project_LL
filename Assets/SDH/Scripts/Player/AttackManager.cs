@@ -22,7 +22,9 @@ public class AttackManager : MonoBehaviour
     Dictionary<ProjectileType, Queue<GameObject>> projectilePoolDic;
 
     HomingEffect homingEffect;
-
+    PiercingEffect piercingEffect;
+    ExplosiveEffect explosiveEffect;
+    Dictionary<ProjectileEffectType, IProjectileEffect> effectDic = new Dictionary<ProjectileEffectType, IProjectileEffect>();
 
     private void Awake()
     {
@@ -40,6 +42,11 @@ public class AttackManager : MonoBehaviour
     void InitializeEffect()
     {
         homingEffect = new HomingEffect();
+        piercingEffect = new PiercingEffect();
+        explosiveEffect = new ExplosiveEffect();
+        effectDic.Add(ProjectileEffectType.Homing, homingEffect);
+        effectDic.Add(ProjectileEffectType.Piercing, piercingEffect);
+        effectDic.Add(ProjectileEffectType.Explosive, explosiveEffect);
     }
 
 void InitializePool()
@@ -78,6 +85,11 @@ void InitializePool()
                 var newProjectileObj = Instantiate(poolList.Find(p => p.projectileType == type).projectilePrefab);
                 Projectile newProjectile = newProjectileObj.GetComponent<Projectile>();
                 newProjectile.OnProjectiledestroyed += ReturnProjectile;
+                foreach(var effect in stat.projectileEffects)
+                {
+                    newProjectile.AddEffect(effectDic[effect]);
+                }
+
                 return newProjectile;
             }
         }
@@ -105,7 +117,7 @@ void InitializePool()
         if (projectile == null) return;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
-        projectile.Fire(transform.position, dir, stat.damage, stat.projecTileLifeTime , projectile.projectileData.speed);
+        projectile.Fire(transform.position, dir, stat.damage, stat.projecTileLifeTime , stat.shotSpeed);
 
     }
 
