@@ -15,9 +15,9 @@ MonoBehaviour:
   entries:
   - tag: 0
     threshold: 3
-    type: 3
-    bonus: 222
+    type: 1
+    bonus: 111
   - tag: 1
     threshold: 3
-    type: 4
-    bonus: 0
+    type: 1
+    bonus: 222

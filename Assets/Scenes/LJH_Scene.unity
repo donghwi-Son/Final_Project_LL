@@ -1267,7 +1267,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!224 &7568586940204392939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1319,6 +1319,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7568586940204392939}
     m_Modifications:
+    - target: {fileID: 693245970586090033, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 816038904629111955, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1402,6 +1406,10 @@ PrefabInstance:
     - target: {fileID: 1713143077836046702, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_Name
       value: Inventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713143077836046702, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
