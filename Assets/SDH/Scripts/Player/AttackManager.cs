@@ -53,6 +53,11 @@ public class AttackManager : MonoBehaviour
         }
     }
 
+    public void ChargeAttack(AttackMode attmode, bool isRight)
+    {
+        anim.SetTrigger("ChargeAtt");
+    }
+
     public void SpecialAttack(AttackMode attmode)
     {
         switch (attmode)
