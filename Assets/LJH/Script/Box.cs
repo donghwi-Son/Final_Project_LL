@@ -68,8 +68,8 @@ public class Box : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            box.Open();
             Debug.Log("플레이어 충돌");
+            box.Open();
         }
     }
 }
