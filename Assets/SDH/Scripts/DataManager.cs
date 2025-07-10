@@ -24,7 +24,6 @@ public class SingleGameRecord
 public class PlayerInfo
 {
     public int RoomID;
-    public AttackMode attackMode;
     //public List<ItemData> items = new();
 }
 
