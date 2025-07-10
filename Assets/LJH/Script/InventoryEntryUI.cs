@@ -11,16 +11,13 @@ public class InventoryEntryUI : MonoBehaviour,
     [SerializeField] private GameObject detailPanel;  // Name+Desc 묶음
     [SerializeField] private TMP_Text   nameText;     // Name
     [SerializeField] private TMP_Text   descText;     // Desc
-
-    /// <summary>
-    /// 외부에서 아이템 데이터를 세팅할 때 호출
-    /// </summary>
+    
     public void Setup(ItemDefinition def)
     {
         iconImage.sprite   = def.icon;
         nameText.text      = def.name;
         descText.text      = def.description;
-        detailPanel.SetActive(false);  // 초기엔 감춤
+        detailPanel.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
