@@ -1267,7 +1267,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!224 &7568586940204392939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1345,11 +1345,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816038904629111955, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1547.4888
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 816038904629111955, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 859.2554
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 816038904629111955, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1381,7 +1381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816038904629111955, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -14.4892
+      value: -46.720825
       objectReference: {fileID: 0}
     - target: {fileID: 816038904629111955, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_AnchoredPosition.y
