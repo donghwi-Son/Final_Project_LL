@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour
@@ -38,9 +39,6 @@ public class ItemDatabase : MonoBehaviour
                     row["UpgradeType"].ToString(), true),
                 description = row["Description"].ToString(),
                 iconName    = row["IconName"].ToString(),
-                //itemTag = (ItemInfo.ItemTag)Enum.Parse(
-                    //typeof(ItemInfo.ItemTag),
-                    //row["ItemTag"].ToString(), true)
             };
             if (row.TryGetValue("ItemTag", out var tagsObj) && tagsObj is string tagsStr)
             {
@@ -65,4 +63,17 @@ public class ItemDatabase : MonoBehaviour
         Debug.LogWarning($"ItemDatabase: 정의되지 않은 index {idx}");
         return null;
     }
+    
+    // 전체 아이템 반환
+    public IEnumerable<ItemDefinition> GetAllDefinitions()
+    {
+        return _defs.Values;
+    }
+
+    // 특정 등급 아이템만 반환
+    public IEnumerable<ItemDefinition> GetDefinitionsByRarity(ItemInfo.ItemRarity rarity)
+    {
+        return _defs.Values.Where(d => d.rarity == rarity);
+    }
+    
 }
