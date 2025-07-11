@@ -642,6 +642,94 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_Attack_21
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 560
+        width: 49
+        height: 58
+      alignment: 9
+      pivot: {x: 0.26498973, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ac2937865753374c80ff46256e1a5b9
+      internalID: 1585516071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_22
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 560
+        width: 47
+        height: 61
+      alignment: 9
+      pivot: {x: 0.27704766, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31b9f7aee7875be43a7c546301bf3233
+      internalID: 484354126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_23
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 560
+        width: 47
+        height: 58
+      alignment: 9
+      pivot: {x: 0.27641523, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18f3e4325f216cc42a8e7842756c2a7b
+      internalID: -1068714843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_24
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 560
+        width: 46
+        height: 58
+      alignment: 9
+      pivot: {x: 0.28218013, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69e2a917193c17a4ab9b68577b5a9d00
+      internalID: -1775267182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -671,6 +759,10 @@ TextureImporter:
       Player_Attack_19: -267981632
       Player_Attack_2: -228208397931037945
       Player_Attack_20: 1480861053
+      Player_Attack_21: 1585516071
+      Player_Attack_22: 484354126
+      Player_Attack_23: -1068714843
+      Player_Attack_24: -1775267182
       Player_Attack_3: -9174203794947737717
       Player_Attack_4: -1879760664134576416
       Player_Attack_5: -3983143353720398026
