@@ -17,7 +17,7 @@ public class AudioManager : SingletonComponent<AudioManager>
     public Transform MusicTrs;
     public Transform SFXTrs;
 
-    private const string AUDIO_PATH = "Audios";
+    private const string AUDIO_PATH = "Audio";
 
     private Dictionary<Music, AudioSource> m_MusicPlayer = new Dictionary<Music, AudioSource>();
     private AudioSource m_CurrMusicSource;

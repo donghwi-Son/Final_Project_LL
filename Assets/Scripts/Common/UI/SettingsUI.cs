@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class SettingsUI : UIBase
 {
+    [SerializeField] private GameObject[] Tabs;
+    [SerializeField] private RectTransform[] TabButtons;
+    [SerializeField] private float InactiveButtonPosX = -275f;
+    [SerializeField] private float ActiveButtonPosX = -300f;
+
     [SerializeField] private TMP_Dropdown ResDropDown;
     [SerializeField] private Toggle FullScreenToggle;
 
@@ -46,6 +51,23 @@ public class SettingsUI : UIBase
             MusicSlider.value = userSettingsData.Music_Volume;
             SFXSlider.value = userSettingsData.SFX_Volume;
         }
+
+        SwitchTab(0); // Default to the first tab
+    }
+
+    public void SwitchTab(int _tabId)
+    {
+        foreach(GameObject go in Tabs)
+        {
+            go.SetActive(false);
+        }
+        Tabs[_tabId].SetActive(true);
+
+        foreach(RectTransform tabButton in TabButtons)
+        {
+            tabButton.anchoredPosition = new Vector2(InactiveButtonPosX, tabButton.anchoredPosition.y);
+        }
+        TabButtons[_tabId].anchoredPosition = new Vector2(ActiveButtonPosX, TabButtons[_tabId].anchoredPosition.y);
     }
 
     public void SetResolution()
