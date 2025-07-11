@@ -50,6 +50,7 @@ public class StageManager : MonoBehaviour
     [Header("스테이지 인덱스와 버튼")]
     public GameObject[] Stages;    // 타일맵 GameObject들을 배열로 등록
     public List<StageButtonBinding> stageButtons; // 일반 선택지 랜덤 2개 선택 // 시작 및 보스 스테이지도 이곳에 통합
+    public StageGenerator stageGenerator;
 
     private void Start()
     {
@@ -143,11 +144,20 @@ public class StageManager : MonoBehaviour
         if (stageIndex >= 0 && stageIndex < Stages.Length)
             Stages[stageIndex].SetActive(false);
 
+        // 프리팹 제거
+        stageGenerator.ClearPrevious();
+
         // 새 스테이지 활성화
         stageIndex = newStageIndex;
 
         if (stageIndex >= 0 && stageIndex < Stages.Length)
             Stages[stageIndex].SetActive(true);
+
+        // 타입 가져오기
+        StageType type = stageButtons.Find(b => b.stageIndex == stageIndex).stagetype;
+
+        // 스폰 실행
+        stageGenerator.Spawn(type);
 
         // ui 버튼이 사라지고 조작을 다시 활성화 및 플레이어 위치 초기화
         stageChoicePanel.SetActive(false);
