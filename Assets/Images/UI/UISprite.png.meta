@@ -648,7 +648,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UISprite_0: -7039278036542493594
+      UISprite_1: -5551083720047672995
+      UISprite_10: -5291051713414902621
+      UISprite_11: 4280211716573651247
+      UISprite_12: 4953155891259474736
+      UISprite_13: -2873450439533561124
+      UISprite_14: 82146563501875287
+      UISprite_15: 5796633646872042464
+      UISprite_16: -1497861240071450413
+      UISprite_17: -2888822428792537953
+      UISprite_18: -4579632794964523722
+      UISprite_19: 267355776008153216
+      UISprite_2: 7690824269795830559
+      UISprite_3: 3068757142155030363
+      UISprite_4: -3731450349067041433
+      UISprite_5: 5666370372913619140
+      UISprite_6: 8646562429103647828
+      UISprite_7: 2901559807424179428
+      UISprite_8: 6514417398518891740
+      UISprite_9: 3543829753800550933
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
