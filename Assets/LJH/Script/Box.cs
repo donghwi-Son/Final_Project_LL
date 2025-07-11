@@ -8,11 +8,14 @@ public class Box : MonoBehaviour
     [Header("드롭 확률 설정")]
     public BoxConfig config;
 
-    [Header("드랍 후 아이템 스폰 위치")]
-    public Transform spawnPoint;
     
+    private Transform spawnPoint;
+    
+    [SerializeField] private GameObject itemPickupPrefab;
+    
+    private float bounceForce = 5f;
     private Box box;
-
+    
     void Awake()
     {
         if(box == null) box = GetComponent<Box>();
@@ -33,19 +36,21 @@ public class Box : MonoBehaviour
         if (pool.Count == 0)
         {
             Debug.LogWarning($"{rarity} 등급 풀에 남은 아이템이 없습니다!");
+            Destroy(gameObject);
             return;
         }
 
         // 3) 하나 랜덤 뽑기
         ItemDefinition chosen = pool[Random.Range(0, pool.Count)];
         Debug.Log($"획득 아이템: {chosen.name}");
+        
+        Vector3 spawnPos = (spawnPoint != null)
+            ? spawnPoint.position
+            : transform.position;
 
-        // 4) 획득
-        PlayerTest.Instance.OnItemAcquired(chosen.index);
-
-        // 5) 직접스폰
-        // Instantiate(itemPickupPrefab, spawnPoint.position, Quaternion.identity)
-        //     .GetComponent<ItemPickup>().itemIndex = chosen.index;
+        var pickupObj = Instantiate(itemPickupPrefab, spawnPos, Quaternion.identity);
+        var itemPickup = pickupObj.GetComponent<ItemPickup>();
+        itemPickup.itemIndex = chosen.index;
 
         Destroy(gameObject);
     }
