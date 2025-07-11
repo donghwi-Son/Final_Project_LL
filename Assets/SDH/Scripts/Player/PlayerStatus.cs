@@ -6,14 +6,6 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    public enum ElementalType
-    {
-        None,
-        Fire,
-        Ice,
-        Poison
-    }
-
     public ProjectileType projectileType;
     public float health = 100f;
     public float maxHealth = 100f;
@@ -28,14 +20,7 @@ public class PlayerStatus : MonoBehaviour
     public float attackRange = 1f;
     public float projecTileLifeTime = 5f;
     public float shotSpeed = 5f;
-    
-    public List<ProjectileEffectType> projectileEffects = new List<ProjectileEffectType>();
-    public List<ElementalType> elementalTypes = new List<ElementalType>();
-
-    public void OnItemAchieve(ItemInfo item)
-    {
-
-    }
+    public bool canHoldAttack;
 
 
     public void TakeDamage(float dmg)
