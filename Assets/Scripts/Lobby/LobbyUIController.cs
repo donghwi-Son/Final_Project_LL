@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 public class LobbyUIController : MonoBehaviour
 {
-    [SerializeField] private EventSystem m_EventSystem;
     [SerializeField] private GameObject m_ContinueBtn;
     [SerializeField] private GameObject m_NewGameBtn;
 
@@ -14,12 +13,12 @@ public class LobbyUIController : MonoBehaviour
         if (userPlayData != null && userPlayData.ExistsSavedPlayData)
         {
             m_ContinueBtn.SetActive(true);
-            m_EventSystem.SetSelectedGameObject(m_ContinueBtn, null);
+            UIManager.Instance.UIEventSystem.SetSelectedGameObject(m_ContinueBtn, null);
         }
         else
         {
             m_ContinueBtn.SetActive(false);
-            m_EventSystem.SetSelectedGameObject(m_NewGameBtn, null);
+            UIManager.Instance.UIEventSystem.SetSelectedGameObject(m_NewGameBtn, null);
         }
 
         UIManager.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, true);
@@ -49,8 +48,8 @@ public class LobbyUIController : MonoBehaviour
     public void OnClickSettingsButton()
     {
         // 설정 UI 열기
-        //var uiData = new UIBaseData();
-        //UIManager.Instance.OpenUI<SettingsUI>(uiData);
+        var uiData = new UIBaseData();
+        UIManager.Instance.OpenUI<SettingsUI>(uiData);
     }
 
     public void OnClickQuitButton()

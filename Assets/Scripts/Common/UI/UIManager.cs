@@ -3,10 +3,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIManager : SingletonComponent<UIManager>
 {
+    public EventSystem UIEventSystem { get; private set; }
+
     [SerializeField] private Transform m_OpenedUITrs;
     [SerializeField] private Transform m_ClosedUITrs;
     [SerializeField] private Image m_Fade;
@@ -22,6 +25,7 @@ public class UIManager : SingletonComponent<UIManager>
 
     protected override bool InitInstance()
     {
+        UIEventSystem = GetComponentInChildren<EventSystem>();
         m_Fade.transform.localScale = Vector3.zero;
         return true;
     }
