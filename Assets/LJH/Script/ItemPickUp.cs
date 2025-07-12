@@ -5,21 +5,23 @@ public class ItemPickup : MonoBehaviour
 {
     public int itemIndex;
     private SpriteRenderer _sr;
+    private Collider2D _col2D;
     private float bounceHeight   = 2.5f;
-    private float bounceDuration = 0.6f;
+    private float bounceDuration = 0.4f;
     private Vector3 _startPos;
 
     void Awake()
     {
         _sr = GetComponentInChildren<SpriteRenderer>();
+        _col2D   = GetComponent<Collider2D>();
         _startPos = transform.position;
     }
 
     void Start()
     {
+        if (_col2D != null) _col2D.enabled = false;
         var def = ItemDatabase.Instance.GetDefinition(itemIndex);
-        if (_sr != null && def.icon != null)
-            _sr.sprite = def.icon;
+        if (_sr != null && def.icon != null) _sr.sprite = def.icon;
         StartCoroutine(BounceY());
     }
 
@@ -52,5 +54,7 @@ public class ItemPickup : MonoBehaviour
         }
         
         transform.position = _startPos;
+        
+        if (_col2D != null) _col2D.enabled = true;
     }
 }
