@@ -514,6 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 161bc03df41521e45b404201da8ac0c4, type: 2}
   spawnPoint: {fileID: 1614947594}
+  itemPickupPrefab: {fileID: 9076133489603789784, guid: 24fc84170eaae3948b379d02535ed13a, type: 3}
 --- !u!4 &942661120
 Transform:
   m_ObjectHideFlags: 0
@@ -691,6 +692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: c04a8d56359330e4c9cdd6ebd4cdc0b9, type: 2}
   spawnPoint: {fileID: 1614947594}
+  itemPickupPrefab: {fileID: 9076133489603789784, guid: 24fc84170eaae3948b379d02535ed13a, type: 3}
 --- !u!4 &1045220085
 Transform:
   m_ObjectHideFlags: 0
@@ -978,6 +980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: fe3629b8dc167254b881fe591fa4ca8e, type: 2}
   spawnPoint: {fileID: 1614947594}
+  itemPickupPrefab: {fileID: 9076133489603789784, guid: 24fc84170eaae3948b379d02535ed13a, type: 3}
 --- !u!4 &2125942595
 Transform:
   m_ObjectHideFlags: 0
