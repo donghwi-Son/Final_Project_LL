@@ -4,6 +4,7 @@ public class PlayerAttackState : PlayerState
 {
     PlayerController player => psm.player;
 
+    bool CanCharge => player.stat.canChargeAttack;
     bool isHolding = false;
     float holdTime;
     float requiredHoldTime = 1f;
@@ -24,13 +25,15 @@ public class PlayerAttackState : PlayerState
         holdTime = 0f;
         isHoldAttack = false;
         chargeBar = player.GetComponent<PlayerChargeBar>();
-        chargeBar?.ShowChargeBar();
+        if(CanCharge)
+            chargeBar?.ShowChargeBar();
+        player.anim.speed = player.stat.attackSpeed / 3;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        if (Input.GetMouseButton(0) && isHolding)
+        if (Input.GetMouseButton(0) && isHolding && CanCharge)
         {
             holdTime += Time.deltaTime;
             chargeBar?.UpdateChargeBar(holdTime / requiredHoldTime);
@@ -42,7 +45,10 @@ public class PlayerAttackState : PlayerState
         if(Input.GetMouseButtonUp(0))
         {
             isHolding = false;
-            chargeBar?.HideChargeBar();
+            if (CanCharge)
+            {
+                chargeBar?.HideChargeBar();
+            }
             if (isHoldAttack)
             {
                 player.AttackManager.ChargeAttack(player.attackMode, player.IsFacingRight);
@@ -59,7 +65,9 @@ public class PlayerAttackState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
+        player.anim.ResetTrigger("Att");
         player.CanFlip = true;
+        player.anim.speed = 1f;
     }
 
 }

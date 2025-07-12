@@ -19,6 +19,8 @@ public class AttackManager : MonoBehaviour
     Vector2 attOffset;
     Vector2 attPos;
     bool isRight;
+    float lastFireTime = 0f;
+    bool canFire = true;
 
 
     private void Awake()
@@ -26,9 +28,25 @@ public class AttackManager : MonoBehaviour
         anim = GetComponent<Animator>();
         stat = GetComponent<PlayerStatus>();
     }
-   
 
+    bool CanFireProjectile()
+    {
+        return canFire && Time.time >= lastFireTime + stat.attackInterval;
+    }
     void FireProjectile()
+    {
+        if(!CanFireProjectile()) return;
+
+        Projectile projectile = ProjectilePool.Instance.GetProjectile();
+        if (projectile == null) return;
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
+        projectile.Fire(transform.position, dir, stat.damage, stat.projecTileLifeTime, stat.shotSpeed);
+
+        lastFireTime = Time.time;
+    }
+
+    void FireChargeProjectile()
     {
         Projectile projectile = ProjectilePool.Instance.GetProjectile();
         if (projectile == null) return;
@@ -47,6 +65,7 @@ public class AttackManager : MonoBehaviour
                 this.isRight = isRight;
                 break;
             case AttackMode.Ranged:
+                if (!CanFireProjectile()) return;
                 anim.SetTrigger("Att");
                 FireProjectile();
                 break;
@@ -55,7 +74,18 @@ public class AttackManager : MonoBehaviour
 
     public void ChargeAttack(AttackMode attmode, bool isRight)
     {
-        anim.SetTrigger("ChargeAtt");
+        switch(attmode)
+        {
+            case AttackMode.Melee:
+                anim.SetTrigger("ChargeAtt");
+                this.isRight = isRight;
+                MeleeAttack();
+                break;
+            case AttackMode.Ranged:
+                anim.SetTrigger("ChargeAtt");
+                FireChargeProjectile();
+                break;
+        }
     }
 
     public void SpecialAttack(AttackMode attmode)

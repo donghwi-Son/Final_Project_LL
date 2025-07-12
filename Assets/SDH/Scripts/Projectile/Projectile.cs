@@ -31,6 +31,7 @@ public class Projectile : MonoBehaviour
     float finalSpeed;
     float finalLifeTime;
     float piercingCount = 0;
+    float sizeFactor = 0.7f;
     bool isPiercing = false;
 
 
@@ -75,6 +76,9 @@ public class Projectile : MonoBehaviour
     public void Fire(Vector2 pos, Vector2 dir, float statdmg, float statlf, float statshotspd)
     {
         CalculateFinalStat(statdmg, statlf, statshotspd);
+        sizeFactor = 0.7f + statdmg * 0.05f;
+        sizeFactor = Mathf.Clamp(sizeFactor, 0.7f, 2.0f);
+        transform.localScale = new Vector3(sizeFactor, sizeFactor, 1f);
         transform.position = pos;
         transform.right = dir;
         gameObject.SetActive(true);

@@ -17,10 +17,11 @@ public class PlayerStatus : MonoBehaviour
     public float defense = 2f;
     public float speed = 5f;
     public float attackSpeed = 1f;
+    public float attackInterval => 1f / attackSpeed;
     public float attackRange = 1f;
     public float projecTileLifeTime = 5f;
     public float shotSpeed = 5f;
-    public bool canHoldAttack;
+    public bool canChargeAttack = false;
 
 
     public void TakeDamage(float dmg)
@@ -37,5 +38,11 @@ public class PlayerStatus : MonoBehaviour
     public void Die()
     {
 
+    }
+
+    public void ChangeProjectile(ProjectileType type)
+    {
+        projectileType = type;
+        ProjectilePool.Instance.ChangeProjectile(projectileType);
     }
 }

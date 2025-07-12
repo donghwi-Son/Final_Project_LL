@@ -16,7 +16,7 @@ public class ProjectilePool : MonoBehaviour
 
     public List<ProjectileMapping> projectileMappings;
     Dictionary<ProjectileType, Queue<GameObject>> activePool = new();
-    ProjectileType currentProjectileType = ProjectileType.Normal;
+    ProjectileType currentProjectileType;
 
     private void Awake()
     {
@@ -25,6 +25,7 @@ public class ProjectilePool : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             InitPool();
+            ChangeProjectile(ProjectileType.AAA);
         }
         else
         {
@@ -36,7 +37,7 @@ public class ProjectilePool : MonoBehaviour
     void InitPool()
     {
         activePool = new Dictionary<ProjectileType, Queue<GameObject>>();
-        GeneratePool(ProjectileType.Normal);
+        GeneratePool(ProjectileType.AAA);
     }
 
     public Projectile GetProjectile()

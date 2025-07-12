@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
     public bool IsDefending { get; private set; }
     public bool IsFacingRight { get; private set; } = true;
 
+    
+
     //타이머
     float lastAttackTime;
     float lastSpecialAttackTime;
@@ -134,6 +136,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        stat = GetComponent<PlayerStatus>();
     }
 
     void HandleInput()
