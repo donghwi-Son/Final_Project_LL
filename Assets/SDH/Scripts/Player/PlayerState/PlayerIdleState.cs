@@ -13,6 +13,7 @@ public class PlayerIdleState : PlayerState
     {
         base.EnterState();
         Debug.Log("Player Idle State Entered");
+        player.anim.SetBool("isFalling", false);
         player.rb.linearVelocityX = 0f;
     }
 

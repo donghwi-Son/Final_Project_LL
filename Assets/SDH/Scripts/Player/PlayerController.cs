@@ -105,9 +105,9 @@ public class PlayerController : MonoBehaviour
         CheckGround();
 
         if(CanFlip)
-            FlipByMouse();
+            FlipByKey();
 
-        if(MeleeChangeInput)
+        if (MeleeChangeInput)
             ChangeAttackMethod();
 
         StateMachine.Update();
@@ -176,6 +176,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void FlipByKey()
+    {
+        if (XInput > 0 && !IsFacingRight)
+        {
+            IsFacingRight = true;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (XInput < 0 && IsFacingRight)
+        {
+            IsFacingRight = false;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
     public void Move()
     {
         rb.linearVelocityX = XInput * moveSpeed;

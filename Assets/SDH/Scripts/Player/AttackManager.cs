@@ -21,6 +21,7 @@ public class AttackManager : MonoBehaviour
     bool isRight;
     float lastFireTime = 0f;
     bool canFire = true;
+    public Transform firePoint;
 
 
     private void Awake()
@@ -40,8 +41,8 @@ public class AttackManager : MonoBehaviour
         Projectile projectile = ProjectilePool.Instance.GetProjectile();
         if (projectile == null) return;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
-        projectile.Fire(transform.position, dir, stat.damage, stat.projecTileLifeTime, stat.shotSpeed);
+        Vector2 dir = (mousePos - (Vector2)firePoint.position).normalized;
+        projectile.Fire(firePoint.position, dir, stat.damage, stat.projecTileLifeTime, stat.shotSpeed);
 
         lastFireTime = Time.time;
     }
@@ -51,8 +52,8 @@ public class AttackManager : MonoBehaviour
         Projectile projectile = ProjectilePool.Instance.GetProjectile();
         if (projectile == null) return;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
-        projectile.Fire(transform.position, dir, stat.damage, stat.projecTileLifeTime, stat.shotSpeed);
+        Vector2 dir = (mousePos - (Vector2)firePoint.position).normalized;
+        projectile.Fire(firePoint.position, dir, stat.damage, stat.projecTileLifeTime, stat.shotSpeed);
 
     }
 
@@ -107,13 +108,18 @@ public class AttackManager : MonoBehaviour
 
     public void AirAttack()
     {
-        anim.SetTrigger("AirAttack");
+        anim.SetTrigger("AirAtt");
+    }
+
+    public void DashAttack()
+    {
+        anim.SetTrigger("DashAtt");
     }
 
     void MeleeAttack()
     {
         attOffset = isRight ? new Vector2(0.5f, 0) : new Vector2(-0.5f, 0);
-        attPos = (Vector2)transform.position + attOffset;
+        attPos = (Vector2)firePoint.position + attOffset;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos, stat.attackRange, LayerMask.GetMask("Enemy"));
         foreach (Collider2D enemy in hitEnemies)
         {

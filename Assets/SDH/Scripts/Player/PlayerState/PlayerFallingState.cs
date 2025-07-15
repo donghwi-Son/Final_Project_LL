@@ -11,6 +11,7 @@ public class PlayerFallingState : PlayerState
     {
         base.EnterState();
         player.anim.SetBool("isFalling", true);
+        Debug.Log("Player Falling State Entered");
     }
 
     public override void UpdateState()
@@ -27,12 +28,7 @@ public class PlayerFallingState : PlayerState
         }
         else if (player.IsGrounded)
         {
-            if(player.DoubleJumpActive && !player.CanDoubleJump)
-            {
-                player.CanDoubleJump = true;
-            }
             player.CanAirAttack = true;
-           // player.anim.SetBool("isGround", true);
             psm.ChangeState(player.IdleState);
         }
     }
@@ -40,6 +36,5 @@ public class PlayerFallingState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
-        player.anim.SetBool("isFalling", false);
     }
 }

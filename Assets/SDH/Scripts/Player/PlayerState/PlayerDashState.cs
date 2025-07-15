@@ -12,6 +12,7 @@ public class PlayerDashState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        player.CanFlip = false;
         player.anim.SetBool("isDashing", true);
         dashTime = 1f;
         player.rb.linearVelocityX = 0f;
@@ -36,7 +37,7 @@ public class PlayerDashState : PlayerState
     {
         base.ExitState();
         player.anim.SetBool("isDashing", false);
-        player.rb.linearVelocityX = 0f;
+        player.CanFlip = true;
     }
 
     void Dash()
