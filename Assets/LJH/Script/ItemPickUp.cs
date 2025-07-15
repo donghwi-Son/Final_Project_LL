@@ -30,11 +30,12 @@ public class ItemPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerTest.Instance.OnItemAcquired(itemIndex);
+            InventoryUI.Instance.Refresh();
             Destroy(gameObject);
         }
     }
     
-    private IEnumerator BounceY()
+    private IEnumerator BounceY()   //아이템 스폰 후 움직임
     {
         float halfTime = bounceDuration * 0.5f;
         Vector3 peakPos = _startPos + Vector3.up * bounceHeight;

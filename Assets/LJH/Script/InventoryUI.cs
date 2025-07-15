@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -9,6 +10,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject     entryPrefab;   // Prefab/ItemEntry
     public GameObject     inventoryUI;
     private bool inventoryOpen = false;
+    public static InventoryUI Instance { get; private set; } 
 
     void Update()
     {
@@ -16,6 +18,11 @@ public class InventoryUI : MonoBehaviour
         {
             InventoryOn();
         }
+    }
+    
+    void Awake()
+    {
+        Instance = this;
     }
 
     private void InventoryOn()
