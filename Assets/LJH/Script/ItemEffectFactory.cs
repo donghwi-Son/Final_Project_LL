@@ -28,24 +28,24 @@ public class ItemEffectFactory : MonoBehaviour
             
             case ItemInfo.ItemUpgradeType.AttackEnhance:
                 Debug.Log("기본 공격 강화 아이템 획득");
-                //PlayerTest.Instance.AttackEnhance(e.attackEnhance);
+                //PlayerTest.Instance.AttackEnhance(e.attackEnhance);   //공격 강화 넣어야 하는 부분
                 break;
             
             case ItemInfo.ItemUpgradeType.SkillUpgrade:
                 Debug.Log("스킬 강화 아이템 획득");
-                //PlayerTest.Instance.AddSkill(e.skillType);
+                //PlayerTest.Instance.AddSkill(e.skillType);            //스킬 획득 넣어야 하는 부분
                 break;
                 
 
             case ItemInfo.ItemUpgradeType.SubAttack:
                 Debug.Log("보조 공격 아이템 획득");
-                //var subCfg = SubAttackRegistry.Instance.Get(e.subAttackType);
-                //SubAttackSystem.Instance.SubAttackRegister(subCfg.prefab, e.subAttackCooldown);
+                //var subCfg = SubAttackRegistry.Instance.Get(e.subAttackType);                     //보조 공격 아이템 프리펩 추가
+                //SubAttackSystem.Instance.SubAttackRegister(subCfg.prefab, e.subAttackCooldown);   //보조 공격 쿨타임 설정
                 break;
                 
             case ItemInfo.ItemUpgradeType.Utility:
                 Debug.Log("유틸 아이템 획득");
-                //PlayerController.Instance.EnableDoubleJump();
+                //PlayerController.Instance.EnableDoubleJump();                         //유틸 활성화
                 break;
         }
     }

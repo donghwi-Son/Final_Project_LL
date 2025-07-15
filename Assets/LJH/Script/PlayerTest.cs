@@ -50,18 +50,18 @@ public class PlayerTest : MonoBehaviour
         // PlayerPrefs 방식으로 acquired 저장, 저장 필요 없으면 안할듯
     }
     
-    public IReadOnlyList<ItemDefinition> GetAllAcquired()
+    public IReadOnlyList<ItemDefinition> GetAllAcquired()   //모든 아이템
     {
         return acquiredDefs;
     }
     
-    public bool HasAcquired(int idx)
+    public bool HasAcquired(int idx)                        //획득한 아이템
     {
         return acquired.Contains(idx);
     }
 
 
-    public void AddHealth(float amount)
+    public void AddHealth(float amount)                 //스탯 강화 예시
     {
         maxHealth += amount;
         Debug.Log(maxHealth);

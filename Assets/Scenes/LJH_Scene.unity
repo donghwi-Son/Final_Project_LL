@@ -432,15 +432,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7861986201593418304, guid: 1e95a398340cd2940bdd479dbaaeb044, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7861986201593418304, guid: 1e95a398340cd2940bdd479dbaaeb044, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7861986201593418304, guid: 1e95a398340cd2940bdd479dbaaeb044, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7861986201593418304, guid: 1e95a398340cd2940bdd479dbaaeb044, type: 3}
       propertyPath: m_LocalRotation.w
@@ -513,7 +513,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 161bc03df41521e45b404201da8ac0c4, type: 2}
-  spawnPoint: {fileID: 1614947594}
   itemPickupPrefab: {fileID: 9076133489603789784, guid: 24fc84170eaae3948b379d02535ed13a, type: 3}
 --- !u!4 &942661120
 Transform:
@@ -524,7 +523,7 @@ Transform:
   m_GameObject: {fileID: 942661118}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.23, y: -0.66756797, z: -0.051252026}
+  m_LocalPosition: {x: 1, y: -0.66756797, z: -0.051252026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -691,7 +690,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: c04a8d56359330e4c9cdd6ebd4cdc0b9, type: 2}
-  spawnPoint: {fileID: 1614947594}
   itemPickupPrefab: {fileID: 9076133489603789784, guid: 24fc84170eaae3948b379d02535ed13a, type: 3}
 --- !u!4 &1045220085
 Transform:
@@ -702,7 +700,7 @@ Transform:
   m_GameObject: {fileID: 1045220083}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.23, y: -0.66756797, z: -0.051252026}
+  m_LocalPosition: {x: 3, y: -0.66756797, z: -0.051252026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -979,7 +977,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: fe3629b8dc167254b881fe591fa4ca8e, type: 2}
-  spawnPoint: {fileID: 1614947594}
   itemPickupPrefab: {fileID: 9076133489603789784, guid: 24fc84170eaae3948b379d02535ed13a, type: 3}
 --- !u!4 &2125942595
 Transform:
@@ -990,7 +987,7 @@ Transform:
   m_GameObject: {fileID: 2125942593}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.39, y: -0.66756797, z: -0.051252026}
+  m_LocalPosition: {x: 6, y: -0.66756797, z: -0.051252026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1134,15 +1131,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3409543038433983212, guid: 6cb4a6bdff68c554d96ed6e3c3e6bb8c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2119904
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3409543038433983212, guid: 6cb4a6bdff68c554d96ed6e3c3e6bb8c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.96641564
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3409543038433983212, guid: 6cb4a6bdff68c554d96ed6e3c3e6bb8c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.025207536
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3409543038433983212, guid: 6cb4a6bdff68c554d96ed6e3c3e6bb8c, type: 3}
       propertyPath: m_LocalRotation.w

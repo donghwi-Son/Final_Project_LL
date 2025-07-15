@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rates:
   - rarity: 0
-    rate: 50
+    rate: 45
   - rarity: 1
-    rate: 30
+    rate: 35
   - rarity: 2
     rate: 15
   - rarity: 3
