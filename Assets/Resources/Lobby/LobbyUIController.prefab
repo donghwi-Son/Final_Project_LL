@@ -899,7 +899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Setting
+  m_text: Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 366de240759a9174e85712a72f669d9b, type: 2}
   m_sharedMaterial: {fileID: 5919616666159528211, guid: 366de240759a9174e85712a72f669d9b, type: 2}
@@ -1498,7 +1498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005be8fb94cd50444b8ef5215eaf53bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EventSystem: {fileID: 0}
   m_ContinueBtn: {fileID: 2043109607915109544}
   m_NewGameBtn: {fileID: 5070594402753855268}
 --- !u!1 &8979901433473610483

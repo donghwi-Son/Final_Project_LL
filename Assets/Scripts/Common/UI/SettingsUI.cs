@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class SettingsUI : UIBase
@@ -9,6 +10,8 @@ public class SettingsUI : UIBase
     [SerializeField] private RectTransform[] TabButtons;
     [SerializeField] private float InactiveButtonPosX = -275f;
     [SerializeField] private float ActiveButtonPosX = -300f;
+
+    [SerializeField] private TMP_Dropdown LanguageDropDown;
 
     [SerializeField] private TMP_Dropdown ResDropDown;
     [SerializeField] private Toggle FullScreenToggle;
@@ -22,6 +25,13 @@ public class SettingsUI : UIBase
     public override void SetInfo(UIBaseData uiData)
     {
         base.SetInfo(uiData);
+
+        List<string> languageOptions = new List<string>();
+        foreach (var locale in LocalizationSettings.AvailableLocales.Locales)
+        {
+            languageOptions.Add(locale.Identifier.Code);
+        }
+        LanguageDropDown.AddOptions(languageOptions);
 
         AllResolutions = Screen.resolutions;
 
@@ -42,6 +52,8 @@ public class SettingsUI : UIBase
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         if (userSettingsData != null)
         {
+            var selectedLanguage = userSettingsData.Language;
+            LanguageDropDown.value = (int)selectedLanguage;
             var selectedResolution = userSettingsData.ResolutionIndex;
             ResDropDown.value = selectedResolution;
             FullScreenToggle.isOn = userSettingsData.FullScreen;
@@ -68,6 +80,17 @@ public class SettingsUI : UIBase
             tabButton.anchoredPosition = new Vector2(InactiveButtonPosX, tabButton.anchoredPosition.y);
         }
         TabButtons[_tabId].anchoredPosition = new Vector2(ActiveButtonPosX, TabButtons[_tabId].anchoredPosition.y);
+    }
+
+    public void SetLanguage()
+    {
+        var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
+        if (userSettingsData != null)
+        {
+            userSettingsData.Language = (LocalizationLanguage)LanguageDropDown.value;
+            userSettingsData.SaveData();
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[(int)userSettingsData.Language];
+        }
     }
 
     public void SetResolution()

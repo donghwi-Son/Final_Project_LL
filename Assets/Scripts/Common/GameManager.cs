@@ -1,5 +1,6 @@
 using Singleton.Component;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class GameManager : SingletonComponent<GameManager>
 {
@@ -28,6 +29,16 @@ public class GameManager : SingletonComponent<GameManager>
             Destroy(gameObject);
     }
     #endregion
+
+    public void LoadPlayerSettings()
+    {
+        // 플레이어 설정 데이터 로드
+        var userSettingsData =  UserDataManager.Instance.GetUserData<UserSettingsData>();
+        if(userSettingsData != null)
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[(int)userSettingsData.Language];
+        }
+    }
 
     public void QuitGame()
     {
