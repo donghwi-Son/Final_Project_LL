@@ -35,6 +35,42 @@ MonoBehaviour:
     m_Key: Quit
     m_Metadata:
       m_Items: []
+  - m_Id: 4218013265113088
+    m_Key: General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218172837408768
+    m_Key: Graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218231725436928
+    m_Key: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218277426573312
+    m_Key: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218318765633536
+    m_Key: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218372251398144
+    m_Key: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218489524137984
+    m_Key: FullScreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218782789873664
+    m_Key: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218853858160640
+    m_Key: SFX
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
