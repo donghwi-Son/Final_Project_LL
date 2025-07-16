@@ -51,6 +51,8 @@ public class TitleManager : MonoBehaviour
 
         //GameManager.Instance.LoadPlayData(); // 게임 매니저를 통한 플레이 데이터 로드
 
+        GameManager.Instance.LoadPlayerSettings(); // 플레이어 설정 데이터 로드
+
         // 게임 로딩 코루틴 시작
         StartCoroutine(LoadGameCo());
     }
