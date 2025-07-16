@@ -29,7 +29,7 @@ public class SettingsUI : UIBase
         List<string> languageOptions = new List<string>();
         foreach (var locale in LocalizationSettings.AvailableLocales.Locales)
         {
-            languageOptions.Add(locale.Identifier.Code);
+            languageOptions.Add(locale.Identifier.ToString());
         }
         LanguageDropDown.AddOptions(languageOptions);
 

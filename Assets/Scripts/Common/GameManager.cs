@@ -37,6 +37,18 @@ public class GameManager : SingletonComponent<GameManager>
         if(userSettingsData != null)
         {
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[(int)userSettingsData.Language];
+            AudioManager.Instance.SetMusicVolume(userSettingsData.Music_Volume);
+            AudioManager.Instance.SetSFXVolume(userSettingsData.SFX_Volume);
+            Screen.fullScreen = userSettingsData.FullScreen;
+            if (userSettingsData.ResolutionIndex >= 0 && userSettingsData.ResolutionIndex < Screen.resolutions.Length)
+            {
+                Resolution resolution = Screen.resolutions[userSettingsData.ResolutionIndex];
+                Screen.SetResolution(resolution.width, resolution.height, userSettingsData.FullScreen);
+            }
+            else
+            {
+                Debug.LogWarning("Invalid resolution index in user settings.");
+            }
         }
     }
 
