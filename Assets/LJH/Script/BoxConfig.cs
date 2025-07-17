@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BoxConfig", menuName = "Configs/BoxConfig")]
-public class BoxConfig : ScriptableObject
+public class BoxConfig : ScriptableObject       //아이템 확률 설정
 {
     [System.Serializable]
     public struct RarityRate

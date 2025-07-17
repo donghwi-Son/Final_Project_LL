@@ -1,0 +1,736 @@
+fileFormatVersion: 2
+guid: 9421e294537bbec4fa9ad056c6bd38e9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6969964833486453593
+    second: Enemy_Wisp_0
+  - first:
+      213: 4707462721196199350
+    second: Enemy_Wisp_1
+  - first:
+      213: -200864481286968020
+    second: Enemy_Wisp_2
+  - first:
+      213: -1057538206536977498
+    second: Enemy_Wisp_3
+  - first:
+      213: 3000050495125407925
+    second: Enemy_Wisp_4
+  - first:
+      213: -3116166021586727902
+    second: Enemy_Wisp_5
+  - first:
+      213: 3224080537924117805
+    second: Enemy_Wisp_6
+  - first:
+      213: -8315225394496892768
+    second: Enemy_Wisp_7
+  - first:
+      213: -1945110509375598072
+    second: Enemy_Wisp_8
+  - first:
+      213: -8966856253890224579
+    second: Enemy_Wisp_9
+  - first:
+      213: 8749703178955138575
+    second: Enemy_Wisp_10
+  - first:
+      213: 3244585116895802551
+    second: Enemy_Wisp_11
+  - first:
+      213: 5331142887930742908
+    second: Enemy_Wisp_12
+  - first:
+      213: -7249996557161042672
+    second: Enemy_Wisp_13
+  - first:
+      213: 8953075899793617188
+    second: Enemy_Wisp_14
+  - first:
+      213: -2238193878696349201
+    second: Enemy_Wisp_15
+  - first:
+      213: 6118547593509833738
+    second: Enemy_Wisp_16
+  - first:
+      213: 8397069670178494647
+    second: Enemy_Wisp_17
+  - first:
+      213: -967441592986505598
+    second: Enemy_Wisp_18
+  - first:
+      213: 8082926149604776554
+    second: Enemy_Wisp_19
+  - first:
+      213: 3322977112609980961
+    second: Enemy_Wisp_20
+  - first:
+      213: 2947139064320005445
+    second: Enemy_Wisp_21
+  - first:
+      213: -1321040118802587600
+    second: Enemy_Wisp_22
+  - first:
+      213: 5532393907718192056
+    second: Enemy_Wisp_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 30
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Enemy_Wisp_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 154
+        width: 11
+        height: 20
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95bbcec661a4ab060800000000000000
+      internalID: 6969964833486453593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 154
+        width: 11
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd0b4a5764445140800000000000000
+      internalID: 4707462721196199350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_24
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 29
+        width: 8
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2da5e881d2663df0800000000000000
+      internalID: -200864481286968020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 154
+        width: 11
+        height: 25
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a3b5feaa9ed251f0800000000000000
+      internalID: -1057538206536977498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_3
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 154
+        width: 11
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b84f26c70252a920800000000000000
+      internalID: 3000050495125407925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_5
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 121
+        width: 15
+        height: 13
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22c4e26738721c4d0800000000000000
+      internalID: -3116166021586727902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_6
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 121
+        width: 14
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d25a736da2c3ebc20800000000000000
+      internalID: 3224080537924117805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_7
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 122
+        width: 15
+        height: 13
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a094b54f826a9c80800000000000000
+      internalID: -8315225394496892768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_8
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 119
+        width: 13
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 802d9cf1c449105e0800000000000000
+      internalID: -1945110509375598072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_9
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 86
+        width: 11
+        height: 20
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3e12eadeb35f8380800000000000000
+      internalID: -8966856253890224579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_10
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 87
+        width: 11
+        height: 19
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f062abfeea03d6970800000000000000
+      internalID: 8749703178955138575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_11
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 88
+        width: 9
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b4f71829f4170d20800000000000000
+      internalID: 3244585116895802551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_12
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 88
+        width: 9
+        height: 11
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7846f106360cf940800000000000000
+      internalID: 5331142887930742908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_13
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 89
+        width: 7
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01d6c9b1b86d26b90800000000000000
+      internalID: -7249996557161042672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_14
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 60
+        width: 13
+        height: 9
+      alignment: 9
+      pivot: {x: 0.73727214, y: 0.49111685}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4213f4e6817bf3c70800000000000000
+      internalID: 8953075899793617188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_15
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 60
+        width: 14
+        height: 9
+      alignment: 9
+      pivot: {x: 0.7544406, y: 0.47801125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe1b9d9968650f0e0800000000000000
+      internalID: -2238193878696349201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_16
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 60
+        width: 15
+        height: 9
+      alignment: 9
+      pivot: {x: 0.7836543, y: 0.47801125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0c897c6e9279e450800000000000000
+      internalID: 6118547593509833738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_17
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 27
+        width: 11
+        height: 21
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b8123d1062688470800000000000000
+      internalID: 8397069670178494647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_19
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 27
+        width: 10
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6a98e402825c2070800000000000000
+      internalID: 8082926149604776554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_20
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 26
+        width: 9
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1220fd9f3169d1e20800000000000000
+      internalID: 3322977112609980961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_22
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 28
+        width: 7
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0306bb8d209baade0800000000000000
+      internalID: -1321040118802587600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Wisp_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 28
+        width: 8
+        height: 20
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bbf31b72f207cc40800000000000000
+      internalID: 5532393907718192056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7ca6e740d0af83c4693ca3ee43a898ce
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Enemy_Wisp_0: 6969964833486453593
+      Enemy_Wisp_1: 4707462721196199350
+      Enemy_Wisp_10: 8749703178955138575
+      Enemy_Wisp_11: 3244585116895802551
+      Enemy_Wisp_12: 5331142887930742908
+      Enemy_Wisp_13: -7249996557161042672
+      Enemy_Wisp_14: 8953075899793617188
+      Enemy_Wisp_15: -2238193878696349201
+      Enemy_Wisp_16: 6118547593509833738
+      Enemy_Wisp_17: 8397069670178494647
+      Enemy_Wisp_18: -967441592986505598
+      Enemy_Wisp_19: 8082926149604776554
+      Enemy_Wisp_2: -1057538206536977498
+      Enemy_Wisp_20: 3322977112609980961
+      Enemy_Wisp_21: 2947139064320005445
+      Enemy_Wisp_22: -1321040118802587600
+      Enemy_Wisp_23: 5532393907718192056
+      Enemy_Wisp_24: -200864481286968020
+      Enemy_Wisp_3: 3000050495125407925
+      Enemy_Wisp_5: -3116166021586727902
+      Enemy_Wisp_6: 3224080537924117805
+      Enemy_Wisp_7: -8315225394496892768
+      Enemy_Wisp_8: -1945110509375598072
+      Enemy_Wisp_9: -8966856253890224579
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
