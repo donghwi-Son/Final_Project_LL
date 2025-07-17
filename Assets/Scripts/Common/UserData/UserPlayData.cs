@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using UnityEngine;
 
 public class UserPlayData : IUserData
@@ -8,6 +10,10 @@ public class UserPlayData : IUserData
     public float PlayTime { get; set; }
     public float TotalPlayTime { get; set; }
     public float NewRecord { get; set; }
+
+    private GlobalGameRecord globalGameRecord;
+
+    private const string GLOBAL_STATS_FILE = "GlobalGameRecord.json";
 
     // 기본 데이터 설정 메서드
     public void SetDefaultData()
@@ -23,17 +29,6 @@ public class UserPlayData : IUserData
         NewRecord = Mathf.Infinity;
     }
 
-    public void SoftResetData()
-    {
-        Debug.Log($"{GetType()}::SoftResetData");
-
-        // 소프트 리셋: 플레이 시간과 플레이어 위치만 초기화
-        ExistsSavedPlayData = false;
-        PlayTime = 0f;
-        PlayerPosition = new Vector3(0, 75f, 0f);
-        PlayerRotation = new Vector3(0f, 180f, 0f);
-    }
-
     // 저장된 데이터를 불러오는 메서드
     public bool LoadData()
     {
@@ -44,29 +39,20 @@ public class UserPlayData : IUserData
         bool result = false;
 
         // 예외 처리를 위한 try-catch 블록 시작
+        string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, GLOBAL_STATS_FILE);
         try
         {
-            // PlayerPrefs에서 저장된 데이터 불러오기
-            ExistsSavedPlayData = PlayerPrefs.GetInt("ExistsSavedPlayData") == 1 ? true : false;
-            PlayerPosition = new Vector3(
-                PlayerPrefs.GetFloat("PlayerPositionX"),
-                PlayerPrefs.GetFloat("PlayerPositionY"),
-                PlayerPrefs.GetFloat("PlayerPositionZ")
-            );
-            PlayerRotation = new Vector3(
-                PlayerPrefs.GetFloat("PlayerRotationX"),
-                PlayerPrefs.GetFloat("PlayerRotationY"),
-                PlayerPrefs.GetFloat("PlayerRotationZ")
-            );
-            PlayTime = PlayerPrefs.GetFloat("PlayTime");
-            TotalPlayTime = PlayerPrefs.GetFloat("TotalPlayTime");
-            NewRecord = PlayerPrefs.GetFloat("NewRecord");
-
-            // 로드 성공으로 설정
-            result = true;
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                globalGameRecord = JsonUtility.FromJson<GlobalGameRecord>(json);
+            }
+            else
+            {
+                globalGameRecord = new GlobalGameRecord();
+            }
         }
-        // 예외 발생 시 처리
-        catch (System.Exception e)
+        catch (Exception e)
         {
             // 로드 실패 로그 출력
             Debug.Log($"Load failed. (" + e.Message + ")");
@@ -88,29 +74,16 @@ public class UserPlayData : IUserData
         // 예외 처리를 위한 try-catch 블록 시작
         try
         {
-            // PlayerPrefs에 현재 플레이 데이터 저장
-            PlayerPrefs.SetInt("ExistsSavedPlayData", ExistsSavedPlayData ? 1 : 0);
+            if (globalGameRecord != null)
+            {
+                string json = JsonUtility.ToJson(globalGameRecord, true);
+                string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, GLOBAL_STATS_FILE);
+                File.WriteAllText(filePath, json);
 
-            PlayerPrefs.SetFloat("PlayerPositionX", PlayerPosition.x);
-            PlayerPrefs.SetFloat("PlayerPositionY", PlayerPosition.y);
-            PlayerPrefs.SetFloat("PlayerPositionZ", PlayerPosition.z);
-
-            PlayerPrefs.SetFloat("PlayerRotationX", PlayerRotation.x);
-            PlayerPrefs.SetFloat("PlayerRotationY", PlayerRotation.y);
-            PlayerPrefs.SetFloat("PlayerRotationZ", PlayerRotation.z);
-
-            PlayerPrefs.SetFloat("PlayTime", PlayTime);
-            PlayerPrefs.SetFloat("TotalPlayTime", TotalPlayTime);
-            PlayerPrefs.SetFloat("NewRecord", NewRecord);
-
-            // PlayerPrefs 저장 실행
-            PlayerPrefs.Save();
-
-            // 저장 성공으로 설정
-            result = true;
+                result = true;
+            }
         }
-        // 예외 발생 시 처리
-        catch (System.Exception e)
+        catch (Exception e)
         {
             // 저장 실패 로그 출력
             Debug.Log($"Save failed. (" + e.Message + ")");

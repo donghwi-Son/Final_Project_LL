@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 
 public enum LocalizationLanguage
 {
@@ -44,7 +44,7 @@ public class UserSettingsData : IUserData
             SFX_Volume = PlayerPrefs.GetFloat("SFX");
             result = true; // 로드 성공
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             // 로드 실패 처리
             Debug.Log("Load failed (" + e.Message + ")");
@@ -72,7 +72,7 @@ public class UserSettingsData : IUserData
 
             result = true; // 저장 성공
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             // 저장 실패 처리
             Debug.Log("Save failed (" + e.Message + ")");
