@@ -54,4 +54,10 @@ public class StageGenerator : MonoBehaviour
         //return origin + new Vector3(grid.x * roomSize.x, grid.y * roomSize.y, 0f) + offset;
         return origin + new Vector3(grid.x * roomSize.x, grid.y * roomSize.y, 0f);
     }
+
+    // 그리드 내부에 방 제한
+    public bool IsInsideGrid(Vector2Int grid)
+    {
+        return grid.x >= 0 && grid.x < cols && grid.y >= 0 && grid.y < rows;
+    }
 }
