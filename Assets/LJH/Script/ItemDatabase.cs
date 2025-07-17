@@ -49,7 +49,6 @@ public class ItemDatabase : MonoBehaviour
             def.icon = Resources.Load<Sprite>($"ItemIcons/{def.iconName}");
             if (def.icon == null)
                 Debug.LogWarning($"Icon '{def.iconName}' not found for item {def.name}");
-
             _defs[def.index] = def;
         }
 

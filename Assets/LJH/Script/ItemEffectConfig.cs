@@ -28,12 +28,16 @@ public class ItemEffectConfig : ScriptableObject
         // Utility 활성화
         public bool enableDoubleJump;
     }
+    
 
     public Entry[] entries;
     
     Dictionary<int, Entry> _map;
+
     void OnEnable()
-        => _map = entries.ToDictionary(e=>e.index);
+    {
+        _map = entries.ToDictionary(e=>e.index);
+    }
 
     public bool TryGet(int idx, out Entry e)
         => _map.TryGetValue(idx, out e);

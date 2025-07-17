@@ -6,8 +6,8 @@ using TMPro;
 public class InventoryUI : MonoBehaviour
 {
     [Header("References")]
-    public RectTransform content;        // Scroll View ▶ Content
-    public GameObject     entryPrefab;   // Prefab/ItemEntry
+    public RectTransform content;    
+    public GameObject     entryPrefab;
     public GameObject     inventoryUI;
     private bool inventoryOpen = false;
     public static InventoryUI Instance { get; private set; } 
