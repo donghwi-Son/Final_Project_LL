@@ -10,7 +10,7 @@ public class LobbyUIController : MonoBehaviour
     private void Start()
     {
         var userPlayData = UserDataManager.Instance.GetUserData<UserPlayData>();
-        if (userPlayData != null && userPlayData.ExistsSavedPlayData)
+        if (userPlayData != null && userPlayData.currentGameData != null)
         {
             m_ContinueBtn.SetActive(true);
             UIManager.Instance.UIEventSystem.SetSelectedGameObject(m_ContinueBtn, null);

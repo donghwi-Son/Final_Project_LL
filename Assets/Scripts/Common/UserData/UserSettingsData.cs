@@ -12,8 +12,8 @@ public class UserSettingsData : IUserData
     public LocalizationLanguage Language { get; set; }
     public int ResolutionIndex { get; set; }
     public bool FullScreen { get; set; }
-    public float Music_Volume { get; set; } = 1.0f;
-    public float SFX_Volume { get; set; } = 1.0f;
+    public float Music_Volume { get; set; }
+    public float SFX_Volume { get; set; }
 
     // 기본값으로 초기화
     public void SetDefaultData()
