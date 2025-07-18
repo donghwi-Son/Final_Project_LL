@@ -194,7 +194,6 @@ public class StageManager : MonoBehaviour
 
         // 프리팹 중심 좌표 보정 적용
         Vector3 worldPos = generator.GridToWorld(gridPos);
-
         GameObject room = Instantiate(prefab, worldPos, Quaternion.identity);
 
         var stageData = new StageData
@@ -207,9 +206,20 @@ public class StageManager : MonoBehaviour
 
         placedRooms[gridPos] = stageData;
         currentGrid = gridPos;
+
+        Transform bossFinishGroup = room.transform.Find("Boss Finish Group");
+        if (bossFinishGroup != null)
+        {
+            foreach (Transform boss in bossFinishGroup)
+            {
+                boss.gameObject.SetActive(false);
+            }
+        }
+
+        // 일반 Finish는 랜덤 2개 활성화
         ActivateRandomFinishes(room);
 
-        // 플레이어 이동 처리 (방 내 SpawnPoint가 있으면)
+        // 스폰 포인트로 플레이어 이동
         var spawn = room.transform.Find("SpawnPoint");
         player.position = spawn != null ? spawn.position : worldPos;
     }
@@ -253,7 +263,7 @@ public class StageManager : MonoBehaviour
     // 새로운 방 생성
     public void TryMoveToDirection(Vector2Int dir)
     {
-        Vector2Int nextGrid = currentGrid + dir;
+        Vector2Int nextGrid = currentGrid + dir * 2;
 
         // 이미 있는 방이면 그걸로 이동
         if (placedRooms.ContainsKey(nextGrid))
@@ -315,31 +325,42 @@ public class StageManager : MonoBehaviour
     {
         // "Finish Group" 자식에서 모든 Finish를 가져옴
         Transform finishGroup = room.transform.Find("Finish Group");
-        if (finishGroup == null)
+        Transform bossFinishGroup = room.transform.Find("Boss Finish Group");
+        if (finishGroup == null || bossFinishGroup == null)
         {
             return;
         }
 
-        // 모든 Finish 비활성화
+        // 일반 Finish 비활성화
         foreach (Transform child in finishGroup)
             child.gameObject.SetActive(false);
+
+        // 보스 Finish 비활성화
+        foreach (Transform boss in bossFinishGroup)
+            boss.gameObject.SetActive(false);
 
         // 보스 전용 Finish 활성화
         if (StageCounter>= maxStageCounter)
         {
-            var bossFinish = finishGroup.Find("Boss Finish");
-            if (bossFinish != null)
-            {
-                bossFinish.gameObject.SetActive(true);
+            // 4개 방향 중 1개 선택
+            List<string> bossFinishNames = new List<string> {
+            "Top Boss Finish", "Down Boss Finish", "Left Boss Finish", "Right Boss Finish"
+        };
 
-                var trigger = bossFinish.GetComponent<FinishTrigger>();
+            string selected = bossFinishNames[Random.Range(0, bossFinishNames.Count)];
+            Transform selectedBoss = bossFinishGroup.Find(selected);
+
+            if (selectedBoss != null)
+            {
+                selectedBoss.gameObject.SetActive(true);
+
+                var trigger = selectedBoss.GetComponent<FinishTrigger>();
                 if (trigger != null)
                 {
-                    trigger.direction = Vector2Int.zero; // 특수 처리
-                    trigger.isBoss = true; // 아래 확장 참조
+                    trigger.direction = GetDirectionFromName(selected); // 방향 매칭
+                    trigger.isBoss = true;
                 }
             }
-
             return;
         }
 
@@ -410,31 +431,32 @@ public class StageManager : MonoBehaviour
     }
 
     // 보스 방 생성
-    public void SpawnBossRoom()
+    public void SpawnBossRoom(Vector2Int dir)
     {
-        Vector2Int bossGrid = GetNextEmptyGrid(currentGrid);
-        if (bossGrid == Vector2Int.zero)
-        {
-            Debug.Log("[StageManager] 보스방 위치 없음");
-            return;
-        }
+        Vector2Int targetGrid = currentGrid + dir;
+        if (placedRooms.ContainsKey(targetGrid)) return;
 
-        GameObject room = Instantiate(bossRoomPrefab, generator.GridToWorld(bossGrid), Quaternion.identity);
+        Vector3 worldPos = generator.GridToWorld(targetGrid);
+        GameObject room = Instantiate(bossRoomPrefab, worldPos, Quaternion.identity);
 
-        StageData bossStage = new StageData
+        StageData newStage = new StageData
         {
             type = StageType.Boss,
-            indexX = bossGrid.x,
-            indexY = bossGrid.y,
-            prefab = bossRoomPrefab,
+            indexX = targetGrid.x,
+            indexY = targetGrid.y,
             instance = room
         };
 
-        placedRooms[bossGrid] = bossStage;
-        currentGrid = bossGrid;
+        placedRooms[targetGrid] = newStage;
+
+        Vector2Int direction = targetGrid - currentGrid;
+        placedRooms[currentGrid].Connect(newStage, direction);
+        newStage.Connect(placedRooms[currentGrid], -direction);
+
+        currentGrid = targetGrid;
 
         var spawn = room.transform.Find("SpawnPoint");
-        player.position = spawn != null ? spawn.position : generator.GridToWorld(bossGrid);
+        player.position = spawn != null ? spawn.position : worldPos;
 
         Debug.Log("[StageManager] 보스 방 생성 완료");
     }
@@ -486,14 +508,18 @@ public class StageManager : MonoBehaviour
 
     StageType GetRandomStageType()
     {
-        StageType[] candidates = new StageType[] {
-        StageType.Normal,
-        StageType.Hard,
-        StageType.Store,
-        StageType.Event
-    };
-        return candidates[Random.Range(0, candidates.Length)];
+        int rand = Random.Range(0, 10); // 0~9
+
+        if (rand < 6)
+            return StageType.Normal;  // 0~5
+        else if (rand < 8)
+            return StageType.Hard;    // 6~7
+        else if (rand == 8)
+            return StageType.Store;   // 8
+        else
+            return StageType.Event;   // 9
     }
+
 
     Vector3 GetRoomCenter(GameObject prefab)
     {
@@ -518,14 +544,10 @@ public class StageManager : MonoBehaviour
 
     Vector2Int GetDirectionFromName(string name)
     {
-        return name switch
-        {
-            "Top Finish" => Vector2Int.up,
-            "Down Finish" => Vector2Int.down,
-            "Left Finish" => Vector2Int.left,
-            "Right Finish" => Vector2Int.right,
-            _ => Vector2Int.zero
-        };
+        if (name.Contains("Top")) return Vector2Int.up;
+        if (name.Contains("Down")) return Vector2Int.down;
+        if (name.Contains("Left")) return Vector2Int.left;
+        if (name.Contains("Right")) return Vector2Int.right;
+        return Vector2Int.zero;
     }
-
 }

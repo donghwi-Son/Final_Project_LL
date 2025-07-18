@@ -26987,7 +26987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: maxStageCounter
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: startRoomPrefab
@@ -27099,7 +27099,7 @@ PrefabInstance:
       objectReference: {fileID: 1773485374}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: hardRoomPrefabs.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: eventRoomPrefabs.Array.size
@@ -27111,12 +27111,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: normalRoomPrefabs.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: 'hardRoomPrefabs.Array.data[0]'
       value: 
       objectReference: {fileID: 3640064922824565140, guid: 7cd087163e162724385f90fac30d6002, type: 3}
+    - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
+      propertyPath: 'hardRoomPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 3640064922824565140, guid: b1e0caf77c9979142992cefa0f4c4743, type: 3}
+    - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
+      propertyPath: 'hardRoomPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 3640064922824565140, guid: f8ad00aa5c605e24eb3c059c0cbe1dbe, type: 3}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: 'eventRoomPrefabs.Array.data[0]'
       value: 
@@ -27129,6 +27137,14 @@ PrefabInstance:
       propertyPath: 'normalRoomPrefabs.Array.data[0]'
       value: 
       objectReference: {fileID: 7838725898838018904, guid: 98dbe9c160e75074bbeceb18972750d4, type: 3}
+    - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
+      propertyPath: 'normalRoomPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7838725898838018904, guid: 8ad70705aa609e34aa9eeaf237cbc493, type: 3}
+    - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
+      propertyPath: 'normalRoomPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 7838725898838018904, guid: 968f400b64aa6544cbbaf52b6811b6a3, type: 3}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: stageButtons.Array.data[0].button
       value: 
