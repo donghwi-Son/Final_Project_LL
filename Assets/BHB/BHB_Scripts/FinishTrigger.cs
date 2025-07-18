@@ -8,13 +8,21 @@ public class FinishTrigger : MonoBehaviour
     // Down Finish	(0, -1)
     // Left Finish	(-1, 0)
     // Right Finish	(1, 0)
+    public bool isBoss = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (triggered) return;
-        if (!other.CompareTag("Player")) return;
+        if (triggered || !other.CompareTag("Player")) return;
 
         triggered = true;
-        StageManager.Instance.TryMoveToDirection(direction);
+
+        if (isBoss)
+        {
+            StageManager.Instance.SpawnBossRoom(); //보스방 생성
+        }
+        else
+        {
+            StageManager.Instance.TryMoveToDirection(direction);
+        }
     }
 }

@@ -26986,6 +26986,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
+      propertyPath: maxStageCounter
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: startRoomPrefab
       value: 
       objectReference: {fileID: 5680127654571884517, guid: 0c6d71b376d28cf428cdd10b41649cbc, type: 3}
@@ -27112,15 +27116,15 @@ PrefabInstance:
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: 'hardRoomPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 7838725898838018904, guid: 98dbe9c160e75074bbeceb18972750d4, type: 3}
+      objectReference: {fileID: 3640064922824565140, guid: 7cd087163e162724385f90fac30d6002, type: 3}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: 'eventRoomPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 7838725898838018904, guid: 98dbe9c160e75074bbeceb18972750d4, type: 3}
+      objectReference: {fileID: 5104878531306034708, guid: 69440e579289a7a448adbae07b483ea1, type: 3}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: 'storeRoomPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 7838725898838018904, guid: 98dbe9c160e75074bbeceb18972750d4, type: 3}
+      objectReference: {fileID: 4339767524800197598, guid: 1024ce7f42d826a4699d27960b000da2, type: 3}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: 'normalRoomPrefabs.Array.data[0]'
       value: 
