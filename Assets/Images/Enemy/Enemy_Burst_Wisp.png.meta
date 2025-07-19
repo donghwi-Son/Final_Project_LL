@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 3d4dd5c4efe038946b70114f8739f2e0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1671928561682363085
+    second: Enemy_Burst_Wisp_0
+  - first:
+      213: 960388720884246416
+    second: Enemy_Burst_Wisp_1
+  - first:
+      213: 6671469082738183556
+    second: Enemy_Burst_Wisp_2
+  - first:
+      213: -8079578544412180115
+    second: Enemy_Burst_Wisp_3
+  - first:
+      213: -8793856355520253576
+    second: Enemy_Burst_Wisp_4
+  - first:
+      213: -3902985501174091961
+    second: Enemy_Burst_Wisp_5
+  - first:
+      213: 5771173879160380966
+    second: Enemy_Burst_Wisp_6
+  - first:
+      213: -7521632235409441442
+    second: Enemy_Burst_Wisp_7
+  - first:
+      213: 1768647748990961254
+    second: Enemy_Burst_Wisp_8
+  - first:
+      213: 4911864104308194657
+    second: Enemy_Burst_Wisp_9
+  - first:
+      213: 6061000511611471127
+    second: Enemy_Burst_Wisp_10
+  - first:
+      213: 1893671951266186737
+    second: Enemy_Burst_Wisp_11
+  - first:
+      213: -7676980628673123985
+    second: Enemy_Burst_Wisp_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 30
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 118
+        width: 22
+        height: 20
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33dc717d4dd1cc8e0800000000000000
+      internalID: -1671928561682363085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 118
+        width: 22
+        height: 21
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 097e89a047cf35d00800000000000000
+      internalID: 960388720884246416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 118
+        width: 22
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48d4c96a8c1d59c50800000000000000
+      internalID: 6671469082738183556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_3
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 103
+        width: 67
+        height: 68
+      alignment: 9
+      pivot: {x: 0.5, y: 0.36984634}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d61c17d0f129fdf80800000000000000
+      internalID: -8079578544412180115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_4
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 117
+        width: 42
+        height: 43
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27893138}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 871776b8c32f5f580800000000000000
+      internalID: -8793856355520253576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_5
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 121
+        width: 28
+        height: 30
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2040507}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74fa4079d5fc5d9c0800000000000000
+      internalID: -3902985501174091961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_6
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 127
+        width: 18
+        height: 18
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62e1e5ce014571050800000000000000
+      internalID: 5771173879160380966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_7
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 41
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5dfa4d455bcd9790800000000000000
+      internalID: -7521632235409441442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_8
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 32
+        width: 47
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 666866bc1cf7b8810800000000000000
+      internalID: 1768647748990961254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_9
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 3
+        width: 94
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16d3842f0627a2440800000000000000
+      internalID: 4911864104308194657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_10
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 26
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 715001e4adffc1450800000000000000
+      internalID: 6061000511611471127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_11
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 44
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f587584b9ca74a10800000000000000
+      internalID: 1893671951266186737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Burst_Wisp_12
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 50
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f692268eac2e57590800000000000000
+      internalID: -7676980628673123985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2cf61f3d836fe4a429402fb1e36f9b4a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Enemy_Burst_Wisp_0: -1671928561682363085
+      Enemy_Burst_Wisp_1: 960388720884246416
+      Enemy_Burst_Wisp_10: 6061000511611471127
+      Enemy_Burst_Wisp_11: 1893671951266186737
+      Enemy_Burst_Wisp_12: -7676980628673123985
+      Enemy_Burst_Wisp_2: 6671469082738183556
+      Enemy_Burst_Wisp_3: -8079578544412180115
+      Enemy_Burst_Wisp_4: -8793856355520253576
+      Enemy_Burst_Wisp_5: -3902985501174091961
+      Enemy_Burst_Wisp_6: 5771173879160380966
+      Enemy_Burst_Wisp_7: -7521632235409441442
+      Enemy_Burst_Wisp_8: 1768647748990961254
+      Enemy_Burst_Wisp_9: 4911864104308194657
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
