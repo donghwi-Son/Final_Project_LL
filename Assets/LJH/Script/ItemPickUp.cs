@@ -29,7 +29,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerTest.Instance.OnItemAcquired(itemIndex);
+            PlayerInventory.Instance.OnItemAcquired(itemIndex);
             InventoryUI.Instance.Refresh();
             Destroy(gameObject);
         }

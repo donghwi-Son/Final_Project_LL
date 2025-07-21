@@ -11,6 +11,8 @@ public class PlayerDashAttState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        player.CanFlip = false;
+        player.AttackManager.DashAttack(player.IsFacingRight);
     }
 
     public override void UpdateState()
@@ -21,5 +23,6 @@ public class PlayerDashAttState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
+        player.CanFlip = true;
     }
 }

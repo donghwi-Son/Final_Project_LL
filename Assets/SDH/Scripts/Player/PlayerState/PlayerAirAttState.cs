@@ -11,19 +11,21 @@ public class PlayerAirAttState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        Debug.Log("Player Air Attack State Entered");
         player.CanDoubleJump = false;
         player.CanAirAttack = false;
+        player.CanFlip = false;
+        player.AttackManager.AirAttack();
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        if(player.rb.linearVelocityY < 0 )
-            psm.ChangeState(player.FallingState);
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        player.CanFlip = true;
     }
 }

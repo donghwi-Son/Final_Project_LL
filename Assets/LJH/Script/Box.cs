@@ -30,7 +30,7 @@ public class Box : MonoBehaviour
         // 2) 해당 등급아이템 확인 이미 획득한 아이템은 제외
         var pool = ItemDatabase.Instance
             .GetAllDefinitions()
-            .Where(d => d.rarity == rarity && !PlayerTest.Instance.HasAcquired(d.index))
+            .Where(d => d.rarity == rarity && !PlayerInventory.Instance.HasAcquired(d.index))
             .ToList();
 
         if (pool.Count == 0)

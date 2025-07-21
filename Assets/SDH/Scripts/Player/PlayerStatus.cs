@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,23 @@ public class PlayerStatus : MonoBehaviour
     public float defense = 2f;
     public float speed = 5f;
     public float attackSpeed = 1f;
+    public float attackInterval => 1f / attackSpeed;
     public float attackRange = 1f;
     public float projecTileLifeTime = 5f;
     public float shotSpeed = 5f;
+    public bool canChargeAttack = false;
     public bool canHoldAttack;
+    public float criticalChance = 0.1f;
+    
+    public static PlayerStatus Instance { get; private set; }
+    void Awake()
+    {
+        if (Instance == null) { 
+            Instance = this; 
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+    }
 
 
     public void TakeDamage(float dmg)
@@ -37,5 +51,45 @@ public class PlayerStatus : MonoBehaviour
     public void Die()
     {
 
+    }
+
+    public void ChangeProjectile(ProjectileType type)
+    {
+        projectileType = type;
+        ProjectilePool.Instance.ChangeProjectile(projectileType);
+    }
+
+
+
+
+
+
+
+    
+    
+    //스탯 증가
+    public void ModifyStat(ItemInfo.StatType statType, float amount)
+    {
+        switch (statType)
+        {
+            case ItemInfo.StatType.Health:
+                maxHealth += amount;
+                break;
+            case ItemInfo.StatType.Defense:
+                defense += amount;
+                break;
+            case ItemInfo.StatType.MoveSpeed:
+                speed += amount;
+                break;
+            case ItemInfo.StatType.Power:
+                damage += amount;
+                break;
+            case ItemInfo.StatType.Critical:
+                criticalChance = Mathf.Clamp01(criticalChance + amount);
+                break;
+            case ItemInfo.StatType.AttackSpeed:
+                attackSpeed += amount;
+                break;
+        }
     }
 }

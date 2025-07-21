@@ -30,7 +30,7 @@ public class PlayerMoveState : PlayerState
         {
             psm.ChangeState(player.AttackState);
         }
-        if(player.SpecialAttackInput)
+        if(player.SpecialAttackInput && player.CanUseSpecialAttack)
         {
             psm.ChangeState(player.SpecialAttackState);
         }
@@ -38,7 +38,7 @@ public class PlayerMoveState : PlayerState
         {
             psm.ChangeState(player.SkillState);
         }
-        if (player.DashInput)
+        if (player.DashInput && player.CanUseDash)
         {
             psm.ChangeState(player.DashState);
         }

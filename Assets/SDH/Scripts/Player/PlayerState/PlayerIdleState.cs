@@ -13,6 +13,7 @@ public class PlayerIdleState : PlayerState
     {
         base.EnterState();
         Debug.Log("Player Idle State Entered");
+        player.anim.SetBool("isFalling", false);
         player.rb.linearVelocityX = 0f;
     }
 
@@ -31,7 +32,7 @@ public class PlayerIdleState : PlayerState
         {
             psm.ChangeState(player.MoveState);
         }
-        if (player.SpecialAttackInput && player.IsGrounded)
+        if (player.SpecialAttackInput && player.IsGrounded && player.CanUseSpecialAttack)
         {
             psm.ChangeState(player.SpecialAttackState);
         }
@@ -39,7 +40,7 @@ public class PlayerIdleState : PlayerState
         {
             psm.ChangeState(player.SkillState);
         }
-        if (player.DashInput && player.IsGrounded)
+        if (player.DashInput && player.IsGrounded && player.CanUseDash)
         {
             psm.ChangeState(player.DashState);
         }
