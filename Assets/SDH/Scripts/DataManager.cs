@@ -11,24 +11,6 @@ public class PlayerInfo
 }
 
 [Serializable]
-public class GameSettings
-{
-    // 오디오 설정
-    public float masterVolume;
-    public float musicVolume;
-    public float sfxVolume;
-
-    // 화면 설정
-    public bool isFullscreen = true;
-    public int qualityLevel;
-
-    // 기타 설정
-    public float mouseSensitivity = 1f;
-    public bool autoSave = true;
-    public float autoSaveInterval = 300f;
-}
-
-[Serializable]
 public class SaveSlotInfo
 {
     public int slotIndex;

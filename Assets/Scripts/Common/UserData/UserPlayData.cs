@@ -21,9 +21,7 @@ public class GameData
 
 public class UserPlayData : IUserData
 {
-    public GameData currentGameData;
-
-    public PlayerData SingleGameRecord { get; set; } = new();
+    public GameData SavedGameData { get; set; }
 
     private const string SAVE_FILE = "GameSave.json";
 
@@ -33,14 +31,7 @@ public class UserPlayData : IUserData
         Debug.Log($"{GetType()}::SetDefaultData");
 
         // 기본값으로 데이터 초기화
-        SingleGameRecord = new PlayerData
-        {
-            playTime = 0f,
-            monsterKills = 0,
-            usedMoney = 0,
-            RoomID = 0,
-            // items = new List<ItemData>() // 필요시 초기화
-        };
+        DeleteData();
     }
 
     // 저장된 데이터를 불러오는 메서드
@@ -59,7 +50,7 @@ public class UserPlayData : IUserData
             if (File.Exists(filePath))
             {
                 string jsonData = File.ReadAllText(filePath);
-                currentGameData = JsonUtility.FromJson<GameData>(jsonData);
+                SavedGameData = JsonUtility.FromJson<GameData>(jsonData);
 
                 result = true;
             }
@@ -86,16 +77,13 @@ public class UserPlayData : IUserData
         // 예외 처리를 위한 try-catch 블록 시작
         try
         {
-            if(currentGameData != null)
-            {
-                currentGameData.lastSaved = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            SavedGameData.lastSaved = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                string jsonData = JsonUtility.ToJson(currentGameData, true);
-                string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, SAVE_FILE);
-                File.WriteAllText(filePath, jsonData);
+            string jsonData = JsonUtility.ToJson(SavedGameData, true);
+            string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, SAVE_FILE);
+            File.WriteAllText(filePath, jsonData);
 
-                result = true;
-            }
+            result = true;
         }
         catch (Exception e)
         {
@@ -105,5 +93,45 @@ public class UserPlayData : IUserData
 
         // 저장 결과 반환
         return result;
+    }
+
+    public void CreateData()
+    {
+        Debug.Log($"{GetType()}::CreateData");
+
+        // 새로운 게임 데이터를 생성하고 기본값으로 초기화
+        SavedGameData = new GameData
+        {
+            singleGameRecord = new PlayerData
+            {
+                playTime = 0f,
+                monsterKills = 0,
+                usedMoney = 0,
+                RoomID = 0
+            }
+        };
+        SaveData();
+    }
+
+    public void DeleteData()
+    {
+        Debug.Log($"{GetType()}::DeleteData");
+
+        try
+        {
+            // 저장된 게임 데이터를 삭제
+            SavedGameData = null;
+            // 파일 삭제
+            string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, SAVE_FILE);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+        catch (Exception e)
+        {
+            // 삭제 실패 로그 출력
+            Debug.Log($"Delete failed. (" + e.Message + ")");
+        }
     }
 }

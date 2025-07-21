@@ -69,14 +69,11 @@ public class UserStatisticsData : IUserData
 
         try
         {
-            if (Statistics != null)
-            {
-                string json = JsonUtility.ToJson(Statistics, true);
-                string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, STATISTICS_FILE);
-                File.WriteAllText(filePath, json);
+            string json = JsonUtility.ToJson(Statistics, true);
+            string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, STATISTICS_FILE);
+            File.WriteAllText(filePath, json);
 
-                result = true;
-            }
+            result = true;
         }
         catch (Exception e)
         {

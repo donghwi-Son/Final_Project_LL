@@ -36,15 +36,6 @@ public class TitleManager : MonoBehaviour
         // 유저 데이터 매니저를 통한 데이터 로드
         UserDataManager.Instance.LoadUserData();
 
-        // 저장된 데이터가 존재하지 않는 경우
-        if (!UserDataManager.Instance.ExistsSavedData)
-        {
-            // 기본 유저 데이터 설정
-            UserDataManager.Instance.SetDefaultUserData();
-            // 유저 데이터 저장
-            UserDataManager.Instance.SaveUserData();
-        }
-
         //AudioManager.Instance.OnLoadUserData(); // 오디오 매니저에 유저 데이터 로드
 
         //AchievementManager.Instance.LoadAchievementState(); // 업적 데이터 로드
