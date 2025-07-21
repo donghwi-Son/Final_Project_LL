@@ -9,7 +9,7 @@ public class ItemDatabase : MonoBehaviour
     
     public static ItemDatabase Instance { get; private set; }
 
-    void Start()
+    void Awake()
     {
         if (Instance == null) Instance = this;
         else
@@ -39,6 +39,7 @@ public class ItemDatabase : MonoBehaviour
                     row["UpgradeType"].ToString(), true),
                 description = row["Description"].ToString(),
                 iconName    = row["IconName"].ToString(),
+                price       = Convert.ToInt32(row["Price"]),
             };
             if (row.TryGetValue("ItemTag", out var tagsObj) && tagsObj is string tagsStr)
             {

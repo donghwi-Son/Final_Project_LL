@@ -1,39 +1,86 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ShopUI : MonoBehaviour
 {
     [Header("Settings")]
-    public RectTransform       content;
-    public GameObject          entryPrefab;
-    public Button              rerollButton;
-    public int                 slotCount = 5;
+    [SerializeField] Transform row1; 
+    [SerializeField] Transform row2; 
+    [SerializeField]private GameObject entryPrefab;
+    [SerializeField]private Button rerollButton;
+    [SerializeField]private GameObject ShopPanel;
+    
+    private bool shopOpen = false;
+    private int slotCount = 5; 
+    private int firstRowCount = 3;
 
     [Header("Fixed Probabilities")]
-    public RarityChance[]      rarityChances; // Inspector에서 ItemInfo.ItemRarity와 % 입력
+    public RarityChance[] rarityChances; // Inspector에서 ItemInfo.ItemRarity와 % 입력
 
-    void OnEnable()
+    void Awake()
     {
         rerollButton.onClick.AddListener(GenerateShop);
+    }
+
+    void Start()
+    {
         GenerateShop();
     }
 
-    private void GenerateShop()
+    void OnDestroy()
     {
-        // 기존 슬롯 삭제
-        foreach (Transform t in content) Destroy(t.gameObject);
+        rerollButton.onClick.RemoveListener(GenerateShop);
+    }
 
-        for (int i = 0; i < slotCount; i++)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            var def = GetRandomItemByRarity();
-            var go  = Instantiate(entryPrefab, content);
-            go.GetComponent<ShopEntryUI>().Setup(def);
+            ShopOpen();
+            Debug.Log("상점오픈");
         }
     }
 
-    private ItemDefinition GetRandomItemByRarity()
+    private void ShopOpen()
     {
+        ShopPanel.SetActive(!shopOpen);
+        shopOpen = !shopOpen;
+        Debug.Log(shopOpen+"오픈 함수");
+    }
+    
+
+    void GenerateShop()
+    {
+        // 기존 삭제
+        foreach (Transform t in row1) Destroy(t.gameObject);
+        foreach (Transform t in row2) Destroy(t.gameObject);
+
+        // 랜덤 아이템 뽑기
+        var list = Enumerable.Range(0, slotCount)
+            .Select(_ => GetRandomItemByRarity())
+            .ToList();
+
+        // 1행에 3개
+        for (int i = 0; i < firstRowCount && i < list.Count; i++)
+        {
+            var go = Instantiate(entryPrefab, row1);
+            go.GetComponent<ShopEntryUI>().Setup(list[i]);
+        }
+
+        // 2행 나머지
+        for (int i = firstRowCount; i < list.Count; i++)
+        {
+            var go = Instantiate(entryPrefab, row2);
+            go.GetComponent<ShopEntryUI>().Setup(list[i]);
+        }
+    }
+
+    ItemDefinition GetRandomItemByRarity()
+    {
+        //퍼센트 기반 뽑기 로직
         int rnd = Random.Range(0, 100);
         int cum = 0;
         ItemInfo.ItemRarity chosen = rarityChances[0].rarity;
@@ -48,18 +95,11 @@ public class ShopUI : MonoBehaviour
             }
         }
 
-        // 해당 등급 아이템 리스트 얻기
         var pool = ItemDatabase.Instance
-            .GetAllDefinitions()
-            .Where(d => d.rarity == chosen)
+            .GetDefinitionsByRarity(chosen)
             .ToList();
-
-        if (pool.Count == 0)
-        {
-            Debug.LogWarning($"{chosen} 등급 아이템 풀이 비어있습니다!");
-            return ItemDatabase.Instance.GetAllDefinitions().First();
-        }
-
+        if (pool.Count == 0) return ItemDatabase.Instance.GetAllDefinitions().First();
         return pool[Random.Range(0, pool.Count)];
     }
+    
 }
