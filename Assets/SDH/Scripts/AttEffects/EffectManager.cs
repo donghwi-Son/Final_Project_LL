@@ -13,7 +13,7 @@ public enum ProjectileEffectType
     Piercing
 }
 
-public enum ElementalType
+public enum CommonEffectType
 {
     None,
     Fire,
@@ -32,7 +32,7 @@ public enum MeleeEffectType
 public class EffectManager : MonoBehaviour
 {
     List<ProjectileEffectType> activePE = new List<ProjectileEffectType>();
-    List<ElementalType> activeEE = new List<ElementalType>();
+    List<CommonEffectType> activeEE = new List<CommonEffectType>();
     List<MeleeEffectType> activeME = new List<MeleeEffectType>();
     Dictionary<ProjectileEffectType, IProjectileEffect> PEDic = new Dictionary<ProjectileEffectType, IProjectileEffect>();
 
@@ -70,7 +70,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void AddEE(ElementalType effectType)
+    public void AddEE(CommonEffectType effectType)
     {
         if (!activeEE.Contains(effectType))
         {
@@ -78,7 +78,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void RemoveEE(ElementalType effectType)
+    public void RemoveEE(CommonEffectType effectType)
     {
         if (activeEE.Contains(effectType))
         {

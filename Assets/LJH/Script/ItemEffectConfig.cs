@@ -13,6 +13,8 @@ public class ItemEffectConfig : ScriptableObject
         public ItemInfo.ItemUpgradeType upgradeType;
 
         // StatIncrease 증가량
+        public ItemInfo.StatType statType;
+
         public float statAmount;
         
         // AttackEnhance 종류
