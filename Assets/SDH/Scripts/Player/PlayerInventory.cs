@@ -7,6 +7,19 @@ public class PlayerInventory : MonoBehaviour
 
     private List<ItemDefinition> acquiredDefs = new List<ItemDefinition>();
 
+    public static PlayerInventory Instance { get; private set; }
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void OnItemAcquired(int idx)      //나중에 플레이어에 넣어야 하는 부분 아이템 획득 적용하는 부분
     {
