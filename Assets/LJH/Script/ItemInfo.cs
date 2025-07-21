@@ -27,12 +27,14 @@ public class ItemInfo : ScriptableObject
     
     public enum StatType    //이후 플레이어 스탯을 상속 받아서 진행
     {
+        No,
         Health,             //체력
         Defense,            //방어력
         MoveSpeed,          //이속
         Power,              //힘
         Critical,           //크리티컬 확률
-        AttackSpeed         //공속
+        AttackSpeed,         //공속
+        Mana                //마나
     }
     
     public enum AttackEnhanceType

@@ -23,7 +23,7 @@ public class ItemEffectFactory : MonoBehaviour
         {
             case ItemInfo.ItemUpgradeType.StatIncrease:
                 Debug.Log("스탯 증가 아이템 획득");
-                
+                ApplyStatIncrease(e.statType, e.statAmount);
                 break;
             
             case ItemInfo.ItemUpgradeType.AttackEnhance:
@@ -49,11 +49,9 @@ public class ItemEffectFactory : MonoBehaviour
                 break;
         }
     }
-
-
-    PlayerStatus stat;
-    private void Awake()
+    
+    static void ApplyStatIncrease(ItemInfo.StatType statType, float amount)
     {
-        stat = FindAnyObjectByType<PlayerStatus>();
+        PlayerStatus.Instance.ModifyStat(statType, amount);
     }
 }
