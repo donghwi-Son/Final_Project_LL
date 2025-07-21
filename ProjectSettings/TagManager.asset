@@ -36,8 +36,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - MiniMapRoom
+  - MiniMap
   m_SortingLayers:
   - name: Default
     uniqueID: 0
