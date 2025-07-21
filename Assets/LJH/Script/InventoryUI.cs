@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
     {
         foreach (Transform t in content) Destroy(t.gameObject);
 
-        var list = PlayerTest.Instance.GetAllAcquired();
+        var list = PlayerInventory.Instance.GetAllAcquired();
         if (list == null)
         {
             Debug.LogError("InventoryUI: PlayerTest.Instance 또는 GetAllAcquired()가 null입니다!");
