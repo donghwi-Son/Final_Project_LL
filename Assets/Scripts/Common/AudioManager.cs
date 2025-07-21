@@ -103,8 +103,8 @@ public class AudioManager : SingletonComponent<AudioManager>
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         if (userSettingsData != null)
         {
-            SetMusicVolume(userSettingsData.Music_Volume);
-            SetSFXVolume(userSettingsData.SFX_Volume);
+            SetMusicVolume(userSettingsData.Settings.Music_Volume);
+            SetSFXVolume(userSettingsData.Settings.SFX_Volume);
         }
     }
 
