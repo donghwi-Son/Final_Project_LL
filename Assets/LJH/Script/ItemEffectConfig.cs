@@ -11,6 +11,9 @@ public class ItemEffectConfig : ScriptableObject
     {
         public int      index;
         public ItemInfo.ItemUpgradeType upgradeType;
+        
+        //증가 시킬 스탯
+        public ItemInfo.StatType statType;
 
         // StatIncrease 증가량
         public float statAmount;

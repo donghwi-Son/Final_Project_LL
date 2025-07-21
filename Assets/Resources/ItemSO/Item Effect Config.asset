@@ -15,7 +15,8 @@ MonoBehaviour:
   entries:
   - index: 0
     upgradeType: 0
-    statAmount: 5
+    statType: 1
+    statAmount: 50
     attackEnhance: 0
     skillType: 0
     subAttackType: 0
@@ -23,6 +24,7 @@ MonoBehaviour:
     enableDoubleJump: 0
   - index: 1
     upgradeType: 1
+    statType: 0
     statAmount: 0
     attackEnhance: 1
     skillType: 0
@@ -31,6 +33,7 @@ MonoBehaviour:
     enableDoubleJump: 0
   - index: 2
     upgradeType: 2
+    statType: 0
     statAmount: 0
     attackEnhance: 0
     skillType: 1
@@ -39,6 +42,7 @@ MonoBehaviour:
     enableDoubleJump: 0
   - index: 3
     upgradeType: 3
+    statType: 0
     statAmount: 0
     attackEnhance: 0
     skillType: 0
@@ -47,6 +51,7 @@ MonoBehaviour:
     enableDoubleJump: 0
   - index: 4
     upgradeType: 4
+    statType: 0
     statAmount: 0
     attackEnhance: 0
     skillType: 0
@@ -55,7 +60,8 @@ MonoBehaviour:
     enableDoubleJump: 1
   - index: 5
     upgradeType: 2
-    statAmount: 5
+    statType: 0
+    statAmount: 0
     attackEnhance: 0
     skillType: 0
     subAttackType: 0
