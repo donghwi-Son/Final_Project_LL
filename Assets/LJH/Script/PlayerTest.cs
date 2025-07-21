@@ -44,7 +44,6 @@ public class PlayerTest : MonoBehaviour
         SaveAcquiredSet();
     }
     
-    
     private void SaveAcquiredSet()
     {
         // PlayerPrefs 방식으로 acquired 저장, 저장 필요 없으면 안할듯
