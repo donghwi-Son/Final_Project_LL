@@ -12,11 +12,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 12f;
     public float dashPower = 30f;
 
-    [Header("Combat")]
-    public float attackDamage = 10f;
-    public float attackRange = 1.5f;
-    public float attackCooldown = 0.5f;
-    public float specialAttackCooldown = 2f;
+    [Header("CoolDown")]
+    public float specialAttackCooldown = 5f;
+    public float dashCooldown = 3f;
     public float skillCooldown = 3f;
 
     [Header("Defense")]
@@ -64,7 +62,6 @@ public class PlayerController : MonoBehaviour
     //불체크값
     public bool IsGrounded { get; private set; }
     public bool CanAttack { get; private set; } = true;
-    public bool CanSpecialAttack { get; private set; } = true;
     public bool CanUseSkill { get; private set; } = true;
     public bool CanAirAttack = true;
     public bool CanFlip = true;
@@ -73,13 +70,16 @@ public class PlayerController : MonoBehaviour
     public bool IsRolling { get; private set; }
     public bool IsDefending { get; private set; }
     public bool IsFacingRight { get; private set; } = true;
+    public bool CanUseDash => Time.time >= lastDashTime + dashCooldown;
+    public bool CanUseSpecialAttack => Time.time >= lastSpecialAttackTime + specialAttackCooldown;
 
-    
+
+
 
     //타이머
-    float lastAttackTime;
-    float lastSpecialAttackTime;
-    float lastSkillTime;
+    public float lastSpecialAttackTime = -999f;
+    public float lastDashTime = -999f;
+
 
     //기타변수
     public int DoubleJumpCount = 0;
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckRadius, IsGrounded ? Color.green : Color.red);
     }
 
-    void FlipByMouse()
+    public void FlipByMouse()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         IsFacingRight = mousePosition.x > transform.position.x;
@@ -208,13 +208,11 @@ public class PlayerController : MonoBehaviour
         {
             attackMode = AttackMode.Ranged;
             anim.SetInteger("AttackMode", 1);
-            anim.SetFloat("SpecialVal", 1f);
         }
         else
         {
             attackMode = AttackMode.Melee;
             anim.SetInteger("AttackMode", 0);
-            anim.SetFloat("SpecialVal", 0f);
         }
     }
 

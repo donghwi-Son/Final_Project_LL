@@ -10,7 +10,21 @@ public class PlayerSpecialAttackState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
-       // player.anim.SetTrigger("SpecialAttack");
+        player.lastSpecialAttackTime = Time.time;
+        player.CanFlip = false;
+        switch (player.attackMode)
+        {
+            case AttackMode.Melee:
+                player.anim.SetTrigger("SpecialAtt");
+                player.AttackManager.SpecialMeleeAttack();
+                break;
+            case AttackMode.Ranged:
+                player.AttackManager.SpecialRangedAttack();
+                psm.ChangeState(player.IdleState);
+                break;
+        }
+
+
     }
 
     public override void UpdateState()
@@ -21,5 +35,6 @@ public class PlayerSpecialAttackState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
+        player.CanFlip = true;
     }
 }

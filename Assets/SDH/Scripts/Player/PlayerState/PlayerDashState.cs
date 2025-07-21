@@ -12,9 +12,10 @@ public class PlayerDashState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        player.lastDashTime = Time.time;
         player.CanFlip = false;
         player.anim.SetBool("isDashing", true);
-        dashTime = 1f;
+        dashTime = 0.7f;
         player.rb.linearVelocityX = 0f;
         Dash();
     }
