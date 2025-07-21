@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -81,13 +82,14 @@ public class StageManager : MonoBehaviour
     public GameObject[] eventRoomPrefabs;
     public GameObject bossRoomPrefab;
 
-    private Dictionary<Vector2Int, StageData> placedRooms = new();
+    public Dictionary<Vector2Int, StageData> placedRooms = new();
     private Vector2Int currentGrid;
     private Vector2 roomSize = new Vector2(28.8456f, 16.1808f);
     private Vector3 origin = Vector3.zero;
     public Transform player;
     [SerializeField] private StageGenerator generator; // StageGenerator 연결
     public static StageManager Instance;
+    public MiniMapManager miniMapManager;
 
     public int maxStageCounter = 10;
     public int StageCounter = 1;
@@ -271,6 +273,7 @@ public class StageManager : MonoBehaviour
             currentGrid = nextGrid;
             var existingRoom = placedRooms[nextGrid].instance;
             player.position = GetEntryPosition(existingRoom, -dir);
+            MiniMapManager.Instance.HighlightCurrent(currentGrid); // 미니맵 
             return;
         }
 
@@ -310,6 +313,9 @@ public class StageManager : MonoBehaviour
         player.position = GetEntryPosition(room, -dir);
 
         ActivateFinishExits(room, dir);
+
+        MiniMapManager.Instance.SpawnIcon(currentGrid, type);
+        MiniMapManager.Instance.HighlightCurrent(currentGrid);
     }
 
     // 기존 방 돌아가기

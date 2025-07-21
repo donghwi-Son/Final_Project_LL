@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8684673537772620419}
   - component: {fileID: 5371689246589290618}
   - component: {fileID: 267668533118736891}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Left Boss Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 898709666542832755}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 7434782242223811105}
   - component: {fileID: 6881033871923748517}
   - component: {fileID: 7885187850242641916}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Boss Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 5764346834539690577}
   - component: {fileID: 809557596202371551}
   - component: {fileID: 361358109251002250}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Top Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -572,7 +572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8063163132196705676}
   - component: {fileID: 3037712556432020775}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 631764347546442810}
   - component: {fileID: 7388234975952353914}
   - component: {fileID: 4718738404503401802}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Down Boss Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -793,7 +793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2888320108400092656}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Room3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 5564068203300707645}
   - component: {fileID: 1620546284321153888}
   - component: {fileID: 150919440075339813}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Down Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -1009,7 +1009,7 @@ GameObject:
   - component: {fileID: 5403152881843009634}
   - component: {fileID: 3948036522729529913}
   - component: {fileID: 6140469394203186381}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Top Boss Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -1186,7 +1186,7 @@ GameObject:
   - component: {fileID: 5818050019561462901}
   - component: {fileID: 4261715593695893534}
   - component: {fileID: 77215156359409509}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Left Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -1362,7 +1362,7 @@ GameObject:
   - component: {fileID: 214468156769622869}
   - component: {fileID: 2319721272720385446}
   - component: {fileID: 5463939523526689360}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Stage_normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4029,7 +4029,7 @@ GameObject:
   - component: {fileID: 6096558283897106034}
   - component: {fileID: 2666127729752745249}
   - component: {fileID: 8013542664534746226}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Right Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -4206,7 +4206,7 @@ GameObject:
   - component: {fileID: 2856385008093062313}
   - component: {fileID: 2339152616366587141}
   - component: {fileID: 9058882275871008860}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Right Boss Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -4379,7 +4379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8565607832806753699}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Boss Finish Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4414,7 +4414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1251365376150271265}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Finish Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
