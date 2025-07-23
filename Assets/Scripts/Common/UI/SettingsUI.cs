@@ -52,16 +52,16 @@ public class SettingsUI : UIBase
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         if (userSettingsData != null)
         {
-            var selectedLanguage = userSettingsData.Language;
+            var selectedLanguage = userSettingsData.Settings.Language;
             LanguageDropDown.value = (int)selectedLanguage;
-            var selectedResolution = userSettingsData.ResolutionIndex;
+            var selectedResolution = userSettingsData.Settings.ResolutionIndex;
             ResDropDown.value = selectedResolution;
-            FullScreenToggle.isOn = userSettingsData.FullScreen;
+            FullScreenToggle.isOn = userSettingsData.Settings.FullScreen;
             Screen.SetResolution(SelectedResolutionList[selectedResolution].width,
                                 SelectedResolutionList[selectedResolution].height,
-                                userSettingsData.FullScreen);
-            MusicSlider.value = userSettingsData.Music_Volume;
-            SFXSlider.value = userSettingsData.SFX_Volume;
+                                userSettingsData.Settings.FullScreen);
+            MusicSlider.value = userSettingsData.Settings.Music_Volume;
+            SFXSlider.value = userSettingsData.Settings.SFX_Volume;
         }
 
         SwitchTab(0); // Default to the first tab
@@ -87,9 +87,9 @@ public class SettingsUI : UIBase
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         if (userSettingsData != null)
         {
-            userSettingsData.Language = (LocalizationLanguage)LanguageDropDown.value;
+            userSettingsData.Settings.Language = (LocalizationLanguage)LanguageDropDown.value;
             userSettingsData.SaveData();
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[(int)userSettingsData.Language];
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[(int)userSettingsData.Settings.Language];
         }
     }
 
@@ -98,12 +98,12 @@ public class SettingsUI : UIBase
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         if (userSettingsData != null)
         {
-            userSettingsData.ResolutionIndex = ResDropDown.value;
+            userSettingsData.Settings.ResolutionIndex = ResDropDown.value;
             userSettingsData.SaveData();
-            var selectedResolution = userSettingsData.ResolutionIndex;
+            var selectedResolution = userSettingsData.Settings.ResolutionIndex;
             Screen.SetResolution(SelectedResolutionList[selectedResolution].width,
                                 SelectedResolutionList[selectedResolution].height,
-                                userSettingsData.FullScreen);
+                                userSettingsData.Settings.FullScreen);
         }
     }
 
@@ -112,9 +112,9 @@ public class SettingsUI : UIBase
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         if (userSettingsData != null)
         {
-            userSettingsData.FullScreen = FullScreenToggle.isOn;
+            userSettingsData.Settings.FullScreen = FullScreenToggle.isOn;
             userSettingsData.SaveData();
-            Screen.fullScreen = userSettingsData.FullScreen;
+            Screen.fullScreen = userSettingsData.Settings.FullScreen;
         }
     }
 
@@ -123,9 +123,9 @@ public class SettingsUI : UIBase
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         if (userSettingsData != null)
         {
-            userSettingsData.Music_Volume = MusicSlider.value;
+            userSettingsData.Settings.Music_Volume = MusicSlider.value;
             userSettingsData.SaveData();
-            AudioManager.Instance.SetMusicVolume(userSettingsData.Music_Volume);
+            AudioManager.Instance.SetMusicVolume(userSettingsData.Settings.Music_Volume);
         }
     }
 
@@ -134,9 +134,9 @@ public class SettingsUI : UIBase
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         if (userSettingsData != null)
         {
-            userSettingsData.SFX_Volume = SFXSlider.value;
+            userSettingsData.Settings.SFX_Volume = SFXSlider.value;
             userSettingsData.SaveData();
-            AudioManager.Instance.SetSFXVolume(userSettingsData.SFX_Volume);
+            AudioManager.Instance.SetSFXVolume(userSettingsData.Settings.SFX_Volume);
         }
     }
 }

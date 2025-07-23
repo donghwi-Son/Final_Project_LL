@@ -38,6 +38,42 @@ MonoBehaviour:
     m_Localized: Quit
     m_Metadata:
       m_Items: []
+  - m_Id: 4218013265113088
+    m_Localized: General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218172837408768
+    m_Localized: Graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218231725436928
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218277426573312
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218318765633536
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218372251398144
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218489524137984
+    m_Localized: FullScreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218782789873664
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4218853858160640
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

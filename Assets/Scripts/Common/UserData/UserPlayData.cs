@@ -1,13 +1,29 @@
+using System;
+using System.IO;
 using UnityEngine;
+
+[Serializable]
+public class PlayerData
+{
+    public float playTime;
+    public int monsterKills;
+    public int usedMoney;
+    public int RoomID;
+    //public List<ItemData> items = new();
+}
+
+[Serializable]
+public class GameData
+{
+    public PlayerData singleGameRecord = new();
+    public string lastSaved;
+}
 
 public class UserPlayData : IUserData
 {
-    public bool ExistsSavedPlayData { get; set; }
-    public Vector3 PlayerPosition { get; set; }
-    public Vector3 PlayerRotation { get; set; }
-    public float PlayTime { get; set; }
-    public float TotalPlayTime { get; set; }
-    public float NewRecord { get; set; }
+    public GameData SavedGameData { get; set; }
+
+    private const string SAVE_FILE = "GameSave.json";
 
     // 기본 데이터 설정 메서드
     public void SetDefaultData()
@@ -15,23 +31,7 @@ public class UserPlayData : IUserData
         Debug.Log($"{GetType()}::SetDefaultData");
 
         // 기본값으로 데이터 초기화
-        ExistsSavedPlayData = false;
-        PlayerPosition = new Vector3(0, 75f, 0f);
-        PlayerRotation = new Vector3(0f, 180f, 0f);
-        PlayTime = 0f;
-        TotalPlayTime = 0f;
-        NewRecord = Mathf.Infinity;
-    }
-
-    public void SoftResetData()
-    {
-        Debug.Log($"{GetType()}::SoftResetData");
-
-        // 소프트 리셋: 플레이 시간과 플레이어 위치만 초기화
-        ExistsSavedPlayData = false;
-        PlayTime = 0f;
-        PlayerPosition = new Vector3(0, 75f, 0f);
-        PlayerRotation = new Vector3(0f, 180f, 0f);
+        DeleteData();
     }
 
     // 저장된 데이터를 불러오는 메서드
@@ -46,27 +46,16 @@ public class UserPlayData : IUserData
         // 예외 처리를 위한 try-catch 블록 시작
         try
         {
-            // PlayerPrefs에서 저장된 데이터 불러오기
-            ExistsSavedPlayData = PlayerPrefs.GetInt("ExistsSavedPlayData") == 1 ? true : false;
-            PlayerPosition = new Vector3(
-                PlayerPrefs.GetFloat("PlayerPositionX"),
-                PlayerPrefs.GetFloat("PlayerPositionY"),
-                PlayerPrefs.GetFloat("PlayerPositionZ")
-            );
-            PlayerRotation = new Vector3(
-                PlayerPrefs.GetFloat("PlayerRotationX"),
-                PlayerPrefs.GetFloat("PlayerRotationY"),
-                PlayerPrefs.GetFloat("PlayerRotationZ")
-            );
-            PlayTime = PlayerPrefs.GetFloat("PlayTime");
-            TotalPlayTime = PlayerPrefs.GetFloat("TotalPlayTime");
-            NewRecord = PlayerPrefs.GetFloat("NewRecord");
+            string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, SAVE_FILE);
+            if (File.Exists(filePath))
+            {
+                string jsonData = File.ReadAllText(filePath);
+                SavedGameData = JsonUtility.FromJson<GameData>(jsonData);
 
-            // 로드 성공으로 설정
-            result = true;
+                result = true;
+            }
         }
-        // 예외 발생 시 처리
-        catch (System.Exception e)
+        catch (Exception e)
         {
             // 로드 실패 로그 출력
             Debug.Log($"Load failed. (" + e.Message + ")");
@@ -88,29 +77,15 @@ public class UserPlayData : IUserData
         // 예외 처리를 위한 try-catch 블록 시작
         try
         {
-            // PlayerPrefs에 현재 플레이 데이터 저장
-            PlayerPrefs.SetInt("ExistsSavedPlayData", ExistsSavedPlayData ? 1 : 0);
+            SavedGameData.lastSaved = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-            PlayerPrefs.SetFloat("PlayerPositionX", PlayerPosition.x);
-            PlayerPrefs.SetFloat("PlayerPositionY", PlayerPosition.y);
-            PlayerPrefs.SetFloat("PlayerPositionZ", PlayerPosition.z);
+            string jsonData = JsonUtility.ToJson(SavedGameData, true);
+            string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, SAVE_FILE);
+            File.WriteAllText(filePath, jsonData);
 
-            PlayerPrefs.SetFloat("PlayerRotationX", PlayerRotation.x);
-            PlayerPrefs.SetFloat("PlayerRotationY", PlayerRotation.y);
-            PlayerPrefs.SetFloat("PlayerRotationZ", PlayerRotation.z);
-
-            PlayerPrefs.SetFloat("PlayTime", PlayTime);
-            PlayerPrefs.SetFloat("TotalPlayTime", TotalPlayTime);
-            PlayerPrefs.SetFloat("NewRecord", NewRecord);
-
-            // PlayerPrefs 저장 실행
-            PlayerPrefs.Save();
-
-            // 저장 성공으로 설정
             result = true;
         }
-        // 예외 발생 시 처리
-        catch (System.Exception e)
+        catch (Exception e)
         {
             // 저장 실패 로그 출력
             Debug.Log($"Save failed. (" + e.Message + ")");
@@ -118,5 +93,45 @@ public class UserPlayData : IUserData
 
         // 저장 결과 반환
         return result;
+    }
+
+    public void CreateData()
+    {
+        Debug.Log($"{GetType()}::CreateData");
+
+        // 새로운 게임 데이터를 생성하고 기본값으로 초기화
+        SavedGameData = new GameData
+        {
+            singleGameRecord = new PlayerData
+            {
+                playTime = 0f,
+                monsterKills = 0,
+                usedMoney = 0,
+                RoomID = 0
+            }
+        };
+        SaveData();
+    }
+
+    public void DeleteData()
+    {
+        Debug.Log($"{GetType()}::DeleteData");
+
+        try
+        {
+            // 저장된 게임 데이터를 삭제
+            SavedGameData = null;
+            // 파일 삭제
+            string filePath = Path.Combine(UserDataManager.Instance.SaveFolderPath, SAVE_FILE);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+        catch (Exception e)
+        {
+            // 삭제 실패 로그 출력
+            Debug.Log($"Delete failed. (" + e.Message + ")");
+        }
     }
 }
