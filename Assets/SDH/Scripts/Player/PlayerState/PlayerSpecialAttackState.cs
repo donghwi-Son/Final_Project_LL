@@ -11,7 +11,6 @@ public class PlayerSpecialAttackState : PlayerState
     {
         base.EnterState();
         player.lastSpecialAttackTime = Time.time;
-        player.CanFlip = false;
         switch (player.attackMode)
         {
             case AttackMode.Melee:
@@ -35,6 +34,5 @@ public class PlayerSpecialAttackState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
-        player.CanFlip = true;
     }
 }

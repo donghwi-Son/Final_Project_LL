@@ -17,8 +17,8 @@ public class PlayerFallingState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        player.Move();
-        if (player.CanDoubleJump && player.JumpInput && !player.IsGrounded)
+        player.SetVelocity(player.XInput * player.moveSpeed, player.rb.linearVelocityY);
+        if (player.CanDoubleJump && player.JumpInput && !player.IsGroundDetected())
         {
             player.DoubleJump();
         }
@@ -26,7 +26,7 @@ public class PlayerFallingState : PlayerState
         {
             psm.ChangeState(player.AirAttState);
         }
-        else if (player.IsGrounded)
+        else if (player.IsGroundDetected())
         {
             player.CanAirAttack = true;
             psm.ChangeState(player.IdleState);

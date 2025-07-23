@@ -10,15 +10,16 @@ public class PlayerJumpState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
-        Jump();
+
+        player.rb.linearVelocity = new Vector2(player.rb.linearVelocityX, player.jumpForce);
         player.anim.SetBool("isJumping", true);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        player.Move();
-        if (player.CanDoubleJump && player.JumpInput && !player.IsGrounded)
+        player.SetVelocity(player.XInput * player.moveSpeed, player.rb.linearVelocityY);
+        if (player.CanDoubleJump && player.JumpInput && !player.IsGroundDetected())
         {
             player.DoubleJump();
         }
@@ -37,12 +38,5 @@ public class PlayerJumpState : PlayerState
     {
         base.ExitState();
         player.anim.SetBool("isJumping", false);
-
     }
-
-    void Jump()
-    {
-        player.rb.AddForce(new Vector2(0, player.jumpForce), ForceMode2D.Impulse);
-    }
-
 }

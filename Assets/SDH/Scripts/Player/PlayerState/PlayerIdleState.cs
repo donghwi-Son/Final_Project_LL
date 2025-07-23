@@ -20,19 +20,19 @@ public class PlayerIdleState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        if(player.JumpInput && player.IsGrounded)
+        if(player.JumpInput && player.IsGroundDetected())
         {
             psm.ChangeState(player.JumpState);
         }
-        if (player.AttackInput && player.IsGrounded)
+        if (player.AttackInput && player.IsGroundDetected())
         {
             psm.ChangeState(player.AttackState);
         }
-        if (player.XInput != 0 && player.IsGrounded)
+        if (player.XInput != 0 && player.IsGroundDetected())
         {
             psm.ChangeState(player.MoveState);
         }
-        if (player.SpecialAttackInput && player.IsGrounded && player.CanUseSpecialAttack)
+        if (player.SpecialAttackInput && player.IsGroundDetected() && player.CanUseSpecialAttack)
         {
             psm.ChangeState(player.SpecialAttackState);
         }
@@ -40,7 +40,7 @@ public class PlayerIdleState : PlayerState
         {
             psm.ChangeState(player.SkillState);
         }
-        if (player.DashInput && player.IsGrounded && player.CanUseDash)
+        if (player.DashInput && player.IsGroundDetected() && player.CanUseDash)
         {
             psm.ChangeState(player.DashState);
         }
@@ -48,7 +48,7 @@ public class PlayerIdleState : PlayerState
         {
             psm.ChangeState(player.DefendState);
         }
-        if (!player.IsGrounded)
+        if (!player.IsGroundDetected())
         {
             psm.ChangeState(player.FallingState);
         }

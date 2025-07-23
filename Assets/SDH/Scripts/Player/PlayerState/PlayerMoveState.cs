@@ -17,12 +17,12 @@ public class PlayerMoveState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        player.Move();
-        if (player.JumpInput && player.IsGrounded)
+        player.SetVelocity(player.XInput * player.moveSpeed, player.rb.linearVelocityY);
+        if (player.JumpInput && player.IsGroundDetected())
         {
             psm.ChangeState(player.JumpState);
         }
-        if (!player.IsGrounded)
+        if (!player.IsGroundDetected())
         {
             psm.ChangeState(player.FallingState);
         }
@@ -46,7 +46,7 @@ public class PlayerMoveState : PlayerState
         {
             psm.ChangeState(player.DefendState);
         }
-        if (player.XInput == 0 && player.IsGrounded)
+        if (player.XInput == 0 && player.IsGroundDetected())
         {
             psm.ChangeState(player.IdleState);
         }

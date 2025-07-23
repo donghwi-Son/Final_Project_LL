@@ -11,8 +11,7 @@ public class PlayerDefendState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
-        player.rb.linearVelocityX = 0f;
-        player.CanFlip = false;
+        player.SetZeroVelocity();
         defendTime = 1f; // 방어 지속 시간 초기화
         player.anim.SetBool("isDefending", true);
     }
@@ -38,7 +37,6 @@ public class PlayerDefendState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
-        player.CanFlip = true;
         player.anim.SetBool("isDefending", false);
     }
 

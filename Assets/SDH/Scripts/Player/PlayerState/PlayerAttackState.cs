@@ -23,7 +23,6 @@ public class PlayerAttackState : PlayerState
     {
         base.EnterState();
         player.rb.linearVelocityX = 0f;
-        player.CanFlip = false;
         isHolding = true;
         holdTime = 0f;
         idleTimer = 0f;
@@ -138,7 +137,6 @@ public class PlayerAttackState : PlayerState
     {
         base.ExitState();
         player.anim.ResetTrigger("Att");
-        player.CanFlip = true;
         player.anim.speed = 1f;
 
         // 차지바 숨기기 (안전장치)
