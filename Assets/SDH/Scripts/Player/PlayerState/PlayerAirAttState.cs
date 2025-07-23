@@ -14,7 +14,6 @@ public class PlayerAirAttState : PlayerState
         Debug.Log("Player Air Attack State Entered");
         player.CanDoubleJump = false;
         player.CanAirAttack = false;
-        player.CanFlip = false;
         player.AttackManager.AirAttack();
     }
 
@@ -26,6 +25,5 @@ public class PlayerAirAttState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
-        player.CanFlip = true;
     }
 }

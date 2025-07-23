@@ -5,7 +5,7 @@ using static UnityEditor.PlayerSettings;
 
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -21,12 +21,6 @@ public class PlayerController : MonoBehaviour
     public float rollDistance = 3f;
     public float rollDuration = 0.3f;
     public float defendReduction = 0.5f;
-
-    //땅체크
-    [Header("Ground Check")]
-    public Transform groundCheck;
-    public float groundCheckRadius = 0.3f;
-    public LayerMask groundLayer;
 
     //스테이트 및 컨트롤
     public PlayerStateMachine StateMachine;
@@ -44,11 +38,6 @@ public class PlayerController : MonoBehaviour
     public AttackManager AttackManager;
     public PlayerStatus stat;
 
-    //컴포넌트
-    public Rigidbody2D rb;
-    public Animator anim;
-    public SpriteRenderer spriteRenderer;
-
     //인풋 변수들
     public float XInput { get; private set; }
     public bool JumpInput { get; private set; }
@@ -60,26 +49,19 @@ public class PlayerController : MonoBehaviour
     public bool MeleeChangeInput { get; private set; }
 
     //불체크값
-    public bool IsGrounded { get; private set; }
     public bool CanAttack { get; private set; } = true;
     public bool CanUseSkill { get; private set; } = true;
     public bool CanAirAttack = true;
-    public bool CanFlip = true;
     public bool DoubleJumpActive = false;
     public bool CanDoubleJump = false;
     public bool IsRolling { get; private set; }
     public bool IsDefending { get; private set; }
-    public bool IsFacingRight { get; private set; } = true;
     public bool CanUseDash => Time.time >= lastDashTime + dashCooldown;
     public bool CanUseSpecialAttack => Time.time >= lastSpecialAttackTime + specialAttackCooldown;
-
-
-
 
     //타이머
     public float lastSpecialAttackTime = -999f;
     public float lastDashTime = -999f;
-
 
     //기타변수
     public int DoubleJumpCount = 0;
@@ -87,8 +69,10 @@ public class PlayerController : MonoBehaviour
     Vector2 mousePosition;
     public AttackMode attackMode = AttackMode.Melee; // 기본 공격 모드
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         InitState();
         InitComponents();
     }
@@ -103,9 +87,6 @@ public class PlayerController : MonoBehaviour
     {
         HandleInput();
         CheckGround();
-
-        if(CanFlip)
-            FlipByKey();
 
         if (MeleeChangeInput)
             ChangeAttackMethod();
@@ -133,9 +114,6 @@ public class PlayerController : MonoBehaviour
     void InitComponents()
     {
         AttackManager = GetComponent<AttackManager>();
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         stat = GetComponent<PlayerStatus>();
     }
 
@@ -151,49 +129,22 @@ public class PlayerController : MonoBehaviour
         MeleeChangeInput = Input.GetKeyDown(KeyCode.Tab);
     }
 
-    void CheckGround()
+    private void CheckGround()
     {
-        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (IsGrounded && !CanDoubleJump && DoubleJumpActive)
+        if (IsGroundDetected() && !CanDoubleJump && DoubleJumpActive)
         {
             CanDoubleJump = true;
             DoubleJumpCount = 0;
         }
-        Debug.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckRadius, IsGrounded ? Color.green : Color.red);
+        Debug.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckRadius, IsGroundDetected() ? Color.green : Color.red);
     }
 
     public void FlipByMouse()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        IsFacingRight = mousePosition.x > transform.position.x;
-        if(IsFacingRight)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
+        float delta = mousePosition.x - transform.position.x;
+        FlipController(delta);
     }
-
-    void FlipByKey()
-    {
-        if (XInput > 0 && !IsFacingRight)
-        {
-            IsFacingRight = true;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (XInput < 0 && IsFacingRight)
-        {
-            IsFacingRight = false;
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-    }
-    public void Move()
-    {
-        rb.linearVelocityX = XInput * moveSpeed;
-    }
-
 
     public void DoubleJump()
     {
