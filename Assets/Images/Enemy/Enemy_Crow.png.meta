@@ -457,6 +457,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Enemy_Crow_13
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 37
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a29fd5509e2b1b542b36ac0ab96af5cb
+      internalID: 1574870082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -476,6 +498,7 @@ TextureImporter:
       Enemy_Crow_10: -5862602160663952141
       Enemy_Crow_11: 5579098754584308620
       Enemy_Crow_12: 401624010
+      Enemy_Crow_13: 1574870082
       Enemy_Crow_2: 6551241522048434326
       Enemy_Crow_3: -8233668351079371431
       Enemy_Crow_4: -2665506638479509021
