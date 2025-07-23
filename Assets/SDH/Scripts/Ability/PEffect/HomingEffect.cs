@@ -8,7 +8,6 @@ public class HomingEffect : IProjectileEffect
 
     public void UpdateEffect(Projectile projectile)
     {
-        Debug.Log("나는 유도");
         // 매 프레임마다 가장 가까운 적을 찾아서 유도
         GameObject nearestEnemy = FindNearestEnemy(projectile);
         if (nearestEnemy != null)

@@ -36,7 +36,6 @@ public class ProjectilePool : MonoBehaviour
 
     void InitPool()
     {
-        activePool = new Dictionary<ProjectileType, Queue<GameObject>>();
         GeneratePool(ProjectileType.AAA);
     }
 
@@ -115,6 +114,7 @@ public class ProjectilePool : MonoBehaviour
     void ReturnProjectile(Projectile projectile)
     {
         if (projectile == null) return;
+        projectile.ClearEffects();
         ProjectileType type = projectile.projectileData.projectileType;
         if (activePool.ContainsKey(type))
         {

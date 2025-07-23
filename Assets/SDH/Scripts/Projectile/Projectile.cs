@@ -12,16 +12,6 @@ public enum ProjectileType
 }
 
 
-public interface IProjectileEffect
-{
-
-    void UpdateEffect(Projectile projectile);
-
-    void OnHit(Projectile projectile, GameObject gameObject);
-
-    void OnDestroy(Projectile projectile);
-}
-
 public class Projectile : MonoBehaviour
 {
 
@@ -30,14 +20,16 @@ public class Projectile : MonoBehaviour
     float finalDamage;
     float finalSpeed;
     float finalLifeTime;
-    float piercingCount = 0;
     float sizeFactor = 0.7f;
-    bool isPiercing = false;
+    bool isPiercingEnemy = false;
+    bool isPiercingWall = false;
 
 
     [Header("컴포넌트")]
     private Rigidbody2D rb;
-    private List<IProjectileEffect> effects = new List<IProjectileEffect>();
+    private List<IProjectileEffect> PEs = new List<IProjectileEffect>();
+    private List<ICommonEffect> CEs = new List<ICommonEffect>();
+
     private List<GameObject> hitEnemies = new List<GameObject>();
 
     private void Awake()
@@ -53,7 +45,11 @@ public class Projectile : MonoBehaviour
             rb.linearVelocity = rb.linearVelocity.normalized * finalSpeed;
         }
         // 모든 효과의 업데이트 처리 실행
-        foreach (var effect in effects)
+        foreach (var effect in PEs)
+        {
+            effect.UpdateEffect(this);
+        }
+        foreach (var effect in CEs)
         {
             effect.UpdateEffect(this);
         }
@@ -70,7 +66,6 @@ public class Projectile : MonoBehaviour
         finalDamage = projectileData.damageMultiplier * statdmg;
         finalLifeTime = statlf;
         finalSpeed = projectileData.speedMultiplier * statshotspd;
-        piercingCount = projectileData.piercingCount;
     }
 
     public void Fire(Vector2 pos, Vector2 dir, float statdmg, float statlf, float statshotspd)
@@ -86,31 +81,26 @@ public class Projectile : MonoBehaviour
     }
 
     // 효과 관리 메소드들
-    public void AddEffect(IProjectileEffect effect)
+    public void ApplyEffects(List<IProjectileEffect> PE, List<ICommonEffect> IE)
     {
-        if (!effects.Contains(effect))
-        {
-            effects.Add(effect);
-        }
+        PEs.AddRange(PE);
+        CEs.AddRange(IE);
     }
 
-    public void RemoveEffect(IProjectileEffect effect)
+    public void ClearEffects()
     {
-        if (effects.Contains(effect))
-        {
-            effects.Remove(effect);
-        }
-    }
-    public void SetPiercingCount(int val)
-    {
-        piercingCount = val;
+        PEs.Clear();
+        CEs.Clear();
     }
 
-    // 관통 횟수 감소
-    public void DecreasePiercingCount()
+    public void EnablePiercingEnemy()
     {
-        piercingCount--;
-        Debug.Log($"Remaining Piercing Count: {piercingCount}");
+        isPiercingEnemy = true;
+    }
+
+    public void EnablePiercingWall()
+    {
+        isPiercingWall = true;
     }
 
     public void DestroyProjectile()
@@ -149,17 +139,36 @@ public class Projectile : MonoBehaviour
             }
 
             // 모든 효과의 충돌 처리 실행
-            foreach (var effect in effects)
+            foreach (var effect in PEs)
             {
                 effect.OnHit(this, other.gameObject);
             }
-            DecreasePiercingCount();
+            foreach (var effect in CEs)
+            {
+                effect.OnHit(other.gameObject);
+            }
 
             // 관통이 아니라면 파괴
-            if (piercingCount <= 0)
+            if (!isPiercingEnemy)
             {
                 DestroyProjectile();
             }
+        }
+        else if (other.CompareTag("Wall"))
+        {
+            foreach (var effect in PEs)
+            {
+                effect.OnHit(this, other.gameObject);
+            }
+            if (!isPiercingWall)
+            {
+                // 벽에 충돌했을 때 파괴
+                DestroyProjectile();
+            }
+        }
+        else if (other.CompareTag("Structure"))
+        {
+            DestroyProjectile();
         }
     }
 }

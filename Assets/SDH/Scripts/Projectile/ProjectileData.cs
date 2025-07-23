@@ -11,7 +11,6 @@ public class ProjectileData : ScriptableObject
     public float damageMultiplier = 1f;
     public float speedMultiplier = 10f;
     public float rateMultiplier = 1f;
-    public int piercingCount = 0;
 
     [Header("속성에 따른 스프라이트")]
     public Sprite projectileSprite;

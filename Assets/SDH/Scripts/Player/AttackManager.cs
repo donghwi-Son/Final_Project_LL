@@ -25,6 +25,8 @@ public class AttackManager : MonoBehaviour
     public Transform attPos;
     public Transform airAttPos;
     Vector3 dashPos;
+    List<ICommonEffect> CEs = new List<ICommonEffect>();
+    List<IMeleeEffect> MEs = new List<IMeleeEffect>();
 
     private void Awake()
     {
@@ -45,6 +47,9 @@ public class AttackManager : MonoBehaviour
         if (projectile == null) return;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mousePos - (Vector2)firePoint.position).normalized;
+        var PEs = EffectManager.Instance.GetActiveProjectileEffects();
+        var CEs = EffectManager.Instance.GetActiveCommonEffects();
+        projectile.ApplyEffects(PEs, CEs);
         projectile.Fire(firePoint.position, dir, stat.damage, stat.projecTileLifeTime, stat.shotSpeed);
 
         lastFireTime = Time.time;
@@ -76,6 +81,20 @@ public class AttackManager : MonoBehaviour
         }
     }
 
+    public void ApplyMeleeEffect(GameObject enemy)
+    {
+        CEs = EffectManager.Instance.GetActiveCommonEffects();
+        MEs = EffectManager.Instance.GetActiveMeleeEffects();
+        foreach (IMeleeEffect effect in MEs)
+        {
+            effect.OnHit(enemy);
+        }
+        foreach (ICommonEffect effect in CEs)
+        {
+            effect.OnHit(enemy);
+        }
+    }
+
     public void ChargeAttack()
     {
         
@@ -93,7 +112,9 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
+
         }
 
     }
@@ -104,6 +125,7 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
     }
@@ -122,6 +144,7 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
     }
@@ -132,6 +155,7 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
     }
@@ -142,17 +166,18 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
     }
 
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attPos.position, stat.attackRange);
-        Gizmos.DrawWireSphere(airAttPos.position, stat.attackRange * 1.5f);
-        Gizmos.DrawWireSphere(attPos.position, stat.attackRange * 1.3f);
-        Gizmos.DrawWireCube(dashPos, new Vector2(6.6f, 1.4f));
-    }
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(attPos.position, stat.attackRange);
+    //    Gizmos.DrawWireSphere(airAttPos.position, stat.attackRange * 1.5f);
+    //    Gizmos.DrawWireSphere(attPos.position, stat.attackRange * 1.3f);
+    //    Gizmos.DrawWireCube(dashPos, new Vector2(6.6f, 1.4f));
+    //}
 }

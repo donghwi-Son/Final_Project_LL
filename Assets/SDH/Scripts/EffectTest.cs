@@ -1,0 +1,29 @@
+using UnityEngine;
+
+public class EffectTest : MonoBehaviour
+{
+    public void Homing()
+    {
+        EffectManager.Instance.AddPE(EffectManager.ProjectileEffectType.Homing);
+    }
+    public void Explosive()
+    {
+        EffectManager.Instance.AddPE(EffectManager.ProjectileEffectType.Explosive);
+    }
+    public void PiercingEnemy()
+    {
+        EffectManager.Instance.AddPE(EffectManager.ProjectileEffectType.PiercingEnemy);
+    }
+    public void PiercingWall()
+    {
+        EffectManager.Instance.AddPE(EffectManager.ProjectileEffectType.PiercingWall);
+    }
+    public void Poison()
+    {
+        EffectManager.Instance.AddCE(EffectManager.CommonEffectType.Poison);
+    }
+    public void Stun()
+    {
+        EffectManager.Instance.AddME(EffectManager.MeleeEffectType.Stun);
+    }
+}
