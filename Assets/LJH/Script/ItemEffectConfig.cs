@@ -29,7 +29,8 @@ public class ItemEffectConfig : ScriptableObject
         public float subAttackCooldown;
         
         // Utility 활성화
-        public bool enableDoubleJump;
+        public ItemInfo.UtilityType utilityType;
+        public float utilityAmount; // 유틸 활성화 시 증가량 (예: 대쉬 횟수 증가, 쿨타임 감소 등)
     }
     
 

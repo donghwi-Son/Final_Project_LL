@@ -13,7 +13,7 @@ public class PlayerDashState : PlayerState
     {
         base.EnterState();
         player.lastDashTime = Time.time;
-        player.CanFlip = false;
+        player.dashCount--;
         player.anim.SetBool("isDashing", true);
         dashTime = 0.7f;
         player.rb.linearVelocityX = 0f;

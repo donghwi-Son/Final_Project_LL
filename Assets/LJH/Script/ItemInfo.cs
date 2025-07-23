@@ -40,12 +40,19 @@ public class ItemInfo : ScriptableObject
     public enum AttackEnhanceType
     {
         No,
-        AttackRange,             //근접, 공격범위
-        Stun,                    //근접, 스턴 효과(확률적으로 스턴)
-        Penetrate,               //원거리, 관통 효과
-        Split,                   //원거리, 화살 분할(1 -> 2)
-        Poison,                  //공통, 독(지속 딜)
-        Ice                      //공통, 슬로우
+        Homing,
+        Explosive,
+        PiercingEnemy,
+        PiercingWall,
+
+        Poision,
+        Fire,
+        Ice,
+        Lightning,
+
+        Bleed,
+        Stun,
+        Knockback
     }
     
     public enum SkillType
@@ -58,6 +65,14 @@ public class ItemInfo : ScriptableObject
     {
         No,
         Boom
+    }
+
+    public enum UtilityType
+    {
+        No,
+        DoubleJump,         //더블 점프
+        DashCoolDown,
+        AddDashCount       //대쉬 횟수 증가
     }
     
     public enum ItemTag

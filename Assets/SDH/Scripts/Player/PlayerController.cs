@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 12f;
     public float dashPower = 30f;
+    public static float maxDashCount = 1;
+    public float dashCount = 1;
 
     [Header("CoolDown")]
     public float specialAttackCooldown = 5f;
-    public float dashCooldown = 3f;
+    public static float dashCooldown = 3f;
     public float skillCooldown = 3f;
 
     [Header("Defense")]
@@ -65,12 +67,12 @@ public class PlayerController : MonoBehaviour
     public bool CanUseSkill { get; private set; } = true;
     public bool CanAirAttack = true;
     public bool CanFlip = true;
-    public bool DoubleJumpActive = false;
+    public static bool DoubleJumpActive = false;
     public bool CanDoubleJump = false;
     public bool IsRolling { get; private set; }
     public bool IsDefending { get; private set; }
     public bool IsFacingRight { get; private set; } = true;
-    public bool CanUseDash => Time.time >= lastDashTime + dashCooldown;
+    public bool CanUseDash => dashCount > 0;
     public bool CanUseSpecialAttack => Time.time >= lastSpecialAttackTime + specialAttackCooldown;
 
 
@@ -103,8 +105,9 @@ public class PlayerController : MonoBehaviour
     {
         HandleInput();
         CheckGround();
+        DashCheckAble();
 
-        if(CanFlip)
+        if (CanFlip)
             FlipByKey();
 
         if (MeleeChangeInput)
@@ -220,6 +223,59 @@ public class PlayerController : MonoBehaviour
     {
         StateMachine.ChangeState(IdleState);
     }
+
+    void DashCheckAble()
+    {
+        if (Time.time >= lastDashTime + dashCooldown)
+        {
+            dashCount++;
+            lastDashTime = Time.time;
+            if (dashCount > maxDashCount)
+            {
+                dashCount = maxDashCount;
+            }
+        }
+    }
+
+
+    // 간이 유틸리티 매니저 ===============
+    public static void EnableDoubleJump()
+    {
+        DoubleJumpActive = true;
+    }
+
+    public static void AddDashCount(float count)
+    {
+        maxDashCount += count;
+    }
+
+    public static void DecreaseDashCooldown(float percent)
+    {
+        dashCooldown *= 1f- percent / 100f; // 감소 비율 적용
+    }
+
+    public static void ApplyUtility(ItemInfo.UtilityType type, float amount)
+    {
+        switch(type)
+        {
+            case ItemInfo.UtilityType.DoubleJump:
+                EnableDoubleJump();
+                break;
+            case ItemInfo.UtilityType.AddDashCount:
+                AddDashCount(amount);
+                break;
+            case ItemInfo.UtilityType.DashCoolDown:
+                DecreaseDashCooldown(amount);
+                break;
+            default:
+                Debug.LogWarning("알 수 없는 유틸리티 타입: " + type);
+                break;
+        }
+    }
+
+
+    // 간이 유틸리티 매니저 ===============
+
 
     //// 7월 3일 추가 부분 : 플레이어가 Finish 태그를 가진 오브젝트와 충돌하면, StageManager의 Onfinish() 발동
     //public StageManager stageManager;

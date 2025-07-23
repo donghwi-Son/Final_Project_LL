@@ -27,15 +27,6 @@ public class PlayerStatus : MonoBehaviour
     public float criticalChance = 0.1f;
     
     public static PlayerStatus Instance { get; private set; }
-    void Awake()
-    {
-        if (Instance == null) { 
-            Instance = this; 
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
-    }
-
 
     public void TakeDamage(float dmg)
     {

@@ -28,7 +28,7 @@ public class ItemEffectFactory : MonoBehaviour
             
             case ItemInfo.ItemUpgradeType.AttackEnhance:
                 Debug.Log("기본 공격 강화 아이템 획득");
-                //PlayerTest.Instance.AttackEnhance(e.attackEnhance);   //공격 강화 넣어야 하는 부분
+                EffectManager.Instance.ApplyItemEffect(e.attackEnhance);
                 break;
             
             case ItemInfo.ItemUpgradeType.SkillUpgrade:
@@ -45,7 +45,7 @@ public class ItemEffectFactory : MonoBehaviour
                 
             case ItemInfo.ItemUpgradeType.Utility:
                 Debug.Log("유틸 아이템 획득");
-                //PlayerController.Instance.EnableDoubleJump();                         //유틸 활성화
+                PlayerController.ApplyUtility(e.utilityType, e.utilityAmount); //유틸 아이템 적용
                 break;
         }
     }
