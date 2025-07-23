@@ -33,8 +33,24 @@ public class ShopEntryUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private void OnBuy()
     {
-        //아이템 획득
-    }
+        // 획득
+        PlayerInventory.Instance.OnItemAcquired(def.index);
+
+        // 인벤토리 UI 새로고침
+        if (InventoryUI.Instance != null)
+                InventoryUI.Instance.Refresh();
+        
+        var c = iconImage.color;
+        c.a = 0.5f;                  
+        iconImage.color = c;
+
+        //이중 구매 방지 비튼 비활성화
+        buyButton.interactable = false;
+        
+
+        Debug.Log($"구매 완료: {def.name} (가격: {def.price})");
+        }
+        
     
     public void OnPointerEnter(PointerEventData eventData)
     {

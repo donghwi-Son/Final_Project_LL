@@ -1,59 +1,82 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MiniMapManager : MonoBehaviour
 {
-    public GameObject minimapIconPrefab; // Square Sprite
-    public Vector3 offset = Vector3.zero;
-    public float iconSpacing = 2f; // 방 간 거리 보정
-    public static MiniMapManager Instance;
+    [Header("패널 및 부모")]
+    [SerializeField] private GameObject fullMapPanel;
+    [SerializeField] private Transform iconParent;
+
+    [Header("타입별 아이콘 프리팹")]
+    public GameObject normalPrefab;
+    public GameObject hardPrefab;
+    public GameObject storePrefab;
+    public GameObject eventPrefab;
+    public GameObject bossPrefab;
+
+    [Header("설정")]
+    public float iconSpacing = 40f;
 
     private Dictionary<Vector2Int, GameObject> spawnedIcons = new();
+    private bool isMapOpen = false;
+    public static MiniMapManager instance;
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
         else
-            Destroy(gameObject);
+            Destroy(gameObject); // 중복 방지
     }
 
-
-    public void SpawnIcon(Vector2Int gridPos, StageType type)
+    private void Update()
     {
-        if (spawnedIcons.ContainsKey(gridPos)) return;
-
-        Vector3 worldPos = new Vector3(gridPos.x * iconSpacing, gridPos.y * iconSpacing, 0) + offset;
-        GameObject icon = Instantiate(minimapIconPrefab, worldPos, Quaternion.identity);
-        icon.layer = LayerMask.NameToLayer("MiniMap");
-
-        var sr = icon.GetComponent<SpriteRenderer>();
-        if (sr != null)
-            sr.color = GetColorForType(type);
-
-        spawnedIcons[gridPos] = icon;
-    }
-
-    public void HighlightCurrent(Vector2Int current)
-    {
-        foreach (var kv in spawnedIcons)
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            var sr = kv.Value.GetComponent<SpriteRenderer>();
-            sr.color = (kv.Key == current) ? Color.cyan : GetColorForType(StageManager.Instance.placedRooms[kv.Key].type);
+            isMapOpen = !isMapOpen;
+            fullMapPanel.SetActive(isMapOpen);
+            Time.timeScale = isMapOpen ? 0f : 1f;
         }
     }
 
-    private Color GetColorForType(StageType type)
+    public void InitializeMiniMap(Dictionary<Vector2Int, StageType> placedRooms)
+    {
+        foreach (var kv in placedRooms)
+        {
+            if (spawnedIcons.ContainsKey(kv.Key)) continue;
+
+            GameObject prefab = GetPrefabForType(kv.Value);
+            if (prefab == null) continue;
+
+            GameObject icon = Instantiate(prefab, iconParent, false);
+            icon.GetComponent<RectTransform>().anchoredPosition = GetAnchoredPosition(kv.Key);
+            spawnedIcons[kv.Key] = icon;
+        }
+    }
+
+    public bool TryGetIcon(Vector2Int gridPos, out GameObject icon)
+    {
+        return spawnedIcons.TryGetValue(gridPos, out icon);
+    }
+
+    private Vector2 GetAnchoredPosition(Vector2Int grid)
+    {
+        Vector2 center = new Vector2(4.5f, 8f); // generator 기준 center (cols/2, rows/2)
+        Vector2 offset = (Vector2)grid - center;
+        return offset * iconSpacing;
+    }
+
+    private GameObject GetPrefabForType(StageType type)
     {
         return type switch
         {
-            StageType.Start => Color.green,
-            StageType.Normal => Color.white,
-            StageType.Hard => new Color(1f, 0.5f, 0.5f),
-            StageType.Store => Color.yellow,
-            StageType.Event => Color.magenta,
-            StageType.Boss => Color.black,
-            _ => Color.gray
+            StageType.Normal => normalPrefab,
+            StageType.Hard => hardPrefab,
+            StageType.Store => storePrefab,
+            StageType.Event => eventPrefab,
+            StageType.Boss => bossPrefab,
+            _ => null
         };
     }
 }
