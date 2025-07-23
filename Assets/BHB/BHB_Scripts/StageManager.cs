@@ -224,6 +224,20 @@ public class StageManager : MonoBehaviour
         // 스폰 포인트로 플레이어 이동
         var spawn = room.transform.Find("SpawnPoint");
         player.position = spawn != null ? spawn.position : worldPos;
+
+        // 전체 미니맵
+        //MiniMapManager.Instance.SpawnIcon(gridPos, type);
+        MiniMapManager.instance.InitializeMiniMap(placedRooms.ToDictionary(
+    kv => kv.Key,
+    kv => kv.Value.type));
+
+        // 시작 부분을 나타내는 이미지 활성화
+        if (MiniMapManager.instance.TryGetIcon(gridPos, out GameObject icon))
+        {
+            Transform startMarker = icon.transform.Find("Start Point");
+            if (startMarker != null)
+                startMarker.gameObject.SetActive(true);
+        }
     }
 
     void ActivateRandomFinishes(GameObject room)
@@ -273,7 +287,6 @@ public class StageManager : MonoBehaviour
             currentGrid = nextGrid;
             var existingRoom = placedRooms[nextGrid].instance;
             player.position = GetEntryPosition(existingRoom, -dir);
-            MiniMapManager.Instance.HighlightCurrent(currentGrid); // 미니맵 
             return;
         }
 
@@ -314,8 +327,9 @@ public class StageManager : MonoBehaviour
 
         ActivateFinishExits(room, dir);
 
-        MiniMapManager.Instance.SpawnIcon(currentGrid, type);
-        MiniMapManager.Instance.HighlightCurrent(currentGrid);
+        MiniMapManager.instance.InitializeMiniMap(placedRooms.ToDictionary(
+    kv => kv.Key,
+    kv => kv.Value.type));
     }
 
     // 기존 방 돌아가기
@@ -439,7 +453,11 @@ public class StageManager : MonoBehaviour
     // 보스 방 생성
     public void SpawnBossRoom(Vector2Int dir)
     {
-        Vector2Int targetGrid = currentGrid + dir;
+        Vector2Int targetGrid = currentGrid + dir * 2;
+        if (!generator.IsInsideGrid(targetGrid))
+        {
+            return;
+        }
         if (placedRooms.ContainsKey(targetGrid)) return;
 
         Vector3 worldPos = generator.GridToWorld(targetGrid);
@@ -464,7 +482,17 @@ public class StageManager : MonoBehaviour
         var spawn = room.transform.Find("SpawnPoint");
         player.position = spawn != null ? spawn.position : worldPos;
 
-        Debug.Log("[StageManager] 보스 방 생성 완료");
+        MiniMapManager.instance.InitializeMiniMap(placedRooms.ToDictionary(
+   kv => kv.Key,
+   kv => kv.Value.type));
+
+        // 보스 방 생성 완료 후 Boss Point 활성
+        if (MiniMapManager.instance.TryGetIcon(currentGrid, out GameObject bossIcon))
+        {
+            Transform bossMarker = bossIcon.transform.Find("Boss Point");
+            if (bossMarker != null)
+                bossMarker.gameObject.SetActive(true);
+        }
     }
 
     Vector2Int GetNextEmptyGrid(Vector2Int from)
