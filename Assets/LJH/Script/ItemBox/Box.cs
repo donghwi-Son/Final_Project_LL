@@ -13,8 +13,8 @@ public class Box : MonoBehaviour
     
     [SerializeField] private GameObject itemPickupPrefab;
     
-    private float bounceForce = 5f;
     private Box box;
+    public static event Action<Box, int> OnBoxOpened;
     
     void Awake()
     {
@@ -26,6 +26,12 @@ public class Box : MonoBehaviour
         // 1) 등급 뽑기
         ItemInfo.ItemRarity rarity = RollRarity();
         Debug.Log($"뽑힌 등급: {rarity}");
+        
+        var entry = config.rates.First(r => r.rarity == rarity);
+        int reward = entry.goldReward;
+        Debug.Log($"지급 보상: {reward} 골드");
+        
+        OnBoxOpened?.Invoke(this, reward);
 
         // 2) 해당 등급아이템 확인 이미 획득한 아이템은 제외
         var pool = ItemDatabase.Instance
