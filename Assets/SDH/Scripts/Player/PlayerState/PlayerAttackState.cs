@@ -35,7 +35,7 @@ public class PlayerAttackState : PlayerState
         if (CanCharge && player.attackMode == AttackMode.Melee)
             chargeBar?.ShowChargeBar();
 
-        player.anim.speed = player.stat.attackSpeed / 3;
+        player.anim.speed = player.stat.attackSpeed.GetValue() / 300f;
     }
 
     public override void UpdateState()
