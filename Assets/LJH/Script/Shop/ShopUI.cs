@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,26 +14,32 @@ public class ShopUI : MonoBehaviour
     [SerializeField]private Button rerollButton;
     [SerializeField]private GameObject ShopPanel;
     
+    [Header("리롤")]
+    [SerializeField] private TMP_Text rerollCostText; 
+    private int rerollCount = 0;
+    private const int baseRerollCost = 50;
+    
     private bool shopOpen = false;
     private int slotCount = 5; 
     private int firstRowCount = 3;
 
     [Header("Fixed Probabilities")]
-    public RarityChance[] rarityChances; // Inspector에서 ItemInfo.ItemRarity와 % 입력
+    public RarityChance[] rarityChances; //등급와 % 입력
 
     void Awake()
     {
-        rerollButton.onClick.AddListener(GenerateShop);
+        rerollButton.onClick.AddListener(OnRerollButtonClicked);
     }
 
     void Start()
     {
+        UpdateRerollUI();
         GenerateShop();
     }
 
     void OnDestroy()
     {
-        rerollButton.onClick.RemoveListener(GenerateShop);
+        rerollButton.onClick.RemoveListener(OnRerollButtonClicked);
     }
 
     private void Update()
@@ -100,6 +107,34 @@ public class ShopUI : MonoBehaviour
             .ToList();
         if (pool.Count == 0) return ItemDatabase.Instance.GetAllDefinitions().First();
         return pool[Random.Range(0, pool.Count)];
+    }
+    
+    int GetRerollCost()
+    {
+        return baseRerollCost * (1 << rerollCount);
+    }
+
+    void UpdateRerollUI()
+    {
+        if (rerollCostText != null)
+            rerollCostText.text = $"{GetRerollCost()}";
+    }
+    
+    private void OnRerollButtonClicked()
+    {
+        int cost = GetRerollCost();
+        
+        if (PlayerGold.Instance.gold < cost)
+        {
+            Debug.Log("리롤 골드 부족");
+            return; 
+        }
+        
+        PlayerGold.Instance.gold -= cost;
+        rerollCount++;
+        
+        UpdateRerollUI();
+        GenerateShop();
     }
     
 }

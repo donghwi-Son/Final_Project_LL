@@ -28,6 +28,16 @@ public class PlayerStatus : MonoBehaviour
     
     public static PlayerStatus Instance { get; private set; }
 
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
     public void TakeDamage(float dmg)
     {
         float takenDamage = dmg * dmg / (dmg + defense);
