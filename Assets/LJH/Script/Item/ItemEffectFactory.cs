@@ -52,11 +52,6 @@ public class ItemEffectFactory : MonoBehaviour
     
     static void ApplyStatIncrease(ItemInfo.StatType statType, float amount)
     {
-        if (PlayerStatus.Instance == null)
-        {
-            Debug.LogError("[ItemEffectFactory] PlayerStatus.Instance가 null입니다! 씬에 PlayerStatus 컴포넌트가 있는지, Awake()에서 Instance 할당이 되었는지 확인하세요.");
-            return;
-        }
-        PlayerStatus.Instance.ModifyStat(statType, amount);
+        PlayerManager.Instance.player.GetComponent<PlayerStatus>().ModifyStat(statType, amount);
     }
 }

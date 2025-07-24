@@ -50,7 +50,7 @@ public class AttackManager : MonoBehaviour
         var PEs = EffectManager.Instance.GetActiveProjectileEffects();
         var CEs = EffectManager.Instance.GetActiveCommonEffects();
         projectile.ApplyEffects(PEs, CEs);
-        projectile.Fire(firePoint.position, dir, stat.damage, stat.projecTileLifeTime, stat.shotSpeed);
+        projectile.Fire(firePoint.position, dir, stat.damage.GetValue(), stat.projectileLifeTime, stat.shotSpeed);
 
         lastFireTime = Time.time;
     }
@@ -61,7 +61,7 @@ public class AttackManager : MonoBehaviour
         if (projectile == null) return;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mousePos - (Vector2)firePoint.position).normalized;
-        projectile.Fire(firePoint.position, dir, stat.damage*3, stat.projecTileLifeTime, stat.shotSpeed);
+        projectile.Fire(firePoint.position, dir, stat.damage.GetValue()*3f, stat.projectileLifeTime, stat.shotSpeed);
 
     }
 
