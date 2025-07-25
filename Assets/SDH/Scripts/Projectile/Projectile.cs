@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
 
     public ProjectileData projectileData;
     public event Action<Projectile> OnProjectiledestroyed;
+    float statdmg;
     float finalDamage;
     float finalSpeed;
     float finalLifeTime;
@@ -70,6 +71,7 @@ public class Projectile : MonoBehaviour
 
     public void Fire(Vector2 pos, Vector2 dir, float statdmg, float statlf, float statshotspd)
     {
+        this.statdmg = statdmg;
         CalculateFinalStat(statdmg, statlf, statshotspd);
         sizeFactor = 0.7f + statdmg * 0.05f;
         sizeFactor = Mathf.Clamp(sizeFactor, 0.7f, 2.0f);
@@ -145,7 +147,7 @@ public class Projectile : MonoBehaviour
             }
             foreach (var effect in CEs)
             {
-                effect.OnHit(other.gameObject);
+                effect.OnHit(other.gameObject, statdmg);
             }
 
             // 관통이 아니라면 파괴

@@ -19,7 +19,7 @@ public interface ICommonEffect
 {
     void UpdateEffect(Projectile projectile = null);
 
-    void OnHit(GameObject gameObject, Projectile projectile = null);
+    void OnHit(GameObject gameObject, float dmg);
 
     void OnDestroy(Projectile projectile = null);
 }
@@ -87,9 +87,13 @@ public class EffectManager : MonoBehaviour
 
     //공통
     PosionEffect posionEffect;
-    
+    LightningEffect lightningEffect;
+    IceEffect iceEffect;
+
     // 근접
     StunEffect stunEffect;
+    BleedEffect bleedEffect;
+    KnockBackEffect knockbackEffect;
 
     void InitEffects()
     {
@@ -98,7 +102,11 @@ public class EffectManager : MonoBehaviour
         piercingEnemyEffect = new PiercingEnemyEffect();
         piercingWallEffect = new PiercingWallEffect();
         posionEffect = new PosionEffect();
+        lightningEffect = new LightningEffect();
+        iceEffect = new IceEffect();
         stunEffect = new StunEffect();
+        bleedEffect = new BleedEffect();
+        knockbackEffect = new KnockBackEffect();
     }
 
     public void AddPE(ProjectileEffectType effectType)
@@ -194,10 +202,10 @@ public class EffectManager : MonoBehaviour
                     // fireEffect가 생성되면 추가
                     break;
                 case CommonEffectType.Ice:
-                    // iceEffect가 생성되면 추가
+                    commonEffects.Add(iceEffect);
                     break;
                 case CommonEffectType.Lightning:
-                    // lightningEffect가 생성되면 추가
+                    commonEffects.Add(lightningEffect);
                     break;
             }
         }
@@ -208,13 +216,13 @@ public class EffectManager : MonoBehaviour
             switch (effectType)
             {
                 case MeleeEffectType.Bleed:
-                    // bleedEffect가 생성되면 추가
+                    meleeEffects.Add(bleedEffect);
                     break;
                 case MeleeEffectType.Stun:
                     meleeEffects.Add(stunEffect);
                     break;
                 case MeleeEffectType.Knockback:
-                    // knockbackEffect가 생성되면 추가
+                    meleeEffects.Add(knockbackEffect);
                     break;
             }
         }
@@ -251,13 +259,31 @@ public class EffectManager : MonoBehaviour
             case ItemInfo.AttackEnhanceType.PiercingWall:
                 AddPE(ProjectileEffectType.PiercingWall);
                 break;
+
+
             case ItemInfo.AttackEnhanceType.Poision:
                 AddCE(CommonEffectType.Poison);
                 break;
+            case ItemInfo.AttackEnhanceType.Fire:
+                //불추가
+                break;
+            case ItemInfo.AttackEnhanceType.Ice:
+                AddCE(CommonEffectType.Ice);
+                break;
+            case ItemInfo.AttackEnhanceType.Lightning:
+                AddCE(CommonEffectType.Lightning);
+                break;
+
+
             case ItemInfo.AttackEnhanceType.Stun:
                 AddME(MeleeEffectType.Stun);
                 break;
-                // 다른 효과들 추가
+            case ItemInfo.AttackEnhanceType.Bleed:
+                AddME(MeleeEffectType.Bleed);
+                break;
+            case ItemInfo.AttackEnhanceType.Knockback:
+                AddME(MeleeEffectType.Knockback);
+                break;
         }
     }
 

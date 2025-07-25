@@ -6,9 +6,9 @@ public class PosionEffect : ICommonEffect
     {
     }
 
-    public void OnHit(GameObject gameObject, Projectile projectile = null)
+    public void OnHit(GameObject gameObject, float dmg)
     {
-        Debug.Log("상대 중독");
+        SpecialAttackManager.Instance.SpawnPoison(gameObject, dmg);
     }
 
     public void UpdateEffect(Projectile projectile = null)

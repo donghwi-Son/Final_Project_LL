@@ -6,8 +6,9 @@ public class LightningEffect : ICommonEffect
     {
     }
 
-    public void OnHit(GameObject gameObject, Projectile projectile = null)
+    public void OnHit(GameObject gameObject, float dmg)
     {
+        SpecialAttackManager.Instance.StartChain(gameObject, dmg);
     }
 
     public void UpdateEffect(Projectile projectile = null)

@@ -26,4 +26,24 @@ public class EffectTest : MonoBehaviour
     {
         EffectManager.Instance.AddME(EffectManager.MeleeEffectType.Stun);
     }
+    public void Bleed()
+    {
+        EffectManager.Instance.AddME(EffectManager.MeleeEffectType.Bleed);
+    }
+    public void Knockback()
+    {
+        EffectManager.Instance.AddME(EffectManager.MeleeEffectType.Knockback);
+    }
+    public void Fire()
+    {
+        EffectManager.Instance.AddCE(EffectManager.CommonEffectType.Fire);
+    }
+    public void Ice()
+    {
+        EffectManager.Instance.AddCE(EffectManager.CommonEffectType.Ice);
+    }
+    public void Lightning()
+    {
+        EffectManager.Instance.AddCE(EffectManager.CommonEffectType.Lightning);
+    }
 }
