@@ -18,10 +18,18 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private TMP_Text rerollCostText; 
     private int rerollCount = 0;
     private const int baseRerollCost = 50;
+
+    [Header("암시장")] [SerializeField] private TMP_Text BlackMarketText;
     
+    //일반 상점
     private bool shopOpen = false;
     private int slotCount = 5; 
     private int firstRowCount = 3;
+    
+    //암시장
+    private bool isBlackMarket = false;
+    private const float blackMarketChance = 0.1f; // 10%
+    private const float blackMarketDiscountRate = 0.3f; // 30% 할인
 
     [Header("Fixed Probabilities")]
     public RarityChance[] rarityChances; //등급와 % 입력
@@ -34,7 +42,6 @@ public class ShopUI : MonoBehaviour
     void Start()
     {
         UpdateRerollUI();
-        GenerateShop();
     }
 
     void OnDestroy()
@@ -56,6 +63,17 @@ public class ShopUI : MonoBehaviour
         ShopPanel.SetActive(!shopOpen);
         shopOpen = !shopOpen;
         Debug.Log(shopOpen+"오픈 함수");
+        if (shopOpen)
+        {
+            // 10% 확률로 암시장
+            isBlackMarket = Random.value < blackMarketChance;
+            Debug.Log(isBlackMarket ? "⚠ 암시장 개방! 할인 적용됨." : "일반 상점 개방.");
+            BlackMarketText.text = isBlackMarket ? "BlackMarket - 30% Discount!" : "";
+            
+            rerollCount = 0;
+            UpdateRerollUI();
+            GenerateShop();
+        }
     }
     
 
@@ -74,14 +92,14 @@ public class ShopUI : MonoBehaviour
         for (int i = 0; i < firstRowCount && i < list.Count; i++)
         {
             var go = Instantiate(entryPrefab, row1);
-            go.GetComponent<ShopEntryUI>().Setup(list[i]);
+            go.GetComponent<ShopEntryUI>().Setup(list[i], isBlackMarket);
         }
 
         // 2행 나머지
         for (int i = firstRowCount; i < list.Count; i++)
         {
             var go = Instantiate(entryPrefab, row2);
-            go.GetComponent<ShopEntryUI>().Setup(list[i]);
+            go.GetComponent<ShopEntryUI>().Setup(list[i], isBlackMarket);
         }
     }
 
@@ -111,7 +129,8 @@ public class ShopUI : MonoBehaviour
     
     int GetRerollCost()
     {
-        return baseRerollCost * (1 << rerollCount);
+        int rawCost = baseRerollCost * (1 << rerollCount);
+        return Mathf.Min(rawCost, 800);
     }
 
     void UpdateRerollUI()
