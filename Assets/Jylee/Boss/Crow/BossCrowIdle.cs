@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class BossCrowIdle : BossCrowState
+public class BossCrowIdle : State<BossCrow>
 {
     private float delayTimer;
 
-    public BossCrowIdle(BossCrow enemy, EnemyStateMachine<BossCrow> stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
+    public BossCrowIdle(BossCrow owner, StateMachine<BossCrow> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
@@ -15,16 +15,16 @@ public class BossCrowIdle : BossCrowState
         delayTimer = 0;
     }
 
-    public override void Update()
+    public override void Execute()
     {
-        base.Update();
-        enemy.ChasePlayer();
+        base.Execute();
+        owner.ChasePlayer();
 
         delayTimer += Time.deltaTime;
 
-        if (delayTimer >= enemy.attackDealy)
+        if (delayTimer >= owner.attackDealy)
         {
-            enemy.nextAttackSelect();
+            owner.nextAttackSelect();
         }
     }
 

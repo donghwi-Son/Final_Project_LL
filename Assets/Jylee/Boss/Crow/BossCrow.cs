@@ -1,7 +1,7 @@
 using System.Reflection;
 using UnityEngine;
 
-public class BossCrow : EnemyBase
+public class BossCrow : Enemy
 {
     [Header("공격 관련")]
     public int nextAttackType;
@@ -16,7 +16,6 @@ public class BossCrow : EnemyBase
 
 
     [Header("추적 관련")]
-    public float moveSpeed;
     public float baseHeight;
     public float moveRadius;
     public float changeTargetTime;
@@ -41,7 +40,7 @@ public class BossCrow : EnemyBase
 
 
     // 머신
-    public EnemyStateMachine<BossCrow> stateMachine { get; private set; }
+    public StateMachine<BossCrow> stateMachine { get; private set; }
     public BossCrowStand standState { get; private set; }
     public BossCrowIdle idleState { get; private set; }
     public BossCrowRangeAttack rangeAttack { get; private set; }
@@ -51,7 +50,7 @@ public class BossCrow : EnemyBase
     protected override void Awake()
     {
         base.Awake();
-        stateMachine = new EnemyStateMachine<BossCrow>();
+        stateMachine = new StateMachine<BossCrow>();
         standState = new BossCrowStand(this, stateMachine, "IsStand");
         idleState = new BossCrowIdle(this, stateMachine, "IsIdle");
         rangeAttack = new BossCrowRangeAttack(this, stateMachine, "IsRange");
@@ -61,7 +60,7 @@ public class BossCrow : EnemyBase
 
     protected override void Start()
     {
-        stateMachine.Initalize(standState);
+        stateMachine.ChangeState(standState);
         nextAttackType = 0;
 
         if (playerTransform == null)
@@ -71,12 +70,12 @@ public class BossCrow : EnemyBase
     protected override void Update()
     {
         base.Update();
-        stateMachine.currentState.Update();
+        stateMachine.CurrentState.Execute();
     }
 
     public void AnimationTrigger()
     {
-        stateMachine.currentState.AnimationFinishTrigger();
+        stateMachine.CurrentState.AnimationFinishTrigger();
     }
 
     public void DetectPlayer()

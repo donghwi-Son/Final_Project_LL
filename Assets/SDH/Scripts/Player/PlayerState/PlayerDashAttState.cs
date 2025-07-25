@@ -1,26 +1,24 @@
 using UnityEngine;
 
-public class PlayerDashAttState : PlayerState
+public class PlayerDashAttState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-
-    public PlayerDashAttState(PlayerStateMachine psm) : base(psm)
+    public PlayerDashAttState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
-        player.AttackManager.DashAttack(player.IsFacingRight);
+        base.Enter();
+        owner.AttackManager.DashAttack(owner.IsFacingRight);
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
+        base.Execute();
     }
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
+        base.Exit();
     }
 }

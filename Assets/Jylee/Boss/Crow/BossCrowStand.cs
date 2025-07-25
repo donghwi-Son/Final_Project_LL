@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class BossCrowStand : BossCrowState
+public class BossCrowStand : State<BossCrow>
 {
-    public BossCrowStand(BossCrow enemy, EnemyStateMachine<BossCrow> stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
+    public BossCrowStand(BossCrow owner, StateMachine<BossCrow> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
@@ -11,11 +11,11 @@ public class BossCrowStand : BossCrowState
         base.Enter();
     }
 
-    public override void Update()
+    public override void Execute()
     {
-        base.Update();
+        base.Execute();
 
-        enemy.DetectPlayer();
+        owner.DetectPlayer();
     }
 
     public override void Exit()

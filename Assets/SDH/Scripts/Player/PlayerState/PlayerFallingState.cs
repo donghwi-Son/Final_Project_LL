@@ -1,40 +1,38 @@
 using UnityEngine;
 
-public class PlayerFallingState : PlayerState
+public class PlayerFallingState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-    public PlayerFallingState(PlayerStateMachine psm) : base(psm)
+    public PlayerFallingState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
-        player.anim.SetBool("isFalling", true);
+        base.Enter();
         Debug.Log("Player Falling State Entered");
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
-        player.SetVelocity(player.XInput * player.moveSpeed, player.rb.linearVelocityY);
-        if (player.CanDoubleJump && player.JumpInput && !player.IsGroundDetected())
+        base.Execute();
+        owner.SetVelocity(owner.XInput * owner.moveSpeed, owner.rb.linearVelocityY);
+        if (owner.CanDoubleJump && owner.JumpInput && !owner.IsGroundDetected())
         {
-            player.DoubleJump();
+            owner.DoubleJump();
         }
-        else if (player.AttackInput && player.CanAirAttack)
+        else if (owner.AttackInput && owner.CanAirAttack)
         {
-            psm.ChangeState(player.AirAttState);
+            stateMachine.ChangeState(owner.AirAttState);
         }
-        else if (player.IsGroundDetected())
+        else if (owner.IsGroundDetected())
         {
-            player.CanAirAttack = true;
-            psm.ChangeState(player.IdleState);
+            owner.CanAirAttack = true;
+            stateMachine.ChangeState(owner.IdleState);
         }
     }
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
+        base.Exit();
     }
 }

@@ -25,7 +25,7 @@ public class PlayerController : Entity
     public static float maxDashCount = 1; // 최대 대시 횟수
 
     //스테이트 및 컨트롤
-    public PlayerStateMachine StateMachine;
+    public StateMachine<PlayerController> stateMachine;
     public PlayerIdleState IdleState;
     public PlayerMoveState MoveState;
     public PlayerJumpState JumpState;
@@ -79,41 +79,45 @@ public class PlayerController : Entity
         InitComponents();
     }
 
-    private void Start()
+    protected override void Start()
     {
-        StateMachine.InitState(IdleState);
+        base.Start();
+
+        stateMachine.ChangeState(IdleState);
 
         PlayerManager.Instance.player = this; // 플레이어 매니저에 플레이어 설정
 
         //originmoveSpeed = moveSpeed; // 7월 3일 추가 : 초기 지정 속도 저장
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         HandleInput();
         CheckGround();
 
         if (MeleeChangeInput)
             ChangeAttackMethod();
 
-        StateMachine.Update();
+        stateMachine.CurrentState.Execute();
     }
 
 
     void InitState()
     {
-        StateMachine = new PlayerStateMachine(this);
-        IdleState = new PlayerIdleState(StateMachine);
-        MoveState = new PlayerMoveState(StateMachine);
-        JumpState = new PlayerJumpState(StateMachine);
-        AttackState = new PlayerAttackState(StateMachine);
-        SpecialAttackState = new PlayerSpecialAttackState(StateMachine);
-        SkillState = new PlayerSkillState(StateMachine);
-        DefendState = new PlayerDefendState(StateMachine);
-        DashState = new PlayerDashState(StateMachine);
-        AirAttState = new PlayerAirAttState(StateMachine);
-        DashAttState = new PlayerDashAttState(StateMachine);
-        FallingState = new PlayerFallingState(StateMachine);
+        stateMachine = new StateMachine<PlayerController>();
+        IdleState = new PlayerIdleState(this, stateMachine, "Idle");
+        MoveState = new PlayerMoveState(this, stateMachine, "Move");
+        JumpState = new PlayerJumpState(this, stateMachine, "Jump");
+        AttackState = new PlayerAttackState(this, stateMachine, "Attack");
+        SpecialAttackState = new PlayerSpecialAttackState(this, stateMachine, "SpecialAttack");
+        SkillState = new PlayerSkillState(this, stateMachine, "Skill");
+        DefendState = new PlayerDefendState(this, stateMachine, "Defend");
+        DashState = new PlayerDashState(this, stateMachine, "Dash");
+        AirAttState = new PlayerAirAttState(this, stateMachine, "AirAttack");
+        DashAttState = new PlayerDashAttState(this, stateMachine, "DashAttack");
+        FallingState = new PlayerFallingState(this, stateMachine, "Fall");
     }
 
     void InitComponents()
@@ -155,7 +159,7 @@ public class PlayerController : Entity
     {
         CanDoubleJump = false;
         rb.linearVelocityY = 0;
-        StateMachine.ChangeState(JumpState);
+        stateMachine.ChangeState(JumpState);
     }
 
     public void ChangeAttackMethod()
@@ -174,7 +178,7 @@ public class PlayerController : Entity
 
     public void AttackToIdle()
     {
-        StateMachine.ChangeState(IdleState);
+        stateMachine.ChangeState(IdleState);
     }
 
     // 간이 유틸리티 매니저 ===============

@@ -1,42 +1,40 @@
 using UnityEngine;
 
-public class PlayerJumpState : PlayerState
+public class PlayerJumpState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-    public PlayerJumpState(PlayerStateMachine psm) : base(psm)
+    public PlayerJumpState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
+        base.Enter();
 
-        player.rb.linearVelocity = new Vector2(player.rb.linearVelocityX, player.jumpForce);
-        player.anim.SetBool("isJumping", true);
+        owner.rb.linearVelocity = new Vector2(owner.rb.linearVelocityX, owner.jumpForce);
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
-        player.SetVelocity(player.XInput * player.moveSpeed, player.rb.linearVelocityY);
-        if (player.CanDoubleJump && player.JumpInput && !player.IsGroundDetected())
+        base.Execute();
+        owner.SetVelocity(owner.XInput * owner.moveSpeed, owner.rb.linearVelocityY);
+        if (owner.CanDoubleJump && owner.JumpInput && !owner.IsGroundDetected())
         {
-            player.DoubleJump();
+            owner.DoubleJump();
         }
-        else if (player.AttackInput && player.CanAirAttack)
+        else if (owner.AttackInput && owner.CanAirAttack)
         {
-            psm.ChangeState(player.AirAttState);
+            stateMachine.ChangeState(owner.AirAttState);
         }
-        else if (player.rb.linearVelocityY < 0)
+        else if (owner.rb.linearVelocityY < 0)
         {
-            psm.ChangeState(player.FallingState);
+            stateMachine.ChangeState(owner.FallingState);
         }
     }
  
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
-        player.anim.SetBool("isJumping", false);
+        base.Exit();
+        owner.anim.SetBool("isJumping", false);
     }
 }
