@@ -52,6 +52,6 @@ public class ItemEffectFactory : MonoBehaviour
     
     static void ApplyStatIncrease(ItemInfo.StatType statType, float amount)
     {
-        PlayerStatus.Instance.ModifyStat(statType, amount);
+        PlayerManager.Instance.player.GetComponent<PlayerStatus>().ModifyStat(statType, amount);
     }
 }

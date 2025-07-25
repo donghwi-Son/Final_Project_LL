@@ -21,8 +21,9 @@ public class Entity : MonoBehaviour
     {
         // 컴포넌트 초기화
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
         // 땅체크 설정
         if (groundCheck == null)
         {
@@ -32,6 +33,17 @@ public class Entity : MonoBehaviour
                 Debug.LogError("GroundCheck transform not found!");
             }
         }
+    }
+
+    protected virtual void Update()
+    {
+        
+    }
+
+    // 피격 관련 메서드
+    public virtual void DamageImpact()
+    {
+
     }
 
     #region 충돌
@@ -74,4 +86,10 @@ public class Entity : MonoBehaviour
         FlipController(_xVelocity);
     }
     #endregion
+
+    // 사망 관련 메서드
+    public virtual void Die()
+    {
+
+    }
 }

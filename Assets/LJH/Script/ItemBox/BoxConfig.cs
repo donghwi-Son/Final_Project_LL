@@ -8,6 +8,7 @@ public class BoxConfig : ScriptableObject       //아이템 확률 설정
     {
         public ItemInfo.ItemRarity rarity;  
         [Range(0,100)] public float rate;  
+        public int goldReward;
     }
 
     public RarityRate[] rates; 
