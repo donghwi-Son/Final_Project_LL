@@ -1,29 +1,27 @@
 using UnityEngine;
 
-public class PlayerAirAttState : PlayerState
+public class PlayerAirAttState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-
-    public PlayerAirAttState(PlayerStateMachine psm) : base(psm)
+    public PlayerAirAttState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
+        base.Enter();
         Debug.Log("Player Air Attack State Entered");
-        player.CanDoubleJump = false;
-        player.CanAirAttack = false;
-        player.AttackManager.AirAttack();
+        owner.CanDoubleJump = false;
+        owner.CanAirAttack = false;
+        owner.AttackManager.AirAttack();
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
+        base.Execute();
     }
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
+        base.Exit();
     }
 }

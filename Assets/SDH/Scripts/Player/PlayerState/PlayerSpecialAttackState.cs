@@ -1,38 +1,34 @@
 using UnityEngine;
 
-public class PlayerSpecialAttackState : PlayerState
+public class PlayerSpecialAttackState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-    public PlayerSpecialAttackState(PlayerStateMachine psm) : base(psm)
+    public PlayerSpecialAttackState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
-        player.lastSpecialAttackTime = Time.time;
-        switch (player.attackMode)
+        base.Enter();
+        owner.lastSpecialAttackTime = Time.time;
+        switch (owner.attackMode)
         {
             case AttackMode.Melee:
-                player.anim.SetTrigger("SpecialAtt");
-                player.AttackManager.SpecialMeleeAttack();
+                owner.AttackManager.SpecialMeleeAttack();
                 break;
             case AttackMode.Ranged:
-                player.AttackManager.SpecialRangedAttack();
-                psm.ChangeState(player.IdleState);
+                owner.AttackManager.SpecialRangedAttack();
+                stateMachine.ChangeState(owner.IdleState);
                 break;
         }
-
-
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
+        base.Execute();
     }
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
+        base.Exit();
     }
 }

@@ -1,9 +1,11 @@
 using UnityEngine;
 
-public class BossCrowStrikeAttack : BossCrowState
+public class BossCrowStrikeAttack : State<BossCrow>
 {
     private Vector2 dashDir;
-    public BossCrowStrikeAttack(BossCrow enemy, EnemyStateMachine<BossCrow> stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
+    private int stateType;
+
+    public BossCrowStrikeAttack(BossCrow owner, StateMachine<BossCrow> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
@@ -12,41 +14,41 @@ public class BossCrowStrikeAttack : BossCrowState
         base.Enter();
         stateType = 0;
 
-        enemy.BossFlip(false);
+        owner.BossFlip(false);
     }
 
-    public override void Update()
+    public override void Execute()
     {
-        base.Update();
+        base.Execute();
 
         if(stateType == 0)
         {
             // 뒤로 살짝 반동 후 공격으로 상태이동
-            Vector2 retreatDir = (enemy.transform.position - enemy.playerTransform.position).normalized;
-            enemy.rb.linearVelocity = retreatDir * enemy.moveSpeed;
+            Vector2 retreatDir = (owner.transform.position - owner.playerTransform.position).normalized;
+            owner.rb.linearVelocity = retreatDir * owner.moveSpeed;
             if (triggerCalled)
             {
                 stateType = 1;
                 triggerCalled = false;
 
                 // 플레이어 거리 계산
-                dashDir = (enemy.playerTransform.position - enemy.transform.position).normalized;
+                dashDir = (owner.playerTransform.position - owner.transform.position).normalized;
                 // 회전값
-                enemy.anim.transform.rotation = Quaternion.Euler(0, 0, enemy.BossPlayerGaze());
+                owner.anim.transform.rotation = Quaternion.Euler(0, 0, owner.BossPlayerGaze());
 
-                enemy.anim.SetTrigger("OnStrike");
+                owner.anim.SetTrigger("OnStrike");
             }            
         }
         else if(stateType == 1)
         {
-            enemy.rb.linearVelocity = dashDir * enemy.dashAttackSpeed;
+            owner.rb.linearVelocity = dashDir * owner.dashAttackSpeed;
 
             // 충돌 여부 등등 추가
 
             if (triggerCalled)
             {
-                enemy.BossRotationZero();
-                enemy.stateMachine.ChangeState(enemy.idleState);
+                owner.SetRotationZero();
+                owner.stateMachine.ChangeState(owner.idleState);
             }
         }
     }
@@ -54,6 +56,6 @@ public class BossCrowStrikeAttack : BossCrowState
     public override void Exit()
     {
         base.Exit();
-        enemy.SetZeroVelocity();
+        owner.SetZeroVelocity();
     }
 }

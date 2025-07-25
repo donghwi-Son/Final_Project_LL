@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyBabyCrow : EnemyBase
+public class EnemyBabyCrow : Enemy
 {
 
 }

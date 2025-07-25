@@ -35,25 +35,21 @@ public class Enemy : Entity
 
     [HideInInspector] public float lastTimeAttacked;
 
-    //public StateMachine stateMachine { get; protected set; }
-    //public State idleState { get; protected set; }
-    //public EnemyStunnedState stunnedState { get; protected set; }
-    //public EnemyPanicState panicState { get; protected set; }
-    //public EnemyDeadState deadState { get; protected set; }
-
     protected override void Awake()
     {
         base.Awake();
 
-        //stateMachine = new StateMachine();
         defaultMoveSpeed = moveSpeed;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
     }
 
     protected override void Update()
     {
         base.Update();
-
-        //stateMachine.currentState.Update();
     }
 
     public override void DamageImpact()
@@ -95,5 +91,10 @@ public class Enemy : Entity
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + AttackDistance * FacingDir, transform.position.y));
         Gizmos.DrawWireSphere(playerCheck.position, playerCheckRadius);
         Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
+    }
+
+    public void SetRotationZero()
+    {
+        anim.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }

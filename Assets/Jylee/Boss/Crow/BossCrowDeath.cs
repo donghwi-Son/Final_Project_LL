@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class BossCrowDeath : BossCrowState
+public class BossCrowDeath : State<BossCrow>
 {
-    public BossCrowDeath(BossCrow enemy, EnemyStateMachine<BossCrow> stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
+    public BossCrowDeath(BossCrow owner, StateMachine<BossCrow> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
@@ -11,9 +11,9 @@ public class BossCrowDeath : BossCrowState
         base.Enter();
     }
 
-    public override void Update()
+    public override void Execute()
     {
-        base.Update();
+        base.Execute();
     }
 
     public override void Exit()

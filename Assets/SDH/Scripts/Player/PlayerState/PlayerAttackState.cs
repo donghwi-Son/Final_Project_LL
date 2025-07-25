@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class PlayerAttackState : PlayerState
+public class PlayerAttackState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-
-    bool CanCharge => player.stat.canChargeAttack;
+    bool CanCharge => owner.stat.canChargeAttack;
     bool isHolding = false;
     float holdTime;
     float idleTimer = 0f;
@@ -15,41 +13,41 @@ public class PlayerAttackState : PlayerState
     float lastAutoFireTime;
     bool isAutoFiring = false;
 
-    public PlayerAttackState(PlayerStateMachine psm) : base(psm)
+    public PlayerAttackState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
-        player.rb.linearVelocityX = 0f;
+        base.Enter();
+        owner.rb.linearVelocityX = 0f;
         isHolding = true;
         holdTime = 0f;
         idleTimer = 0f;
         isHoldAttack = false;
         isAutoFiring = false;
         lastAutoFireTime = 0f;
-        chargeBar = player.GetComponent<PlayerChargeBar>();
+        chargeBar = owner.GetComponent<PlayerChargeBar>();
 
         // 근거리 모드에서만 차지바 표시
-        if (CanCharge && player.attackMode == AttackMode.Melee)
+        if (CanCharge && owner.attackMode == AttackMode.Melee)
             chargeBar?.ShowChargeBar();
 
-        player.anim.speed = player.stat.attackSpeed.GetValue() / 300f;
+        owner.anim.speed = owner.stat.attackSpeed.GetValue() / 300f;
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
+        base.Execute();
 
         if (Input.GetMouseButton(0) && isHolding)
         {
-            if (player.attackMode == AttackMode.Melee)
+            if (owner.attackMode == AttackMode.Melee)
             {
                 // 근거리 모드: 차지 공격 처리
                 HandleMeleeChargeAttack();
             }
-            else if (player.attackMode == AttackMode.Ranged)
+            else if (owner.attackMode == AttackMode.Ranged)
             {
                 // 원거리 모드: 자동 발사 처리
                 HandleRangedAutoFire();
@@ -66,7 +64,7 @@ public class PlayerAttackState : PlayerState
         idleTimer += Time.deltaTime;
         if (idleTimer >= 0.5f)
         {
-            psm.ChangeState(player.IdleState);
+            stateMachine.ChangeState(owner.IdleState);
         }
     }
 
@@ -88,14 +86,14 @@ public class PlayerAttackState : PlayerState
         if (!isAutoFiring)
         {
             // 첫 발사
-            player.AttackManager.Attack(player.attackMode, player.IsFacingRight);
+            owner.AttackManager.Attack(owner.attackMode, owner.IsFacingRight);
             isAutoFiring = true;
             lastAutoFireTime = Time.time;
         }
-        else if (Time.time >= lastAutoFireTime + player.stat.attackInterval)
+        else if (Time.time >= lastAutoFireTime + owner.stat.attackInterval)
         {
             // 자동 발사
-            player.AttackManager.Attack(player.attackMode, player.IsFacingRight);
+            owner.AttackManager.Attack(owner.attackMode, owner.IsFacingRight);
             lastAutoFireTime = Time.time;
         }
     }
@@ -105,7 +103,7 @@ public class PlayerAttackState : PlayerState
         isHolding = false;
         isAutoFiring = false;
 
-        if (player.attackMode == AttackMode.Melee)
+        if (owner.attackMode == AttackMode.Melee)
         {
             // 근거리 모드: 차지바 숨기기 및 공격 실행
             if (CanCharge)
@@ -115,17 +113,17 @@ public class PlayerAttackState : PlayerState
 
             if (isHoldAttack && CanCharge)
             {
-                player.AttackManager.ChargeAttack();
+                owner.AttackManager.ChargeAttack();
             }
             else
             {
-                player.AttackManager.Attack(player.attackMode, player.IsFacingRight);
+                owner.AttackManager.Attack(owner.attackMode, owner.IsFacingRight);
             }
         }
-        else if (player.attackMode == AttackMode.Ranged && !isAutoFiring)
+        else if (owner.attackMode == AttackMode.Ranged && !isAutoFiring)
         {
             // 원거리 모드에서 즉시 떼는 경우 (자동발사가 시작되지 않은 경우)
-            player.AttackManager.Attack(player.attackMode, player.IsFacingRight);
+            owner.AttackManager.Attack(owner.attackMode, owner.IsFacingRight);
         }
 
         // 변수 초기화
@@ -133,11 +131,10 @@ public class PlayerAttackState : PlayerState
         holdTime = 0f;
     }
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
-        player.anim.ResetTrigger("Att");
-        player.anim.speed = 1f;
+        base.Exit();
+        owner.anim.speed = 1f;
 
         // 차지바 숨기기 (안전장치)
         if (chargeBar != null)
