@@ -91,7 +91,7 @@ public class AttackManager : MonoBehaviour
         }
         foreach (ICommonEffect effect in CEs)
         {
-            effect.OnHit(enemy, stat.damage);
+            //effect.OnHit(enemy, stat.damage);
         }
     }
 

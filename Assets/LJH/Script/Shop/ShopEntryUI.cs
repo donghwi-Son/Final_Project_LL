@@ -17,26 +17,31 @@ public class ShopEntryUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private ItemDefinition def;
 
-    public void Setup(ItemDefinition def)
+    public void Setup(ItemDefinition def, bool isBlackMarket)
     {
         this.def = def;
         iconImage.sprite = def.icon;
-        priceText.text = def.price.ToString();
+        
+        int price = def.price;
+        if (isBlackMarket)
+            price = Mathf.CeilToInt(def.price * 0.7f);
+        
+        priceText.text = price.ToString();
         
         nameText.text    = def.name;
         descText.text    = def.description;
         detailPanel.SetActive(false);
 
         buyButton.onClick.RemoveAllListeners();
-        buyButton.onClick.AddListener(OnBuy);
+        buyButton.onClick.AddListener(() => OnBuy(price));
     }
 
-    private void OnBuy()
+    private void OnBuy(int price)
     {
         // 획득
-        if (PlayerGold.Instance.gold >= def.price)
+        if (PlayerGold.Instance.gold >= price)
         {
-            PlayerGold.Instance.gold -= def.price;
+            PlayerGold.Instance.gold -= price;
             PlayerInventory.Instance.OnItemAcquired(def.index);
             
             // 인벤토리 UI 새로고침
@@ -51,7 +56,7 @@ public class ShopEntryUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             buyButton.interactable = false;
         
 
-            Debug.Log($"구매 완료: {def.name} (가격: {def.price})");
+            Debug.Log($"구매 완료: {def.name} (가격: {price})");
         }
         else
         {
