@@ -1,60 +1,57 @@
 using UnityEngine;
 
-public class PlayerMoveState : PlayerState
+public class PlayerMoveState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-    public PlayerMoveState(PlayerStateMachine psm) : base(psm)
+    public PlayerMoveState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
+        base.Enter();
         Debug.Log("Player Move State Entered");
-        player.anim.SetBool("isMoving", true);
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
-        player.SetVelocity(player.XInput * player.moveSpeed, player.rb.linearVelocityY);
-        if (player.JumpInput && player.IsGroundDetected())
+        base.Execute();
+        owner.SetVelocity(owner.XInput * owner.moveSpeed, owner.rb.linearVelocityY);
+        if (owner.JumpInput && owner.IsGroundDetected())
         {
-            psm.ChangeState(player.JumpState);
+            stateMachine.ChangeState(owner.JumpState);
         }
-        if (!player.IsGroundDetected())
+        if (!owner.IsGroundDetected())
         {
-            psm.ChangeState(player.FallingState);
+            stateMachine.ChangeState(owner.FallingState);
         }
-        if (player.AttackInput)
+        if (owner.AttackInput)
         {
-            psm.ChangeState(player.AttackState);
+            stateMachine.ChangeState(owner.AttackState);
         }
-        if(player.SpecialAttackInput && player.CanUseSpecialAttack)
+        if(owner.SpecialAttackInput && owner.CanUseSpecialAttack)
         {
-            psm.ChangeState(player.SpecialAttackState);
+            stateMachine.ChangeState(owner.SpecialAttackState);
         }
-        if (player.SkillInput)
+        if (owner.SkillInput)
         {
-            psm.ChangeState(player.SkillState);
+            stateMachine.ChangeState(owner.SkillState);
         }
-        if (player.DashInput && player.CanUseDash)
+        if (owner.DashInput && owner.CanUseDash)
         {
-            psm.ChangeState(player.DashState);
+            stateMachine.ChangeState(owner.DashState);
         }
-        if (player.DefendInput)
+        if (owner.DefendInput)
         {
-            psm.ChangeState(player.DefendState);
+            stateMachine.ChangeState(owner.DefendState);
         }
-        if (player.XInput == 0 && player.IsGroundDetected())
+        if (owner.XInput == 0 && owner.IsGroundDetected())
         {
-            psm.ChangeState(player.IdleState);
+            stateMachine.ChangeState(owner.IdleState);
         }
     }
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
-        player.anim.SetBool("isMoving", false);
+        base.Exit();
     }
 }

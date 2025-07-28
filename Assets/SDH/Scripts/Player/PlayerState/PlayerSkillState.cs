@@ -1,25 +1,23 @@
 using UnityEngine;
 
-public class PlayerSkillState : PlayerState
+public class PlayerSkillState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-    public PlayerSkillState(PlayerStateMachine psm) : base(psm)
+    public PlayerSkillState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
-        //player.anim.SetTrigger("Skill");
+        base.Enter();
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
+        base.Execute();
     }
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
+        base.Exit();
     }
 }

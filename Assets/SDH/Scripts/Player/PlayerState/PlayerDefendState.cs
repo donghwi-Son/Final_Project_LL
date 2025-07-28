@@ -1,43 +1,40 @@
 using UnityEngine;
 
-public class PlayerDefendState : PlayerState
+public class PlayerDefendState : State<PlayerController>
 {
-    PlayerController player => psm.player;
-    float defendTime; // 방어 지속 시간
-    public PlayerDefendState(PlayerStateMachine psm) : base(psm)
+    public PlayerDefendState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
-    public override void EnterState()
+    public override void Enter()
     {
-        base.EnterState();
-        player.SetZeroVelocity();
-        defendTime = 1f; // 방어 지속 시간 초기화
-        player.anim.SetBool("isDefending", true);
+        base.Enter();
+        owner.SetZeroVelocity();
+        stateTimer = 1f; // 방어 지속 시간 초기화
+        owner.anim.SetBool("isDefending", true);
     }
 
-    public override void UpdateState()
+    public override void Execute()
     {
-        base.UpdateState();
-        defendTime -= Time.deltaTime;
-        if (defendTime >= player.perfectDefendTime)
+        base.Execute();
+        if (stateTimer >= owner.perfectDefendTime)
         {
             //완벽가드
         }
-        else if(defendTime > 0f)
+        else if(stateTimer > 0f)
         {
             //일반가드
         }
         else
         {
-            psm.ChangeState(player.IdleState);
+            stateMachine.ChangeState(owner.IdleState);
         }
     }
 
-    public override void ExitState()
+    public override void Exit()
     {
-        base.ExitState();
-        player.anim.SetBool("isDefending", false);
+        base.Exit();
+        owner.anim.SetBool("isDefending", false);
     }
 
 }
