@@ -88,7 +88,7 @@ public class PlayerController : Entity
         //originmoveSpeed = moveSpeed; // 7월 3일 추가 : 초기 지정 속도 저장
     }
 
-    private void Update()
+    protected override void Update()
     {
         HandleInput();
         CheckGround();

@@ -6,7 +6,7 @@ public class ExplosiveEffect : IProjectileEffect
 
     public void OnHit(Projectile projectile, GameObject target)
     {
-        Debug.Log("폭발!");
+        SpecialAttackManager.Instance.SpawnExplosive(target);
     }
 
     public void OnDestroy(Projectile projectile) { }

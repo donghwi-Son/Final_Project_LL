@@ -19,7 +19,7 @@ public class AttackManager : MonoBehaviour
     PlayerController player;
     Vector2 attOffset;
     bool isRight;
-    float lastFireTime = 0f;
+    float lastFireTime = -999f;
     bool canFire = true;
     public Transform firePoint;
     public Transform attPos;
@@ -42,6 +42,7 @@ public class AttackManager : MonoBehaviour
     void FireProjectile()
     {
         if(!CanFireProjectile()) return;
+
         player.FlipByMouse();
         Projectile projectile = ProjectilePool.Instance.GetProjectile();
         if (projectile == null) return;
@@ -91,7 +92,7 @@ public class AttackManager : MonoBehaviour
         }
         foreach (ICommonEffect effect in CEs)
         {
-            effect.OnHit(enemy, stat.damage);
+            effect.OnHit(enemy, stat.damage.GetValue());
         }
     }
 

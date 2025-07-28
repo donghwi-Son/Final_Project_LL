@@ -7,6 +7,19 @@ using UnityEngine;
 
 public class PlayerStatus : CharacterStats
 {
+    public static PlayerStatus Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public ProjectileType projectileType;
     public Stat maxMana;
     public int currentMana;

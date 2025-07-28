@@ -21,6 +21,7 @@ public class PlayerAttackState : PlayerState
 
     public override void EnterState()
     {
+        Debug.Log("어택진입");
         base.EnterState();
         player.rb.linearVelocityX = 0f;
         isHolding = true;

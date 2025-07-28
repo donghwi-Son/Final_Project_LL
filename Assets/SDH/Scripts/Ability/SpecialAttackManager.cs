@@ -195,4 +195,23 @@ public class SpecialAttackManager : MonoBehaviour
 
         EffectPool.Instance.ReturnPoisonEffect(parti);
     }
+
+    // 폭발 ================================================================
+
+    public void SpawnExplosive(GameObject enemy)
+    {
+        GameObject explosiveEffect = EffectPool.Instance.GetExplosiveEffect();
+        if (explosiveEffect != null)
+        {
+            explosiveEffect.transform.position = enemy.transform.position;
+            explosiveEffect.SetActive(true);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(enemy.transform.position, 0.5f, LayerMask.GetMask("Enemy"));
+            float dmg = PlayerStatus.Instance.damage.GetValue();
+            foreach (var collider in colliders)
+            {
+                    Debug.Log($"폭발 Enemy: {collider.gameObject.name}, Damage: {dmg}");
+            }
+        }
+    }
+
 }

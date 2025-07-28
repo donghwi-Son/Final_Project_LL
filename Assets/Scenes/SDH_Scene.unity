@@ -2893,23 +2893,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af63b44e7b12c4643a6c28a25a4f9f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileType: 1
-  health: 100
-  maxHealth: 100
-  mana: 100
-  maxMana: 100
-  stamina: 100
-  maxStamina: 100
-  damage: 10
-  defense: 2
-  speed: 5
-  attackSpeed: 3
+  damage:
+    baseValue: 0
+    modifiers: 
+  critChance:
+    baseValue: 0
+    modifiers: 
+  critPower:
+    baseValue: 0
+    modifiers: 
+  attackSpeed:
+    baseValue: 300
+    modifiers: 
   attackRange: 1
-  projecTileLifeTime: 5
+  maxHealth:
+    baseValue: 0
+    modifiers: 
+  defense:
+    baseValue: 0
+    modifiers: 
+  currentHealth: 0
+  projectileType: 1
+  maxMana:
+    baseValue: 0
+    modifiers: 
+  currentMana: 0
+  maxStamina:
+    baseValue: 0
+    modifiers: 
+  currentStamina: 0
+  projectileLifeTime: 5
   shotSpeed: 5
   canChargeAttack: 0
   canHoldAttack: 0
-  criticalChance: 0.1
 --- !u!114 &1470061348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3398,6 +3414,7 @@ MonoBehaviour:
   lightningEffect: {fileID: 3593014612722186589, guid: 179035e194e6d5d47a9fefc4e1c6419e, type: 3}
   iceEffect: {fileID: 1583730194426079749, guid: 3e12774056c6af9478e9608e06235010, type: 3}
   poisonEffect: {fileID: 2846515686177944968, guid: f11fddb4cada65d4fb0803c6591c0f1c, type: 3}
+  explosiveEffect: {fileID: 6899552178797592894, guid: 9ca85163e882e334d81f2cfd4e89a5f7, type: 3}
 --- !u!114 &1775392693
 MonoBehaviour:
   m_ObjectHideFlags: 0

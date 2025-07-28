@@ -28,6 +28,8 @@ public class EffectPool : MonoBehaviour
     public GameObject poisonEffect;
     Queue<GameObject> poisonEffectPool = new();
 
+    public GameObject explosiveEffect;
+    Queue<GameObject> explosiveEffectPool = new();
 
     void GenerateEffectPool()
     {
@@ -45,6 +47,9 @@ public class EffectPool : MonoBehaviour
             GameObject poisonObj = Instantiate(poisonEffect);
             poisonObj.SetActive(false);
             poisonEffectPool.Enqueue(poisonObj);
+            GameObject explosiveObj = Instantiate(explosiveEffect);
+            explosiveObj.SetActive(false);
+            explosiveEffectPool.Enqueue(explosiveObj);
         }
     }
 
@@ -96,6 +101,22 @@ public class EffectPool : MonoBehaviour
         }
     }
 
+    public GameObject GetExplosiveEffect()
+    {
+        if (explosiveEffectPool.Count > 0)
+        {
+            GameObject obj = explosiveEffectPool.Dequeue();
+            obj.SetActive(true);
+            return obj;
+        }
+        else
+        {
+            GameObject obj = Instantiate(explosiveEffect);
+            obj.SetActive(true);
+            return obj;
+        }
+    }
+
     public ParticleSystem GetPoisonEffect()
     {
         if (poisonEffectPool.Count > 0)
@@ -137,5 +158,12 @@ public class EffectPool : MonoBehaviour
         if (effect == null) return;
         effect.gameObject.SetActive(false);
         poisonEffectPool.Enqueue(effect.gameObject);
+    }
+
+    public void ReturnExplosiveEffect(GameObject effect)
+    {
+        if (effect == null) return;
+        effect.SetActive(false);
+        explosiveEffectPool.Enqueue(effect);
     }
 }
