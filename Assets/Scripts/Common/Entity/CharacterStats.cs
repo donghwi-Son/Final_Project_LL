@@ -8,7 +8,6 @@ public class CharacterStats : MonoBehaviour
     public Stat critChance;
     public Stat critPower;              // default value 150%
     public Stat attackSpeed;
-    public float attackRange;
 
     [Header("Defensive stats")]
     public Stat maxHealth;

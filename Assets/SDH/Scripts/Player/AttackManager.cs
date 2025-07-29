@@ -108,7 +108,7 @@ public class AttackManager : MonoBehaviour
     public void AirAttack()
     {
         anim.SetTrigger("AirAtt");
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, stat.attackRange*1.5f, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.attackRange*1.5f, LayerMask.GetMask("Enemy"));
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
@@ -121,7 +121,7 @@ public class AttackManager : MonoBehaviour
 
     public void SpecialMeleeAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, stat.attackRange * 1.6f, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.attackRange * 1.6f, LayerMask.GetMask("Enemy"));
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
@@ -151,7 +151,7 @@ public class AttackManager : MonoBehaviour
 
     void MeleeAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, stat.attackRange, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.attackRange, LayerMask.GetMask("Enemy"));
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
@@ -162,7 +162,7 @@ public class AttackManager : MonoBehaviour
 
     void ThirdMeleeAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, stat.attackRange*1.3f, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.attackRange*1.3f, LayerMask.GetMask("Enemy"));
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드

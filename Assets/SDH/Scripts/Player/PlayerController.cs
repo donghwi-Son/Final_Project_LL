@@ -1,9 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEditor.PlayerSettings;
-
-
-
 
 public class PlayerController : Entity
 {
@@ -14,31 +9,34 @@ public class PlayerController : Entity
 
     [Header("CoolDown")]
     public float specialAttackCooldown = 5f;
-    public static float dashCooldown = 3f;
+    public float dashCooldown = 3f;
     public float skillCooldown = 3f;
+
+    [Header("Offense")]
+    public float attackRange = 1.5f; // 공격 범위
 
     [Header("Defense")]
     public float rollDistance = 3f;
     public float rollDuration = 0.3f;
     public float defendReduction = 0.5f;
 
-    public static float maxDashCount = 1; // 최대 대시 횟수
+    public float maxDashCount = 1; // 최대 대시 횟수
 
     //스테이트 및 컨트롤
-    public StateMachine<PlayerController> stateMachine;
-    public PlayerIdleState IdleState;
-    public PlayerMoveState MoveState;
-    public PlayerJumpState JumpState;
-    public PlayerAttackState AttackState;
-    public PlayerSpecialAttackState SpecialAttackState;
-    public PlayerSkillState SkillState;
-    public PlayerDashState DashState;
-    public PlayerDefendState DefendState;
-    public PlayerAirAttState AirAttState;
-    public PlayerDashAttState DashAttState;
-    public PlayerFallingState FallingState;
-    public AttackManager AttackManager;
-    public PlayerStatus stat;
+    public StateMachine<PlayerController> stateMachine { get; private set; }
+    public PlayerIdleState IdleState { get; private set; }
+    public PlayerMoveState MoveState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
+    public PlayerSpecialAttackState SpecialAttackState { get; private set; }
+    public PlayerSkillState SkillState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
+    public PlayerDefendState DefendState { get; private set; }
+    public PlayerAirAttState AirAttState { get; private set; }
+    public PlayerDashAttState DashAttState { get; private set; }
+    public PlayerFallingState FallingState { get; private set; }
+    public AttackManager AttackManager { get; private set; }
+    public PlayerStatus stat { get; private set; }
 
     //인풋 변수들
     public float XInput { get; private set; }
@@ -182,22 +180,22 @@ public class PlayerController : Entity
     }
 
     // 간이 유틸리티 매니저 ===============
-    public static void EnableDoubleJump()
+    public void EnableDoubleJump()
     {
         DoubleJumpActive = true;
     }
 
-    public static void AddDashCount(float count)
+    public void AddDashCount(float count)
     {
         maxDashCount += count;
     }
 
-    public static void DecreaseDashCooldown(float percent)
+    public void DecreaseDashCooldown(float percent)
     {
         dashCooldown *= 1f - percent / 100f; // 감소 비율 적용
     }
 
-    public static void ApplyUtility(ItemInfo.UtilityType type, float amount)
+    public void ApplyUtility(ItemInfo.UtilityType type, float amount)
     {
         switch (type)
         {

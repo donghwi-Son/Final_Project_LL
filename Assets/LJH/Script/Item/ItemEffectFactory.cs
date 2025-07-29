@@ -45,7 +45,7 @@ public class ItemEffectFactory : MonoBehaviour
                 
             case ItemInfo.ItemUpgradeType.Utility:
                 Debug.Log("유틸 아이템 획득");
-                PlayerController.ApplyUtility(e.utilityType, e.utilityAmount); //유틸 아이템 적용
+                PlayerManager.Instance.player.ApplyUtility(e.utilityType, e.utilityAmount); //유틸 아이템 적용
                 break;
         }
     }
