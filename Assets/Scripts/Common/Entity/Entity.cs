@@ -33,6 +33,16 @@ public class Entity : MonoBehaviour
                 Debug.LogError("GroundCheck transform not found!");
             }
         }
+
+        // 벽체크 설정
+        if (wallCheck == null)
+        {
+            wallCheck = transform.Find("WallCheck");
+            if (wallCheck == null)
+            {
+                Debug.LogError("WallCheck transform not found!");
+            }
+        }
     }
 
     protected virtual void Start()
@@ -57,8 +67,8 @@ public class Entity : MonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckRadius));
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        if (groundCheck != null) Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckRadius));
+        if (wallCheck != null) Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
     }
     #endregion
 
