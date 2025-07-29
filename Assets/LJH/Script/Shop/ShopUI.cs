@@ -68,7 +68,7 @@ public class ShopUI : MonoBehaviour
             // 10% 확률로 암시장
             isBlackMarket = Random.value < blackMarketChance;
             Debug.Log(isBlackMarket ? "⚠ 암시장 개방! 할인 적용됨." : "일반 상점 개방.");
-            BlackMarketText.text = isBlackMarket ? "BlackMarket - 30% Discount!" : "";
+            BlackMarketText.text = isBlackMarket ? "BlackMarket - 30% Discount!" : "";                  
             
             rerollCount = 0;
             UpdateRerollUI();
