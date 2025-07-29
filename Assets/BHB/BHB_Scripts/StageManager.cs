@@ -118,20 +118,20 @@ public class StageManager : MonoBehaviour
         }
 
         Vector2Int prevGrid = currentGrid;
+        currentGrid = nextGrid;
 
+        // 모든 방 비활성화
         foreach (var room in placedRooms.Values)
         {
             if (room.instance != null)
                 room.instance.SetActive(false);
         }
 
-        currentGrid = nextGrid;
-
         StageData roomData = placedRooms[nextGrid];
         if (roomData.instance != null)
             roomData.instance.SetActive(true);
 
-        // === backDir을 먼저 계산 ===
+        // === backDir 가장 먼저 계산 ===
         Vector2Int? backDir = null;
         if (prevGrid != Vector2Int.zero && prevGrid != nextGrid)
         {
@@ -142,26 +142,21 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        // === Finish Group 먼저 선언 ===
+        // === FinishGroup 참조 ===
         Transform finishGroup = roomData.instance.transform.Find("Finish Group");
 
-        // === SpawnPoint 설정 ===
+        // === SpawnPoint 위치: backDir 기반 Entry Finish 사용 ===
         Transform spawn = null;
-
-        // 먼저 finishGroup 정의는 위에서 했다고 가정
         if (backDir.HasValue && finishGroup != null)
         {
-            string entryFinishName = GetFinishName(backDir.Value, false);
-            Transform entryFinish = finishGroup.Find(entryFinishName);
-
+            string entryName = GetFinishName(backDir.Value, false);
+            Transform entryFinish = finishGroup.Find(entryName);
             if (entryFinish != null)
             {
-                // 방향 기반 정확한 포인트 사용
                 spawn = entryFinish;
             }
         }
 
-        // fallback: SpawnPoint 오브젝트 또는 방 중심
         if (spawn == null)
         {
             spawn = roomData.instance.transform.Find("SpawnPoint");
@@ -169,19 +164,17 @@ public class StageManager : MonoBehaviour
 
         player.position = spawn != null ? spawn.position : roomData.instance.transform.position;
 
-
         // === 미니맵 처리 ===
         MiniMapManager.instance?.HighlightIcon(nextGrid);
         MiniMapManager.instance?.RevealRoom(nextGrid, roomData.type);
-        MiniMapManager.instance?.HighlightIcon(nextGrid);
 
         roomData.hasBeenVisited = true;
 
-        // === Start Room이면 포탈 비활성 처리 안함 ===
+        // === Start Room이면 포탈 처리 생략 ===
         if (roomData.type == StageType.Start)
             return;
 
-        // === Boss 조건 우선 판단 ===
+        // === Boss 조건 처리 먼저 ===
         if (stageCounter >= maxStageCounter)
         {
             Debug.Log($"[StageManager] Boss 조건 도달! 현재 {stageCounter}, 최대 {maxStageCounter}");
@@ -189,10 +182,16 @@ public class StageManager : MonoBehaviour
             if (finishGroup != null)
                 foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
 
+            var escapeGroup = roomData.instance.transform.Find("Escape Finish Group");
+            if (escapeGroup != null)
+                foreach (Transform child in escapeGroup) child.gameObject.SetActive(false);
+
             Transform bossGroup = roomData.instance.transform.Find("Boss Finish Group");
             if (bossGroup != null)
             {
-                foreach (Transform child in bossGroup) child.gameObject.SetActive(false);
+                foreach (Transform child in bossGroup)
+                    child.gameObject.SetActive(false);
+
                 Transform bossFinish = bossGroup.Find("Boss Finish 1");
                 if (bossFinish != null)
                 {
@@ -208,14 +207,10 @@ public class StageManager : MonoBehaviour
                 }
             }
 
-            var escapeGroup = roomData.instance.transform.Find("Escape Finish Group");
-            if (escapeGroup != null)
-                foreach (Transform child in escapeGroup) child.gameObject.SetActive(false);
-
-            return;
+            return; // Boss 조건이면 나머지 처리 생략
         }
 
-        // === 일반 포탈 활성화 ===
+        // === 일반 Finish 활성화 ===
         if (finishGroup != null)
         {
             foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
@@ -227,10 +222,13 @@ public class StageManager : MonoBehaviour
             {
                 if (backDir.HasValue && dir == backDir.Value) continue;
 
-                Vector2Int neighborGrid = nextGrid + dir;
-                if (placedRooms.TryGetValue(neighborGrid, out var neighbor) && !neighbor.hasBeenVisited)
+                if (roomData.HasNeighbor(dir))
                 {
-                    candidateDirs.Add(dir);
+                    Vector2Int neighborGrid = nextGrid + dir;
+                    if (placedRooms.TryGetValue(neighborGrid, out var neighbor) && !neighbor.hasBeenVisited)
+                    {
+                        candidateDirs.Add(dir);
+                    }
                 }
             }
 
@@ -243,7 +241,7 @@ public class StageManager : MonoBehaviour
                     if (candidateDirs.Contains(dir)) continue;
 
                     Vector2Int neighborGrid = nextGrid + dir;
-                    if (placedRooms.ContainsKey(neighborGrid))
+                    if (roomData.HasNeighbor(dir) && placedRooms.ContainsKey(neighborGrid))
                     {
                         candidateDirs.Add(dir);
                         if (candidateDirs.Count == 2) break;
@@ -267,25 +265,29 @@ public class StageManager : MonoBehaviour
                 }
             }
 
+            // 되돌아가는 방향 확실히 비활성화
             if (backDir.HasValue)
             {
-                string backFinishName = GetFinishName(backDir.Value, false);
-                Transform backFinish = finishGroup.Find(backFinishName);
+                string backName = GetFinishName(backDir.Value, false);
+                Transform backFinish = finishGroup.Find(backName);
                 if (backFinish != null)
                     backFinish.gameObject.SetActive(false);
             }
         }
 
-        // === Escape 처리 ===
+        // === Escape Finish 처리 (오직 연결된 미탐색 방이 없는 경우만) ===
         bool noUnvisited = true;
         Vector2Int[] dirsToCheck = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
         foreach (var dir in dirsToCheck)
         {
             Vector2Int neighborGrid = nextGrid + dir;
-            if (placedRooms.TryGetValue(neighborGrid, out var neighborRoom) && !neighborRoom.hasBeenVisited)
+            if (roomData.HasNeighbor(dir) && placedRooms.TryGetValue(neighborGrid, out var neighborRoom))
             {
-                noUnvisited = false;
-                break;
+                if (!neighborRoom.hasBeenVisited)
+                {
+                    noUnvisited = false;
+                    break;
+                }
             }
         }
 
@@ -294,7 +296,8 @@ public class StageManager : MonoBehaviour
             Transform escapeGroup = roomData.instance.transform.Find("Escape Finish Group");
             if (escapeGroup != null)
             {
-                foreach (Transform child in escapeGroup) child.gameObject.SetActive(false);
+                foreach (Transform child in escapeGroup)
+                    child.gameObject.SetActive(false);
 
                 Transform escapeFinish = escapeGroup.Find("Escape Finish");
                 if (escapeFinish != null)
@@ -311,6 +314,7 @@ public class StageManager : MonoBehaviour
             }
         }
     }
+
 
 
     // 최대 스테이지 리미트
