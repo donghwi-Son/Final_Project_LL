@@ -9,11 +9,18 @@ public class BossCrow : Enemy
 
     [Header("돌진 공격 관련")]
     public float dashAttackSpeed;
+    public float dashReboundSpeed;
+    [SerializeField] private Collider2D strikeCol;
 
     [Header("원거리 공격 관련")]
     [SerializeField] private GameObject rangeAttackObj;
     [SerializeField] private int rangeAttackQty;
 
+    [Header("소환 공격 관련")]
+    [SerializeField] private GameObject spawnEnemyObj;
+    [SerializeField] private int spawnEnemyQty;
+    [SerializeField] private float spawnSpaceX;
+    [SerializeField] private float spawnSpaceY;
 
     [Header("추적 관련")]
     public float baseHeight;
@@ -25,13 +32,15 @@ public class BossCrow : Enemy
     private float lastDirX;
     private Vector2 moveDir;
 
+    [Header("죽음 관련")]
+    public float dyingTime;
+    public float dieForceX;
+    public float dieForceY;
+
     [Header("기타")]
-    [SerializeField] public float detectionRange;
-    [SerializeField] private LayerMask playerLayer;
     public float attackDealy;
+    public CharacterStats stats;
 
-
-    private Collider2D detectionCol;
     public Transform playerTransform;
 
     private Vector2 targetPos;
@@ -45,6 +54,7 @@ public class BossCrow : Enemy
     public BossCrowIdle idleState { get; private set; }
     public BossCrowRangeAttack rangeAttack { get; private set; }
     public BossCrowStrikeAttack strikeAttack { get; private set; }
+    public BossCrowSpawnEnemy spawnEnemyState { get; private set; }
     public BossCrowDeath deathState { get; private set; }
 
     protected override void Awake()
@@ -55,7 +65,9 @@ public class BossCrow : Enemy
         idleState = new BossCrowIdle(this, stateMachine, "IsIdle");
         rangeAttack = new BossCrowRangeAttack(this, stateMachine, "IsRange");
         strikeAttack = new BossCrowStrikeAttack(this, stateMachine, "IsStrike");
-        deathState = new BossCrowDeath(this, stateMachine, "IsDeath");
+        spawnEnemyState = new BossCrowSpawnEnemy(this, stateMachine, "IsIdle");
+        deathState = new BossCrowDeath(this, stateMachine, "IsIdle");
+        stats = GetComponent<CharacterStats>();
     }
 
     protected override void Start()
@@ -71,6 +83,11 @@ public class BossCrow : Enemy
     {
         base.Update();
         stateMachine.CurrentState.Execute();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            stateMachine.ChangeState(deathState);
+        }
     }
 
     public void AnimationTrigger()
@@ -80,8 +97,7 @@ public class BossCrow : Enemy
 
     public void DetectPlayer()
     {
-        detectionCol = Physics2D.OverlapCircle(transform.position, detectionRange, playerLayer);
-        if (detectionCol != null)
+        if (IsPlayerDetected())
         {
             // 다음 동작
             stateMachine.ChangeState(idleState);
@@ -154,6 +170,9 @@ public class BossCrow : Enemy
             case 2:
                 stateMachine.ChangeState(strikeAttack);
                 break;
+            case 3:
+                stateMachine.ChangeState(spawnEnemyState);
+                break;
         }
     }
 
@@ -182,12 +201,20 @@ public class BossCrow : Enemy
         projectile.GetComponent<PlayerTargetRangeAttack>().SetDirection(fireDirection);
     }
 
-    protected override void OnDrawGizmos()
+    public void BossSpawnEnemy()
     {
-        base.OnDrawGizmos();
+        for(int i = 0; i < spawnEnemyQty; i++)
+        {
+            float xPos = Random.Range(0, spawnSpaceX);
+            float yPos = Random.Range(0, spawnSpaceY);
 
-        // 감 지거리
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
+            Instantiate(spawnEnemyObj, new Vector3(transform.position.x + xPos, transform.position.y + yPos), Quaternion.identity);
+        }
+    }
+
+    // 콜라이더
+    public void StrikeColliderSwitch(bool value)
+    {
+        strikeCol.enabled = value;
     }
 }
