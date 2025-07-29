@@ -40,20 +40,57 @@ public class MiniMapManager : MonoBehaviour
         }
     }
 
-    public void InitializeMiniMap(Dictionary<Vector2Int, StageType> placedRooms)
+    //public void InitializeMiniMap(Dictionary<Vector2Int, StageType> placedRooms)
+    //{
+    //    foreach (var kv in placedRooms)
+    //    {
+    //        if (spawnedIcons.ContainsKey(kv.Key)) continue;
+
+    //        GameObject prefab = GetPrefabForType(kv.Value);
+    //        if (prefab == null) continue;
+
+    //        GameObject icon = Instantiate(prefab, iconParent, false);
+    //        icon.GetComponent<RectTransform>().anchoredPosition = GetAnchoredPosition(kv.Key);
+    //        spawnedIcons[kv.Key] = icon;
+    //    }
+    //}
+
+    // 해당 좌표의 미니맵 아이콘을 생성 또는 활성화 영역
+    public void RevealRoom(Vector2Int grid, StageType type)
     {
-        foreach (var kv in placedRooms)
+        if (spawnedIcons.ContainsKey(grid))
         {
-            if (spawnedIcons.ContainsKey(kv.Key)) continue;
+            spawnedIcons[grid].SetActive(true);
+            return;
+        }
 
-            GameObject prefab = GetPrefabForType(kv.Value);
-            if (prefab == null) continue;
+        GameObject prefab = GetPrefabForType(type);
+        if (prefab == null) return;
 
-            GameObject icon = Instantiate(prefab, iconParent, false);
-            icon.GetComponent<RectTransform>().anchoredPosition = GetAnchoredPosition(kv.Key);
-            spawnedIcons[kv.Key] = icon;
+        GameObject icon = Instantiate(prefab, iconParent, false);
+        icon.GetComponent<RectTransform>().anchoredPosition = GetAnchoredPosition(grid);
+        spawnedIcons[grid] = icon;
+    }
+
+
+    // 미니맵에 플레이어가 위치한 방 강조 영역
+    public void HighlightIcon(Vector2Int grid)
+    {
+        foreach (var pair in spawnedIcons)
+        {
+            var marker = pair.Value.transform.Find("CurrentIcon");
+            if (marker != null)
+                marker.gameObject.SetActive(false);
+        }
+
+        if (spawnedIcons.TryGetValue(grid, out var currentIcon))
+        {
+            var marker = currentIcon.transform.Find("CurrentIcon");
+            if (marker != null)
+                marker.gameObject.SetActive(true);
         }
     }
+
 
     public bool TryGetIcon(Vector2Int gridPos, out GameObject icon)
     {

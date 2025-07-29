@@ -10,11 +10,15 @@ public class StartStageFinishTrigger : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         triggered = true;
-        Invoke(nameof(GenerateRoomDelayed), 0.1f);
+        Invoke(nameof(EnterFirstRoom), 0.1f);
     }
 
-    private void GenerateRoomDelayed()
+    private void EnterFirstRoom()
     {
-        StageManager.Instance.GenerateFirstRoom(); // 첫 방 생성
+        // 최초 룸 좌표 획득
+        Vector2Int firstRoomGrid = StageInitializer.FirstRoomGrid;
+
+        // StageManager가 해당 위치로 플레이어 이동 처리
+        StageManager.Instance.MovePlayerTo(firstRoomGrid);
     }
 }

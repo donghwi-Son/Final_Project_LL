@@ -42,6 +42,14 @@ public class StageGenerator : MonoBehaviour
 
     }
 
+    // Random 좌표 전송 영역
+    public Vector2Int GetRandomGridPosition()
+    {
+        int x = Random.Range(0, cols);
+        int y = Random.Range(0, rows);
+        return new Vector2Int(x, y);
+    }
+
     // 아래 2개는 중심 좌표를 사용하기 위한 공개 메서드
     public Vector2Int GetCenterGrid()
     {
