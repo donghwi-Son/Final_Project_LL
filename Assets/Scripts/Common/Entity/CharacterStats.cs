@@ -7,13 +7,11 @@ public class CharacterStats : MonoBehaviour
     public Stat damage;
     public Stat critChance;
     public Stat critPower;              // default value 150%
-    public Stat attackSpeed;
 
     [Header("Defensive stats")]
     public Stat maxHealth;
     public Stat defense;
 
-    public float attackInterval => 100f / attackSpeed.GetValue();
     public int currentHealth;
 
     public System.Action onHealthChanged;
