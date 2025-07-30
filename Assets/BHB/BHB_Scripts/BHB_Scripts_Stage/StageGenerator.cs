@@ -1,11 +1,12 @@
 using UnityEngine;
 
+// 그리드 기반 좌표 계산, Room 배치 좌표 유효성 확인 클래스
 public class StageGenerator : MonoBehaviour
 {
     [Header("그리드 설정")]
     public int rows = 16; // 세로 칸 수 (y)
     public int cols = 9;  // 가로 칸 수 (x)
-    public Vector2 roomSize = new Vector2(28.8456f, 16.1808f); // 각 룸의 크기
+    public Vector2 roomSize = new Vector2(28.8456f, 16.1808f); // 각 룸의 크기, 변경 가능
     public Vector3 origin = Vector3.zero; // 기준 시작 위치
 
     private void OnDrawGizmos()

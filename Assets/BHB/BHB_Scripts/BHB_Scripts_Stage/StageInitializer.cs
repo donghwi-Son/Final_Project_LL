@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// 게임 시작 시 전체 Room 맵 구조를 생성하는 초기화 클래스
-/// </summary>
+// 게임 시작 시 전체 맵 구조를 사전 생성하는 초기화 클래스
 public class StageInitializer : MonoBehaviour
 {
-    public int maxStageCount = 10;
+    public int maxStageCount; // 매 런타임마다 생성될 맵의 수
 
     [Header("연결 참조")]
     public StageGenerator generator;
@@ -84,6 +82,7 @@ public class StageInitializer : MonoBehaviour
         return map;
     }
 
+    // 맵 셔플 메서드
     private T[] Shuffle<T>(T[] array)
     {
         for (int i = 0; i < array.Length; i++)
@@ -94,10 +93,11 @@ public class StageInitializer : MonoBehaviour
         return array;
     }
 
+    // 각 맵을 런타임마다 생성되는 확률을 다르게 주는 영역
 
     private StageType GetRandomStageType()
     {
-        int rand = Random.Range(0, 10); // 0~9
+        int rand = Random.Range(0, 10); // 랜덤 확률 조정
 
         if (rand < 6) return StageType.Normal;   // 60%
         else if (rand < 8) return StageType.Hard;   // 20%

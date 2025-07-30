@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// 생성된 StageData를 기반으로 프리팹 생성 및 플레이어 이동 담당 클래스
 public class StageManager : MonoBehaviour
 {
-    public static StageManager Instance;
+    public static StageManager Instance; // 싱글톤 인스턴스
 
-    [Header("프리팹 설정")]
+    [Header("프리팹 설정")] // 각 타입 별 방 연결
     public GameObject startRoomPrefab;
     public GameObject[] normalRoomPrefabs;
     public GameObject[] hardRoomPrefabs;
@@ -20,19 +21,19 @@ public class StageManager : MonoBehaviour
     public Transform player;
 
     [Header("스테이지 진행 정보")]
-    public int maxStageCount;         // 방 생성 총 수량 (초기화용)
+    public int maxStageCount; // 방 생성 총 수량 (=초기화용), StageInitializer와 연결된 상태
 
     [Header("보스 진입 조건")]
-    public int maxStageCounter = 10; // 플레이어가 몇 방을 지나야 Boss Finish가 열리는가
+    public int maxStageCounter; // 플레이어가 몇 방을 지나야 Boss Finish가 열리는지 정하는 영역
 
     [Header("플레이어 진행도")]
-    public int stageCounter = 0;
+    public int stageCounter; // 플레이어가 방을 지날 때마다 가산되는 영역
     private StageData bossRoomData; // 클래스 필드로 보관하는 보스 방 데이터
 
+    // 각 방의 타입, 방 크기 등의 선언 영역
     public Dictionary<Vector2Int, StageData> placedRooms = new();
     private Vector2 roomSize;
     private Vector3 origin;
-
     private Vector2Int currentGrid;
 
     private void Awake()
@@ -41,6 +42,9 @@ public class StageManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    // 매 런타임 초기마다 정해진 수량의 방을 랜덤하게 생성하는 영역
+    // 방 생성은 정중앙 Room에 startRoomPrefab 생성 - 좌우로 랜덤 타입의 방이 1개씩 생성 - 그 후에는 각각 최소 1개 이상 이어진 연결성을 가지고 랜덤 생성
+    // 보스 방은 가장 멀리 생성됨
     public void InitializeStages(Dictionary<Vector2Int, StageData> stageMap, int maxStageCountFromInitializer, int startingStageCounter)
     {
         placedRooms = stageMap;
@@ -55,11 +59,7 @@ public class StageManager : MonoBehaviour
             StageData data = pair.Value;
 
             GameObject prefab = GetPrefabByType(data.type);
-            if (prefab == null)
-            {
-                Debug.LogError($"[{data.type}] 프리팹이 설정되지 않았습니다.");
-                continue;
-            }
+            if (prefab == null) continue;
 
             Vector3 worldPos = generator.GridToWorld(grid);
 
@@ -89,6 +89,7 @@ public class StageManager : MonoBehaviour
         }
 
         // 연결 처리
+        EnsureStartRoomSideConnections();
         RoomConnector.ProcessConnections(placedRooms, generator, maxStageCount, stageCounter);
 
         // 보스 방 미리 생성
@@ -105,33 +106,29 @@ public class StageManager : MonoBehaviour
                 return;
             }
         }
-
-        Debug.LogError("[StageManager] 시작 Room이 지정되지 않았습니다.");
     }
 
+    // 플레이어가 이전 방에서 다음 방으로 이동하는 부분을 다루는 영역
     public void MovePlayerTo(Vector2Int nextGrid)
     {
-        if (!placedRooms.ContainsKey(nextGrid))
-        {
-            Debug.LogWarning("[StageManager] 존재하지 않는 Room으로 이동 시도됨");
-            return;
-        }
+        if (!placedRooms.ContainsKey(nextGrid)) return;
 
         Vector2Int prevGrid = currentGrid;
         currentGrid = nextGrid;
 
-        // 모든 방 비활성화
+        // 런타임마다 생성되는 모든 방은 최초 비활성화 상태
         foreach (var room in placedRooms.Values)
         {
             if (room.instance != null)
                 room.instance.SetActive(false);
         }
 
+        // 방에 플레이어가 들어갈 때마다 활성화
         StageData roomData = placedRooms[nextGrid];
         if (roomData.instance != null)
             roomData.instance.SetActive(true);
 
-        // === backDir 가장 먼저 계산 ===
+        // backDir(이전 방) 가장 먼저 계산 
         Vector2Int? backDir = null;
         if (prevGrid != Vector2Int.zero && prevGrid != nextGrid)
         {
@@ -142,10 +139,11 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        // === FinishGroup 참조 ===
+        // FinishGroup 참조하여 자식인 상하좌우 Finish 활성화
         Transform finishGroup = roomData.instance.transform.Find("Finish Group");
 
-        // === SpawnPoint 위치: backDir 기반 Entry Finish 사용 ===
+        // SpawnPoint 위치: backDir 기반 Entry Finish 사용
+        // 이전 방의 Finish와 반대되는 곳에 SpawnPoint가 놓여짐
         Transform spawn = null;
         if (backDir.HasValue && finishGroup != null)
         {
@@ -164,27 +162,27 @@ public class StageManager : MonoBehaviour
 
         player.position = spawn != null ? spawn.position : roomData.instance.transform.position;
 
-        // === 미니맵 처리 ===
+        // 미니맵 처리
         MiniMapManager.instance?.HighlightIcon(nextGrid);
         MiniMapManager.instance?.RevealRoom(nextGrid, roomData.type);
+        // 라인 처리 — MiniMapManager 쪽에서 진행
+        if (backDir.HasValue)
+        {
+            MiniMapManager.instance?.ShowOnlyLineInDirection(nextGrid, roomData, backDir.Value);
+        }
+        MiniMapManager.instance?.ShowLinesFromThisRoom(nextGrid, roomData);
 
         roomData.hasBeenVisited = true;
 
-        // === Start Room이면 포탈 처리 생략 ===
-        if (roomData.type == StageType.Start)
-            return;
+        // Start Room이면 포탈 처리 생략
+        // Start Room은 매 게임마다 최초 입장 1번만 허용되게 막는 역할
+        if (roomData.type == StageType.Start) return;
 
-        // === Boss 조건 처리 먼저 ===
+        // Boss 조건 처리 먼저
         if (stageCounter >= maxStageCounter)
         {
-            Debug.Log($"[StageManager] Boss 조건 도달! 현재 {stageCounter}, 최대 {maxStageCounter}");
-
             if (finishGroup != null)
                 foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
-
-            var escapeGroup = roomData.instance.transform.Find("Escape Finish Group");
-            if (escapeGroup != null)
-                foreach (Transform child in escapeGroup) child.gameObject.SetActive(false);
 
             Transform bossGroup = roomData.instance.transform.Find("Boss Finish Group");
             if (bossGroup != null)
@@ -202,15 +200,14 @@ public class StageManager : MonoBehaviour
                         trigger.direction = Vector2Int.zero;
                         trigger.isBoss = true;
                     }
-
-                    Debug.Log("[StageManager] Boss Finish 1 활성화 완료 at " + nextGrid);
                 }
             }
-
             return; // Boss 조건이면 나머지 처리 생략
         }
 
-        // === 일반 Finish 활성화 ===
+        // 일반 Finish 활성화
+        // 기본적으로 각 방마다 상하좌우로 연결된 방 && 아직 거치지 않은 방을 확인하고 Finish 생성
+        // 만약, 상하좌우 연결된 새로운 방이 없고 이전 건너온 방들만 존재한다면 되돌아갈 수 있게 Finish 생성
         if (finishGroup != null)
         {
             foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
@@ -225,9 +222,31 @@ public class StageManager : MonoBehaviour
                 if (roomData.HasNeighbor(dir))
                 {
                     Vector2Int neighborGrid = nextGrid + dir;
-                    if (placedRooms.TryGetValue(neighborGrid, out var neighbor) && !neighbor.hasBeenVisited)
+
+                    if (placedRooms.TryGetValue(neighborGrid, out var neighbor))
                     {
-                        candidateDirs.Add(dir);
+                        // 아직 방문하지 않은 방이면 무조건 Finish 열기
+                        if (!neighbor.hasBeenVisited)
+                        {
+                            candidateDirs.Add(dir);
+                        }
+                    }
+                }
+            }
+
+            // Finish 생성 (개수 제한 없이 전부 활성화)
+            foreach (var dir in candidateDirs)
+            {
+                string finishName = GetFinishName(dir, false);
+                Transform finish = finishGroup.Find(finishName);
+                if (finish != null)
+                {
+                    finish.gameObject.SetActive(true);
+                    var trigger = finish.GetComponent<FinishTrigger>();
+                    if (trigger != null)
+                    {
+                        trigger.direction = dir;
+                        trigger.isBoss = false;
                     }
                 }
             }
@@ -273,49 +292,35 @@ public class StageManager : MonoBehaviour
                 if (backFinish != null)
                     backFinish.gameObject.SetActive(false);
             }
-        }
 
-        // === Escape Finish 처리 (오직 연결된 미탐색 방이 없는 경우만) ===
-        bool noUnvisited = true;
-        Vector2Int[] dirsToCheck = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-        foreach (var dir in dirsToCheck)
-        {
-            Vector2Int neighborGrid = nextGrid + dir;
-            if (roomData.HasNeighbor(dir) && placedRooms.TryGetValue(neighborGrid, out var neighborRoom))
+            // 되돌아가기만 가능한 경우의 처리
+            if (candidateDirs.Count == 0 && backDir.HasValue)
             {
-                if (!neighborRoom.hasBeenVisited)
+                Vector2Int backGrid = nextGrid + backDir.Value;
+                if (placedRooms.TryGetValue(backGrid, out var backRoom))
                 {
-                    noUnvisited = false;
-                    break;
-                }
-            }
-        }
-
-        if (noUnvisited)
-        {
-            Transform escapeGroup = roomData.instance.transform.Find("Escape Finish Group");
-            if (escapeGroup != null)
-            {
-                foreach (Transform child in escapeGroup)
-                    child.gameObject.SetActive(false);
-
-                Transform escapeFinish = escapeGroup.Find("Escape Finish");
-                if (escapeFinish != null)
-                {
-                    escapeFinish.gameObject.SetActive(true);
-                    var trigger = escapeFinish.GetComponent<EscapeFinishTrigger>();
-                    if (trigger != null)
+                    // Start Room이면 Finish 생성 금지
+                    if (backRoom.type != StageType.Start) //  핵심 조건 추가됨
                     {
-                        trigger.originGrid = nextGrid;
+                        string backFinishName = GetFinishName(backDir.Value, false);
+                        Transform backFinish = finishGroup.Find(backFinishName);
+                        if (backFinish != null)
+                        {
+                            backFinish.gameObject.SetActive(true);
+                            var trigger = backFinish.GetComponent<FinishTrigger>();
+                            if (trigger != null)
+                            {
+                                trigger.direction = backDir.Value;
+                                trigger.isBoss = false;
+                                trigger.isReturning = true; // 되돌이 표시
+                            }
+                        }
                     }
-
-                    Debug.Log("[StageManager] Escape Finish 활성화 완료 at " + nextGrid);
                 }
             }
+
         }
     }
-
-
 
     // 최대 스테이지 리미트
     public void SetProgressionLimit(int limit)
@@ -323,15 +328,11 @@ public class StageManager : MonoBehaviour
         maxStageCounter = limit;
     }
 
-    // 초기 Start 방은 1개의 좌측과 우측 중 Finish만 활성화
+    // 초기 Start 방은 좌측과 우측 Finish만 활성화
     private void SetStartRoomFinishTwoDirections(GameObject roomInstance)
     {
         Transform finishGroup = roomInstance.transform.Find("Finish Group");
-        if (finishGroup == null)
-        {
-            Debug.LogWarning("[StageManager] StartRoom에 Finish Group 없음");
-            return;
-        }
+        if (finishGroup == null) return;
 
         // 모든 Finish 비활성화
         foreach (Transform child in finishGroup)
@@ -356,74 +357,43 @@ public class StageManager : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log("[StageManager] StartRoom에서 Left, Right Finish 모두 활성화됨");
     }
 
+    // 시작 방 연결 처리
+    private void EnsureStartRoomSideConnections()
+    {
+        foreach (var pair in placedRooms)
+        {
+            if (pair.Value.isStartRoom)
+            {
+                Vector2Int startGrid = pair.Key;
+                Vector2Int[] dirs = { Vector2Int.left, Vector2Int.right };
 
+                foreach (var dir in dirs)
+                {
+                    Vector2Int neighborGrid = startGrid + dir;
 
-    //// Boss Finish 활성화 메서드
-    //public void EnableBossFinishIfReady()
-    //{
-    //    if (stageCounter < maxStageCounter || bossRoomData == null)
-    //    {
-    //        Debug.Log("[StageManager] 아직 보스 방 조건 미달");
-    //        return;
-    //    }
+                    if (!generator.IsInsideGrid(neighborGrid)) continue; // 그리드 초과 방지
+                    if (!placedRooms.ContainsKey(neighborGrid))
+                    {
+                        StageData neighbor = new StageData(neighborGrid.x, neighborGrid.y, StageType.Normal);
+                        placedRooms[neighborGrid] = neighbor;
+                    }
 
-    //    Debug.Log("[StageManager] Boss Finish 활성화 시작");
+                    var current = placedRooms[startGrid];
+                    var neighborRoom = placedRooms[neighborGrid];
 
-    //    // 일반 방들만 무작위 순회
-    //    var candidateGrids = placedRooms
-    //        .Where(pair => pair.Value.type != StageType.Boss)
-    //        .Select(pair => pair.Key)
-    //        .OrderBy(_ => Random.value)
-    //        .ToList();
+                    // 여기서 강제 연결
+                    current.Connect(neighborRoom, dir);
+                    neighborRoom.Connect(current, -dir);
+                }
 
-    //    foreach (var grid in candidateGrids)
-    //    {
-    //        var data = placedRooms[grid];
+                break; // StartRoom은 하나뿐이므로 break
+            }
+        }
+    }
 
-    //        Transform instance = data.instance?.transform;
-    //        if (instance == null) continue;
-
-    //        // Boss Finish Group 확인
-    //        var bossGroup = instance.Find("Boss Finish Group");
-    //        if (bossGroup == null) continue;
-
-    //        // 일반 Finish Group 비활성화
-    //        var finishGroup = instance.Find("Finish Group");
-    //        if (finishGroup != null)
-    //        {
-    //            foreach (Transform finish in finishGroup)
-    //                finish.gameObject.SetActive(false);
-    //        }
-
-    //        // Boss Finish Group 내 모든 Finish 비활성화
-    //        foreach (Transform finish in bossGroup)
-    //            finish.gameObject.SetActive(false);
-
-    //        // "Boss Finish 1"만 활성화
-    //        var targetBossFinish = bossGroup.Find("Boss Finish 1");
-    //        if (targetBossFinish != null)
-    //        {
-    //            targetBossFinish.gameObject.SetActive(true);
-
-    //            var trigger = targetBossFinish.GetComponent<FinishTrigger>();
-    //            if (trigger != null)
-    //            {
-    //                // Boss Finish에 대한 방향 설정은 불필요하거나 고정값 사용 가능
-    //                trigger.direction = Vector2Int.zero; // 또는 필요한 방향으로
-    //                trigger.isBoss = true;
-    //            }
-
-    //            Debug.Log($"[StageManager] Boss Finish 1 활성화 완료 at {grid}");
-    //            return; // 1개만 처리하고 종료
-    //        }
-    //    }
-    //}
-
-    //
+    // 보스 방 생성
     public Vector2Int GetBossRoomGrid()
     {
         foreach (var pair in placedRooms)
@@ -431,12 +401,10 @@ public class StageManager : MonoBehaviour
             if (pair.Value.type == StageType.Boss)
                 return pair.Key;
         }
-
-        Debug.LogError("[StageManager] 보스 방을 찾지 못했습니다.");
         return currentGrid; // fallback
     }
 
-
+    // 보스 Finish 활성화
     private void ActivateBossFinish(Transform group, string name, Vector2Int dir)
     {
         Transform finish = group.Find(name);
@@ -452,7 +420,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    // 보스 방은 룸 외부에 생성되도록
+    // 보스 방은 룸 외부에 생성되도록 하는 영역
     public void SpawnBossRoom()
     {
         if (bossRoomData != null) return; // 이미 생성되었으면 무시
@@ -470,6 +438,7 @@ public class StageManager : MonoBehaviour
         placedRooms[bossGrid] = bossRoomData;
     }
 
+    // 플레이어 보스 방 이동
     public void MovePlayerToBossRoom()
     {
         if (bossRoomData == null)
@@ -530,7 +499,7 @@ public class StageManager : MonoBehaviour
         Vector3 offscreenPos = new Vector3(9999f, 9999f, 0f);
         GameObject bossInstance = Instantiate(bossRoomPrefab, offscreenPos, Quaternion.identity);
 
-        bossInstance.SetActive(false); // 처음엔 비활성화!
+        bossInstance.SetActive(false); // 처음엔 비활성화
         bossRoomData.instance = bossInstance;
 
         placedRooms[bossGrid] = bossRoomData;
@@ -539,10 +508,7 @@ public class StageManager : MonoBehaviour
     public void ActivateBossRoomIfReady()
     {
         if (stageCounter >= maxStageCounter && bossRoomData != null)
-        {
             bossRoomData.instance?.SetActive(true);
-            Debug.Log("[StageManager] 보스 방 활성화 완료");
-        }
     }
 
     // 이전 방으로 되돌아가는 방향 뒤집기 유틸 비활성화
@@ -562,7 +528,7 @@ public class StageManager : MonoBehaviour
         return null;
     }
 
-
+    // 등록한 프리팹을 각 타입 별로 연결
     private GameObject GetPrefabByType(StageType type)
     {
         return type switch
@@ -577,6 +543,7 @@ public class StageManager : MonoBehaviour
         };
     }
 
+    // 이 밑으로는 각 방을 랜덤하게 생성하는 배열 영역
     private GameObject GetRandomFromArray(GameObject[] array)
     {
         if (array == null || array.Length == 0) return null;
@@ -601,14 +568,5 @@ public class StageManager : MonoBehaviour
     public Vector2Int GetCurrentGrid()
     {
         return currentGrid;
-    }
-
-    private string GetBossFinishName(Vector2Int dir)
-    {
-        if (dir == Vector2Int.right) return "Left Boss Finish";  // 플레이어는 왼쪽에서 보스로 감
-        if (dir == Vector2Int.left) return "Right Boss Finish";
-        if (dir == Vector2Int.up) return "Down Boss Finish";
-        if (dir == Vector2Int.down) return "Top Boss Finish";
-        return "Unknown";
     }
 }

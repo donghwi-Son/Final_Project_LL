@@ -1,9 +1,6 @@
 using UnityEngine;
 
-/// <summary>
-/// 각 방(Room)의 정보, 연결 방향, 프리팹/인스턴스 보관
-/// 게임 내에서 단순 데이터 전송/참조용으로 사용됨
-/// </summary>
+// 각 Room의 메타 정보 및 연결 정보 저장 클래스
 public class StageData
 {
     public StageType type;

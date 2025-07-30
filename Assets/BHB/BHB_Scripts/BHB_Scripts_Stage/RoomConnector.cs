@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 생성된 방들 간 연결을 자동으로 수행하는 클래스
 public class RoomConnector : MonoBehaviour
 {
+    // 각 방의 위치를 상하좌우로
     private static readonly Vector2Int[] directions = new Vector2Int[]
     {
         Vector2Int.up,
@@ -11,6 +13,7 @@ public class RoomConnector : MonoBehaviour
         Vector2Int.right
     };
 
+    // 각 방의 연결을 담당하는 영역
     public static void ProcessConnections(
         Dictionary<Vector2Int, StageData> placedRooms,
         StageGenerator generator,
@@ -86,7 +89,7 @@ public class RoomConnector : MonoBehaviour
         }
     }
 
-    // 맵 섞기
+    // 맵 섞기 메서드
     private static void Shuffle<T>(IList<T> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -96,7 +99,7 @@ public class RoomConnector : MonoBehaviour
         }
     }
 
-    // 
+    // Stage 
     private static StageData FindConnectedRoom(
     Dictionary<Vector2Int, StageData> placedRooms,
     Vector2Int from,
@@ -122,6 +125,7 @@ public class RoomConnector : MonoBehaviour
         return null;
     }
 
+    // 방마다 Finish를 생성
 
     private static void EnableFinish(GameObject roomInstance, Vector2Int direction, bool isBoss)
     {
@@ -145,6 +149,7 @@ public class RoomConnector : MonoBehaviour
     }
 
 
+    // 각 방향 별 Finish 생성 및 조정
     private static string GetFinishName(Vector2Int dir, bool isBoss)
     {
         string prefix = dir switch

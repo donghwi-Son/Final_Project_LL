@@ -1,26 +1,24 @@
 using UnityEngine;
 
+// 방 끝 포탈. 플레이어가 닿으면 다음 방으로 이동 클래스
 public class FinishTrigger : MonoBehaviour
 {
-    public Vector2Int direction; // ex: (0, 1), (1, 0) 등
+    public Vector2Int direction;  // ex: (0, 1), (1, 0)
     public bool isBoss = false;
+    public bool isReturning = false;  // 새로 추가
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
 
-        // Boss Finish만 Boss 방으로 이동
-        if (isBoss)
+        // 보스 이동 조건
+        if (isBoss && StageManager.Instance.stageCounter >= StageManager.Instance.maxStageCounter)
         {
-            if (StageManager.Instance.stageCounter >= StageManager.Instance.maxStageCounter)
-            {
-                StageManager.Instance.ActivateBossRoomIfReady();
-                StageManager.Instance.MovePlayerToBossRoom();
-            }
+            StageManager.Instance.ActivateBossRoomIfReady();
+            StageManager.Instance.MovePlayerToBossRoom();
             return;
         }
 
-        // 일반 Finish 처리
         Vector2Int current = StageManager.Instance.GetCurrentGrid();
         Vector2Int next = FindNextRoomInDirection(current, direction);
 
@@ -29,17 +27,16 @@ public class FinishTrigger : MonoBehaviour
         StageData targetRoom = StageManager.Instance.GetRoomAt(next);
         if (targetRoom == null) return;
 
-        if (targetRoom.type != StageType.Boss)
+        // 최초 방문만 stageCounter++
+        if (!isReturning && targetRoom.type != StageType.Boss && !targetRoom.hasBeenVisited)
+        {
             StageManager.Instance.stageCounter++;
+        }
 
         StageManager.Instance.MovePlayerTo(next);
     }
 
-
-
-
-
-    // 1칸 앞만이 아닌 직선 방향으로 방을 탐색하는 영역
+    // 직선 방향 방 찾기
     private Vector2Int FindNextRoomInDirection(Vector2Int from, Vector2Int dir)
     {
         Vector2Int check = from + dir;
@@ -49,15 +46,12 @@ public class FinishTrigger : MonoBehaviour
             StageData room = StageManager.Instance.GetRoomAt(check);
             if (room != null) return check;
 
-            // 다음 칸으로 직진
             check += dir;
 
-            // 그리드 벗어나는 경우 대비 (선택적 한계)
             if (check.x < 0 || check.x >= 100 || check.y < 0 || check.y >= 100)
                 break;
         }
 
-        return from; // 못 찾으면 원래 위치로 되돌림
+        return from;
     }
-
 }

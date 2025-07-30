@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
   isBoss: 0
+  isReturning: 0
 --- !u!1 &1539918986200924529
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 1898884950644916774}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 6, z: 0}
+  m_LocalPosition: {x: 15, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -499,6 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: -1, y: 0}
   isBoss: 0
+  isReturning: 0
 --- !u!1 &4930963738768269954
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
   isBoss: 0
+  isReturning: 0
 --- !u!1 &5162847905397493679
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 0}
   isBoss: 0
+  isReturning: 0
 --- !u!1 &5723528991343720908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
   isBoss: 0
+  isReturning: 0
 --- !u!1 &6786238410340249124
 GameObject:
   m_ObjectHideFlags: 0
@@ -3873,6 +3878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
   isBoss: 0
+  isReturning: 0
 --- !u!1 &7838725898838018904
 GameObject:
   m_ObjectHideFlags: 0
@@ -4085,3 +4091,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
   isBoss: 0
+  isReturning: 0
