@@ -11,7 +11,12 @@ public class Box : MonoBehaviour
     
     private Transform spawnPoint;
     
+    [Header("아이템 프리펩")]
     [SerializeField] private GameObject itemPickupPrefab;
+    
+    [Header("골드 프리펩")]
+    [SerializeField] private GameObject goldPrefab;
+
     
     private Box box;
     public static event Action<Box, int> OnBoxOpened;
@@ -26,12 +31,13 @@ public class Box : MonoBehaviour
         // 1) 등급 뽑기
         ItemInfo.ItemRarity rarity = RollRarity();
         Debug.Log($"뽑힌 등급: {rarity}");
-        
+    
         var entry = config.rates.First(r => r.rarity == rarity);
         int reward = entry.goldReward;
-        Debug.Log($"지급 보상: {reward} 골드");
-        
-        OnBoxOpened?.Invoke(this, reward);
+        Debug.Log($"골드 드랍: {reward}");
+
+        // 골드 드랍 추가
+        SpawnGold(reward);
 
         // 2) 해당 등급아이템 확인 이미 획득한 아이템은 제외
         var pool = ItemDatabase.Instance
@@ -49,10 +55,8 @@ public class Box : MonoBehaviour
         // 3) 하나 랜덤 뽑기
         ItemDefinition chosen = pool[Random.Range(0, pool.Count)];
         Debug.Log($"획득 아이템: {chosen.name}");
-        
-        Vector3 spawnPos = (spawnPoint != null)
-            ? spawnPoint.position
-            : transform.position;
+
+        Vector3 spawnPos = (spawnPoint != null) ? spawnPoint.position : transform.position;
 
         var pickupObj = Instantiate(itemPickupPrefab, spawnPos, Quaternion.identity);
         var itemPickup = pickupObj.GetComponent<ItemPickup>();
@@ -81,6 +85,26 @@ public class Box : MonoBehaviour
         {
             Debug.Log("플레이어 충돌");
             box.Open();
+        }
+    }
+    
+    void SpawnGold(int totalAmount)
+    {
+        int unit = 50;
+        int roundedAmount = totalAmount / unit * unit;
+        int count = Mathf.Max(1, roundedAmount / unit);
+        Vector3 dropPos = (spawnPoint != null) ? spawnPoint.position : transform.position;
+
+        for (int i = 0; i < count; i++)
+        {
+            GameObject gold = Instantiate(goldPrefab, dropPos, Quaternion.identity);
+            var goldPickup = gold.GetComponent<GoldPickup>();
+            goldPickup.SetValue(unit);
+
+            if (gold.TryGetComponent<Rigidbody2D>(out var rb))
+            {
+                rb.AddForce(new Vector2(Random.Range(-1f, 1f), 2f), ForceMode2D.Impulse);
+            }
         }
     }
 }
