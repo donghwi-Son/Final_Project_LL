@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class WoodSpiritIdleState : State<WoodSpirit>
+public class WoodSpiritIdleState : State<Enemy>
 {
-    public WoodSpiritIdleState(WoodSpirit owner, StateMachine<WoodSpirit> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
+    public WoodSpiritIdleState(Enemy owner, StateMachine<Enemy> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
