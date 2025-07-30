@@ -11,6 +11,7 @@ public class WoodSpirit : Enemy
     protected override void Awake()
     {
         base.Awake();
+
         StateMachine = new StateMachine<WoodSpirit>();
         IdleState = new WoodSpiritIdleState(this, StateMachine, "Idle");
         MoveState = new WoodSpiritMoveState(this, StateMachine, "Move");
@@ -22,5 +23,17 @@ public class WoodSpirit : Enemy
     {
         base.Start();
         StateMachine.ChangeState(IdleState);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        StateMachine.CurrentState.Execute();
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        StateMachine.ChangeState(DeadState);
     }
 }

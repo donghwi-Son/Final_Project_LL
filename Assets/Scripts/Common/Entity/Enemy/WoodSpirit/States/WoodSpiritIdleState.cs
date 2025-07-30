@@ -9,11 +9,18 @@ public class WoodSpiritIdleState : State<WoodSpirit>
     public override void Enter()
     {
         base.Enter();
+        owner.SetZeroVelocity();
+        stateTimer = owner.idleTime;
     }
 
     public override void Execute()
     {
         base.Execute();
+
+        if(stateTimer <= 0f)
+        {
+            owner.StateMachine.ChangeState(owner.MoveState);
+        }
     }
 
     public override void Exit()

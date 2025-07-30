@@ -42,16 +42,6 @@ public class Enemy : Entity
         defaultMoveSpeed = moveSpeed;
     }
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
     public override void DamageImpact()
     {
         base.DamageImpact();
