@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 804809418605294872}
   - component: {fileID: 401718951766860043}
   - component: {fileID: 5399384873300768799}
+  - component: {fileID: 1465312073845186870}
   m_Layer: 8
   m_Name: Boss_Crow
   m_TagString: Boss
@@ -136,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8016035473357344166}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -181,19 +182,27 @@ MonoBehaviour:
   attackCooldown: 0
   lastTimeAttacked: 0
   nextAttackType: 0
-  attackSelect: 2
+  attackSelect: 3
   dashAttackSpeed: 20
   dashReboundSpeed: 5
   strikeCol: {fileID: 2288214621202020875}
   rangeAttackObj: {fileID: 8132504508249322451, guid: 4652fa688e2e6a4409b96a38803301b4, type: 3}
   rangeAttackQty: 1
+  spawnEnemyObj: {fileID: 8284890929279240609, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+  spawnEnemyQty: 1
+  spawnSpaceX: 1
+  spawnSpaceY: 1
   baseHeight: 5
   moveRadius: 5
   changeTargetTime: 0.5
   turnCooldown: 0.5
   turnLerpSpeed: 5
   playerYLimit: 0
+  dyingTime: 1
+  dieForceX: 5
+  dieForceY: 5
   attackDealy: 3
+  stats: {fileID: 0}
   playerTransform: {fileID: 0}
 --- !u!50 &401718951766860043
 Rigidbody2D:
@@ -268,6 +277,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.8781521, y: 3.6064153}
   m_EdgeRadius: 0
+--- !u!114 &1465312073845186870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016035473357344166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d00bc2f4223d2147a2798699d0ae493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 10
+    modifiers: 
+  critChance:
+    baseValue: 0
+    modifiers: 
+  critPower:
+    baseValue: 0
+    modifiers: 
+  attackSpeed:
+    baseValue: 0
+    modifiers: 
+  maxHealth:
+    baseValue: 100
+    modifiers: 
+  defense:
+    baseValue: 0
+    modifiers: 
+  currentHealth: 0
 --- !u!1 &9092921760690567582
 GameObject:
   m_ObjectHideFlags: 0

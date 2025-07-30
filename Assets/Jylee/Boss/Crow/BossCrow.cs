@@ -39,9 +39,9 @@ public class BossCrow : Enemy
 
     [Header("기타")]
     public float attackDealy;
-    public CharacterStats stats;
+    public CrowStats stats;
 
-    public Transform playerTransform;
+    public Transform playerTrans;
 
     private Vector2 targetPos;
     private float timer;
@@ -67,7 +67,7 @@ public class BossCrow : Enemy
         strikeAttack = new BossCrowStrikeAttack(this, stateMachine, "IsStrike");
         spawnEnemyState = new BossCrowSpawnEnemy(this, stateMachine, "IsIdle");
         deathState = new BossCrowDeath(this, stateMachine, "IsIdle");
-        stats = GetComponent<CharacterStats>();
+        stats = GetComponent<CrowStats>();
     }
 
     protected override void Start()
@@ -75,8 +75,8 @@ public class BossCrow : Enemy
         stateMachine.ChangeState(standState);
         nextAttackType = 0;
 
-        if (playerTransform == null)
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if (playerTrans == null)
+            playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     protected override void Update()
@@ -86,7 +86,7 @@ public class BossCrow : Enemy
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            stateMachine.ChangeState(deathState);
+            stats.TakeDamage(10);
         }
     }
 
@@ -106,7 +106,7 @@ public class BossCrow : Enemy
 
     public void ChasePlayer()
     {
-        if (playerTransform == null) return;
+        if (playerTrans == null) return;
 
         timer += Time.deltaTime;
         turnTimer += Time.deltaTime;
@@ -140,7 +140,7 @@ public class BossCrow : Enemy
         }
 
         // 플레이어 안닿게 하기
-        float minY = playerTransform.position.y + playerYLimit;
+        float minY = playerTrans.position.y + playerYLimit;
         if (transform.position.y < minY)
         {
             transform.position = new Vector3(transform.position.x, minY, transform.position.z);
@@ -149,7 +149,7 @@ public class BossCrow : Enemy
 
     private void PickNewTarget()
     {
-        Vector2 playerPos = playerTransform.position;
+        Vector2 playerPos = playerTrans.position;
 
         float targetX = playerPos.x + Random.Range(-moveRadius, moveRadius);
 
@@ -178,7 +178,7 @@ public class BossCrow : Enemy
 
     public void BossFlip(bool reverse)
     {
-        float gazePos = transform.position.x > playerTransform.position.x ? -1 : 1;
+        float gazePos = transform.position.x > playerTrans.position.x ? -1 : 1;
         gazePos = reverse ? gazePos * -1 : gazePos;
 
         FlipController(gazePos);
@@ -186,7 +186,7 @@ public class BossCrow : Enemy
 
     public float BossPlayerGaze()
     {
-        Vector2 direction = (new Vector3(playerTransform.position.x, playerTransform.position.y) - transform.position).normalized; // 플레이어 방향 계산
+        Vector2 direction = (new Vector3(playerTrans.position.x, playerTrans.position.y) - transform.position).normalized; // 플레이어 방향 계산
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 각도로 변환
 
         return angle;
@@ -194,11 +194,12 @@ public class BossCrow : Enemy
 
     public void BossRangeAttack()
     {
-        Vector2 fireDirection = (playerTransform.position - transform.position).normalized;
+        Vector2 fireDirection = (playerTrans.position - transform.position).normalized;
         float laserAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
         GameObject projectile = Instantiate(rangeAttackObj, transform.position, Quaternion.Euler(0, 0, laserAngle-90)); // 보정각도 추가
-        projectile.GetComponent<PlayerTargetRangeAttack>().SetDirection(fireDirection);
+        projectile.GetComponent<ProjectileBase>().SetParentsStats(stats);
+        projectile.GetComponent<ProjectileBase>().SetDirection(fireDirection);
     }
 
     public void BossSpawnEnemy()
@@ -210,6 +211,13 @@ public class BossCrow : Enemy
 
             Instantiate(spawnEnemyObj, new Vector3(transform.position.x + xPos, transform.position.y + yPos), Quaternion.identity);
         }
+    }
+
+    public void BossDefeat()
+    {
+        stateMachine.ChangeState(deathState);
+
+        // 보상 아이템
     }
 
     // 콜라이더
