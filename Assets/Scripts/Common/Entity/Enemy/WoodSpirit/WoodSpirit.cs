@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WoodSpirit : Enemy
 {
-    public StateMachine<WoodSpirit> stateMachine { get; private set; }
+    public StateMachine<WoodSpirit> StateMachine { get; private set; }
     public WoodSpiritIdleState IdleState { get; private set; }
     public WoodSpiritMoveState MoveState { get; private set; }
     public WoodSpiritAttackState AttackState { get; private set; }
@@ -11,10 +11,16 @@ public class WoodSpirit : Enemy
     protected override void Awake()
     {
         base.Awake();
-        stateMachine = new StateMachine<WoodSpirit>();
-        IdleState = new WoodSpiritIdleState(this, stateMachine, "Idle");
-        MoveState = new WoodSpiritMoveState(this, stateMachine, "Move");
-        AttackState = new WoodSpiritAttackState(this, stateMachine, "Attack");
-        DeadState = new WoodSpiritDeadState(this, stateMachine, "Dead");
+        StateMachine = new StateMachine<WoodSpirit>();
+        IdleState = new WoodSpiritIdleState(this, StateMachine, "Idle");
+        MoveState = new WoodSpiritMoveState(this, StateMachine, "Move");
+        AttackState = new WoodSpiritAttackState(this, StateMachine, "Attack");
+        DeadState = new WoodSpiritDeadState(this, StateMachine, "Dead");
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        StateMachine.ChangeState(IdleState);
     }
 }

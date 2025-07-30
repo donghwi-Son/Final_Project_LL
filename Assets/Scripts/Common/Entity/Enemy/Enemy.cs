@@ -78,8 +78,6 @@ public class Enemy : Entity
         FreezeTime(false);
     }
 
-    //public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
-
     public virtual RaycastHit2D IsPlayerDetected()
     => Physics2D.CircleCast(playerCheck.position, playerCheckRadius, Vector2.down * FacingDir, PlayerCheckDistance, whatIsPlayer);
 

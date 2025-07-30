@@ -37,7 +37,7 @@ public class AttackManager : MonoBehaviour
 
     bool CanFireProjectile()
     {
-        return canFire && Time.time >= lastFireTime + stat.attackInterval;
+        return canFire && Time.time >= lastFireTime + player.attackInterval;
     }
     void FireProjectile()
     {
