@@ -35,21 +35,11 @@ public class Enemy : Entity
 
     [HideInInspector] public float lastTimeAttacked;
 
-    public StateMachine<Enemy> StateMachine { get; private set; }
-
     protected override void Awake()
     {
         base.Awake();
-        StateMachine = new StateMachine<Enemy>();
 
         defaultMoveSpeed = moveSpeed;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        StateMachine.CurrentState.Execute();
     }
 
     public override void DamageImpact()
