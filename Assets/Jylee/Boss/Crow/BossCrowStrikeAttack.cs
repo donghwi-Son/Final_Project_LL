@@ -28,7 +28,7 @@ public class BossCrowStrikeAttack : State<BossCrow>
         if(stateType == 0)
         {
             // 뒤로 살짝 반동 후 공격으로 상태이동
-            Vector2 retreatDir = (owner.transform.position - owner.playerTransform.position).normalized;
+            Vector2 retreatDir = (owner.transform.position - owner.playerTrans.position).normalized;
             owner.rb.linearVelocity = retreatDir * owner.moveSpeed;
             if (triggerCalled)
             {
@@ -36,7 +36,7 @@ public class BossCrowStrikeAttack : State<BossCrow>
                 triggerCalled = false;
 
                 // 플레이어 거리 계산
-                dashDir = (owner.playerTransform.position - owner.transform.position).normalized;
+                dashDir = (owner.playerTrans.position - owner.transform.position).normalized;
                 // 회전값
                 owner.anim.transform.rotation = Quaternion.Euler(0, 0, owner.BossPlayerGaze());
 

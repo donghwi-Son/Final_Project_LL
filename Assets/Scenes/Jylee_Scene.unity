@@ -119,6 +119,105 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &363658125
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934301789155590453, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284890929279240609, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Baby_Crow
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8284890929279240609, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 363658127}
+    - targetCorrespondingSourceObject: {fileID: 3283446162131367842, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2106370435}
+  m_SourcePrefab: {fileID: 100100000, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+--- !u!1 &363658126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8284890929279240609, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+  m_PrefabInstance: {fileID: 363658125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &363658127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363658126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b57429d52890e47b0f3b6479accc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 5
+    modifiers: 
+  critChance:
+    baseValue: 0
+    modifiers: 
+  critPower:
+    baseValue: 0
+    modifiers: 
+  attackSpeed:
+    baseValue: 0
+    modifiers: 
+  maxHealth:
+    baseValue: 10
+    modifiers: 
+  defense:
+    baseValue: 0
+    modifiers: 
+  currentHealth: 0
 --- !u!1 &371421387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,6 +1236,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1662509434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3784877645696428819, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
+  m_PrefabInstance: {fileID: 3903159530476553375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1662509437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662509434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc2f14762918fa4aaf1f8e1bc5750d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1713947387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1868,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.718}
+--- !u!1 &2106370433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3283446162131367842, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
+  m_PrefabInstance: {fileID: 363658125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2106370435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106370433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc2f14762918fa4aaf1f8e1bc5750d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3903159530476553375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1785,20 +1918,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 804809418605294872, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
-      propertyPath: dieBoundForce
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 804809418605294872, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
       propertyPath: spawnEnemyObj
       value: 
       objectReference: {fileID: 8284890929279240609, guid: 3e287a633ce5d1b4d8e38273909621ef, type: 3}
     - target: {fileID: 804809418605294872, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
       propertyPath: spawnEnemyQty
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 804809418605294872, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
-      propertyPath: deadFirstDelay
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3519788255562297085, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1848,47 +1973,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8016035473357344166, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 3784877645696428819, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3903159530476553377}
+      addedObject: {fileID: 1662509437}
   m_SourcePrefab: {fileID: 100100000, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
---- !u!1 &3903159530476553376 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8016035473357344166, guid: 7e68ed1163faf004b97fd9da785425e7, type: 3}
-  m_PrefabInstance: {fileID: 3903159530476553375}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3903159530476553377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3903159530476553376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bc35bcd5b2dc1d4d81f2ea51c66aa3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage:
-    baseValue: 10
-    modifiers: 
-  critChance:
-    baseValue: 0
-    modifiers: 
-  critPower:
-    baseValue: 0
-    modifiers: 
-  attackSpeed:
-    baseValue: 0
-    modifiers: 
-  attackRange: 0
-  maxHealth:
-    baseValue: 100
-    modifiers: 
-  defense:
-    baseValue: 2
-    modifiers: 
-  currentHealth: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1910,3 +1998,4 @@ SceneRoots:
   - {fileID: 812095781}
   - {fileID: 1713947390}
   - {fileID: 3903159530476553375}
+  - {fileID: 363658125}
