@@ -33,7 +33,7 @@ public class PlayerAttackState : State<PlayerController>
         if (CanCharge && owner.attackMode == AttackMode.Melee)
             chargeBar?.ShowChargeBar();
 
-        owner.anim.speed = owner.stat.attackSpeed.GetValue() / 300f;
+        owner.anim.speed = owner.attackSpeed / 3f;
     }
 
     public override void Execute()
@@ -90,7 +90,7 @@ public class PlayerAttackState : State<PlayerController>
             isAutoFiring = true;
             lastAutoFireTime = Time.time;
         }
-        else if (Time.time >= lastAutoFireTime + owner.stat.attackInterval)
+        else if (Time.time >= lastAutoFireTime + owner.attackInterval)
         {
             // 자동 발사
             owner.AttackManager.Attack(owner.attackMode, owner.IsFacingRight);

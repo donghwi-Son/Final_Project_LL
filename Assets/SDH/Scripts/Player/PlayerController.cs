@@ -13,6 +13,7 @@ public class PlayerController : Entity
     public float skillCooldown = 3f;
 
     [Header("Offense")]
+    public float attackSpeed = 1f; // 공격 속도
     public float attackRange = 1.5f; // 공격 범위
 
     [Header("Defense")]
@@ -21,6 +22,8 @@ public class PlayerController : Entity
     public float defendReduction = 0.5f;
 
     public float maxDashCount = 1; // 최대 대시 횟수
+
+    public float attackInterval => 1f / attackSpeed;
 
     //스테이트 및 컨트롤
     public StateMachine<PlayerController> stateMachine { get; private set; }
