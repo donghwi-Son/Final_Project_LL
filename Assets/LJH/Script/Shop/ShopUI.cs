@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -79,23 +80,29 @@ public class ShopUI : MonoBehaviour
 
     void GenerateShop()
     {
-        // 기존 삭제
         foreach (Transform t in row1) Destroy(t.gameObject);
         foreach (Transform t in row2) Destroy(t.gameObject);
 
-        // 랜덤 아이템 뽑기
-        var list = Enumerable.Range(0, slotCount)
-            .Select(_ => GetRandomItemByRarity())
-            .ToList();
+        var list = new List<ItemDefinition>();
+        var attempted = new HashSet<int>();
 
-        // 1행에 3개
+        while (list.Count < slotCount)
+        {
+            var item = GetRandomItemByRarity();
+            if (item == null) break;
+
+            if (attempted.Contains(item.index)) continue; // 같은 아이템 두 번 추가 방지
+            attempted.Add(item.index);
+
+            list.Add(item);
+        }
+
         for (int i = 0; i < firstRowCount && i < list.Count; i++)
         {
             var go = Instantiate(entryPrefab, row1);
             go.GetComponent<ShopEntryUI>().Setup(list[i], isBlackMarket);
         }
 
-        // 2행 나머지
         for (int i = firstRowCount; i < list.Count; i++)
         {
             var go = Instantiate(entryPrefab, row2);
@@ -103,9 +110,9 @@ public class ShopUI : MonoBehaviour
         }
     }
 
+
     ItemDefinition GetRandomItemByRarity()
     {
-        //퍼센트 기반 뽑기 로직
         int rnd = Random.Range(0, 100);
         int cum = 0;
         ItemInfo.ItemRarity chosen = rarityChances[0].rarity;
@@ -122,8 +129,12 @@ public class ShopUI : MonoBehaviour
 
         var pool = ItemDatabase.Instance
             .GetDefinitionsByRarity(chosen)
+            .Where(def => !PlayerInventory.Instance.HasAcquired(def.index)) // 보유 아이템 제외
             .ToList();
-        if (pool.Count == 0) return ItemDatabase.Instance.GetAllDefinitions().First();
+
+        if (pool.Count == 0)
+            return null;
+
         return pool[Random.Range(0, pool.Count)];
     }
     
