@@ -20,9 +20,9 @@ public class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         // 컴포넌트 초기화
-        rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
 
         // 땅체크 설정
         if (groundCheck == null)

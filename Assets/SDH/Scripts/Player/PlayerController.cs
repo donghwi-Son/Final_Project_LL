@@ -26,7 +26,7 @@ public class PlayerController : Entity
     public float attackInterval => 1f / attackSpeed;
 
     //스테이트 및 컨트롤
-    public StateMachine<PlayerController> stateMachine { get; private set; }
+    public StateMachine<PlayerController> StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
@@ -39,7 +39,7 @@ public class PlayerController : Entity
     public PlayerDashAttState DashAttState { get; private set; }
     public PlayerFallingState FallingState { get; private set; }
     public AttackManager AttackManager { get; private set; }
-    public PlayerStatus stat { get; private set; }
+    public PlayerStatus stats { get; private set; }
 
     //인풋 변수들
     public float XInput { get; private set; }
@@ -84,7 +84,7 @@ public class PlayerController : Entity
     {
         base.Start();
 
-        stateMachine.ChangeState(IdleState);
+        StateMachine.ChangeState(IdleState);
 
         PlayerManager.Instance.player = this; // 플레이어 매니저에 플레이어 설정
 
@@ -101,30 +101,30 @@ public class PlayerController : Entity
         if (MeleeChangeInput)
             ChangeAttackMethod();
 
-        stateMachine.CurrentState.Execute();
+        StateMachine.CurrentState.Execute();
     }
 
 
     void InitState()
     {
-        stateMachine = new StateMachine<PlayerController>();
-        IdleState = new PlayerIdleState(this, stateMachine, "Idle");
-        MoveState = new PlayerMoveState(this, stateMachine, "Move");
-        JumpState = new PlayerJumpState(this, stateMachine, "Jump");
-        AttackState = new PlayerAttackState(this, stateMachine, "Attack");
-        SpecialAttackState = new PlayerSpecialAttackState(this, stateMachine, "SpecialAttack");
-        SkillState = new PlayerSkillState(this, stateMachine, "Skill");
-        DefendState = new PlayerDefendState(this, stateMachine, "Defend");
-        DashState = new PlayerDashState(this, stateMachine, "Dash");
-        AirAttState = new PlayerAirAttState(this, stateMachine, "AirAttack");
-        DashAttState = new PlayerDashAttState(this, stateMachine, "DashAttack");
-        FallingState = new PlayerFallingState(this, stateMachine, "Fall");
+        StateMachine = new StateMachine<PlayerController>();
+        IdleState = new PlayerIdleState(this, StateMachine, "Idle");
+        MoveState = new PlayerMoveState(this, StateMachine, "Move");
+        JumpState = new PlayerJumpState(this, StateMachine, "Jump");
+        AttackState = new PlayerAttackState(this, StateMachine, "Attack");
+        SpecialAttackState = new PlayerSpecialAttackState(this, StateMachine, "SpecialAttack");
+        SkillState = new PlayerSkillState(this, StateMachine, "Skill");
+        DefendState = new PlayerDefendState(this, StateMachine, "Defend");
+        DashState = new PlayerDashState(this, StateMachine, "Dash");
+        AirAttState = new PlayerAirAttState(this, StateMachine, "AirAttack");
+        DashAttState = new PlayerDashAttState(this, StateMachine, "DashAttack");
+        FallingState = new PlayerFallingState(this, StateMachine, "Fall");
     }
 
     void InitComponents()
     {
         AttackManager = GetComponent<AttackManager>();
-        stat = GetComponent<PlayerStatus>();
+        stats = GetComponent<PlayerStatus>();
     }
 
     void HandleInput()
@@ -160,7 +160,7 @@ public class PlayerController : Entity
     {
         CanDoubleJump = false;
         rb.linearVelocityY = 0;
-        stateMachine.ChangeState(JumpState);
+        StateMachine.ChangeState(JumpState);
     }
 
     public void ChangeAttackMethod()
@@ -179,7 +179,7 @@ public class PlayerController : Entity
 
     public void AttackToIdle()
     {
-        stateMachine.ChangeState(IdleState);
+        StateMachine.ChangeState(IdleState);
     }
 
     // 간이 유틸리티 매니저 ===============

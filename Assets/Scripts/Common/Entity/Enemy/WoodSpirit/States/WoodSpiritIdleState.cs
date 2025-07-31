@@ -19,7 +19,7 @@ public class WoodSpiritIdleState : State<WoodSpirit>
 
         if(stateTimer <= 0f)
         {
-            owner.StateMachine.ChangeState(owner.MoveState);
+            stateMachine.ChangeState(owner.MoveState);
         }
     }
 

@@ -196,11 +196,11 @@ MonoBehaviour:
   battleTime: 0
   fallSpeed: 2
   playerCheck: {fileID: 1178266456617497302}
-  playerCheckRadius: 5
+  playerCheckRadius: 2
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  playerCheckDistance: 5
+  playerCheckDistance: 1
   attackCheck: {fileID: 6975092539010024380}
   attackCheckRadius: 1
   attackDistance: 1
@@ -217,8 +217,9 @@ GameObject:
   - component: {fileID: 7147920526942763627}
   - component: {fileID: 4835016229900716052}
   - component: {fileID: 450175594669809882}
+  - component: {fileID: 633709521802505487}
   m_Layer: 0
-  m_Name: Sprite
+  m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,3 +317,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &633709521802505487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5125916414656398973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32679b29acb7f7846a9ce4f199d1e028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
