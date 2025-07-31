@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    public EnemyStats stats { get; private set; }
+
     [Header("이동 정보")]
     public float moveSpeed;
     public float idleTime;
@@ -39,12 +41,25 @@ public class Enemy : Entity
     {
         base.Awake();
 
+        stats = GetComponent<EnemyStats>();
+
         defaultMoveSpeed = moveSpeed;
     }
 
     public override void DamageImpact()
     {
         base.DamageImpact();
+    }
+
+    public bool CanAttack()
+    {
+        if (Time.time >= lastTimeAttacked + attackCooldown)
+        {
+            lastTimeAttacked = Time.time;
+            return true;
+        }
+
+        return false;
     }
 
     public virtual void FreezeTime(bool _timeFrozen)
@@ -66,6 +81,13 @@ public class Enemy : Entity
         FreezeTime(true);
         yield return new WaitForSeconds(_seconds);
         FreezeTime(false);
+    }
+
+    public virtual void AnimationFinishTrigger()
+    {
+        // 애니메이션 트리거가 끝났을 때 호출되는 메서드
+        // 이 메서드는 EnemyAnimationTrigger에서 호출됩니다.
+        // 기본 구현은 아무것도 하지 않습니다.
     }
 
     public virtual RaycastHit2D IsPlayerDetected()

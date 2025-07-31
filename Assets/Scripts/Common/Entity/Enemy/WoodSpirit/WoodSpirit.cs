@@ -36,4 +36,10 @@ public class WoodSpirit : Enemy
         base.Die();
         StateMachine.ChangeState(DeadState);
     }
+
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
+        StateMachine.CurrentState.AnimationFinishTrigger();
+    }
 }

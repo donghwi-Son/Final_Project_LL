@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerAttackState : State<PlayerController>
 {
-    bool CanCharge => owner.stat.canChargeAttack;
+    bool CanCharge => owner.stats.canChargeAttack;
     bool isHolding = false;
     float holdTime;
     float idleTimer = 0f;
