@@ -16,11 +16,13 @@ public class FinishTrigger : MonoBehaviour
         {
             StageManager.Instance.ActivateBossRoomIfReady();
             StageManager.Instance.MovePlayerToBossRoom();
+            StageManager.Instance.MoveToBossRoomCleanTransition();
             return;
         }
 
         Vector2Int current = StageManager.Instance.GetCurrentGrid();
         Vector2Int next = FindNextRoomInDirection(current, direction);
+        StageData nextRoom = StageManager.Instance.GetRoomAt(next);
 
         if (next == current) return;
 
@@ -31,6 +33,11 @@ public class FinishTrigger : MonoBehaviour
         if (!isReturning && targetRoom.type != StageType.Boss && !targetRoom.hasBeenVisited)
         {
             StageManager.Instance.stageCounter++;
+        }
+
+        if (nextRoom != null && nextRoom.type == StageType.Start)
+        {
+            return;
         }
 
         StageManager.Instance.MovePlayerTo(next);

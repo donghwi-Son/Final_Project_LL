@@ -24,6 +24,7 @@ public class PlayerTestController : MonoBehaviour
     {
         HandleMovement();
         HandleJump();
+        HandleInteraction();
     }
 
     private void HandleMovement()
@@ -42,6 +43,28 @@ public class PlayerTestController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+    }
+
+    private void HandleInteraction()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Vector2Int currentGrid = StageManager.Instance.GetCurrentGrid();
+            StageData currentRoom = StageManager.Instance.GetRoomAt(currentGrid);
+            if (currentRoom?.instance != null)
+            {
+                var condition = currentRoom.instance.GetComponentInChildren<IRoomCondition>();
+                if (condition != null)
+                {
+                    Debug.Log("[Player] P 키 상호작용 시도");
+                    condition.OnPlayerInteract(); // 핵심 인터랙션 호출
+                }
+                else
+                {
+                    Debug.LogWarning("[Player] 현재 방에 IRoomCondition이 존재하지 않음");
+                }
+            }
         }
     }
 

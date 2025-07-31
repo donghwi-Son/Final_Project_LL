@@ -113,6 +113,7 @@ public class StageManager : MonoBehaviour
     {
         if (!placedRooms.ContainsKey(nextGrid)) return;
 
+
         Vector2Int prevGrid = currentGrid;
         currentGrid = nextGrid;
 
@@ -162,8 +163,19 @@ public class StageManager : MonoBehaviour
 
         player.position = spawn != null ? spawn.position : roomData.instance.transform.position;
 
+        
+
+        // 보스 맵
+        if (roomData.type == StageType.Boss)
+        {
+            Debug.LogWarning("[StageManager] Boss 방 진입 확인됨");
+
+            // 강제 Boss 미니맵 처리
+            MiniMapManager.instance?.ShowOnlyBossRoom(roomData.GetGridPosition(), roomData.type);
+            return;
+        }
+
         // 미니맵 처리
-        MiniMapManager.instance?.HighlightIcon(nextGrid);
         MiniMapManager.instance?.RevealRoom(nextGrid, roomData.type);
         // 라인 처리 — MiniMapManager 쪽에서 진행
         if (backDir.HasValue)
@@ -171,8 +183,12 @@ public class StageManager : MonoBehaviour
             MiniMapManager.instance?.ShowOnlyLineInDirection(nextGrid, roomData, backDir.Value);
         }
         MiniMapManager.instance?.ShowLinesFromThisRoom(nextGrid, roomData);
+        MiniMapManager.instance.HighlightIcon(currentGrid);
+        
 
         roomData.hasBeenVisited = true;
+
+        TrySetupRoomCondition(roomData.instance);
 
         // Start Room이면 포탈 처리 생략
         // Start Room은 매 게임마다 최초 입장 1번만 허용되게 막는 역할
@@ -218,6 +234,9 @@ public class StageManager : MonoBehaviour
             foreach (var dir in directions)
             {
                 if (backDir.HasValue && dir == backDir.Value) continue;
+
+                if (roomData.type == StageType.Start && (dir == Vector2Int.up || dir == Vector2Int.down))
+                    continue;
 
                 if (roomData.HasNeighbor(dir))
                 {
@@ -294,13 +313,14 @@ public class StageManager : MonoBehaviour
             }
 
             // 되돌아가기만 가능한 경우의 처리
+            // 되돌이 방향만 존재할 경우 (모든 후보가 방문됨)
             if (candidateDirs.Count == 0 && backDir.HasValue)
             {
                 Vector2Int backGrid = nextGrid + backDir.Value;
+
                 if (placedRooms.TryGetValue(backGrid, out var backRoom))
                 {
-                    // Start Room이면 Finish 생성 금지
-                    if (backRoom.type != StageType.Start) //  핵심 조건 추가됨
+                    if (backRoom.type != StageType.Start)
                     {
                         string backFinishName = GetFinishName(backDir.Value, false);
                         Transform backFinish = finishGroup.Find(backFinishName);
@@ -312,7 +332,7 @@ public class StageManager : MonoBehaviour
                             {
                                 trigger.direction = backDir.Value;
                                 trigger.isBoss = false;
-                                trigger.isReturning = true; // 되돌이 표시
+                                trigger.isReturning = true;
                             }
                         }
                     }
@@ -321,6 +341,29 @@ public class StageManager : MonoBehaviour
 
         }
     }
+
+    // Finish 조건 업데이트
+    private void TrySetupRoomCondition(GameObject roomInstance)
+    {
+        IRoomCondition condition = roomInstance.GetComponentInChildren<IRoomCondition>();
+
+        if (condition != null)
+        {
+            Debug.Log($"[StageManager] 조건 스크립트 발견: {condition.GetType().Name}");
+            condition.Setup(roomInstance);
+        }
+        else
+        {
+            Debug.Log($"[StageManager] 조건 스크립트 없음. 해당 방은 즉시 Finish 활성 처리");
+
+            // 조건 스크립트가 없으면 기본 Finish 활성
+            foreach (var trigger in roomInstance.GetComponentsInChildren<FinishTrigger>())
+            {
+                trigger.gameObject.SetActive(true);
+            }
+        }
+    }
+
 
     // 최대 스테이지 리미트
     public void SetProgressionLimit(int limit)
@@ -403,6 +446,42 @@ public class StageManager : MonoBehaviour
         }
         return currentGrid; // fallback
     }
+
+    // 전체 방 제거 & 보스룸 재생성
+    public void MoveToBossRoomCleanTransition()
+    {
+        // 1. 기존 모든 방 제거
+        foreach (var room in placedRooms.Values)
+        {
+            if (room.instance != null)
+                Destroy(room.instance);
+        }
+        placedRooms.Clear();
+
+        // 2. 미니맵 아이콘 전부 제거
+        MiniMapManager.instance.ClearAllIcons();
+
+        // 3. 보스 룸 재생성
+        Vector2Int bossGrid = new Vector2Int(8, 4); // 중심 좌표
+        bossRoomData = new StageData(bossGrid.x, bossGrid.y, StageType.Boss);
+        bossRoomData.prefab = bossRoomPrefab;
+
+        Vector3 bossWorldPos = generator.GridToWorld(bossGrid);
+        GameObject bossInstance = Instantiate(bossRoomPrefab, bossWorldPos, Quaternion.identity);
+        bossInstance.SetActive(true);
+
+        bossRoomData.instance = bossInstance;
+        placedRooms[bossGrid] = bossRoomData;
+        currentGrid = bossGrid;
+
+        // 4. 플레이어 이동
+        Transform spawn = bossInstance.transform.Find("SpawnPoint");
+        player.position = spawn != null ? spawn.position : bossWorldPos;
+
+        // 5. 미니맵 중앙에 보스 룸만 표시
+        MiniMapManager.instance.ShowOnlyBossRoom(bossGrid, StageType.Boss);
+    }
+
 
     // 보스 Finish 활성화
     private void ActivateBossFinish(Transform group, string name, Vector2Int dir)
@@ -505,17 +584,14 @@ public class StageManager : MonoBehaviour
         placedRooms[bossGrid] = bossRoomData;
     }
 
+
+
     public void ActivateBossRoomIfReady()
     {
         if (stageCounter >= maxStageCounter && bossRoomData != null)
             bossRoomData.instance?.SetActive(true);
     }
 
-    // 이전 방으로 되돌아가는 방향 뒤집기 유틸 비활성화
-    private static Vector2Int GetOppositeDirection(Vector2Int dir)
-    {
-        return new Vector2Int(-dir.x, -dir.y);
-    }
 
     // 이전 방 되돌아가기 방지 보조 함수
     private string GetFinishName(Vector2Int dir, bool isBoss)
@@ -550,19 +626,21 @@ public class StageManager : MonoBehaviour
         return array[Random.Range(0, array.Length)];
     }
 
-    private Dictionary<Vector2Int, StageType> GetRoomTypeMap()
-    {
-        Dictionary<Vector2Int, StageType> map = new();
-        foreach (var pair in placedRooms)
-        {
-            map[pair.Key] = pair.Value.type;
-        }
-        return map;
-    }
+    
 
     public StageData GetRoomAt(Vector2Int grid)
     {
         return placedRooms.TryGetValue(grid, out var data) ? data : null;
+    }
+
+    public StageData GetStageDataByInstance(GameObject roomInstance)
+    {
+        foreach (var data in placedRooms.Values)
+        {
+            if (data.instance == roomInstance)
+                return data;
+        }
+        return null;
     }
 
     public Vector2Int GetCurrentGrid()

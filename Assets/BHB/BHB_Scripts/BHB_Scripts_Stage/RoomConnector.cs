@@ -28,7 +28,37 @@ public class RoomConnector : MonoBehaviour
             if (instance == null) continue;
 
             // Start와 Boss 방은 별도 처리하므로 제외
-            if (currentRoom.type == StageType.Start || currentRoom.type == StageType.Boss)
+            // Start 방 따로 분리 처리 (Boss는 여전히 제외)
+            if (currentRoom.type == StageType.Start)
+            {
+                Vector2Int[] startDirs = { Vector2Int.left, Vector2Int.right };
+
+                foreach (var dir in startDirs)
+                {
+                    Vector2Int neighborPos = currentGrid + dir;
+
+                    if (!placedRooms.ContainsKey(neighborPos))
+                    {
+                        var newRoom = new StageData(neighborPos.x, neighborPos.y, StageType.Normal);
+                        placedRooms[neighborPos] = newRoom;
+                    }
+
+                    var neighborRoom = placedRooms[neighborPos];
+
+                    // Start 방 연결 방지
+                    if (neighborRoom.type == StageType.Start) continue;
+
+                    currentRoom.Connect(neighborRoom, dir);
+                    neighborRoom.Connect(currentRoom, -dir);
+
+                    EnableFinish(instance, dir, false);
+                }
+
+                // 위아래 무시
+                continue;
+            }
+
+            if (currentRoom.type == StageType.Boss)
                 continue;
 
             bool isStartRoom = currentRoom.type == StageType.Start;
@@ -79,11 +109,14 @@ public class RoomConnector : MonoBehaviour
                     cols: generator.cols);
 
                 if (neighborRoom == null) continue;
+                if (neighborRoom.type == StageType.Start)continue;
 
                 currentRoom.Connect(neighborRoom, dir);
                 neighborRoom.Connect(currentRoom, -dir);
 
                 //EnableFinish(instance, dir, isBoss: false);
+                // 연결된 방향으로 Finish 오브젝트 활성화
+                EnableFinish(instance, dir, false);
                 connectionsMade++;
             }
         }

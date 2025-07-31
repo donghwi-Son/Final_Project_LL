@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Structure
   - Boss
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - NPC
   - MiniMapRoom
   - MiniMap
   m_SortingLayers:

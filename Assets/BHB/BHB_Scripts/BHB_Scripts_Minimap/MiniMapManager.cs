@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 // M 키 전체 미니맵 패널 UI 전담 클래스
 public class MiniMapManager : MonoBehaviour
@@ -65,14 +66,14 @@ public class MiniMapManager : MonoBehaviour
     {
         foreach (var pair in spawnedIcons)
         {
-            var marker = pair.Value.transform.Find("CurrentIcon");
+            var marker = pair.Value.transform.Find("Player Point");
             if (marker != null)
                 marker.gameObject.SetActive(false);
         }
 
         if (spawnedIcons.TryGetValue(grid, out var currentIcon))
         {
-            var marker = currentIcon.transform.Find("CurrentIcon");
+            var marker = currentIcon.transform.Find("Player Point");
             if (marker != null)
                 marker.gameObject.SetActive(true);
         }
@@ -86,16 +87,61 @@ public class MiniMapManager : MonoBehaviour
         Transform lineGroup = icon.transform.Find("Line Group");
         if (lineGroup == null) return;
 
+        // 라인 비활성화 기능 추가
+        foreach (Transform child in lineGroup)
+        {
+            child.gameObject.SetActive(false);
+        }
+
         Vector2Int[] directions = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
         foreach (var dir in directions)
         {
+            Vector2Int neighborGrid = currentGrid + dir;
+
+            // 이웃이 존재하는 경우 가져오기
+            StageData neighborData = StageManager.Instance.GetRoomAt(neighborGrid);
+
+            // 없는 방에 라인이 뻗지 않게
+            if (neighborData == null || neighborData.instance == null)
+            {
+                Debug.Log($"[MiniMap] {neighborGrid} 방향 라인 생략 (이웃 방 instance 없음)");
+                continue;
+            }
+
+            // Start 방과 관련된 상하 라인은 무조건 표시 안 함
+            // 상하 방향 차단 (Start 방과 연결된 경우)
+            bool startIsHere = roomData.type == StageType.Start;
+            bool startIsNeighbor = neighborData != null && neighborData.type == StageType.Start;
+            bool vertical = dir == Vector2Int.up || dir == Vector2Int.down;
+
+            if (vertical && (startIsHere || startIsNeighbor))
+            {
+                Debug.Log($"[MiniMap] {dir} 방향 라인 제거 ({currentGrid} ↔ {neighborGrid}) - Start 방 관련");
+                continue;
+            }
+
+            // 이웃 방이 Start  상하 라인 차단
+            if (neighborData != null &&
+                neighborData.type == StageType.Start &&
+                (dir == Vector2Int.down || dir == Vector2Int.up))
+                continue;
+
+            // 연결된 이웃이 없으면 표시 안 함
             if (!roomData.HasNeighbor(dir)) continue;
 
-            Vector2Int neighborGrid = currentGrid + dir;
-            Vector2Int oppositeDir = -dir;
+            if (neighborData == null) continue;
 
-            // 반대쪽이 이미 라인을 표시했으면 현재 쪽은 비활성 유지
+            // 쌍방 연결 확인
+            Vector2Int oppositeDir = -dir;
+            if (!neighborData.HasNeighbor(oppositeDir))
+            {
+                Debug.Log($"[MiniMap] {dir} 라인 생략 (이웃에서 반대 방향 없음)");
+                continue;
+            }
+
+
+            // 반대쪽에서 이미 표시했으면 생략
             if (spawnedIcons.TryGetValue(neighborGrid, out var neighborIcon))
             {
                 Transform neighborLineGroup = neighborIcon.transform.Find("Line Group");
@@ -105,12 +151,13 @@ public class MiniMapManager : MonoBehaviour
                     Transform neighborLine = neighborLineGroup.Find(oppositeLineName);
                     if (neighborLine != null && neighborLine.gameObject.activeSelf)
                     {
-                        Debug.Log($"[MiniMap] {dir} 방향 라인 생략: 반대쪽에서 이미 표시됨");
+                        Debug.Log($"[MiniMap] {dir} 방향 라인 생략 (반대쪽에서 표시됨)");
                         continue;
                     }
                 }
             }
 
+            // 라인 표시
             string lineName = GetLineName(dir);
             Transform line = lineGroup.Find(lineName);
             if (line != null)
@@ -168,10 +215,49 @@ public class MiniMapManager : MonoBehaviour
             if (line != null)
                 line.gameObject.SetActive(true);
         }
+
+        if ((roomData.type == StageType.Start) && (fromDir == Vector2Int.up || fromDir == Vector2Int.down)) return;
     }
 
+    // 보스 미니맵만 생성
+    public void ShowOnlyBossRoom(Vector2Int bossGrid, StageType type)
+    {
+        Debug.Log($"[MiniMapManager] ShowOnlyBossRoom 호출됨 - Type: {type}");
 
-    // 미니맵 라인 영역
+        foreach (var bossicon in spawnedIcons.Values)
+        {
+            if (bossicon != null) Destroy(bossicon);
+        }
+        spawnedIcons.Clear();
+
+        GameObject prefab = GetPrefabForType(type);
+        if (prefab == null)
+        {
+            Debug.LogError("[MiniMapManager] Boss 프리팹이 할당되지 않았습니다.");
+            return;
+        }
+
+        GameObject icon = Instantiate(prefab, iconParent, false);
+        RectTransform rt = icon.GetComponent<RectTransform>();
+        rt.anchoredPosition = Vector2.zero;
+
+        spawnedIcons[bossGrid] = icon;
+
+        var marker = icon.transform.Find("Player Point");
+        if (marker != null)
+            marker.gameObject.SetActive(true);
+    }
+
+    // 아이콘 초기화
+    public void ClearAllIcons()
+    {
+        foreach (var icon in spawnedIcons.Values)
+        {
+            if (icon != null)
+                Destroy(icon);
+        }
+        spawnedIcons.Clear();
+    }
 
     public bool TryGetIcon(Vector2Int gridPos, out GameObject icon)
     {
@@ -182,7 +268,11 @@ public class MiniMapManager : MonoBehaviour
     {
         Vector2 center = new Vector2(4.5f, 8f); // generator 기준 center (cols/2, rows/2)
         Vector2 offset = (Vector2)grid - center;
-        return offset * iconSpacing;
+        Vector2 pos = offset * iconSpacing;
+        // Y축으로 위로 올리기
+        pos.y += 50f;
+
+        return pos;
     }
 
     private GameObject GetPrefabForType(StageType type)

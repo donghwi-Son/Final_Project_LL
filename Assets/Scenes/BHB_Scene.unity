@@ -18595,7 +18595,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3221225472
+    m_Bits: 3758096576
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: a9809a79acba73f4cb89184cb66db773, type: 2}
   m_TargetDisplay: 0
@@ -24466,7 +24466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1813544971
@@ -27912,7 +27912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3408812093243740129}
   - component: {fileID: 6963726638103288875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29403,7 +29403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5643922806042872105}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Village Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30769,7 +30769,7 @@ GameObject:
   - component: {fileID: 2934188987322291896}
   - component: {fileID: 6624113550132886379}
   - component: {fileID: 4056819432234145097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stage_Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30953,7 +30953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: maxStageCounter
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8097085249419514012, guid: 11e109576d163c54ba29369aabad6b49, type: 3}
       propertyPath: startRoomPrefab
