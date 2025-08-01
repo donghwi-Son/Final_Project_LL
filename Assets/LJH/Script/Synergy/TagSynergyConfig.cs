@@ -18,5 +18,13 @@ public class TagSynergyConfig : ScriptableObject
     void OnEnable()
         => _map = entries.ToDictionary(e=>e.tag);
     public bool TryGetSynergy(ItemInfo.ItemTag t, out TagSynergy s)
-        => _map.TryGetValue(t, out s);
+    {
+        if (_map == null || _map.Count == 0)
+        {
+            Debug.LogWarning("TagSynergyConfig map not initialized! Rebuilding now.");
+            _map = entries.ToDictionary(e => e.tag);
+        }
+
+        return _map.TryGetValue(t, out s);
+    }
 }
