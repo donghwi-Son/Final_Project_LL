@@ -10,5 +10,6 @@ public class TagSynergy
     public int threshold;
     public TagSynergyConfig.SynergyType type;
     public float bonus;
+    public ItemInfo.StatType statType;
 }
 

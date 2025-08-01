@@ -9,6 +9,8 @@ TagManager:
   - Structure
   - Boss
   - NPC
+  - Gold
+  - Item
   layers:
   - Default
   - TransparentFX

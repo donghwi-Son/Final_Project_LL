@@ -31,16 +31,22 @@ public class GoldChest : MonoBehaviour
     void SpawnGold(int totalAmount)
     {
         int unit = 50;
-        int roundedAmount = totalAmount / unit * unit;
-        int count = Mathf.Max(1, roundedAmount / unit);
+        int count = Mathf.Max(1, totalAmount / unit);
 
         for (int i = 0; i < count; i++)
         {
-            GameObject gold = Instantiate(goldPrefab, dropPoint.position, Quaternion.identity);
+            Vector3 spawnOffset = (Vector3)Random.insideUnitCircle.normalized * Random.Range(0.5f, 1.5f);
+            Vector3 spawnPos = dropPoint.position + spawnOffset;
+
+            GameObject gold = Instantiate(goldPrefab, spawnPos, Quaternion.identity);
             gold.GetComponent<GoldPickup>().SetValue(unit);
-            Rigidbody2D rb = gold.GetComponent<Rigidbody2D>();
-            if (rb != null)
-                rb.AddForce(new Vector2(Random.Range(-1f, 1f), 2f), ForceMode2D.Impulse);
+            
+            if (gold.TryGetComponent(out Rigidbody2D rb))
+            {
+                Vector2 forceDir = new Vector2(Random.Range(-2f, 2f), Random.Range(2f, 4f));
+                rb.AddForce(forceDir, ForceMode2D.Impulse);
+                rb.AddTorque(Random.Range(-10f, 10f), ForceMode2D.Impulse);
+            }
         }
     }
     

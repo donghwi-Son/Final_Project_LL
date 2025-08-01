@@ -10,6 +10,8 @@ public class SynergyManager : MonoBehaviour
     private HashSet<ItemInfo.ItemTag> activeTagSynergy = new();
 
     private TagSynergyConfig  tagConfig;
+    
+    [SerializeField] private PlayerStatus playerStatus;
 
     void Awake()
     {
@@ -45,7 +47,7 @@ public class SynergyManager : MonoBehaviour
         {
             case TagSynergyConfig.SynergyType.Stats:
                 //스탯을 증가 일단 체력으로 테스트
-                PlayerTest.Instance.AddHealth(entry.bonus);
+                playerStatus.ModifyStat(entry.statType, entry.bonus);
                 break;
 
             case TagSynergyConfig.SynergyType.Attack:
@@ -62,7 +64,7 @@ public class SynergyManager : MonoBehaviour
 
             case TagSynergyConfig.SynergyType.Utility:
                     // 유틸 효과 EX)더블 점프 활성화
-                    PlayerTest.Instance.EnableDoubleJump();
+                    //PlayerTest.Instance.EnableDoubleJump();
                     Debug.Log("유틸 획득");
                 break;
 
