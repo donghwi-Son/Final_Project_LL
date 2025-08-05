@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class WispMoveState : State<Wisp>
+public class BurstWispMoveState : State<BurstWisp>
 {
-    public WispMoveState(Wisp owner, StateMachine<Wisp> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
+    public BurstWispMoveState(BurstWisp owner, StateMachine<BurstWisp> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
@@ -19,11 +19,8 @@ public class WispMoveState : State<Wisp>
 
         if (owner.IsPlayerDetected())
         {
-            if (owner.IsPlayerDetected().distance <= owner.AttackDistance && owner.CanAttack())
-            {
-                stateMachine.ChangeState(owner.AttackState);
-                return;
-            }
+            stateMachine.ChangeState(owner.ChaseState);
+            return;
         }
         if (!owner.IsGroundDetected() || owner.IsWallDetected())
         {
