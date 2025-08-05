@@ -49,6 +49,7 @@ public class PlayerStatus : CharacterStats
     //스탯 증가
     public void ModifyStat(ItemInfo.StatType statType, float amount)
     {
+        PlayerController player = GetComponent<PlayerController>();
         switch (statType)
         {
             case ItemInfo.StatType.Health:
@@ -58,7 +59,6 @@ public class PlayerStatus : CharacterStats
                 IncreaseStatBy(defense, (int)amount);
                 break;
             case ItemInfo.StatType.MoveSpeed:
-                PlayerController player = GetComponent<PlayerController>();
                 player.moveSpeed += amount;
                 break;
             case ItemInfo.StatType.Power:
@@ -68,7 +68,7 @@ public class PlayerStatus : CharacterStats
                 IncreaseStatBy(critChance, (int)amount);
                 break;
             case ItemInfo.StatType.AttackSpeed:
-                IncreaseStatBy(attackSpeed, (int)amount);
+                player.attackSpeed += amount;
                 break;
         }
     }

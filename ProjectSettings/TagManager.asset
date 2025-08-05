@@ -8,6 +8,9 @@ TagManager:
   - Wall
   - Structure
   - Boss
+  - NPC
+  - Gold
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -19,6 +22,7 @@ TagManager:
   - Enemy
   - Boss
   - Player
+  - EnemyHitBox
   - 
   - 
   - 
@@ -37,8 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - NPC
   - MiniMapRoom
   - MiniMap
   m_SortingLayers:

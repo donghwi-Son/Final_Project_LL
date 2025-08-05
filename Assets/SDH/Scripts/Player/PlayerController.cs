@@ -1,9 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEditor.PlayerSettings;
-
-
-
 
 public class PlayerController : Entity
 {
@@ -14,15 +9,21 @@ public class PlayerController : Entity
 
     [Header("CoolDown")]
     public float specialAttackCooldown = 5f;
-    public static float dashCooldown = 3f;
+    public float dashCooldown = 3f;
     public float skillCooldown = 3f;
+
+    [Header("Offense")]
+    public float attackSpeed = 1f; // 공격 속도
+    public float attackRange = 1.5f; // 공격 범위
 
     [Header("Defense")]
     public float rollDistance = 3f;
     public float rollDuration = 0.3f;
     public float defendReduction = 0.5f;
 
-    public static float maxDashCount = 1; // 최대 대시 횟수
+    public float maxDashCount = 1; // 최대 대시 횟수
+
+    public float attackInterval => 1f / attackSpeed;
 
     //스테이트 및 컨트롤
     public StateMachine<PlayerController> stateMachine;
@@ -90,7 +91,7 @@ public class PlayerController : Entity
     {
         base.Start();
 
-        stateMachine.ChangeState(IdleState);
+        StateMachine.ChangeState(IdleState);
 
         PlayerManager.Instance.player = this; // 플레이어 매니저에 플레이어 설정
 
@@ -107,36 +108,30 @@ public class PlayerController : Entity
         if (MeleeChangeInput)
             ChangeAttackMethod();
 
-        stateMachine.CurrentState.Execute();
-
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            GetHit(1);
-        }
+        StateMachine.CurrentState.Execute();
     }
 
 
     void InitState()
     {
-        stateMachine = new StateMachine<PlayerController>();
-        IdleState = new PlayerIdleState(this, stateMachine, "Idle");
-        MoveState = new PlayerMoveState(this, stateMachine, "Move");
-        JumpState = new PlayerJumpState(this, stateMachine, "Jump");
-        AttackState = new PlayerAttackState(this, stateMachine, "Attack");
-        SpecialAttackState = new PlayerSpecialAttackState(this, stateMachine, "SpecialAttack");
-        SkillState = new PlayerSkillState(this, stateMachine, "Skill");
-        DefendState = new PlayerDefendState(this, stateMachine, "Defend");
-        DashState = new PlayerDashState(this, stateMachine, "Dash");
-        AirAttState = new PlayerAirAttState(this, stateMachine, "AirAttack");
-        DashAttState = new PlayerDashAttState(this, stateMachine, "DashAttack");
-        FallingState = new PlayerFallingState(this, stateMachine, "Fall");
-        HitState = new PlayerHitState(this, stateMachine, "Hit");
+        StateMachine = new StateMachine<PlayerController>();
+        IdleState = new PlayerIdleState(this, StateMachine, "Idle");
+        MoveState = new PlayerMoveState(this, StateMachine, "Move");
+        JumpState = new PlayerJumpState(this, StateMachine, "Jump");
+        AttackState = new PlayerAttackState(this, StateMachine, "Attack");
+        SpecialAttackState = new PlayerSpecialAttackState(this, StateMachine, "SpecialAttack");
+        SkillState = new PlayerSkillState(this, StateMachine, "Skill");
+        DefendState = new PlayerDefendState(this, StateMachine, "Defend");
+        DashState = new PlayerDashState(this, StateMachine, "Dash");
+        AirAttState = new PlayerAirAttState(this, StateMachine, "AirAttack");
+        DashAttState = new PlayerDashAttState(this, StateMachine, "DashAttack");
+        FallingState = new PlayerFallingState(this, StateMachine, "Fall");
     }
 
     void InitComponents()
     {
         AttackManager = GetComponent<AttackManager>();
-        stat = GetComponent<PlayerStatus>();
+        stats = GetComponent<PlayerStatus>();
     }
 
     void HandleInput()
@@ -184,7 +179,7 @@ public class PlayerController : Entity
     {
         CanDoubleJump = false;
         rb.linearVelocityY = 0;
-        stateMachine.ChangeState(JumpState);
+        StateMachine.ChangeState(JumpState);
     }
 
     public void ChangeAttackMethod()
@@ -203,26 +198,26 @@ public class PlayerController : Entity
 
     public void AttackToIdle()
     {
-        stateMachine.ChangeState(IdleState);
+        StateMachine.ChangeState(IdleState);
     }
 
     // 간이 유틸리티 매니저 ===============
-    public static void EnableDoubleJump()
+    public void EnableDoubleJump()
     {
         DoubleJumpActive = true;
     }
 
-    public static void AddDashCount(float count)
+    public void AddDashCount(float count)
     {
         maxDashCount += count;
     }
 
-    public static void DecreaseDashCooldown(float percent)
+    public void DecreaseDashCooldown(float percent)
     {
         dashCooldown *= 1f - percent / 100f; // 감소 비율 적용
     }
 
-    public static void ApplyUtility(ItemInfo.UtilityType type, float amount)
+    public void ApplyUtility(ItemInfo.UtilityType type, float amount)
     {
         switch (type)
         {
