@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Wisp : Enemy
 {
+    public GameObject Projectile { get; private set; }
+
     public StateMachine<Wisp> StateMachine { get; private set; }
     public WispIdleState IdleState { get; private set; }
     public WispMoveState MoveState { get; private set; }
@@ -11,9 +13,11 @@ public class Wisp : Enemy
     protected override void Awake()
     {
         base.Awake();
+        Projectile = Resources.Load<GameObject>("Projectile/Wisp_Fireball");
+
         StateMachine = new StateMachine<Wisp>();
         IdleState = new WispIdleState(this, StateMachine, "Idle");
-        MoveState = new WispMoveState(this, StateMachine, "Move");
+        MoveState = new WispMoveState(this, StateMachine, "Idle");
         AttackState = new WispAttackState(this, StateMachine, "Attack");
         DeadState = new WispDeadState(this, StateMachine, "Dead");
     }

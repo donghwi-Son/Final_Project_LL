@@ -4,6 +4,8 @@ public class BurstWisp : Enemy
 {
     public StateMachine<BurstWisp> StateMachine { get; private set; }
     public BurstWispIdleState IdleState { get; private set; }
+    public BurstWispMoveState MoveState { get; private set; }
+    public BurstWispChaseState ChaseState { get; private set; }
     public BurstWispAttackState AttackState { get; private set; }
 
     protected override void Awake()
@@ -11,6 +13,8 @@ public class BurstWisp : Enemy
         base.Awake();
         StateMachine = new StateMachine<BurstWisp>();
         IdleState = new BurstWispIdleState(this, StateMachine, "Idle");
+        MoveState = new BurstWispMoveState(this, StateMachine, "Idle");
+        ChaseState = new BurstWispChaseState(this, StateMachine, "Idle");
         AttackState = new BurstWispAttackState(this, StateMachine, "Attack");
     }
 
