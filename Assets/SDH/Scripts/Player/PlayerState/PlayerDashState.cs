@@ -9,6 +9,7 @@ public class PlayerDashState : State<PlayerController>
     public override void Enter()
     {
         base.Enter();
+        owner.IsInvincible = true;
         owner.lastDashTime = Time.time;
         stateTimer = 0.7f;
         owner.rb.linearVelocityX = 0f;
@@ -32,6 +33,7 @@ public class PlayerDashState : State<PlayerController>
     public override void Exit()
     {
         base.Exit();
+        owner.IsInvincible = false;
     }
 
     void Dash()

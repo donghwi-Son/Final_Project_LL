@@ -37,6 +37,7 @@ public class PlayerController : Entity
     public PlayerAirAttState AirAttState;
     public PlayerDashAttState DashAttState;
     public PlayerFallingState FallingState;
+    public PlayerHitState HitState;
     public AttackManager AttackManager;
     public PlayerStatus stat;
 
@@ -60,6 +61,10 @@ public class PlayerController : Entity
     public bool IsDefending { get; private set; }
     public bool CanUseDash => Time.time >= lastDashTime + dashCooldown;
     public bool CanUseSpecialAttack => Time.time >= lastSpecialAttackTime + specialAttackCooldown;
+    public bool IsGetHitStun = false;
+    public bool IsPerfectDefend = false; // 완벽 방어 여부
+    public bool IsNormalDefend = false;
+    public bool IsInvincible = false; // 무적 상태 여부
 
     //타이머
     public float lastSpecialAttackTime = -999f;
@@ -67,9 +72,11 @@ public class PlayerController : Entity
 
     //기타변수
     public int DoubleJumpCount = 0;
-    public float perfectDefendTime = 0.5f; // 완벽 방어 시간
+    public float perfectDefendTime = 0.3f; // 완벽 방어 시간
     Vector2 mousePosition;
     public AttackMode attackMode = AttackMode.Melee; // 기본 공격 모드
+    public Material defaultMaterial;
+    public Material hitMaterial;
 
     protected override void Awake()
     {
@@ -101,6 +108,11 @@ public class PlayerController : Entity
             ChangeAttackMethod();
 
         stateMachine.CurrentState.Execute();
+
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            GetHit(1);
+        }
     }
 
 
@@ -118,6 +130,7 @@ public class PlayerController : Entity
         AirAttState = new PlayerAirAttState(this, stateMachine, "AirAttack");
         DashAttState = new PlayerDashAttState(this, stateMachine, "DashAttack");
         FallingState = new PlayerFallingState(this, stateMachine, "Fall");
+        HitState = new PlayerHitState(this, stateMachine, "Hit");
     }
 
     void InitComponents()
@@ -128,6 +141,18 @@ public class PlayerController : Entity
 
     void HandleInput()
     {
+        if (IsGetHitStun)
+        {
+            XInput = 0f; // 피격 상태에서는 이동 입력을 무시
+            JumpInput = false;
+            AttackInput = false;
+            SpecialAttackInput = false;
+            SkillInput = false;
+            DashInput = false;
+            DefendInput = false;
+            MeleeChangeInput = false;
+            return; // 피격 상태에서는 다른 입력을 처리하지 않음
+        }
         XInput = Input.GetAxisRaw("Horizontal");
         JumpInput = Input.GetKeyDown(KeyCode.Space);
         AttackInput = Input.GetMouseButtonDown(0);
@@ -216,6 +241,57 @@ public class PlayerController : Entity
         }
     }
 
+    public void GetHit(int dmg)
+    {
+        if (IsGetHitStun) return;
+        if (IsInvincible) return; // 무적 상태에서는 피격 처리하지 않음
+        if (IsPerfectDefend)
+        {
+            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경  
+            IsInvincible = true; // 무적 상태로 전환
+            Invoke("ResetMaterial", 0.3f);
+            Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
+        }
+        else if (IsNormalDefend)
+        {
+            // 일반 방어 상태에서는 피해를 반감
+            dmg = Mathf.CeilToInt(dmg * (1 - defendReduction));
+            stat.TakeDamage(dmg);
+            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경
+            IsInvincible = true; // 무적 상태로 전환
+            Invoke("ResetMaterial", 0.3f);
+            Invoke("ResetInvincible", 0.5f); // 무적 상태 해제 타이머 설정
+        }
+        else
+        {
+            IsGetHitStun = true;
+            IsInvincible = true; // 무적 상태로 전환
+            Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
+            stat.TakeDamage(dmg);
+            GetKnockBack();
+            spriteRenderer.material = hitMaterial;
+            stateMachine.ChangeState(HitState);
+
+            Invoke("ResetMaterial", 0.3f);
+        }
+    }
+
+    void ResetMaterial()
+    {
+        spriteRenderer.material = defaultMaterial; // 원래 머티리얼로 되돌림
+    }
+
+    void ResetInvincible()
+    {
+        IsInvincible = false; // 무적 상태 해제
+    }
+
+    void GetKnockBack()
+    {
+        rb.linearVelocity = new Vector2(0, 0);
+        rb.AddForce(new Vector2(-FacingDir * 5f, 5f), ForceMode2D.Impulse);
+    }
+
 
     // 간이 유틸리티 매니저 ===============
 
@@ -242,4 +318,7 @@ public class PlayerController : Entity
     //    moveSpeed = originmoveSpeed;
     //    enabled = true;
     //}
+
+
+
 }

@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,4 +72,5 @@ public class PlayerStatus : CharacterStats
                 break;
         }
     }
+
 }

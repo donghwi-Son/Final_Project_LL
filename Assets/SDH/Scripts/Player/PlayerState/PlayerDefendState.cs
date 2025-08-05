@@ -10,7 +10,7 @@ public class PlayerDefendState : State<PlayerController>
     {
         base.Enter();
         owner.SetZeroVelocity();
-        stateTimer = 1f; // 방어 지속 시간 초기화
+        stateTimer = 0.5f; // 방어 지속 시간 초기화
         owner.anim.SetBool("isDefending", true);
     }
 
@@ -19,12 +19,13 @@ public class PlayerDefendState : State<PlayerController>
         base.Execute();
         if (stateTimer >= owner.perfectDefendTime)
         {
-            //완벽가드
+            owner.IsPerfectDefend = true;
         }
         else if(stateTimer > 0f)
         {
-            //일반가드
-        }
+            owner.IsNormalDefend = true;
+            owner.IsPerfectDefend = false;
+        }  
         else
         {
             stateMachine.ChangeState(owner.IdleState);
@@ -34,6 +35,7 @@ public class PlayerDefendState : State<PlayerController>
     public override void Exit()
     {
         base.Exit();
+        owner.IsNormalDefend = false;
         owner.anim.SetBool("isDefending", false);
     }
 

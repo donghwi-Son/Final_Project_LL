@@ -19,7 +19,6 @@ public class PlayerAttackState : State<PlayerController>
 
     public override void Enter()
     {
-        base.Enter();
         owner.rb.linearVelocityX = 0f;
         isHolding = true;
         holdTime = 0f;
@@ -38,7 +37,6 @@ public class PlayerAttackState : State<PlayerController>
 
     public override void Execute()
     {
-        base.Execute();
 
         if (Input.GetMouseButton(0) && isHolding)
         {
@@ -133,9 +131,8 @@ public class PlayerAttackState : State<PlayerController>
 
     public override void Exit()
     {
-        base.Exit();
         owner.anim.speed = 1f;
-
+        owner.anim.ResetTrigger("Att");
         // 차지바 숨기기 (안전장치)
         if (chargeBar != null)
         {

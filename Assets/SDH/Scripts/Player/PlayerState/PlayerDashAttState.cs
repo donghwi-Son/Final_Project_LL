@@ -9,6 +9,7 @@ public class PlayerDashAttState : State<PlayerController>
     public override void Enter()
     {
         base.Enter();
+        owner.IsInvincible = true;
         owner.AttackManager.DashAttack(owner.IsFacingRight);
     }
 
@@ -20,5 +21,6 @@ public class PlayerDashAttState : State<PlayerController>
     public override void Exit()
     {
         base.Exit();
+        owner.IsInvincible = false;
     }
 }

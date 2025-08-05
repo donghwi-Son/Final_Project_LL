@@ -46,4 +46,10 @@ public class EffectTest : MonoBehaviour
     {
         EffectManager.Instance.AddCE(EffectManager.CommonEffectType.Lightning);
     }
+
+    public void Hit()
+    {
+        PlayerController player = FindFirstObjectByType<PlayerController>();
+        player.GetHit(1);
+    }
 }

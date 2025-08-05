@@ -9,13 +9,20 @@ public class PlayerFallingState : State<PlayerController>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Player Falling State Entered");
     }
 
     public override void Execute()
     {
-        base.Execute();
-        owner.SetVelocity(owner.XInput * owner.moveSpeed, owner.rb.linearVelocityY);
+        float xVel;
+        if (!Mathf.Approximately(owner.XInput, 0f))
+        {
+            xVel = owner.XInput * owner.moveSpeed;
+        }
+        else
+        {
+            xVel = owner.rb.linearVelocity.x;
+        }
+        owner.SetVelocity(xVel, owner.rb.linearVelocityY);
         if (owner.CanDoubleJump && owner.JumpInput && !owner.IsGroundDetected())
         {
             owner.DoubleJump();

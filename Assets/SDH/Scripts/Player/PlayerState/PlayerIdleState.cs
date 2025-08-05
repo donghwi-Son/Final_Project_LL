@@ -9,8 +9,8 @@ public class PlayerIdleState : State<PlayerController>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Player Idle State Entered");
         owner.SetZeroVelocity();
+        Debug.Log("Player Idle State Entered");
     }
 
     public override void Execute()

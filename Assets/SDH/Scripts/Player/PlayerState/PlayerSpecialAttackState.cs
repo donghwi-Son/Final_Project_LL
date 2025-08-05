@@ -8,11 +8,11 @@ public class PlayerSpecialAttackState : State<PlayerController>
 
     public override void Enter()
     {
-        base.Enter();
         owner.lastSpecialAttackTime = Time.time;
         switch (owner.attackMode)
         {
             case AttackMode.Melee:
+                owner.anim.SetTrigger("SpecialAtt");
                 owner.AttackManager.SpecialMeleeAttack();
                 break;
             case AttackMode.Ranged:
@@ -24,11 +24,9 @@ public class PlayerSpecialAttackState : State<PlayerController>
 
     public override void Execute()
     {
-        base.Execute();
     }
 
     public override void Exit()
     {
-        base.Exit();
     }
 }
