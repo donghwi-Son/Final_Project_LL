@@ -14,7 +14,7 @@ public class RoomConditionManager : MonoBehaviour
     public GameObject bossFinishObject;   // Boss Finish Group
 
     private IRoomCondition condition;
-    private bool isBossRoom = false;
+    //private bool isBossRoom = false;
     private bool finishActivated = false;
 
     private void Start()
@@ -27,15 +27,15 @@ public class RoomConditionManager : MonoBehaviour
         // 여기 핵심
         GameObject root = transform.root.gameObject;
         var data = StageManager.Instance?.GetStageDataByInstance(root);
-        if (data != null && data.type == StageType.Boss)
-        {
-            isBossRoom = true;
-            Debug.Log("[RoomConditionManager] 보스 방으로 인식됨 (루트 기준)");
-        }
-        else
-        {
-            Debug.LogWarning("[RoomConditionManager] Boss 인식 실패! → data: " + (data == null ? "null" : data.type.ToString()));
-        }
+        //if (data != null && data.type == StageType.Boss)
+        //{
+        //    isBossRoom = true;
+        //    Debug.Log("[RoomConditionManager] 보스 방으로 인식됨 (루트 기준)");
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("[RoomConditionManager] Boss 인식 실패! → data: " + (data == null ? "null" : data.type.ToString()));
+        //}
 
         condition?.Setup(root); // 조건 설정도 반드시 루트 전달
     }
@@ -46,11 +46,11 @@ public class RoomConditionManager : MonoBehaviour
     {
         yield return null; // 1프레임 기다림
         var data = StageManager.Instance?.GetStageDataByInstance(gameObject);
-        if (data != null && data.type == StageType.Boss)
-        {
-            isBossRoom = true;
-            Debug.Log("[RoomConditionManager] 보스 방으로 인식됨 (지연 확인)");
-        }
+        //if (data != null && data.type == StageType.Boss)
+        //{
+        //    isBossRoom = true;
+        //    Debug.Log("[RoomConditionManager] 보스 방으로 인식됨 (지연 확인)");
+        //}
     }
 
 
@@ -86,7 +86,6 @@ public class RoomConditionManager : MonoBehaviour
             finishActivated = true;
         }
     }
-
 
 
     private void ActivateNormalFinish()
