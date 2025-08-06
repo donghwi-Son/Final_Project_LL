@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3834295576106383428}
   - component: {fileID: 2549002392064810839}
   - component: {fileID: 1921613405430780991}
+  - component: {fileID: -6651051158900690681}
   m_Layer: 0
   m_Name: Wisp
   m_TagString: Untagged
@@ -175,6 +176,36 @@ MonoBehaviour:
   attackDistance: 10
   attackCooldown: 1
   lastTimeAttacked: 0
+--- !u!114 &-6651051158900690681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201702559513276343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284bafb19fac2074aae8788e718f5e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 10
+    modifiers: 
+  critChance:
+    baseValue: 0
+    modifiers: 
+  critPower:
+    baseValue: 0
+    modifiers: 
+  maxHealth:
+    baseValue: 100
+    modifiers: 
+  defense:
+    baseValue: 0
+    modifiers: 
+  currentHealth: 0
+  level: 1
+  percantageModifier: 0.4
 --- !u!1 &5526122820782390172
 GameObject:
   m_ObjectHideFlags: 0
