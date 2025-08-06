@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7983810689500209712}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Finish Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1680022502560978767}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2580286075539021043}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Boss Finish Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 6728234026297203107}
   - component: {fileID: 7110892157854518376}
   - component: {fileID: 3969876442814163927}
-  m_Layer: 30
+  m_Layer: 28
   m_Name: Left Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 1459264955777301013}
   - component: {fileID: 8332079992362934731}
   - component: {fileID: 1077933444279213464}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28840,7 +28840,7 @@ GameObject:
   - component: {fileID: 5766406128212664208}
   - component: {fileID: 1804638333701692893}
   - component: {fileID: 3399214374768122332}
-  m_Layer: 30
+  m_Layer: 28
   m_Name: Right Finish
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -29018,7 +29018,7 @@ GameObject:
   - component: {fileID: 4336083802755815878}
   - component: {fileID: 6439073762725227968}
   - component: {fileID: 8023606303103859887}
-  m_Layer: 30
+  m_Layer: 28
   m_Name: Boss Finish 1
   m_TagString: Finish
   m_Icon: {fileID: 0}
@@ -29195,9 +29195,9 @@ GameObject:
   - component: {fileID: 754405997927214887}
   - component: {fileID: 527428093408120457}
   - component: {fileID: 3717400362523317165}
-  m_Layer: 30
+  m_Layer: 6
   m_Name: Stage_Start
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

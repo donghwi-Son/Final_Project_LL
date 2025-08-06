@@ -11,6 +11,7 @@ TagManager:
   - NPC
   - Gold
   - Item
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -40,7 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Finish
   - NPC
   - MiniMapRoom
   - MiniMap
