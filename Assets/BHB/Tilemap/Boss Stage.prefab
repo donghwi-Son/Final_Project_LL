@@ -46,9 +46,9 @@ GameObject:
   - component: {fileID: 3917615692366668075}
   - component: {fileID: 5959201225175720215}
   - component: {fileID: 3235666215150404169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stage_Boss
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
