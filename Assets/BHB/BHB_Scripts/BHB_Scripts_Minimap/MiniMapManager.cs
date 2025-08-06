@@ -20,6 +20,7 @@ public class MiniMapManager : MonoBehaviour
 
     [Header("설정")]
     public float iconSpacing = 40f;
+    public Vector2 miniMapOffset = new Vector2(0f, -50f); // 위치 보정 역할
 
     private Dictionary<Vector2Int, GameObject> spawnedIcons = new();
     private bool isMapOpen = false;
@@ -270,9 +271,7 @@ public class MiniMapManager : MonoBehaviour
         Vector2 offset = (Vector2)grid - center;
         Vector2 pos = offset * iconSpacing;
         // Y축으로 위로 올리기
-        pos.y += 50f;
-
-        return pos;
+        return pos + miniMapOffset;
     }
 
     private GameObject GetPrefabForType(StageType type)

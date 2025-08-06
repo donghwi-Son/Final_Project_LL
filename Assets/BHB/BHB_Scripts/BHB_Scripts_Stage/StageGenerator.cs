@@ -6,8 +6,9 @@ public class StageGenerator : MonoBehaviour
     [Header("그리드 설정")]
     public int rows = 16; // 세로 칸 수 (y)
     public int cols = 9;  // 가로 칸 수 (x)
-    public Vector2 roomSize = new Vector2(28.8456f, 16.1808f); // 각 룸의 크기, 변경 가능
+    public Vector2 roomSize = new Vector2(0f, 0f); // 각 룸의 크기, 변경 가능
     public Vector3 origin = Vector3.zero; // 기준 시작 위치
+    public float ySpawnOffsetFix = -10f; // 컴포넌트에서 보정값 조정 가능하게 공개 필드로 설정
 
     private void OnDrawGizmos()
     {
@@ -61,7 +62,8 @@ public class StageGenerator : MonoBehaviour
     {
         //Vector3 offset = new Vector3(roomSize.x / 2f, roomSize.y / 2f, 0f);
         //return origin + new Vector3(grid.x * roomSize.x, grid.y * roomSize.y, 0f) + offset;
-        return origin + new Vector3(grid.x * roomSize.x, grid.y * roomSize.y, 0f);
+        Vector3 basePos = origin + new Vector3(grid.x * roomSize.x, grid.y * roomSize.y, 0f);
+        return basePos + new Vector3(0f, ySpawnOffsetFix, 0f); // Y축 보정 적용
     }
 
     // 그리드 내부에 방 제한
