@@ -6,11 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Wall
-  - Structure
   - Boss
   - NPC
   - Gold
   - Item
+  - Ground
   layers:
   - Default
   - TransparentFX
