@@ -126,6 +126,10 @@ public class StageManager : MonoBehaviour
 
         // 방에 플레이어가 들어갈 때마다 활성화
         StageData roomData = placedRooms[nextGrid];
+
+        // Start에서 좌우 null 오류 해결 부분
+        if (roomData?.instance == null) return;
+
         if (roomData.instance != null)
             roomData.instance.SetActive(true);
 
@@ -146,6 +150,7 @@ public class StageManager : MonoBehaviour
         // SpawnPoint 위치: backDir 기반 Entry Finish 사용
         // 이전 방의 Finish와 반대되는 곳에 SpawnPoint가 놓여짐
         Transform spawn = null;
+
         if (backDir.HasValue && finishGroup != null)
         {
             string entryName = GetFinishName(backDir.Value, false);
@@ -161,9 +166,27 @@ public class StageManager : MonoBehaviour
             spawn = roomData.instance.transform.Find("SpawnPoint");
         }
 
-        player.position = spawn != null ? spawn.position : roomData.instance.transform.position;
+        // 끼임 방지용 오프셋 계산
+        Vector3 spawnOffset = Vector3.zero;
 
-        
+        if (backDir.HasValue)
+        {
+            Vector2Int dir = backDir.Value;
+
+            // 방향에 따라 플레이어를 진입 방향 기준 약간 "앞으로" 이동
+            if (dir == Vector2Int.up) spawnOffset = Vector3.down * 0.5f;
+            else if (dir == Vector2Int.down) spawnOffset = Vector3.up * 0.5f;
+            else if (dir == Vector2Int.left) spawnOffset = Vector3.right * 0.5f;
+            else if (dir == Vector2Int.right) spawnOffset = Vector3.left * 0.5f;
+        }
+
+        // 최종 위치 이동
+        player.position = spawn != null
+            ? spawn.position + spawnOffset
+            : roomData.instance.transform.position;
+
+
+
 
         // 보스 맵
         if (roomData.type == StageType.Boss)
