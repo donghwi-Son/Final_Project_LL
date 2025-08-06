@@ -39,7 +39,7 @@ public class Enemy : Entity
 
     protected override void Awake()
     {
-        base.Awake();
+        base.Awake();   
 
         stats = GetComponent<EnemyStats>();
 
