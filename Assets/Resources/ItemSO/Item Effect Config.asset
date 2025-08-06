@@ -21,7 +21,8 @@ MonoBehaviour:
     skillType: 0
     subAttackType: 0
     subAttackCooldown: 0
-    enableDoubleJump: 0
+    utilityType: 0
+    utilityAmount: 0
   - index: 1
     upgradeType: 1
     statType: 0
@@ -30,7 +31,8 @@ MonoBehaviour:
     skillType: 0
     subAttackType: 0
     subAttackCooldown: 0
-    enableDoubleJump: 0
+    utilityType: 0
+    utilityAmount: 0
   - index: 2
     upgradeType: 2
     statType: 0
@@ -39,16 +41,18 @@ MonoBehaviour:
     skillType: 1
     subAttackType: 0
     subAttackCooldown: 0
-    enableDoubleJump: 0
+    utilityType: 0
+    utilityAmount: 0
   - index: 3
     upgradeType: 3
     statType: 0
     statAmount: 0
     attackEnhance: 0
     skillType: 0
-    subAttackType: 1
+    subAttackType: 2
     subAttackCooldown: 10
-    enableDoubleJump: 0
+    utilityType: 0
+    utilityAmount: 0
   - index: 4
     upgradeType: 4
     statType: 0
@@ -57,7 +61,8 @@ MonoBehaviour:
     skillType: 0
     subAttackType: 0
     subAttackCooldown: 0
-    enableDoubleJump: 1
+    utilityType: 0
+    utilityAmount: 0
   - index: 5
     upgradeType: 2
     statType: 0
@@ -66,4 +71,5 @@ MonoBehaviour:
     skillType: 0
     subAttackType: 0
     subAttackCooldown: 0
-    enableDoubleJump: 0
+    utilityType: 0
+    utilityAmount: 0
