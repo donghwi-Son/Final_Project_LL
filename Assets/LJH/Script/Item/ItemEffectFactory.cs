@@ -35,13 +35,21 @@ public class ItemEffectFactory : MonoBehaviour
                 Debug.Log("스킬 강화 아이템 획득");
                 //PlayerTest.Instance.AddSkill(e.skillType);            //스킬 획득 넣어야 하는 부분
                 break;
-                
-
+            
             case ItemInfo.ItemUpgradeType.SubAttack:
-                Debug.Log("보조 공격 아이템 획득");
-                //var subCfg = SubAttackRegistry.Instance.Get(e.subAttackType);                     //보조 공격 아이템 프리펩 추가
-                //SubAttackSystem.Instance.SubAttackRegister(subCfg.prefab, e.subAttackCooldown);   //보조 공격 쿨타임 설정
+            {
+                string prefabName = e.subAttackType.ToString();
+                GameObject prefab = Resources.Load<GameObject>($"SubAttacks/{prefabName}");
+                if (prefab == null)
+                {
+                    Debug.LogError($"서브어택 프리팹을 찾을 수 없음: Resources/SubAttacks/{prefabName}.prefab");
+                    break;
+                }
+                
+                // Config 쿨다운을 우선 적용하고 싶으면 overrideCooldown 전달
+                SubAttackSlot.Instance.Equip(prefab, e.subAttackCooldown > 0 ? e.subAttackCooldown : -1f);
                 break;
+            }
                 
             case ItemInfo.ItemUpgradeType.Utility:
                 Debug.Log("유틸 아이템 획득");

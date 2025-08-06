@@ -45,7 +45,6 @@ public class GoldChest : MonoBehaviour
             {
                 Vector2 forceDir = new Vector2(Random.Range(-2f, 2f), Random.Range(2f, 4f));
                 rb.AddForce(forceDir, ForceMode2D.Impulse);
-                rb.AddTorque(Random.Range(-10f, 10f), ForceMode2D.Impulse);
             }
         }
     }

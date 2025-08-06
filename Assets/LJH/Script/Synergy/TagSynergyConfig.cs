@@ -21,7 +21,6 @@ public class TagSynergyConfig : ScriptableObject
     {
         if (_map == null || _map.Count == 0)
         {
-            Debug.LogWarning("TagSynergyConfig map not initialized! Rebuilding now.");
             _map = entries.ToDictionary(e => e.tag);
         }
 
