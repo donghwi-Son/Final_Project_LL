@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1711541471446974995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5364633373054986642}
+  - component: {fileID: 2637259167064539495}
+  - component: {fileID: 8079758505187441040}
+  - component: {fileID: 9034065956981574499}
+  - component: {fileID: 7711233474105136884}
+  m_Layer: 0
+  m_Name: ProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5364633373054986642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711541471446974995}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3484464, y: -1.0390626, z: -0.054063484}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2637259167064539495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711541471446974995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b00e4dba58a1d4f8ea66bff92db45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileMappings:
+  - type: 1
+    prefab: {fileID: 7823349647714137135, guid: 9554ae85852165d4eabcf1288d7a6893, type: 3}
+  - type: 2
+    prefab: {fileID: 5867868818670292960, guid: 2064dcbd085b6a14d88124fdc64612a0, type: 3}
+--- !u!114 &8079758505187441040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711541471446974995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351acde4df25a7e43b0a284bb1aab350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9034065956981574499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711541471446974995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca8e7609b258a64ca26690042190daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightningLine: {fileID: 4646407399044105225, guid: 25abfe8b59c3d8149adf933adae106a4, type: 3}
+  lightningEffect: {fileID: 3593014612722186589, guid: 179035e194e6d5d47a9fefc4e1c6419e, type: 3}
+  iceEffect: {fileID: 1583730194426079749, guid: 3e12774056c6af9478e9608e06235010, type: 3}
+  poisonEffect: {fileID: 2846515686177944968, guid: f11fddb4cada65d4fb0803c6591c0f1c, type: 3}
+  explosiveEffect: {fileID: 6899552178797592894, guid: 9ca85163e882e334d81f2cfd4e89a5f7, type: 3}
+--- !u!114 &7711233474105136884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711541471446974995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3408098758d60546af6a18d89011271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTarget: 3
+  chainRange: 5

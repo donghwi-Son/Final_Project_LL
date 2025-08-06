@@ -26,7 +26,7 @@ public class PlayerUI : MonoBehaviour
         if (player == null) return;
 
         float timeSinceLastDash = Time.time - player.lastDashTime;
-        float cooldownProgress = timeSinceLastDash / PlayerController.dashCooldown;
+        float cooldownProgress = timeSinceLastDash / player.dashCooldown;
 
         // 쿨다운 이미지 업데이트
         if (DashCool != null)

@@ -26,7 +26,7 @@ public class PlayerController : Entity
     public float attackInterval => 1f / attackSpeed;
 
     //스테이트 및 컨트롤
-    public StateMachine<PlayerController> stateMachine;
+    public StateMachine<PlayerController> StateMachine;
     public PlayerIdleState IdleState;
     public PlayerMoveState MoveState;
     public PlayerJumpState JumpState;
@@ -131,7 +131,7 @@ public class PlayerController : Entity
     void InitComponents()
     {
         AttackManager = GetComponent<AttackManager>();
-        stats = GetComponent<PlayerStatus>();
+        stat = GetComponent<PlayerStatus>();
     }
 
     void HandleInput()
@@ -265,7 +265,7 @@ public class PlayerController : Entity
             stat.TakeDamage(dmg);
             GetKnockBack();
             spriteRenderer.material = hitMaterial;
-            stateMachine.ChangeState(HitState);
+            StateMachine.ChangeState(HitState);
 
             Invoke("ResetMaterial", 0.3f);
         }
