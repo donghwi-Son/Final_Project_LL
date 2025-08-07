@@ -10,8 +10,6 @@ public class SynergyManager : MonoBehaviour
     private HashSet<ItemInfo.ItemTag> activeTagSynergy = new();
 
     private TagSynergyConfig  tagConfig;
-    
-    [SerializeField] private PlayerStatus playerStatus;
 
     void Awake()
     {
@@ -47,7 +45,7 @@ public class SynergyManager : MonoBehaviour
         {
             case TagSynergyConfig.SynergyType.Stats:
                 //스탯을 증가 일단 체력으로 테스트
-                playerStatus.ModifyStat(entry.statType, entry.bonus);
+                PlayerStatus.Instance.ModifyStat(entry.statType, entry.bonus);
                 break;
 
             case TagSynergyConfig.SynergyType.Attack:
