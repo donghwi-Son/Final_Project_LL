@@ -53,8 +53,13 @@ public class RoomConditionManager : MonoBehaviour
         //}
     }
 
-
     private void Update()
+    {
+        TriggerFinishCheck();
+    }
+
+    // 참조
+    public void TriggerFinishCheck()
     {
         if (finishActivated || condition == null) return;
 
@@ -88,7 +93,7 @@ public class RoomConditionManager : MonoBehaviour
     }
 
 
-    private void ActivateNormalFinish()
+    public void ActivateNormalFinish()
     {
         if (finishObject != null)
         {
@@ -102,7 +107,7 @@ public class RoomConditionManager : MonoBehaviour
         }
     }
 
-    private void ActivateBossFinish()
+    public void ActivateBossFinish()
     {
         if (bossFinishObject != null)
         {
