@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 804809418605294872}
   - component: {fileID: 401718951766860043}
   - component: {fileID: 5399384873300768799}
-  - component: {fileID: 1465312073845186870}
+  - component: {fileID: 3946163173554294032}
   m_Layer: 8
   m_Name: Boss_Crow
   m_TagString: Boss
@@ -215,7 +215,6 @@ MonoBehaviour:
   dieForceX: 5
   dieForceY: 5
   attackDealy: 3
-  stats: {fileID: 0}
   playerTrans: {fileID: 0}
 --- !u!50 &401718951766860043
 Rigidbody2D:
@@ -290,7 +289,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.8781521, y: 3.6064153}
   m_EdgeRadius: 0
---- !u!114 &1465312073845186870
+--- !u!114 &3946163173554294032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,6 +317,8 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   currentHealth: 0
+  level: 1
+  percantageModifier: 0.4
 --- !u!1 &9092921760690567582
 GameObject:
   m_ObjectHideFlags: 0

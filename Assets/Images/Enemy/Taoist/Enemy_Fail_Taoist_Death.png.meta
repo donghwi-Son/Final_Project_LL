@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: ad1027cacdb880246a1feadbbc0ddc36
+guid: 5eafab3829666cd4f9366f948d359da5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7237692574612119189
-    second: Enemy_Fail_Taoist_Beam_0
+      213: -651135712784637907
+    second: Enemy_Fail_Taoist_Death_0
+  - first:
+      213: 8242469778693165760
+    second: Enemy_Fail_Taoist_Death_1
+  - first:
+      213: -2304056036913646140
+    second: Enemy_Fail_Taoist_Death_2
+  - first:
+      213: 519872814442567271
+    second: Enemy_Fail_Taoist_Death_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 15
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,45 +148,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_Fail_Taoist_Beam_0
+      name: Enemy_Fail_Taoist_Death_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 1
+        width: 122
+        height: 89
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59edc37bc03717460800000000000000
-      internalID: 7237692574612119189
+      spriteID: d20a6e2e483b6f6f0800000000000000
+      internalID: -651135712784637907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Fail_Taoist_Beam_1
+      name: Enemy_Fail_Taoist_Death_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 122
+        y: 1
+        width: 122
+        height: 89
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: b9d5c9147dc8eb249b2b9fdd07627693
-      internalID: -9491219
+      spriteID: 0c216eed792236270800000000000000
+      internalID: 8242469778693165760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Fail_Taoist_Death_2
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 1
+        width: 122
+        height: 89
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c5fa29ed395600e0800000000000000
+      internalID: -2304056036913646140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Fail_Taoist_Death_3
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 1
+        width: 122
+        height: 89
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7665b310295f63700800000000000000
+      internalID: 519872814442567271
       vertices: []
       indices: 
       edges: []
@@ -186,7 +239,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 09a1b5f3a2b2ad24b959bdd2928ebd30
+    spriteID: 31afca9b5a5d7ef4daa67f3c6e4c6e03
     internalID: 0
     vertices: []
     indices: 
@@ -196,8 +249,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Enemy_Fail_Taoist_Beam_0: 7237692574612119189
-      Enemy_Fail_Taoist_Beam_1: -9491219
+      Enemy_Fail_Taoist_Death_0: -651135712784637907
+      Enemy_Fail_Taoist_Death_1: 8242469778693165760
+      Enemy_Fail_Taoist_Death_2: -2304056036913646140
+      Enemy_Fail_Taoist_Death_3: 519872814442567271
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
