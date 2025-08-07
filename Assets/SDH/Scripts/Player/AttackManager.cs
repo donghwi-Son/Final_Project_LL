@@ -113,6 +113,8 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
+            player.stat.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
 
@@ -126,6 +128,8 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
+            player.stat.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
@@ -145,6 +149,8 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
+            player.stat.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
@@ -156,6 +162,8 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
+            player.stat.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
@@ -167,6 +175,8 @@ public class AttackManager : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
+            CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
+            player.stat.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }

@@ -53,23 +53,7 @@ public class RoomConditionManager : MonoBehaviour
         //}
     }
 
-    private void Update()
-    {
-        TriggerFinishCheck();
-    }
-
-    // 참조
-    public void TriggerFinishCheck()
-    {
-        if (finishActivated || condition == null) return;
-
-        if (condition.IsConditionMet())
-        {
-            CreateNextRoom();
-        }
-    }
-
-    void CreateNextRoom()
+    public void CreateNextRoom()
     {
         int current = StageManager.Instance.stageCounter;
         int max = StageManager.Instance.maxStageCounter;
