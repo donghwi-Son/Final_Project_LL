@@ -19,6 +19,7 @@ public class WoodSpiritMoveState : State<WoodSpirit>
 
         if(owner.IsPlayerDetected())
         {
+            Debug.Log(owner.CanAttack());
             if(owner.IsPlayerDetected().distance <= owner.AttackDistance && owner.CanAttack())
             {
                 stateMachine.ChangeState(owner.AttackState);

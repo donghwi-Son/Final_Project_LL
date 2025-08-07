@@ -16,6 +16,11 @@ public class PlayerDashAttState : State<PlayerController>
     public override void Execute()
     {
         base.Execute();
+
+        if (triggerCalled)
+        {
+            stateMachine.ChangeState(owner.IdleState);
+        }
     }
 
     public override void Exit()

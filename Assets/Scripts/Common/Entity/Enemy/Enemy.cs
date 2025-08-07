@@ -10,7 +10,6 @@ public class Enemy : Entity
     public float idleTime;
     public float battleTime;
     private float defaultMoveSpeed;
-    [SerializeField] public float fallSpeed = 2f;
 
     private Transform playerTransform;
     [Header("플레이어 탐지 정보")]

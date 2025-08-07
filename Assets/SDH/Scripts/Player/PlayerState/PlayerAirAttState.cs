@@ -18,6 +18,11 @@ public class PlayerAirAttState : State<PlayerController>
     public override void Execute()
     {
         base.Execute();
+
+        if (triggerCalled)
+        {
+            stateMachine.ChangeState(owner.FallingState);
+        }
     }
 
     public override void Exit()
