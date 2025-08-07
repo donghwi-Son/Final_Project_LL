@@ -43,7 +43,7 @@ public class GoldChest : MonoBehaviour
             
             if (gold.TryGetComponent(out Rigidbody2D rb))
             {
-                Vector2 forceDir = new Vector2(Random.Range(-2f, 2f), Random.Range(2f, 4f));
+                Vector2 forceDir = new Vector2(Random.Range(-1f, 1f), Random.Range(2f, 3f));
                 rb.AddForce(forceDir, ForceMode2D.Impulse);
             }
         }
