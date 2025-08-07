@@ -45,8 +45,8 @@ public class PlayerUI : MonoBehaviour
     void UpdateHP()
     {
         if (player == null) return;
-        int currenthp = player.stat.currentHealth;
-        int MaxHP = player.stat.maxHealth.GetValue();
+        int currenthp = player.stats.currentHealth;
+        int MaxHP = player.stats.maxHealth.GetValue();
         hp.text = $"HP : {currenthp}/{MaxHP}";
         if (hpBar != null)
         {

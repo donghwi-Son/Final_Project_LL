@@ -12,7 +12,6 @@ public class PlayerSpecialAttackState : State<PlayerController>
         switch (owner.attackMode)
         {
             case AttackMode.Melee:
-                owner.anim.SetTrigger("SpecialAtt");
                 owner.AttackManager.SpecialMeleeAttack();
                 break;
             case AttackMode.Ranged:
@@ -24,6 +23,10 @@ public class PlayerSpecialAttackState : State<PlayerController>
 
     public override void Execute()
     {
+        if (triggerCalled)
+        {
+            stateMachine.ChangeState(owner.IdleState);
+        }
     }
 
     public override void Exit()

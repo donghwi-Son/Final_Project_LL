@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 661592345750761689}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2549002392064810839}
   - component: {fileID: 1921613405430780991}
   - component: {fileID: -6651051158900690681}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wisp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,8 +84,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 2.5
+  m_Material: {fileID: 6200000, guid: 4c34b5f2c3cae8544a3f56f705587300, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -95,7 +95,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2549002392064810839
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -161,16 +161,15 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 0
-  idleTime: 0
+  moveSpeed: 5
+  idleTime: 1
   battleTime: 0
-  fallSpeed: 2
   playerCheck: {fileID: 1646223157908553210}
-  playerCheckRadius: 0
+  playerCheckRadius: 5
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  playerCheckDistance: 0
+  playerCheckDistance: 5
   attackCheck: {fileID: 1646223157908553210}
   attackCheckRadius: 0
   attackDistance: 10
@@ -201,7 +200,7 @@ MonoBehaviour:
     baseValue: 100
     modifiers: 
   defense:
-    baseValue: 0
+    baseValue: 1
     modifiers: 
   currentHealth: 0
   level: 1
@@ -215,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4551136120153328820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +248,7 @@ GameObject:
   - component: {fileID: 7505593475991413817}
   - component: {fileID: 6234196627569365266}
   - component: {fileID: 6336849921576546630}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

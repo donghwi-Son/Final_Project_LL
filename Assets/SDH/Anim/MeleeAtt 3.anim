@@ -89,8 +89,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
-    functionName: AttackToIdle
+  - time: 0.51666665
+    functionName: AnimationTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

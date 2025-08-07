@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6975092539010024380}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2671366235820854894}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 6390871455492103988}
   - component: {fileID: 6302362356345450120}
   - component: {fileID: 6374016064044086467}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WoodSpirit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,8 +115,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 2.5
+  m_Material: {fileID: 6200000, guid: 4c34b5f2c3cae8544a3f56f705587300, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -192,10 +192,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 0
-  idleTime: 0
+  moveSpeed: 5
+  idleTime: 1
   battleTime: 0
-  fallSpeed: 2
   playerCheck: {fileID: 1178266456617497302}
   playerCheckRadius: 2
   whatIsPlayer:
@@ -232,7 +231,7 @@ MonoBehaviour:
     baseValue: 100
     modifiers: 
   defense:
-    baseValue: 0
+    baseValue: 1
     modifiers: 
   currentHealth: 0
   level: 1
@@ -249,7 +248,7 @@ GameObject:
   - component: {fileID: 4835016229900716052}
   - component: {fileID: 450175594669809882}
   - component: {fileID: 633709521802505487}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
