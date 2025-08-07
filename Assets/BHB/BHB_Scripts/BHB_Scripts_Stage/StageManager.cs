@@ -174,10 +174,10 @@ public class StageManager : MonoBehaviour
             Vector2Int dir = backDir.Value;
 
             // 방향에 따라 플레이어를 진입 방향 기준 약간 "앞으로" 이동
-            if (dir == Vector2Int.up) spawnOffset = Vector3.down * 0.5f;
-            else if (dir == Vector2Int.down) spawnOffset = Vector3.up * 0.5f;
-            else if (dir == Vector2Int.left) spawnOffset = Vector3.right * 0.5f;
-            else if (dir == Vector2Int.right) spawnOffset = Vector3.left * 0.5f;
+            if (dir == Vector2Int.up) spawnOffset = Vector3.down * 1f;
+            else if (dir == Vector2Int.down) spawnOffset = Vector3.up * 1f;
+            else if (dir == Vector2Int.left) spawnOffset = Vector3.right * 1f;
+            else if (dir == Vector2Int.right) spawnOffset = Vector3.left * 1f;
         }
 
         // 최종 위치 이동
