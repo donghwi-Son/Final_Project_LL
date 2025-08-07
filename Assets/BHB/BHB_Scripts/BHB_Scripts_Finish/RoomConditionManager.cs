@@ -60,31 +60,36 @@ public class RoomConditionManager : MonoBehaviour
 
         if (condition.IsConditionMet())
         {
-            int current = StageManager.Instance.stageCounter;
-            int max = StageManager.Instance.maxStageCounter;
+            CreateNextRoom();
+        }
+    }
 
-            Debug.Log($"[RoomConditionManager] 조건 달성됨: {current} / {max}");
+    void CreateNextRoom()
+    {
+        int current = StageManager.Instance.stageCounter;
+        int max = StageManager.Instance.maxStageCounter;
 
-            var data = StageManager.Instance.GetStageDataByInstance(gameObject);
-            if (data != null && data.type == StageType.Boss)
+        Debug.Log($"[RoomConditionManager] 조건 달성됨: {current} / {max}");
+
+        var data = StageManager.Instance.GetStageDataByInstance(gameObject);
+        if (data != null && data.type == StageType.Boss)
+        {
+            ActivateBossFinish(); // 보스 방 내부에서 피니시 켜기
+        }
+        else
+        {
+            // 일반 방인데, Boss Finish 로 연결되는 경우
+            if (current >= max)
             {
-                ActivateBossFinish(); // 보스 방 내부에서 피니시 켜기
+                ActivateBossFinish(); // Boss Finish 1 만 열기
             }
             else
             {
-                // 일반 방인데, Boss Finish 로 연결되는 경우
-                if (current >= max)
-                {
-                    ActivateBossFinish(); // Boss Finish 1 만 열기
-                }
-                else
-                {
-                    ActivateNormalFinish(); // 일반 Finish 켜기
-                }
+                ActivateNormalFinish(); // 일반 Finish 켜기
             }
-
-            finishActivated = true;
         }
+
+        finishActivated = true;
     }
 
 
