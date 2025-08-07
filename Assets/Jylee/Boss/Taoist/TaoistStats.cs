@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class CrowStats : EnemyStats
+public class TaoistStats : EnemyStats
 {
-    private BossCrow crow;
+    private BossTaoist taoist;
     protected override void Start()
     {
         base.Start();
-        crow = GetComponent<BossCrow>();
+        taoist = GetComponent<BossTaoist>();
 
     }
 
@@ -19,5 +19,4 @@ public class CrowStats : EnemyStats
     {
         base.Die();
     }
-
 }

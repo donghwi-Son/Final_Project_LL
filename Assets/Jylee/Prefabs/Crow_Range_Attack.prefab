@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9091250730120754840}
   - component: {fileID: 7350891231268777250}
   - component: {fileID: 9195533022489344082}
-  m_Layer: 30
+  m_Layer: 10
   m_Name: Crow_Range_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
