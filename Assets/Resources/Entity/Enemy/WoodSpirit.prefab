@@ -203,7 +203,7 @@ MonoBehaviour:
   playerCheckDistance: 1
   attackCheck: {fileID: 6975092539010024380}
   attackCheckRadius: 1
-  attackDistance: 1
+  attackDistance: 2
   attackCooldown: 1
   lastTimeAttacked: 0
 --- !u!114 &6374016064044086467
