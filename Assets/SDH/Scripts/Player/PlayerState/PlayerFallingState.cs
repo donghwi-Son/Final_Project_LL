@@ -13,6 +13,8 @@ public class PlayerFallingState : State<PlayerController>
 
     public override void Execute()
     {
+        base.Execute();
+
         float xVel;
         if (!Mathf.Approximately(owner.XInput, 0f))
         {

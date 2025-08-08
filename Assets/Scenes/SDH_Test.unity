@@ -127,22 +127,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -6651051158900690681, guid: e83c037ec119dc548b8f06ce7c1d4743, type: 3}
-      propertyPath: level
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6651051158900690681, guid: e83c037ec119dc548b8f06ce7c1d4743, type: 3}
-      propertyPath: percantageModifier
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6651051158900690681, guid: e83c037ec119dc548b8f06ce7c1d4743, type: 3}
-      propertyPath: damage.modifiers.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -6651051158900690681, guid: e83c037ec119dc548b8f06ce7c1d4743, type: 3}
-      propertyPath: 'damage.modifiers.Array.data[0]'
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1646223157908553210, guid: e83c037ec119dc548b8f06ce7c1d4743, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.74
@@ -200,22 +184,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8096972363588528597, guid: 93ecbc41d14c7a54b916db65d9cbc596, type: 3}
-      propertyPath: level
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8096972363588528597, guid: 93ecbc41d14c7a54b916db65d9cbc596, type: 3}
-      propertyPath: percantageModifier
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8096972363588528597, guid: 93ecbc41d14c7a54b916db65d9cbc596, type: 3}
-      propertyPath: damage.modifiers.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8096972363588528597, guid: 93ecbc41d14c7a54b916db65d9cbc596, type: 3}
-      propertyPath: 'damage.modifiers.Array.data[0]'
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2600241771567903699, guid: 93ecbc41d14c7a54b916db65d9cbc596, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.7
@@ -279,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1178266456617497302, guid: f14d6c3535f798e47a3864c68a3f5c2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.28
+      value: -2.05
       objectReference: {fileID: 0}
     - target: {fileID: 1178266456617497302, guid: f14d6c3535f798e47a3864c68a3f5c2e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -316,22 +284,6 @@ PrefabInstance:
     - target: {fileID: 1604835728007414106, guid: f14d6c3535f798e47a3864c68a3f5c2e, type: 3}
       propertyPath: m_Name
       value: WoodSpirit
-      objectReference: {fileID: 0}
-    - target: {fileID: 6374016064044086467, guid: f14d6c3535f798e47a3864c68a3f5c2e, type: 3}
-      propertyPath: level
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6374016064044086467, guid: f14d6c3535f798e47a3864c68a3f5c2e, type: 3}
-      propertyPath: percantageModifier
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6374016064044086467, guid: f14d6c3535f798e47a3864c68a3f5c2e, type: 3}
-      propertyPath: damage.modifiers.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6374016064044086467, guid: f14d6c3535f798e47a3864c68a3f5c2e, type: 3}
-      propertyPath: 'damage.modifiers.Array.data[0]'
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

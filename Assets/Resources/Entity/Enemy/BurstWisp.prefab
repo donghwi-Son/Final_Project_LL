@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 5390064105033122297}
-  groundCheckRadius: 0.3
+  groundCheckRadius: 0.1
   wallCheck: {fileID: 2589025984371459687}
   wallCheckDistance: 0.1
   groundLayer:
@@ -200,7 +200,9 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  playerCheckDistance: 5
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 576
   attackCheck: {fileID: 2600241771567903699}
   attackCheckRadius: 2
   attackDistance: 2

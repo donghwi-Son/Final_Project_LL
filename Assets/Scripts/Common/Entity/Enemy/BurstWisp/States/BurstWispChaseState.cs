@@ -22,7 +22,8 @@ public class BurstWispChaseState : State<BurstWisp>
 
         if (owner.IsPlayerDetected())
         {
-            if (owner.IsPlayerDetected().distance < owner.AttackDistance)
+            float dist = Vector2.Distance(owner.transform.position, player.position);
+            if (dist <= owner.AttackDistance)
             {
                 //공격 상태
                 if (owner.CanAttack())
