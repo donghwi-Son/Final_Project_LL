@@ -39,7 +39,6 @@ public class BossCrow : Enemy
 
     [Header("기타")]
     public float attackDealy;
-    public CrowStats stats;
 
     public Transform playerTrans;
 
@@ -67,7 +66,6 @@ public class BossCrow : Enemy
         strikeAttack = new BossCrowStrikeAttack(this, stateMachine, "IsStrike");
         spawnEnemyState = new BossCrowSpawnEnemy(this, stateMachine, "IsIdle");
         deathState = new BossCrowDeath(this, stateMachine, "IsIdle");
-        stats = GetComponent<CrowStats>();
     }
 
     protected override void Start()

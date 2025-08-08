@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4419773920109221858}
   - component: {fileID: 3506619374476279039}
   - component: {fileID: 2007943429444823319}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2045396829249292687}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3175198009254228142}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 8102793639661579619}
   - component: {fileID: 7897829474298639568}
   - component: {fileID: 4467860583206324954}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.018911839, y: 0.9054403}
+  m_Offset: {x: -0.018911839, y: 0}
   m_Size: {x: 0.43264198, y: 1.8108805}
   m_Direction: 0
 --- !u!114 &745451287114533313
@@ -295,7 +295,7 @@ MonoBehaviour:
   defendReduction: 0.5
   maxDashCount: 1
   AttackManager: {fileID: 0}
-  stat: {fileID: 0}
+  stats: {fileID: 0}
   CanAirAttack: 1
   CanDoubleJump: 0
   IsGetHitStun: 0
@@ -412,7 +412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4914405894045734775}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8234352494590740841}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ Transform:
   m_GameObject: {fileID: 6738523396078625631}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 0.03, z: 0}
+  m_LocalPosition: {x: -0.01, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -474,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2643296564514281861}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 7813888569614985203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.9, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -505,7 +505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7092994725689579274}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AirAttPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

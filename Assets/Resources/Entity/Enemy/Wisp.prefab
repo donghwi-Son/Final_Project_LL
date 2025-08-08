@@ -169,10 +169,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  playerCheckDistance: 5
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 576
   attackCheck: {fileID: 1646223157908553210}
   attackCheckRadius: 0
-  attackDistance: 10
+  attackDistance: 5
   attackCooldown: 1
   lastTimeAttacked: 0
 --- !u!114 &-6651051158900690681

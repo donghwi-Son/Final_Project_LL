@@ -8,6 +8,8 @@ public class PlayerSpecialAttackState : State<PlayerController>
 
     public override void Enter()
     {
+        base.Enter();
+
         owner.lastSpecialAttackTime = Time.time;
         switch (owner.attackMode)
         {
@@ -23,6 +25,8 @@ public class PlayerSpecialAttackState : State<PlayerController>
 
     public override void Execute()
     {
+        base.Execute();
+
         if (triggerCalled)
         {
             stateMachine.ChangeState(owner.IdleState);
@@ -31,5 +35,6 @@ public class PlayerSpecialAttackState : State<PlayerController>
 
     public override void Exit()
     {
+        base.Exit();
     }
 }

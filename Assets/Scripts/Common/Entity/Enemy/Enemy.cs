@@ -11,15 +11,13 @@ public class Enemy : Entity
     public float battleTime;
     private float defaultMoveSpeed;
 
-    private Transform playerTransform;
     [Header("플레이어 탐지 정보")]
     [SerializeField] protected Transform playerCheck;
     [SerializeField] protected float playerCheckRadius;
     public float PlayerCheckRadius { get => playerCheckRadius; set => playerCheckRadius = value; }
 
     [SerializeField] protected LayerMask whatIsPlayer;
-    [SerializeField] protected float playerCheckDistance;
-    public float PlayerCheckDistance { get => playerCheckDistance; set => playerCheckDistance = value; }
+    [SerializeField] protected LayerMask whatIsObstacle;
 
     [Header("공격 정보")]
     [SerializeField] protected Transform attackCheck;
@@ -89,8 +87,22 @@ public class Enemy : Entity
         // 기본 구현은 아무것도 하지 않습니다.
     }
 
-    public virtual RaycastHit2D IsPlayerDetected()
-    => Physics2D.CircleCast(playerCheck.position, playerCheckRadius, Vector2.down * FacingDir, PlayerCheckDistance, whatIsPlayer);
+    public virtual bool IsPlayerDetected()
+    {
+        if (DetectedPlayerCollider != null)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, DetectedPlayerCollider.transform.position - transform.position, playerCheckRadius, whatIsObstacle);
+
+            if(hit.collider == DetectedPlayerCollider)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected Collider2D DetectedPlayerCollider => Physics2D.OverlapCircle(playerCheck.position, playerCheckRadius, whatIsPlayer);
 
     protected override void OnDrawGizmos()
     {

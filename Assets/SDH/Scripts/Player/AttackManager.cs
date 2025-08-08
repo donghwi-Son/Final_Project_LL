@@ -142,9 +142,9 @@ public class AttackManager : MonoBehaviour
         }
     }
 
-    public void MeleeAttack()
+    public void MeleeAttack(float _rangeMod)
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.attackRange, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.attackRange * _rangeMod, LayerMask.GetMask("Enemy"));
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
@@ -154,20 +154,6 @@ public class AttackManager : MonoBehaviour
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
     }
-
-    void ThirdMeleeAttack()
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.attackRange*1.3f, LayerMask.GetMask("Enemy"));
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            //적 공격 메소드
-            CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
-            player.stats.DoDamage(enemyStats);
-            ApplyMeleeEffect(enemy.gameObject);
-            Debug.Log($"Hit Enemy: {enemy.name}");
-        }
-    }
-
 
     //void OnDrawGizmos()
     //{

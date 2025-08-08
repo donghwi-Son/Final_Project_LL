@@ -9,8 +9,8 @@ public class PlayerAnimationTrigger : MonoBehaviour
         player.AnimationFinishTrigger();
     }
 
-    private void AttackTrigger()
+    private void AttackTrigger(float _rangeMod)
     {
-        player.AttackManager.MeleeAttack();
+        player.AttackManager.MeleeAttack(_rangeMod);
     }
 }

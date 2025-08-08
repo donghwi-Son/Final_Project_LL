@@ -196,16 +196,19 @@ MonoBehaviour:
   idleTime: 1
   battleTime: 0
   playerCheck: {fileID: 1178266456617497302}
-  playerCheckRadius: 2
+  playerCheckRadius: 5
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  playerCheckDistance: 1
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 576
   attackCheck: {fileID: 6975092539010024380}
   attackCheckRadius: 1
-  attackDistance: 2
+  attackDistance: 1
   attackCooldown: 1
   lastTimeAttacked: 0
+  maxVerticalOffset: 1
 --- !u!114 &6374016064044086467
 MonoBehaviour:
   m_ObjectHideFlags: 0

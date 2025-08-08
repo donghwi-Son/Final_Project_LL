@@ -42,7 +42,7 @@ public class WispAttackState : State<Wisp>
         GameObject missile = GameObject.Instantiate(owner.Projectile, owner.transform.position, Quaternion.identity);
 
         //플레이어 방향으로 발사 방향 설정
-        Vector2 direction = (player.position - owner.transform.position).normalized;
-        missile.GetComponent<EnemyProjectile>().SetDirection(direction);
+        Vector2 direction = player.position - owner.transform.position;
+        missile.GetComponent<EnemyProjectile>().Initialize(direction, owner.stats.damage.GetValue());
     }
 }

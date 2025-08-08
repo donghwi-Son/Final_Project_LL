@@ -23,7 +23,8 @@ public class PlayerAttackState : State<PlayerController>
 
     public override void Enter()
     {
-        owner.rb.linearVelocityX = 0f;
+        base.Enter();
+
         isHolding = true;
         holdTime = 0f;
         isHoldAttack = false;
@@ -31,22 +32,24 @@ public class PlayerAttackState : State<PlayerController>
         lastAutoFireTime = 0f;
         chargeBar = owner.GetComponent<PlayerChargeBar>();
 
-        // 근거리 모드에서만 차지바 표시
-        if (CanCharge && owner.attackMode == AttackMode.Melee)
-            chargeBar?.ShowChargeBar();
-
-        owner.anim.speed = owner.attackSpeed / 3f;
-
         if (ComboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
         {
             ComboCounter = 0;
         }
 
         owner.anim.SetInteger("ComboCounter", ComboCounter);
+
+        // 근거리 모드에서만 차지바 표시
+        if (CanCharge && owner.attackMode == AttackMode.Melee)
+            chargeBar?.ShowChargeBar();
+
+        owner.anim.speed = owner.attackSpeed / 3f;
+        owner.SetZeroVelocity();
     }
 
     public override void Execute()
     {
+        base.Execute();
 
         if (Input.GetMouseButton(0) && isHolding)
         {
@@ -138,6 +141,8 @@ public class PlayerAttackState : State<PlayerController>
 
     public override void Exit()
     {
+        base.Exit();
+
         owner.anim.speed = 1f;
         // 차지바 숨기기 (안전장치)
         if (chargeBar != null)
