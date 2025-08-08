@@ -92,11 +92,11 @@ public class BossTaoist : Enemy
         }
     }
 
-    public RaycastHit2D IsPlayerInAttackRange()
-    => Physics2D.CircleCast(transform.position, attackCheckRadius, Vector2.down * FacingDir, PlayerCheckDistance, whatIsPlayer);
+    public bool IsPlayerInAttackRange()
+    => Physics2D.OverlapCircle(transform.position, attackCheckRadius, whatIsPlayer);
 
-    public RaycastHit2D IsPlayerInAttackRangeNear()
-    => Physics2D.CircleCast(transform.position, attackRangeNear, Vector2.down * FacingDir, PlayerCheckDistance, whatIsPlayer);
+    public bool IsPlayerInAttackRangeNear()
+    => Physics2D.OverlapCircle(transform.position, attackRangeNear, whatIsPlayer);
 
     public void ChasePlayer()
     {
