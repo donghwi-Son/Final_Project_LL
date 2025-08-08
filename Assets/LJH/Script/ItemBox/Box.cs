@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,18 +17,28 @@ public class Box : MonoBehaviour
     
     [Header("골드 프리펩")]
     [SerializeField] private GameObject goldPrefab;
+    
+    [Header("오디오")]
+    [SerializeField] private AudioClip openSound;
+    private AudioSource audioSource;
 
     
     private Box box;
     public static event Action<Box, int> OnBoxOpened;
     
+    private bool isOpened = false;
+    
     void Awake()
     {
         if(box == null) box = GetComponent<Box>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Open()
     {
+        if (isOpened) return;
+        isOpened = true;
+        
         // 1) 등급 뽑기
         ItemInfo.ItemRarity rarity = RollRarity();
         Debug.Log($"뽑힌 등급: {rarity}");
@@ -35,6 +46,12 @@ public class Box : MonoBehaviour
         var entry = config.rates.First(r => r.rarity == rarity);
         int reward = entry.goldReward;
         Debug.Log($"골드 드랍: {reward}");
+        
+        if (audioSource != null && openSound != null)
+            audioSource.PlayOneShot(openSound);
+        
+        var boxAni = GetComponent<BoxAni>();
+        if (boxAni != null) boxAni.SetOpened();
 
         // 골드 드랍 추가
         SpawnGold(reward);
@@ -62,7 +79,7 @@ public class Box : MonoBehaviour
         var itemPickup = pickupObj.GetComponent<ItemPickup>();
         itemPickup.itemIndex = chosen.index;
 
-        Destroy(gameObject);
+        StartCoroutine(DestroyAfterDelay(3f));
     }
 
     ItemInfo.ItemRarity RollRarity()
@@ -106,5 +123,11 @@ public class Box : MonoBehaviour
                 rb.AddForce(new Vector2(Random.Range(-1f, 1f), 2f), ForceMode2D.Impulse);
             }
         }
+    }
+    
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
