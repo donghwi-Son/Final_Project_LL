@@ -6,11 +6,11 @@ using static UnityEditor.PlayerSettings;
 // M 키 전체 미니맵 패널 UI 전담 클래스
 public class MiniMapManager : MonoBehaviour
 {
-    [Header("패널 및 부모")]
+    [Header("패널 및 부모")] // 각각 Canvas 아래 만든 MinimapPanel과 그 자식인 iconparent(프리팹 자식으로 저장 영역) 등록
     [SerializeField] private GameObject fullMapPanel;
     [SerializeField] private Transform iconParent;
 
-    [Header("타입별 아이콘 프리팹")]
+    [Header("타입별 아이콘 프리팹")] // UI 캔버스에 표시되는 각 방 타입 별 미니맵 프리팹 등록
     public GameObject startPrefab;
     public GameObject normalPrefab;
     public GameObject hardPrefab;
@@ -19,12 +19,12 @@ public class MiniMapManager : MonoBehaviour
     public GameObject bossPrefab;
 
     [Header("설정")]
-    public float iconSpacing = 40f;
-    public Vector2 miniMapOffset = new Vector2(0f, -50f); // 위치 보정 역할
+    public float iconSpacing = 40f; // 미니맵을 나타내는 프리팹이 캔버스에서 서로 유지하는 거리 설정(라인 포함)
+    public Vector2 miniMapOffset = new Vector2(0f, 0f); // 위치 보정 역할로 미니맵의 위치 설정
 
     private Dictionary<Vector2Int, GameObject> spawnedIcons = new();
     private bool isMapOpen = false;
-    public static MiniMapManager instance;
+    public static MiniMapManager instance; // 싱글톤
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class MiniMapManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M)) // M 키로 미니맵 UI 캔버스 활성화 및 활성화 시 플레이어를 포함한 모든 이동 일시정지
         {
             isMapOpen = !isMapOpen;
             fullMapPanel.SetActive(isMapOpen);
@@ -63,6 +63,8 @@ public class MiniMapManager : MonoBehaviour
 
 
     // 미니맵에 플레이어가 위치한 방 강조 영역
+    // 각 미니맵 프리팹에 존재하는 자식 Player Point를 활성화
+    // 활성화 조건은 해당 방에 존재할 때
     public void HighlightIcon(Vector2Int grid)
     {
         foreach (var pair in spawnedIcons)
@@ -81,6 +83,7 @@ public class MiniMapManager : MonoBehaviour
     }
 
     // 미니맵 라인 처리 수행 영역
+    // 각 미니맵간의 연결 및 현재 위치에서 다음 위치를 모를 때 길을 알려줄 Line을 연결된 방끼리 보여주는 영역
     public void ShowLinesFromThisRoom(Vector2Int currentGrid, StageData roomData)
     {
         if (!spawnedIcons.TryGetValue(currentGrid, out GameObject icon)) return;
@@ -106,7 +109,6 @@ public class MiniMapManager : MonoBehaviour
             // 없는 방에 라인이 뻗지 않게
             if (neighborData == null || neighborData.instance == null)
             {
-                Debug.Log($"[MiniMap] {neighborGrid} 방향 라인 생략 (이웃 방 instance 없음)");
                 continue;
             }
 
@@ -118,7 +120,6 @@ public class MiniMapManager : MonoBehaviour
 
             if (vertical && (startIsHere || startIsNeighbor))
             {
-                Debug.Log($"[MiniMap] {dir} 방향 라인 제거 ({currentGrid} ↔ {neighborGrid}) - Start 방 관련");
                 continue;
             }
 
@@ -137,7 +138,6 @@ public class MiniMapManager : MonoBehaviour
             Vector2Int oppositeDir = -dir;
             if (!neighborData.HasNeighbor(oppositeDir))
             {
-                Debug.Log($"[MiniMap] {dir} 라인 생략 (이웃에서 반대 방향 없음)");
                 continue;
             }
 
@@ -152,7 +152,6 @@ public class MiniMapManager : MonoBehaviour
                     Transform neighborLine = neighborLineGroup.Find(oppositeLineName);
                     if (neighborLine != null && neighborLine.gameObject.activeSelf)
                     {
-                        Debug.Log($"[MiniMap] {dir} 방향 라인 생략 (반대쪽에서 표시됨)");
                         continue;
                     }
                 }
@@ -164,14 +163,11 @@ public class MiniMapManager : MonoBehaviour
             if (line != null)
             {
                 line.gameObject.SetActive(true);
-                Debug.Log($"[MiniMap] {lineName} 활성화: {currentGrid}");
             }
         }
     }
 
-
-
-
+    // Line Group의 4방향 라인 이름
     private string GetLineName(Vector2Int dir)
     {
         if (dir == Vector2Int.up) return "Top Line";
@@ -181,6 +177,7 @@ public class MiniMapManager : MonoBehaviour
         return null;
     }
 
+    // Line의 활성화 기준은 이전 방에서부터 뻗어서 다음 방에 연결되는 구조이기에 다음 방에서 이전 방으로 Line이 뻗지 않게 방지하는 영역
     public void ShowOnlyLineInDirection(Vector2Int grid, StageData roomData, Vector2Int fromDir)
     {
         if (!spawnedIcons.TryGetValue(grid, out GameObject icon)) return;
@@ -203,7 +200,6 @@ public class MiniMapManager : MonoBehaviour
 
                 if (prevLine != null && prevLine.gameObject.activeSelf)
                 {
-                    Debug.Log($"[MiniMap] {grid}: {fromDir} 방향 라인 비활성 (이미 반대쪽 있음)");
                     return; // 현재 방에서는 표시하지 않음
                 }
             }
@@ -217,14 +213,13 @@ public class MiniMapManager : MonoBehaviour
                 line.gameObject.SetActive(true);
         }
 
+        // Start 영역으로 위나 아래 Line이 뻗지 않도록(즉, 인접하되 그곳에 Finish가 없기에 갈 수 없음을 나타내는 것)
         if ((roomData.type == StageType.Start) && (fromDir == Vector2Int.up || fromDir == Vector2Int.down)) return;
     }
 
-    // 보스 미니맵만 생성
+    // 보스 미니맵만 생성하고 다른 기존 미니맵들을 삭제하는 영역
     public void ShowOnlyBossRoom(Vector2Int bossGrid, StageType type)
     {
-        Debug.Log($"[MiniMapManager] ShowOnlyBossRoom 호출됨 - Type: {type}");
-
         foreach (var bossicon in spawnedIcons.Values)
         {
             if (bossicon != null) Destroy(bossicon);
@@ -234,7 +229,6 @@ public class MiniMapManager : MonoBehaviour
         GameObject prefab = GetPrefabForType(type);
         if (prefab == null)
         {
-            Debug.LogError("[MiniMapManager] Boss 프리팹이 할당되지 않았습니다.");
             return;
         }
 
