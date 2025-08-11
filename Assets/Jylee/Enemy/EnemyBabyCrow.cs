@@ -27,7 +27,7 @@ public class EnemyBabyCrow : Enemy
         anim.transform.rotation = Quaternion.Euler(0, 0, EnemyPlayerGaze()-90);
 
         // 3. 현재 방향으로 이동
-        rb.linearVelocity = direction * moveSpeed;
+        rb.linearVelocity = direction * MoveSpeed;
     }
 
     public float EnemyPlayerGaze()

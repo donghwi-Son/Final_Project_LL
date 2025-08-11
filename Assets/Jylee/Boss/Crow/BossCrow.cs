@@ -126,7 +126,7 @@ public class BossCrow : Enemy
 
         moveDir = Vector2.Lerp(moveDir, desiredDir, Time.deltaTime * turnLerpSpeed).normalized;
 
-        transform.position += (Vector3)(moveDir * moveSpeed * Time.deltaTime);
+        transform.position += (Vector3)(moveDir * MoveSpeed * Time.deltaTime);
 
         // 방향 전환 체크
         float dirX = Mathf.Sign(moveDir.x);

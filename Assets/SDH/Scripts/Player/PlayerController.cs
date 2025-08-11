@@ -85,6 +85,8 @@ public class PlayerController : Entity
 
         InitState();
         InitComponents();
+
+        PlayerManager.Instance.player = this; // 플레이어 매니저에 플레이어 설정
     }
 
     protected override void Start()
@@ -92,8 +94,6 @@ public class PlayerController : Entity
         base.Start();
 
         StateMachine.ChangeState(IdleState);
-
-        PlayerManager.Instance.player = this; // 플레이어 매니저에 플레이어 설정
 
         //originmoveSpeed = moveSpeed; // 7월 3일 추가 : 초기 지정 속도 저장
     }
