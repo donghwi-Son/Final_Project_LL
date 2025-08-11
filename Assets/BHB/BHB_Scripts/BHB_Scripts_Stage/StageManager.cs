@@ -15,7 +15,7 @@ public class StageManager : MonoBehaviour
     public GameObject[] eventRoomPrefabs;
     public GameObject bossRoomPrefab;
 
-    [Header("연결 참조")]
+    [Header("연결 참조")] // StageGenerator, MinimapManage, Player 연결
     public StageGenerator generator;
     public MiniMapManager miniMapManager;
     public Transform player;
@@ -63,20 +63,20 @@ public class StageManager : MonoBehaviour
 
             Vector3 worldPos = generator.GridToWorld(grid);
 
-            // 1. Instantiate Room
+            // 처음에 생성된 방들을 전부 비활성화 상태
             GameObject instance = Instantiate(prefab, worldPos, Quaternion.identity);
             instance.SetActive(false); // 모두 비활성화
             data.instance = instance;
             data.prefab = prefab;
 
-            // 2. StartRoom만 예외적으로 Finish 2개 활성화
+            // Start Type 방은 좌우측 Finish 활성화
             if (data.isStartRoom)
             {
                 SetStartRoomFinishTwoDirections(data.instance);
             }
             else
             {
-                // 3. 나머지 방은 Finish 전부 비활성화
+                // 나머지 방은 Finish 전부 비활성화
                 Transform finishGroup = data.instance.transform.Find("Finish Group");
                 if (finishGroup != null)
                 {
@@ -92,10 +92,11 @@ public class StageManager : MonoBehaviour
         EnsureStartRoomSideConnections();
         RoomConnector.ProcessConnections(placedRooms, generator, maxStageCount, stageCounter);
 
-        // 보스 방 미리 생성
+        // 보스 방 미리 생성, 모든 방 이동 후에 발동
         PreloadBossRoom();
     }
 
+    // 시작 방으로 이동
     public void MoveToStartRoom()
     {
         foreach (var pair in placedRooms)
@@ -112,7 +113,6 @@ public class StageManager : MonoBehaviour
     public void MovePlayerTo(Vector2Int nextGrid)
     {
         if (!placedRooms.ContainsKey(nextGrid)) return;
-
 
         Vector2Int prevGrid = currentGrid;
         currentGrid = nextGrid;
@@ -166,7 +166,7 @@ public class StageManager : MonoBehaviour
             spawn = roomData.instance.transform.Find("SpawnPoint");
         }
 
-        // 끼임 방지용 오프셋 계산
+        // 끼임 방지용 오프셋 계산으로 플레이어가 다음 방으로 이동하면 튀어나오도록 스폰 포인트를 조정
         Vector3 spawnOffset = Vector3.zero;
 
         if (backDir.HasValue)
@@ -181,18 +181,11 @@ public class StageManager : MonoBehaviour
         }
 
         // 최종 위치 이동
-        player.position = spawn != null
-            ? spawn.position + spawnOffset
-            : roomData.instance.transform.position;
-
-
-
+        player.position = spawn != null ? spawn.position + spawnOffset : roomData.instance.transform.position;
 
         // 보스 맵
         if (roomData.type == StageType.Boss)
-        {
-            Debug.LogWarning("[StageManager] Boss 방 진입 확인됨");
-
+        { 
             // 강제 Boss 미니맵 처리
             MiniMapManager.instance?.ShowOnlyBossRoom(roomData.GetGridPosition(), roomData.type);
             return;
@@ -200,6 +193,7 @@ public class StageManager : MonoBehaviour
 
         // 미니맵 처리
         MiniMapManager.instance?.RevealRoom(nextGrid, roomData.type);
+
         // 라인 처리 — MiniMapManager 쪽에서 진행
         if (backDir.HasValue)
         {
@@ -208,7 +202,6 @@ public class StageManager : MonoBehaviour
         MiniMapManager.instance?.ShowLinesFromThisRoom(nextGrid, roomData);
         MiniMapManager.instance.HighlightIcon(currentGrid);
         
-
         roomData.hasBeenVisited = true;
 
         TrySetupRoomCondition(roomData.instance);
@@ -372,13 +365,10 @@ public class StageManager : MonoBehaviour
 
         if (condition != null)
         {
-            Debug.Log($"[StageManager] 조건 스크립트 발견: {condition.GetType().Name}");
             condition.Setup(roomInstance);
         }
         else
         {
-            Debug.Log($"[StageManager] 조건 스크립트 없음. 해당 방은 즉시 Finish 활성 처리");
-
             // 조건 스크립트가 없으면 기본 Finish 활성
             foreach (var trigger in roomInstance.GetComponentsInChildren<FinishTrigger>())
             {
@@ -554,42 +544,7 @@ public class StageManager : MonoBehaviour
         player.position = spawn != null ? spawn.position : bossRoomData.instance.transform.position;
     }
 
-    // 보스 피니시 활성화 처리 영역
-    public void EnableBossFinishOnly()
-    {
-        foreach (var pair in placedRooms)
-        {
-            var data = pair.Value;
-
-            // Finish Group 전부 비활성화
-            var finishGroup = data.instance.transform.Find("Finish Group");
-            if (finishGroup != null)
-                finishGroup.gameObject.SetActive(false);
-
-            // Boss Finish Group에서 하나만 활성화
-            var bossGroup = data.instance.transform.Find("Boss Finish Group");
-            if (bossGroup == null) continue;
-
-            foreach (Transform t in bossGroup)
-                t.gameObject.SetActive(false);
-
-            // 하나만 찾고 활성화
-            string[] finishes = { "Top Boss Finish", "Down Boss Finish", "Left Boss Finish", "Right Boss Finish" };
-            foreach (var name in finishes)
-            {
-                var finish = bossGroup.Find(name);
-                if (finish != null)
-                {
-                    finish.gameObject.SetActive(true);
-                    var trigger = finish.GetComponent<FinishTrigger>();
-                    if (trigger != null) trigger.isBoss = true;
-                    break;
-                }
-            }
-        }
-    }
-
-    // 보스 방 미리 생성
+    // 보스 방 미리 생성해놓고 비활성화 시키기
     public void PreloadBossRoom()
     {
         if (bossRoomData != null) return;
@@ -598,7 +553,7 @@ public class StageManager : MonoBehaviour
         bossRoomData = new StageData(bossGrid.x, bossGrid.y, StageType.Boss);
         bossRoomData.prefab = bossRoomPrefab;
 
-        Vector3 offscreenPos = new Vector3(9999f, 9999f, 0f);
+        Vector3 offscreenPos = new Vector3(0f, 0f, 0f);
         GameObject bossInstance = Instantiate(bossRoomPrefab, offscreenPos, Quaternion.identity);
 
         bossInstance.SetActive(false); // 처음엔 비활성화
@@ -607,7 +562,7 @@ public class StageManager : MonoBehaviour
         placedRooms[bossGrid] = bossRoomData;
     }
 
-
+    // 보스 방 생성 조건
 
     public void ActivateBossRoomIfReady()
     {
@@ -648,8 +603,6 @@ public class StageManager : MonoBehaviour
         if (array == null || array.Length == 0) return null;
         return array[Random.Range(0, array.Length)];
     }
-
-    
 
     public StageData GetRoomAt(Vector2Int grid)
     {
