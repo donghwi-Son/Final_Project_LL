@@ -10,6 +10,7 @@ public class StageGenerator : MonoBehaviour
     public Vector3 origin = Vector3.zero; // 기준 시작 위치
     public float ySpawnOffsetFix = -10f; // 컴포넌트에서 보정값 조정 가능하게 공개 필드로 설정
 
+    // 방들이 그려질 Gizmo 그리기
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.gray;
@@ -31,20 +32,16 @@ public class StageGenerator : MonoBehaviour
             }
         }
 
-        // 중심 좌표 시각화
+        // 중심 좌표 시각화, 가운데 빨간색 원이 보이는 곳으로 Start Type 방이 생성되는 위치 설정
         int centerCol = cols / 2;
         int centerRow = rows / 2;
 
-        Vector3 centerPos = origin + new Vector3(centerCol * roomSize.x + roomSize.x / 2f,
-                                                 centerRow * roomSize.y + roomSize.y / 2f,
-                                                 0f);
-
+        Vector3 centerPos = origin + new Vector3(centerCol * roomSize.x + roomSize.x / 2f, centerRow * roomSize.y + roomSize.y / 2f, 0f);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(centerPos, Mathf.Min(roomSize.x, roomSize.y) * 0.2f);
-
     }
 
-    // Random 좌표 전송 영역
+    // Random으로 방 생성 좌표 전송 영역
     public Vector2Int GetRandomGridPosition()
     {
         int x = Random.Range(0, cols);
@@ -60,10 +57,8 @@ public class StageGenerator : MonoBehaviour
 
     public Vector3 GridToWorld(Vector2Int grid)
     {
-        //Vector3 offset = new Vector3(roomSize.x / 2f, roomSize.y / 2f, 0f);
-        //return origin + new Vector3(grid.x * roomSize.x, grid.y * roomSize.y, 0f) + offset;
         Vector3 basePos = origin + new Vector3(grid.x * roomSize.x, grid.y * roomSize.y, 0f);
-        return basePos + new Vector3(0f, ySpawnOffsetFix, 0f); // Y축 보정 적용
+        return basePos + new Vector3(0f, ySpawnOffsetFix, 0f); // y축 보정 적용, y축이 항상 10씩 +되어 그를 수정
     }
 
     // 그리드 내부에 방 제한
