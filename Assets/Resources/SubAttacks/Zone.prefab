@@ -50,7 +50,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 384
-  radius: 3
+  radius: 2.5
   damage: 10
 --- !u!212 &5879330563868191033
 SpriteRenderer:
