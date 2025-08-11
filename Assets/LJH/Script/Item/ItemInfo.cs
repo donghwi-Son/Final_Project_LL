@@ -58,7 +58,9 @@ public class ItemInfo : ScriptableObject
     public enum SkillType
     {
         No,
-        Swing
+        Heal,
+        SwardSlash,
+        Adrenaline
     }
 
     public enum SubAttackType

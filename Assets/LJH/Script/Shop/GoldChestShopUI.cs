@@ -15,7 +15,7 @@ public class GoldChestShopUI : MonoBehaviour
     [SerializeField] private GameObject largeChestPrefab;
 
     [Header("Player Reference")]
-    [SerializeField] private Transform player; // 플레이어 트랜스폼
+    [SerializeField] private Transform player; // 플레이어 위치
 
     [SerializeField] private GameObject panel;
     private void Awake()

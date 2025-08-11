@@ -7,7 +7,7 @@ public class SynergyManager : MonoBehaviour
     
     private Dictionary<ItemInfo.ItemTag,int> tagCounts = new();
     
-    private HashSet<ItemInfo.ItemTag> activeTagSynergy = new();
+    private readonly Dictionary<ItemInfo.ItemTag, HashSet<int>> activatedTierIndices = new();
 
     private TagSynergyConfig  tagConfig;
 
@@ -22,48 +22,55 @@ public class SynergyManager : MonoBehaviour
         foreach (var tag in def.tags)
         {
             tagCounts[tag] = tagCounts.GetValueOrDefault(tag) + 1;
-            TryApplyTagSynergy(tag);
+            TryApplySynergies(tag);
         }
     }
 
-    void TryApplyTagSynergy(ItemInfo.ItemTag tag)
+    private void TryApplySynergies(ItemInfo.ItemTag tag)
     {
-        if (activeTagSynergy.Contains(tag)) return;
-        if (!tagConfig.TryGetSynergy(tag, out var entry)) return;
+        if (tagConfig == null) return;
+        if (!tagConfig.TryGetSynergies(tag, out var list)) return;
 
         int count = tagCounts.GetValueOrDefault(tag);
-        Debug.Log($"[Synergy] count={count}, threshold={entry.threshold}");
-    
-        if (count < entry.threshold) 
-            return;
-
-        // 한 번만 실행하게
-        activeTagSynergy.Add(tag);
-        Debug.Log($"[Synergy] 발동! tag={tag}, type={entry.type}, bonus={entry.bonus}");
+        if (!activatedTierIndices.TryGetValue(tag, out var activated))
+        {
+            activated = new HashSet<int>();
+            activatedTierIndices[tag] = activated;
+        }
         
+        for (int i = 0; i < list.Count; i++)
+        {
+            var entry = list[i];
+            if (activated.Contains(i)) continue;
+            if (entry.threshold > count) break;
+
+            ActivateSynergy(entry);
+            activated.Add(i);
+        }
+    }
+
+    private void ActivateSynergy(TagSynergy entry)
+    {
+        Debug.Log($"[Synergy] 발동! tag={entry.tag}, type={entry.type}, threshold={entry.threshold}, bonus={entry.bonus}");
+
         switch (entry.type)
         {
             case TagSynergyConfig.SynergyType.Stats:
-                //스탯을 증가 일단 체력으로 테스트
                 PlayerStatus.Instance.ModifyStat(entry.statType, entry.bonus);
                 break;
 
             case TagSynergyConfig.SynergyType.Attack:
-                // 공격강화
-                // PlayerTest.Instance.AttackEnhance(entry.bonus);
-                Debug.Log("공격 강화");
+                EffectManager.Instance.ApplyItemEffect(entry.attackEnhance);
                 break;
 
             case TagSynergyConfig.SynergyType.Skill:
-                // 스킬 강화
-                //SkillSystem.Instance.AddSkill();
-                Debug.Log("스킬 획득");
+                // SkillSystem.Instance.AddSkill(entry.skillType);
+                Debug.Log($"[Synergy] 스킬 적용: {entry.skillType}");
                 break;
 
             case TagSynergyConfig.SynergyType.Utility:
-                    // 유틸 효과 EX)더블 점프 활성화
-                    //PlayerTest.Instance.EnableDoubleJump();
-                    Debug.Log("유틸 획득");
+                // 아이템 로직과 동일 경로
+                PlayerManager.Instance.player.ApplyUtility(entry.utilityType, entry.bonus);
                 break;
 
             default:
@@ -71,5 +78,4 @@ public class SynergyManager : MonoBehaviour
                 break;
         }
     }
-    
 }
