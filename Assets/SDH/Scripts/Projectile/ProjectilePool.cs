@@ -87,6 +87,7 @@ public class ProjectilePool : MonoBehaviour
                 {
                     GameObject obj = Instantiate(data.prefab);
                     obj.SetActive(false);
+                    obj.transform.SetParent(this.transform); // 풀링 관리용 부모 설정
                     Projectile projectile = obj.GetComponent<Projectile>();
                     projectile.OnProjectiledestroyed += ReturnProjectile;
                     activePool[type].Enqueue(obj);
@@ -103,6 +104,7 @@ public class ProjectilePool : MonoBehaviour
             {
                 GameObject obj = Instantiate(data.prefab);
                 obj.SetActive(false);
+                obj.transform.SetParent(this.transform); // 풀링 관리용 부모 설정
                 Projectile projectile = obj.GetComponent<Projectile>();
                 projectile.OnProjectiledestroyed += ReturnProjectile;
                 activePool[type].Enqueue(obj);

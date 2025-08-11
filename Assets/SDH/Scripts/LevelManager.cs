@@ -23,15 +23,23 @@ public class LevelManager : MonoBehaviour
         {
             GameObject woodObj = Instantiate(woodmon);
             woodObj.SetActive(false);
+            woodObj.transform.SetParent(this.transform);
             woodmonPool.Enqueue(woodObj);
+
             GameObject wispObj = Instantiate(wispmon);
             wispObj.SetActive(false);
+            wispObj.transform.SetParent(this.transform);
             wispmonPool.Enqueue(wispObj);
+
             GameObject fireObj = Instantiate(firemon);
             fireObj.SetActive(false);
+            fireObj.transform.SetParent(this.transform);
             firemonPool.Enqueue(fireObj);
         }
     }
+
+
+
 
     void GoToNextLevel()
     {

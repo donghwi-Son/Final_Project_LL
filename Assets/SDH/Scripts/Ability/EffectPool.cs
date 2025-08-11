@@ -37,18 +37,27 @@ public class EffectPool : MonoBehaviour
         {
             GameObject lineObj = Instantiate(lightningLine);
             lineObj.SetActive(false);
+            lineObj.transform.SetParent(this.transform); // Set parent to keep hierarchy clean
             lightningLinePool.Enqueue(lineObj);
+
             GameObject effectObj = Instantiate(lightningEffect);
             effectObj.SetActive(false);
+            effectObj.transform.SetParent(this.transform); // Set parent to keep hierarchy clean
             lightningEffectPool.Enqueue(effectObj);
+            
             GameObject iceObj = Instantiate(iceEffect);
             iceObj.SetActive(false);
+            iceObj.transform.SetParent(this.transform);
             iceEffectPool.Enqueue(iceObj);
+
             GameObject poisonObj = Instantiate(poisonEffect);
             poisonObj.SetActive(false);
+            poisonObj.transform.SetParent(this.transform);
             poisonEffectPool.Enqueue(poisonObj);
+
             GameObject explosiveObj = Instantiate(explosiveEffect);
             explosiveObj.SetActive(false);
+            explosiveObj.transform.SetParent(this.transform);
             explosiveEffectPool.Enqueue(explosiveObj);
         }
     }
@@ -65,6 +74,7 @@ public class EffectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(lightningLine);
             obj.SetActive(true);
+            obj.transform.SetParent(this.transform); // Set parent to keep hierarchy clean
             return obj.GetComponent<LineRenderer>();
         }
     }
@@ -81,6 +91,7 @@ public class EffectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(lightningEffect);
             obj.SetActive(true);
+            obj.transform.SetParent(this.transform); // Set parent to keep hierarchy clean
             return obj.GetComponent<ParticleSystem>();
         }
     }
@@ -97,6 +108,7 @@ public class EffectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(iceEffect);
             obj.SetActive(true);
+            obj.transform.SetParent(this.transform); // Set parent to keep hierarchy clean
             return obj.GetComponent<ParticleSystem>();
         }
     }
@@ -113,6 +125,7 @@ public class EffectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(explosiveEffect);
             obj.SetActive(true);
+            obj.transform.SetParent(this.transform); // Set parent to keep hierarchy clean
             return obj;
         }
     }
@@ -129,6 +142,7 @@ public class EffectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(poisonEffect);
             obj.SetActive(true);
+            obj.transform.SetParent(this.transform); // Set parent to keep hierarchy cleans
             return obj.GetComponent<ParticleSystem>();
         }
     }
