@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class PlayerAttackState : State<PlayerController>
 {
-    bool CanCharge => owner.stat.canChargeAttack;
+    public int ComboCounter { get; private set; }
+
+    private float lastTimeAttacked;
+    private float comboWindow = 0.5f;
+
+    bool CanCharge => owner.stats.canChargeAttack;
     bool isHolding = false;
     float holdTime;
-    float idleTimer = 0f;
     float requiredHoldTime = 1f;
     bool isHoldAttack = false;
     PlayerChargeBar chargeBar;
@@ -19,24 +23,33 @@ public class PlayerAttackState : State<PlayerController>
 
     public override void Enter()
     {
-        owner.rb.linearVelocityX = 0f;
+        base.Enter();
+
         isHolding = true;
         holdTime = 0f;
-        idleTimer = 0f;
         isHoldAttack = false;
         isAutoFiring = false;
         lastAutoFireTime = 0f;
         chargeBar = owner.GetComponent<PlayerChargeBar>();
+
+        if (ComboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
+        {
+            ComboCounter = 0;
+        }
+
+        owner.anim.SetInteger("ComboCounter", ComboCounter);
 
         // 근거리 모드에서만 차지바 표시
         if (CanCharge && owner.attackMode == AttackMode.Melee)
             chargeBar?.ShowChargeBar();
 
         owner.anim.speed = owner.attackSpeed / 3f;
+        owner.SetZeroVelocity();
     }
 
     public override void Execute()
     {
+        base.Execute();
 
         if (Input.GetMouseButton(0) && isHolding)
         {
@@ -50,17 +63,14 @@ public class PlayerAttackState : State<PlayerController>
                 // 원거리 모드: 자동 발사 처리
                 HandleRangedAutoFire();
             }
-            idleTimer = 0f; // 공격 중이므로 idle 타이머 초기화
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             HandleMouseButtonUp();
-            idleTimer = 0f; // 공격이 끝났으므로 idle 타이머 초기화
         }
 
-        idleTimer += Time.deltaTime;
-        if (idleTimer >= 0.5f)
+        if (triggerCalled)
         {
             stateMachine.ChangeState(owner.IdleState);
         }
@@ -131,12 +141,16 @@ public class PlayerAttackState : State<PlayerController>
 
     public override void Exit()
     {
+        base.Exit();
+
         owner.anim.speed = 1f;
-        owner.anim.ResetTrigger("Att");
         // 차지바 숨기기 (안전장치)
         if (chargeBar != null)
         {
             chargeBar.HideChargeBar();
         }
+
+        ComboCounter++;
+        lastTimeAttacked = Time.time;
     }
 }

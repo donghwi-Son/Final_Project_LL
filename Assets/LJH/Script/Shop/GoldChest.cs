@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GoldChest : MonoBehaviour
@@ -5,15 +6,42 @@ public class GoldChest : MonoBehaviour
     public enum ChestSize { Small, Medium, Large }
     [SerializeField] private ChestSize size;
 
-    [Header("Gold Drop Settings")]
+    [Header("세팅")]
     public GameObject goldPrefab;
     public Transform dropPoint;
+    
+    [Header("오디오")]
+    [SerializeField] private AudioClip openSound;
+    private AudioSource audioSource;
+    
+    [Header("이미지")]
+    [SerializeField] private Sprite openedSprite;
+    private SpriteRenderer sr;
+    
+    private bool isOpened = false;
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void SetOpened()
+    {
+        if (sr != null && openedSprite != null)
+            sr.sprite = openedSprite;
+    }
 
     private void Open()
     {
+        if (isOpened) return;
+        isOpened = true;
         int amount = GetRandomGold();
         SpawnGold(amount);
-        Destroy(gameObject); // 상자 파괴
+        if (audioSource != null && openSound != null)
+            audioSource.PlayOneShot(openSound);
+        SetOpened();
+        StartCoroutine(DestroyAfterDelay(3f));
     }
 
     int GetRandomGold()
@@ -43,7 +71,7 @@ public class GoldChest : MonoBehaviour
             
             if (gold.TryGetComponent(out Rigidbody2D rb))
             {
-                Vector2 forceDir = new Vector2(Random.Range(-2f, 2f), Random.Range(2f, 4f));
+                Vector2 forceDir = new Vector2(Random.Range(-1f, 1f), Random.Range(2f, 3f));
                 rb.AddForce(forceDir, ForceMode2D.Impulse);
             }
         }
@@ -55,5 +83,11 @@ public class GoldChest : MonoBehaviour
         {
             Open();
         }
+    }
+    
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }

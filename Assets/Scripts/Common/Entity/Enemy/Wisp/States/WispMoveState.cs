@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class WispMoveState : State<Wisp>
 {
+    private Transform player;
+
     public WispMoveState(Wisp owner, StateMachine<Wisp> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
@@ -9,6 +11,8 @@ public class WispMoveState : State<Wisp>
     public override void Enter()
     {
         base.Enter();
+
+        player = PlayerManager.Instance.player.transform;
     }
 
     public override void Execute()
@@ -19,10 +23,15 @@ public class WispMoveState : State<Wisp>
 
         if (owner.IsPlayerDetected())
         {
-            if (owner.IsPlayerDetected().distance <= owner.AttackDistance && owner.CanAttack())
+            float dist = Vector2.Distance(owner.transform.position, player.position);
+            if (dist <= owner.AttackDistance)
             {
-                stateMachine.ChangeState(owner.AttackState);
-                return;
+                //공격 상태
+                if (owner.CanAttack())
+                {
+                    stateMachine.ChangeState(owner.AttackState);
+                    return;
+                }
             }
         }
         if (!owner.IsGroundDetected() || owner.IsWallDetected())

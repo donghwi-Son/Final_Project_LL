@@ -279,15 +279,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Wood_Spirits_5
+      name: Enemy_Wood_Spirits_6
       rect:
         serializedVersion: 2
-        x: 48
+        x: 93
         y: 53
-        width: 31
+        width: 42
         height: 40
       alignment: 9
-      pivot: {x: 0.38723066, y: 0}
+      pivot: {x: 0.2724971, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -296,28 +296,6 @@ TextureImporter:
       bones: []
       spriteID: 3222b56274cd52110800000000000000
       internalID: 1235635870927364643
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_Wood_Spirits_6
-      rect:
-        serializedVersion: 2
-        x: 102
-        y: 56
-        width: 14
-        height: 33
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ec6912b29844a1fd0800000000000000
-      internalID: -2370506897932314930
       vertices: []
       indices: 
       edges: []
@@ -432,6 +410,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Enemy_Wood_Spirits_5
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 53
+        width: 31
+        height: 40
+      alignment: 9
+      pivot: {x: 0.36834568, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7539c13b0d7aca43b444b39a90bb99d
+      internalID: 751950769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -453,8 +453,8 @@ TextureImporter:
       Enemy_Wood_Spirits_2: -5614446506915511598
       Enemy_Wood_Spirits_3: 7385161749416135002
       Enemy_Wood_Spirits_4: -6549523111590879070
-      Enemy_Wood_Spirits_5: 1235635870927364643
-      Enemy_Wood_Spirits_6: -2370506897932314930
+      Enemy_Wood_Spirits_5: -2370506897932314930
+      Enemy_Wood_Spirits_6: 1235635870927364643
       Enemy_Wood_Spirits_7: 4554340244699735986
       Enemy_Wood_Spirits_8: 7345795621762737278
       Enemy_Wood_Spirits_9: -7891304082818020249

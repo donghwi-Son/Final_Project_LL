@@ -4,27 +4,35 @@ public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;      //미사일 속도
     [SerializeField] private float lifeTime = 3f;   //미사일 생존 시간
-    [SerializeField] private int damage = 10;       //미사일 대미지
+    private int damage;       //미사일 대미지
     private Vector2 direction;                      //미사일 이동 방향
+    private Rigidbody2D rb;                         //미사일 Rigidbody2D 컴포넌트
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Start()
     {
         Destroy(gameObject, lifeTime); //일정 시간 후 미사일 제거
     }
 
-    public Vector2 GetDirection()
+    public void Initialize(Vector2 _dir, int _damage)
     {
-        return direction;
-    }
+        direction = _dir.normalized;
+        damage = _damage;
 
-    public void SetDirection(Vector2 dir)
-    {
-        direction = dir.normalized;
-    }
+        if(direction.x < 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, direction.y * Mathf.Rad2Deg); //왼쪽으로 발사 시 회전
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, direction.y * Mathf.Rad2Deg); //오른쪽으로 발사 시 회전
+        }
 
-    void Update()
-    {
-        transform.Translate(direction * speed * Time.deltaTime);
+        rb.linearVelocity = direction * speed; //미사일 속도 설정
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

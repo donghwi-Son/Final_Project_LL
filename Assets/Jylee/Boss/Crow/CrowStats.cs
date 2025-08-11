@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CrowStats : CharacterStats
+public class CrowStats : EnemyStats
 {
     private BossCrow crow;
     protected override void Start()
@@ -18,8 +18,6 @@ public class CrowStats : CharacterStats
     protected override void Die()
     {
         base.Die();
-
-        crow.BossDefeat();
     }
 
 }

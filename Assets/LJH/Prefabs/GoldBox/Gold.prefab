@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7849737714429944762}
   - component: {fileID: 4045359693577535833}
   - component: {fileID: -4923168214255416068}
-  - component: {fileID: 4490511730111655424}
   - component: {fileID: -5481708952599559510}
-  m_Layer: 0
+  - component: {fileID: 4741205446806261898}
+  m_Layer: 15
   m_Name: Gold
   m_TagString: Gold
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 98304
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -126,7 +126,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.00000039842678}
   m_Radius: 0.6822141
---- !u!50 &4490511730111655424
+--- !u!114 &-5481708952599559510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186156720219619368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feba84bd7f442b64bab39449e37bd803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &4741205446806261898
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -153,15 +165,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-5481708952599559510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2186156720219619368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feba84bd7f442b64bab39449e37bd803, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

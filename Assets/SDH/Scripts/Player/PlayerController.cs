@@ -40,7 +40,7 @@ public class PlayerController : Entity
     public PlayerFallingState FallingState;
     public PlayerHitState HitState;
     public AttackManager AttackManager;
-    public PlayerStatus stat;
+    public PlayerStatus stats;
 
     //인풋 변수들
     public float XInput { get; private set; }
@@ -104,6 +104,7 @@ public class PlayerController : Entity
 
         HandleInput();
         CheckGround();
+        anim.SetFloat("yVelocity", rb.linearVelocityY);
 
         if (MeleeChangeInput)
             ChangeAttackMethod();
@@ -125,13 +126,13 @@ public class PlayerController : Entity
         DashState = new PlayerDashState(this, StateMachine, "Dash");
         AirAttState = new PlayerAirAttState(this, StateMachine, "AirAttack");
         DashAttState = new PlayerDashAttState(this, StateMachine, "DashAttack");
-        FallingState = new PlayerFallingState(this, StateMachine, "Fall");
+        FallingState = new PlayerFallingState(this, StateMachine, "Jump");
     }
 
     void InitComponents()
     {
         AttackManager = GetComponent<AttackManager>();
-        stat = GetComponent<PlayerStatus>();
+        stats = GetComponent<PlayerStatus>();
     }
 
     void HandleInput()
@@ -196,11 +197,6 @@ public class PlayerController : Entity
         }
     }
 
-    public void AttackToIdle()
-    {
-        StateMachine.ChangeState(IdleState);
-    }
-
     // 간이 유틸리티 매니저 ===============
     public void EnableDoubleJump()
     {
@@ -251,7 +247,7 @@ public class PlayerController : Entity
         {
             // 일반 방어 상태에서는 피해를 반감
             dmg = Mathf.CeilToInt(dmg * (1 - defendReduction));
-            stat.TakeDamage(dmg);
+            stats.TakeDamage(dmg);
             spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경
             IsInvincible = true; // 무적 상태로 전환
             Invoke("ResetMaterial", 0.3f);
@@ -262,7 +258,7 @@ public class PlayerController : Entity
             IsGetHitStun = true;
             IsInvincible = true; // 무적 상태로 전환
             Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
-            stat.TakeDamage(dmg);
+            stats.TakeDamage(dmg);
             GetKnockBack();
             spriteRenderer.material = hitMaterial;
             StateMachine.ChangeState(HitState);
@@ -287,6 +283,7 @@ public class PlayerController : Entity
         rb.AddForce(new Vector2(-FacingDir * 5f, 5f), ForceMode2D.Impulse);
     }
 
+    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
     // 간이 유틸리티 매니저 ===============
 

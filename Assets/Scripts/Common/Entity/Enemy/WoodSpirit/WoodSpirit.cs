@@ -8,6 +8,9 @@ public class WoodSpirit : Enemy
     public WoodSpiritAttackState AttackState { get; private set; }
     public WoodSpiritDeadState DeadState { get; private set; }
 
+    [Header("감지 옵션")]
+    [SerializeField] private float maxVerticalOffset = 1f;  // y차이가 이 값 이하일 때만 감지
+
     protected override void Awake()
     {
         base.Awake();
@@ -41,5 +44,19 @@ public class WoodSpirit : Enemy
     {
         base.AnimationFinishTrigger();
         StateMachine.CurrentState.AnimationFinishTrigger();
+    }
+
+    public override bool IsPlayerDetected()
+    {
+        if (base.IsPlayerDetected())
+        {
+            float dy = Mathf.Abs(DetectedPlayerCollider.transform.position.y - transform.position.y);
+            if (dy <= maxVerticalOffset)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

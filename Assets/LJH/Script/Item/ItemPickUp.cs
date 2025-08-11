@@ -55,7 +55,19 @@ public class ItemPickup : MonoBehaviour
         }
         
         transform.position = _startPos;
-        
+        SnapToGround();
         if (_col2D != null) _col2D.enabled = true;
+    }
+    
+    private void SnapToGround()
+    {
+        int groundMask = LayerMask.GetMask("Ground");
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 5f, groundMask);
+
+        if (hit.collider != null)
+        {
+            float offsetY = 0.5f;
+            transform.position = new Vector3(transform.position.x, hit.point.y + offsetY, transform.position.z);
+        }
     }
 }
