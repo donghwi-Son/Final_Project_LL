@@ -6,9 +6,12 @@ public class Enemy : Entity
     public EnemyStats stats { get; private set; }
 
     [Header("이동 정보")]
-    public float moveSpeed;
-    public float idleTime;
-    public float battleTime;
+    [SerializeField] protected float moveSpeed = 2f; // 적의 이동 속도
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    [SerializeField] protected float idleTime = 1f; // 적이 대기하는 시간
+    public float IdleTime => idleTime;
+    [SerializeField] protected float combatTime = 3f; // 적이 플레이어와 전투하는 시간
+    public float CombatTime => combatTime;
     private float defaultMoveSpeed;
 
     [Header("플레이어 탐지 정보")]
@@ -40,7 +43,7 @@ public class Enemy : Entity
 
         stats = GetComponent<EnemyStats>();
 
-        defaultMoveSpeed = moveSpeed;
+        defaultMoveSpeed = MoveSpeed;
     }
 
     public override void DamageImpact()
@@ -91,6 +94,12 @@ public class Enemy : Entity
     {
         if (DetectedPlayerCollider != null)
         {
+            if ((DetectedPlayerCollider.transform.position.x < transform.position.x && IsFacingRight) ||
+                (DetectedPlayerCollider.transform.position.x > transform.position.x && !IsFacingRight))
+            {
+                return false;
+            }
+
             RaycastHit2D hit = Physics2D.Raycast(transform.position, DetectedPlayerCollider.transform.position - transform.position, playerCheckRadius, whatIsObstacle);
 
             if(hit.collider == DetectedPlayerCollider)

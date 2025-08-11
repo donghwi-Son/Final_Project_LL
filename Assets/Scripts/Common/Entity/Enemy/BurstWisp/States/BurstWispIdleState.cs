@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BurstWispIdleState : State<BurstWisp>
+public class BurstWispIdleState : BurstWispGroundedState
 {
     public BurstWispIdleState(BurstWisp owner, StateMachine<BurstWisp> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
@@ -10,7 +10,7 @@ public class BurstWispIdleState : State<BurstWisp>
     {
         base.Enter();
         owner.SetZeroVelocity();
-        stateTimer = owner.idleTime;
+        stateTimer = owner.IdleTime;
     }
 
     public override void Execute()

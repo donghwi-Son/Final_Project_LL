@@ -192,7 +192,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 5
+  moveSpeed: 2
   idleTime: 1
   battleTime: 0
   playerCheck: {fileID: 1178266456617497302}

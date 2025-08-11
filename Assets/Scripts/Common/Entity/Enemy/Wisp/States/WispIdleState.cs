@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WispIdleState : State<Wisp>
+public class WispIdleState : WispGroundedState
 {
     public WispIdleState(Wisp owner, StateMachine<Wisp> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
@@ -10,7 +10,7 @@ public class WispIdleState : State<Wisp>
     {
         base.Enter();
         owner.SetZeroVelocity();
-        stateTimer = owner.idleTime;
+        stateTimer = owner.IdleTime;
     }
 
     public override void Execute()

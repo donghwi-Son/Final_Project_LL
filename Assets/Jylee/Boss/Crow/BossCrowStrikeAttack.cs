@@ -29,7 +29,7 @@ public class BossCrowStrikeAttack : State<BossCrow>
         {
             // 뒤로 살짝 반동 후 공격으로 상태이동
             Vector2 retreatDir = (owner.transform.position - owner.playerTrans.position).normalized;
-            owner.rb.linearVelocity = retreatDir * owner.moveSpeed;
+            owner.rb.linearVelocity = retreatDir * owner.MoveSpeed;
             if (triggerCalled)
             {
                 stateType = 1;
