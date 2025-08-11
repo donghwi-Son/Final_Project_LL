@@ -17,6 +17,14 @@ public class LevelManager : MonoBehaviour
         GenerateMonsterPool();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            GoToNextLevel();
+        }
+    }
+
     void GenerateMonsterPool()
     {
         for (int i = 0; i < 10; i++)
