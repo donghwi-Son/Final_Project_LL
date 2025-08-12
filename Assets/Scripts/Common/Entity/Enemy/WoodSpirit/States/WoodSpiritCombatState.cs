@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class BurstWispChaseState : State<BurstWisp>
+public class WoodSpiritCombatState : State<WoodSpirit>
 {
     private Transform player;
     private int moveDir;
 
-    public BurstWispChaseState(BurstWisp owner, StateMachine<BurstWisp> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
+    public WoodSpiritCombatState(WoodSpirit owner, StateMachine<WoodSpirit> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
@@ -22,6 +22,8 @@ public class BurstWispChaseState : State<BurstWisp>
 
         if (owner.IsPlayerDetected())
         {
+            stateTimer = owner.CombatTime;
+
             float dist = Vector2.Distance(owner.transform.position, player.position);
             if (dist <= owner.AttackDistance)
             {
@@ -35,8 +37,11 @@ public class BurstWispChaseState : State<BurstWisp>
         }
         else
         {
-            stateMachine.ChangeState(owner.IdleState);
-            return;
+            if (stateTimer <= 0)
+            {
+                stateMachine.ChangeState(owner.IdleState);
+                return;
+            }
         }
 
         if (player.position.x > owner.transform.position.x)
@@ -48,7 +53,7 @@ public class BurstWispChaseState : State<BurstWisp>
             moveDir = -1;
         }
 
-        owner.SetVelocity(owner.moveSpeed * moveDir, owner.rb.linearVelocityY);
+        owner.SetVelocity(owner.MoveSpeed * moveDir, owner.rb.linearVelocityY);
     }
 
     public override void Exit()

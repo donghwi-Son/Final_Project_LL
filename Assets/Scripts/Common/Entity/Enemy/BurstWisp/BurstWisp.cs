@@ -5,8 +5,9 @@ public class BurstWisp : Enemy
     public StateMachine<BurstWisp> StateMachine { get; private set; }
     public BurstWispIdleState IdleState { get; private set; }
     public BurstWispMoveState MoveState { get; private set; }
-    public BurstWispChaseState ChaseState { get; private set; }
+    public BurstWispCombatState CombatState { get; private set; }
     public BurstWispAttackState AttackState { get; private set; }
+    public BurstWispDeadState DeadState { get; private set; }
 
     protected override void Awake()
     {
@@ -14,8 +15,9 @@ public class BurstWisp : Enemy
         StateMachine = new StateMachine<BurstWisp>();
         IdleState = new BurstWispIdleState(this, StateMachine, "Idle");
         MoveState = new BurstWispMoveState(this, StateMachine, "Idle");
-        ChaseState = new BurstWispChaseState(this, StateMachine, "Idle");
+        CombatState = new BurstWispCombatState(this, StateMachine, "Idle");
         AttackState = new BurstWispAttackState(this, StateMachine, "Attack");
+        DeadState = new BurstWispDeadState(this, StateMachine, "Dead");
     }
 
     protected override void Start()
@@ -33,7 +35,7 @@ public class BurstWisp : Enemy
     public override void Die()
     {
         base.Die();
-        StateMachine.ChangeState(AttackState); // Assuming AttackState handles the death animation
+        StateMachine.ChangeState(AttackState);
     }
 
     public override void AnimationFinishTrigger()

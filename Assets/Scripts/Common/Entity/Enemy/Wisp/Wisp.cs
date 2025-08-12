@@ -7,6 +7,7 @@ public class Wisp : Enemy
     public StateMachine<Wisp> StateMachine { get; private set; }
     public WispIdleState IdleState { get; private set; }
     public WispMoveState MoveState { get; private set; }
+    public WispCombatState CombatState { get; private set; }
     public WispAttackState AttackState { get; private set; }
     public WispDeadState DeadState { get; private set; }
 
@@ -18,6 +19,7 @@ public class Wisp : Enemy
         StateMachine = new StateMachine<Wisp>();
         IdleState = new WispIdleState(this, StateMachine, "Idle");
         MoveState = new WispMoveState(this, StateMachine, "Idle");
+        CombatState = new WispCombatState(this, StateMachine, "Idle");
         AttackState = new WispAttackState(this, StateMachine, "Attack");
         DeadState = new WispDeadState(this, StateMachine, "Dead");
     }

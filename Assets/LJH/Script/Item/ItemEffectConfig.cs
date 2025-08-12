@@ -30,7 +30,7 @@ public class ItemEffectConfig : ScriptableObject
         
         // Utility 활성화
         public ItemInfo.UtilityType utilityType;
-        public float utilityAmount; // 유틸 활성화 시 증가량 (예: 대쉬 횟수 증가, 쿨타임 감소 등)
+        public float utilityAmount; // 유틸 활성화 시 증가량 (예: 대쉬 횟수 증가)
     }
     
 

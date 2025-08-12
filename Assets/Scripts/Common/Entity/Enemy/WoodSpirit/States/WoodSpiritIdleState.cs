@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WoodSpiritIdleState : State<WoodSpirit>
+public class WoodSpiritIdleState : WoodSpiritGroundedState
 {
     public WoodSpiritIdleState(WoodSpirit owner, StateMachine<WoodSpirit> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
@@ -10,7 +10,7 @@ public class WoodSpiritIdleState : State<WoodSpirit>
     {
         base.Enter();
         owner.SetZeroVelocity();
-        stateTimer = owner.idleTime;
+        stateTimer = owner.IdleTime;
     }
 
     public override void Execute()

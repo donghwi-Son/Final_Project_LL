@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BurstWispMoveState : State<BurstWisp>
+public class BurstWispMoveState : BurstWispGroundedState
 {
     public BurstWispMoveState(BurstWisp owner, StateMachine<BurstWisp> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
@@ -15,13 +15,8 @@ public class BurstWispMoveState : State<BurstWisp>
     {
         base.Execute();
 
-        owner.SetVelocity(owner.moveSpeed * owner.FacingDir, owner.rb.linearVelocityY);
+        owner.SetVelocity(owner.MoveSpeed * owner.FacingDir, owner.rb.linearVelocityY);
 
-        if (owner.IsPlayerDetected())
-        {
-            stateMachine.ChangeState(owner.ChaseState);
-            return;
-        }
         if (!owner.IsGroundDetected() || owner.IsWallDetected())
         {
             owner.Flip();

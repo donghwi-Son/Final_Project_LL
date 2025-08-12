@@ -18,7 +18,7 @@ public class BurstWispAttackState : State<BurstWisp>
 
         if (triggerCalled)
         {
-            // 여기에 사망 코드를 추가할 것
+            stateMachine.ChangeState(owner.DeadState);
             return;
         }
     }
