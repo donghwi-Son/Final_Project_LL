@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 219174612992
-    m_Localized: NewGame
+    m_Localized: New Game
     m_Metadata:
       m_Items: []
   - m_Id: 280445005824
@@ -72,6 +72,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4218853858160640
     m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14141925226655744
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14142127954145280
+    m_Localized: Return To Lobby
     m_Metadata:
       m_Items: []
   references:
