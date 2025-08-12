@@ -23,7 +23,14 @@ public class ItemEffectFactory : MonoBehaviour
         {
             case ItemInfo.ItemUpgradeType.StatIncrease:
                 Debug.Log("스탯 증가 아이템 획득");
-                ApplyStatIncrease(e.statType, e.statAmount);
+                if (e.statType == ItemInfo.StatType.AllStats)
+                {
+                    PlayerStatus.Instance.IncreaseAllStats(1);
+                }
+                else
+                {
+                    ApplyStatIncrease(e.statType, e.statAmount);
+                }
                 break;
             
             case ItemInfo.ItemUpgradeType.AttackEnhance:
