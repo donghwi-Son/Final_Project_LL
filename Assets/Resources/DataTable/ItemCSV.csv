@@ -1,22 +1,22 @@
 Index,ItemName,ItemGrade,UpgradeType,IconName,ItemTag,Description,,Price
-0,StatsTest01,Common,StatIncrease,test01,Tag01,Health Stats +50,,100
-1,StatsTest02,Common,StatIncrease,test01,Tag01,Defense Stats +5,,100
-2,StatsTest03,Common,StatIncrease,test01,Tag01,MoveSpeed +3,,100
-3,StatsTest04,Common,StatIncrease,test01,Tag01,Power Stats +10,,100
-4,StatsTest05,Common,StatIncrease,test01,Tag01,Critical Stats +5,,100
-5,StatsTest06,Common,StatIncrease,test01,Tag01,Attack Speed Stats + 3,,100
-6,StatsTest07,Common,StatIncrease,test01,Tag01,Mana Stats + 5,,100
-7,AttackTest 02,Uncommon,AttackEnhance,test02,Tag01,Homing,,200
+0,Ã¶Åõ±¸,Common,StatIncrease,Helmat,Tag01,Health Stats +50,,100
+1,Ã¶°©¿Ê,Uncommon,StatIncrease,Armor,Tag01,Defense Stats +5,,100
+2,°¢¹Ý,Uncommon,StatIncrease,Leggings,Tag01,MoveSpeed +3,,100
+3,È¯µµ,Rare,StatIncrease,Hwando,Tag01,Power Stats +10,,300
+4,ÆÈÂî,Common,StatIncrease,Bracelet,Tag01,Critical Stats +5,,100
+5,Àü´ë,Rare,StatIncrease,test01,Tag01,Attack Speed Stats + 3,,100
+6,¸ñ°ÉÀÌ,Common,StatIncrease,Necklace,Tag02,Mana Stats + 5,,100
+7,°¢±Ã,Uncommon,AttackEnhance,Hornbow,Tag01,Homing,,200
 8,AttackTest 03,Uncommon,AttackEnhance,test02,Tag01,Explosive,,200
 9,AttackTest 04,Uncommon,AttackEnhance,test02,Tag01,PiercingEnemy,,200
 10,AttackTest 05,Uncommon,AttackEnhance,test02,Tag01,PiercingWall,,200
-11,AttackTest 06,Uncommon,AttackEnhance,test02,Tag01,Poision,,200
+11,µ¶ ÁÖ¸Ó´Ï,Uncommon,AttackEnhance,Poison,Tag01,Poision,,200
 12,AttackTest 07,Uncommon,AttackEnhance,test02,Tag01,Fire,,200
 13,AttackTest 08,Uncommon,AttackEnhance,test02,Tag01,Ice,,200
 14,AttackTest 09,Uncommon,AttackEnhance,test02,Tag01,Lightning,,200
 15,AttackTest 10,Uncommon,AttackEnhance,test02,Tag01,Bleed,,200
-16,AttackTest 11,Uncommon,AttackEnhance,test02,Tag01,Stun,,200
-17,AttackTest 11,Uncommon,AttackEnhance,test02,Tag01,Knockback,,200
+16,Ã¶Åð,Uncommon,AttackEnhance,Mace,Tag01,Stun,,200
+17,±Ø,Rare,AttackEnhance,test02,Tag01,Knockback,,200
 18,SkillTest 01,Rare,SkillUpgrade,test03,Tag01,Skill Change => Heal,,300
 19,SkillTest 02,Rare,SkillUpgrade,test03,Tag01,Skill Change => Sward Slash,,300
 20,SkillTest 03,Rare,SkillUpgrade,test03,Tag01,Skill Change => Adrenaline,,300
@@ -26,6 +26,6 @@ Index,ItemName,ItemGrade,UpgradeType,IconName,ItemTag,Description,,Price
 24,UtilityTest 01,Legendary,Utility,test05,Tag02,DoubleJump,,500
 25,UtilityTest 02,Legendary,Utility,test05,Tag02,Decrease DashCoolDawn,,500
 26,UtilityTest 03,Legendary,Utility,test05,Tag02,AddDashCount,,500
-27,BossItem 01,Boss,StatIncrease,test06,Tag02,Health Stats +100,,600
+27,BossItem 01,Boss,StatIncrease,test06,Tag02,Health Stats +200,,600
 28,BossItem 02,Boss,StatIncrease,test06,Tag02,Increase All Stats,,600
 29,BossItem 03,Boss,AttackEnhance,test06,Tag02,Bleed,,600
