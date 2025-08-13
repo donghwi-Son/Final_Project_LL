@@ -34,7 +34,7 @@ public class ItemInfo : ScriptableObject
         Power,              //힘
         Critical,           //크리티컬 확률
         AttackSpeed,         //공속
-        Mana                //마나
+        AllStats
     }
     
     public enum AttackEnhanceType
@@ -58,7 +58,9 @@ public class ItemInfo : ScriptableObject
     public enum SkillType
     {
         No,
-        Swing
+        Heal,
+        SwardSlash,
+        Adrenaline
     }
 
     public enum SubAttackType

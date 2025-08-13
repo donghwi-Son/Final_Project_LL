@@ -24229,7 +24229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 232626892983170232, guid: fe6ac077c686d474d9d4b3897d599dda, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2956340744102358014, guid: fe6ac077c686d474d9d4b3897d599dda, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27379,7 +27379,7 @@ PrefabInstance:
       objectReference: {fileID: 969701965}
     - target: {fileID: 4177606385954360968, guid: 29700979436a78844a3b62dcecdbeb29, type: 3}
       propertyPath: maxStageCount
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5630791914527151879, guid: 29700979436a78844a3b62dcecdbeb29, type: 3}
       propertyPath: m_Name

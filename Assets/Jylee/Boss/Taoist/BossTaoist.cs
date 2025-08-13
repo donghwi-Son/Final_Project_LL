@@ -6,11 +6,11 @@ using UnityEngine.Rendering;
 public class BossTaoist : Enemy
 {
     [Header("공격 관련")]
-    // [SerializeField] private float attackRangeFar;
     [SerializeField] private float attackRangeNear;
     public float attackCooldownTimer;
     public int nextAttackType;
     [SerializeField] private int attackSelect;
+    private bool isSpecial;
 
     [Header("대쉬 공격 관련")]
     public float dashPower;
@@ -33,6 +33,14 @@ public class BossTaoist : Enemy
     public float beamDuration;
     private LineRenderer lineRenderer;
 
+    [Header("특수 공격 관련")]
+    [SerializeField] private GameObject sAttackObj;
+    public float singleAttackDelay;
+    public float doubleAttackDelay;
+    public float finalDelay;
+    public int singleAttackCount;
+    public int doubleAttackCount;
+
     [Header("추적 관련")]
     public float moveDistance;
     public float moveDuration;
@@ -47,6 +55,7 @@ public class BossTaoist : Enemy
     public BossTaoistRangeAttack rangeAttack { get; private set; }
     public BossTaoistBeamAttack beamAttack { get; private set; }
     public BossTaoistDeath deathState { get; private set; }
+    public BossTaoistSpecialAttack specialAttack { get; private set; }
 
     protected override void Awake()
     {
@@ -59,6 +68,7 @@ public class BossTaoist : Enemy
         rangeAttack = new BossTaoistRangeAttack(this, stateMachine, "IsRangeAttack");
         beamAttack = new BossTaoistBeamAttack(this, stateMachine, "IsBeamAttack");
         deathState = new BossTaoistDeath(this, stateMachine, "IsDeath");
+        specialAttack = new BossTaoistSpecialAttack(this, stateMachine, "IsPhaseChange");
     }
 
     protected override void Start()
@@ -80,6 +90,10 @@ public class BossTaoist : Enemy
         if (Input.GetKeyDown(KeyCode.R))
         {
             stats.TakeDamage(10);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            BossSpecialTrigger();
         }
     }
 
@@ -130,6 +144,13 @@ public class BossTaoist : Enemy
 
     public void NextAttackSelect()
     {
+        if (isSpecial)
+        {
+            isSpecial = false;
+            stateMachine.ChangeState(specialAttack);
+            return;
+        }
+
         while (true)
         {
             nextAttackType = Random.Range(1, attackSelect + 1);
@@ -221,6 +242,19 @@ public class BossTaoist : Enemy
         beam.GetComponent<ProjectileBase>().SetDirection(fireDirection);
 
         BossBeamTrajectorySwitch(false);
+    }
+
+    public void BossSpecialTrigger()
+    {
+        isSpecial = true;
+    }
+
+    public void BossSpecialAttack(float zAngle)
+    {
+        Vector3 newDir = new Vector3(playerTrans.position.x, playerTrans.position.y + 1, playerTrans.position.z);
+
+        GameObject sAtt = Instantiate(sAttackObj, newDir, Quaternion.Euler(0, 0, zAngle));
+        sAtt.GetComponent<TaoistSpecialAttack>().SetParentsStats(stats);
     }
 
     public override void Die()

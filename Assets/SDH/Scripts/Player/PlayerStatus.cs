@@ -72,5 +72,23 @@ public class PlayerStatus : CharacterStats
                 break;
         }
     }
+    
+    public void IncreaseAllStats(float amount)
+    {
+        PlayerController player = GetComponent<PlayerController>();
+        
+        IncreaseStatBy(maxHealth, (int)amount * 10);
+        IncreaseStatBy(defense, (int)amount);
+        IncreaseStatBy(damage, (int)amount);
+        IncreaseStatBy(critChance, (int)amount);
+        
+        player.moveSpeed += amount;
+        player.attackSpeed += amount;
+        
+        IncreaseStatBy(maxMana, (int)amount);
+        IncreaseStatBy(maxStamina, (int)amount);
+
+        Debug.Log($"모든 스탯이 {amount}만큼 증가했습니다.");
+    }
 
 }
