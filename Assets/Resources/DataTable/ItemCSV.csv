@@ -4,15 +4,15 @@ Index,ItemName,ItemGrade,UpgradeType,IconName,ItemTag,Description,,Price
 2,°¢¹Ý,Uncommon,StatIncrease,Leggings,Tag01,MoveSpeed +3,,100
 3,È¯µµ,Rare,StatIncrease,Hwando,Tag01,Power Stats +10,,300
 4,ÆÈÂî,Common,StatIncrease,Bracelet,Tag01,Critical Stats +5,,100
-5,Àü´ë,Rare,StatIncrease,test01,Tag01,Attack Speed Stats + 3,,100
+5,Àü´ë,Rare,StatIncrease,test01,Tag01,Attack Speed Stats + 3,,300
 6,¸ñ°ÉÀÌ,Common,StatIncrease,Necklace,Tag02,Mana Stats + 5,,100
 7,°¢±Ã,Uncommon,AttackEnhance,Hornbow,Tag01,Homing,,200
-8,AttackTest 03,Uncommon,AttackEnhance,test02,Tag01,Explosive,,200
-9,AttackTest 04,Uncommon,AttackEnhance,test02,Tag01,PiercingEnemy,,200
-10,AttackTest 05,Uncommon,AttackEnhance,test02,Tag01,PiercingWall,,200
-11,µ¶ ÁÖ¸Ó´Ï,Uncommon,AttackEnhance,Poison,Tag01,Poision,,200
-12,AttackTest 07,Uncommon,AttackEnhance,test02,Tag01,Fire,,200
-13,AttackTest 08,Uncommon,AttackEnhance,test02,Tag01,Ice,,200
+8,ÆøÆÈ È­»ìÃË,Uncommon,AttackEnhance,BlastArrowhead,Tag01,Explosive,,200
+9,Àû °üÅë È­»ìÃË,Uncommon,AttackEnhance,PiercingEnemy,Tag01,PiercingEnemy,,200
+10,º® °üÅë È­»ìÃË,Uncommon,AttackEnhance,PiercingWall,Tag01,PiercingWall,,200
+11,µ¶ ÁÖ¸Ó´Ï,Common,AttackEnhance,Poison,Tag01,Poision,,200
+12,ºÒ²É ºÎÀû,Uncommon,AttackEnhance,FlameAmulet,Tag01,Fire,,200
+13,¾óÀ½ ºÎÀû,Uncommon,AttackEnhance,IceAmulet,Tag01,Ice,,200
 14,AttackTest 09,Uncommon,AttackEnhance,test02,Tag01,Lightning,,200
 15,AttackTest 10,Uncommon,AttackEnhance,test02,Tag01,Bleed,,200
 16,Ã¶Åð,Uncommon,AttackEnhance,Mace,Tag01,Stun,,200
@@ -20,12 +20,12 @@ Index,ItemName,ItemGrade,UpgradeType,IconName,ItemTag,Description,,Price
 18,SkillTest 01,Rare,SkillUpgrade,test03,Tag01,Skill Change => Heal,,300
 19,SkillTest 02,Rare,SkillUpgrade,test03,Tag01,Skill Change => Sward Slash,,300
 20,SkillTest 03,Rare,SkillUpgrade,test03,Tag01,Skill Change => Adrenaline,,300
-21,SubTest 01,Epic,SubAttack,test04,Tag02,SubAttack Zone,,400
-22,SubTest 02,Epic,SubAttack,test04,Tag02,SubAttack Zone,,400
+21,¿À·Î¶ó,Epic,SubAttack,Aura,Tag02,SubAttack Zone,,400
+22,Èú·¯,Epic,SubAttack,Healer,Tag02,SubAttack Healer,,400
 23,SubTest 03,Epic,SubAttack,test04,Tag02,SubAttack Zone,,400
-24,UtilityTest 01,Legendary,Utility,test05,Tag02,DoubleJump,,500
-25,UtilityTest 02,Legendary,Utility,test05,Tag02,Decrease DashCoolDawn,,500
-26,UtilityTest 03,Legendary,Utility,test05,Tag02,AddDashCount,,500
+24,¹Ù¶÷½Å,Legendary,Utility,WindShoes,Tag02,DoubleJump,,500
+25,¹Ù¶÷º§Æ®,Legendary,Utility,WindBelt,Tag02,Decrease DashCoolDawn,,500
+26,¹Ù¶÷Çï¸ä,Legendary,Utility,WindHelmat,Tag02,AddDashCount,,500
 27,BossItem 01,Boss,StatIncrease,test06,Tag02,Health Stats +200,,600
 28,BossItem 02,Boss,StatIncrease,test06,Tag02,Increase All Stats,,600
 29,BossItem 03,Boss,AttackEnhance,test06,Tag02,Bleed,,600
