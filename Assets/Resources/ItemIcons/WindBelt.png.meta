@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WindBelt_0: -7182326861960220014
+      WindBelt_1: -2923662545483199189
+      WindBelt_2: 7355166310352762333
+      WindBelt_3: 7179532387401170291
+      WindBelt_4: 1068878946090024097
+      WindBelt_5: -8727165831783978842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

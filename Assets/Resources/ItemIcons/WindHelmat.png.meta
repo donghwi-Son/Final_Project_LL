@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WindHelmat_0: 532649986194018632
+      WindHelmat_1: -57636540457733541
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

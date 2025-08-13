@@ -20,12 +20,12 @@ Index,ItemName,ItemGrade,UpgradeType,IconName,ItemTag,Description,,Price
 18,SkillTest 01,Rare,SkillUpgrade,test03,Tag01,Skill Change => Heal,,300
 19,SkillTest 02,Rare,SkillUpgrade,test03,Tag01,Skill Change => Sward Slash,,300
 20,SkillTest 03,Rare,SkillUpgrade,test03,Tag01,Skill Change => Adrenaline,,300
-21,Aura,Epic,SubAttack,Aura,Tag02,SubAttack Zone,,400
-22,Healer,Epic,SubAttack,Healer,Tag02,SubAttack Healer,,400
+21,오로라,Epic,SubAttack,Aura,Tag02,SubAttack Zone,,400
+22,힐러,Epic,SubAttack,Healer,Tag02,SubAttack Healer,,400
 23,SubTest 03,Epic,SubAttack,test04,Tag02,SubAttack Zone,,400
-24,WindShoes,Legendary,Utility,WindShoes,Tag02,DoubleJump,,500
-25,WindBelt,Legendary,Utility,test05,Tag02,Decrease DashCoolDawn,,500
-26,UtilityTest 03,Legendary,Utility,test05,Tag02,AddDashCount,,500
+24,바람신,Legendary,Utility,WindShoes,Tag02,DoubleJump,,500
+25,바람벨트,Legendary,Utility,WindBelt,Tag02,Decrease DashCoolDawn,,500
+26,바람헬멧,Legendary,Utility,WindHelmat,Tag02,AddDashCount,,500
 27,BossItem 01,Boss,StatIncrease,test06,Tag02,Health Stats +200,,600
 28,BossItem 02,Boss,StatIncrease,test06,Tag02,Increase All Stats,,600
 29,BossItem 03,Boss,AttackEnhance,test06,Tag02,Bleed,,600
