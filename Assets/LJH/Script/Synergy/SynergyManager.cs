@@ -56,7 +56,14 @@ public class SynergyManager : MonoBehaviour
         switch (entry.type)
         {
             case TagSynergyConfig.SynergyType.Stats:
-                PlayerStatus.Instance.ModifyStat(entry.statType, entry.bonus);
+                if (entry.statType == ItemInfo.StatType.AllStats)
+                {
+                    PlayerStatus.Instance.IncreaseAllStats(1);
+                }
+                else
+                {
+                    PlayerStatus.Instance.ModifyStat(entry.statType, entry.bonus);
+                }
                 break;
 
             case TagSynergyConfig.SynergyType.Attack:

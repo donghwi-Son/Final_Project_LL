@@ -295,8 +295,8 @@ MonoBehaviour:
     utilityAmount: 0
   - index: 28
     upgradeType: 0
-    statType: 1
-    statAmount: 30
+    statType: 7
+    statAmount: 1
     attackEnhance: 0
     skillType: 0
     subAttackType: 0

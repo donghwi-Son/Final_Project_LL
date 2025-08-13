@@ -1539,7 +1539,7 @@ Transform:
   m_GameObject: {fileID: 1855111505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.62, y: -1.38, z: 0}
+  m_LocalPosition: {x: -8.09, y: -2.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1877,13 +1877,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3472645651048792155, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656414976722569964, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: finalDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656414976722569964, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: sAttackObj
+      value: 
+      objectReference: {fileID: 2860647745609201837, guid: c20f4d46ec30b13499406fce81d5831e, type: 3}
+    - target: {fileID: 3656414976722569964, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: doubleAttackCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656414976722569964, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: doubleAttackDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656414976722569964, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: playerCheckRadius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656414976722569964, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: singleAttackCount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656414976722569964, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: singleAttackDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656414976722569964, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: whatIsObstacle.m_Bits
+      value: 576
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762137910561591018, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5486535019401551603, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6927346146877407325, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
       propertyPath: m_Name
       value: Boss_Fail_Taoist
       objectReference: {fileID: 0}
     - target: {fileID: 8314698925035898205, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.86
+      value: 5.24
       objectReference: {fileID: 0}
     - target: {fileID: 8314698925035898205, guid: aa4e7a9046dc3c549939e9d2ff8ae93e, type: 3}
       propertyPath: m_LocalPosition.y
