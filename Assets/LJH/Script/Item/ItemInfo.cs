@@ -66,8 +66,8 @@ public class ItemInfo : ScriptableObject
     public enum SubAttackType
     {
         No,
-        Boom,
-        Zone
+        Zone,
+        Healer
     }
 
     public enum UtilityType
