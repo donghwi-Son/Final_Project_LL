@@ -283,7 +283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &107134691
 Transform:
   m_ObjectHideFlags: 0
@@ -958,6 +958,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5739463095070534095, guid: ce403801dd455e94da03894752b1dcfd, type: 3}
   m_PrefabInstance: {fileID: 5863681068504617356}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &826701082 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1841371386424423850, guid: ce403801dd455e94da03894752b1dcfd, type: 3}
+  m_PrefabInstance: {fileID: 5863681068504617356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826701080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &861503720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,7 +1396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1249872470077441623, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 850
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1249872470077441623, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1417,11 +1428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1249872470077441623, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -46.720825
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1249872470077441623, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 7.2446
+      value: 41.22809
       objectReference: {fileID: 0}
     - target: {fileID: 1249872470077441623, guid: 08c04fcc78054dd46956fd7cfd786299, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2567,6 +2578,9 @@ MonoBehaviour:
   ShopPanel: {fileID: 826701080}
   rerollCostText: {fileID: 5863681068504617358}
   BlackMarketText: {fileID: 628757548}
+  background: {fileID: 826701082}
+  normalBg: {fileID: -51418321219850622, guid: 05137f5110ad23e42941291bffebabe0, type: 3}
+  blackMarketBg: {fileID: 931520067691491884, guid: 1a3d93c1aa286e443a1c52591537d0af, type: 3}
   rarityChances:
   - rarity: 0
     percentage: 30
