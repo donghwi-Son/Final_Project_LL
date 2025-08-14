@@ -22,6 +22,11 @@ public class ShopUI : MonoBehaviour
 
     [Header("암시장")] [SerializeField] private TMP_Text BlackMarketText;
     
+    [Header("배경")]
+    [SerializeField] private Image background;      
+    [SerializeField] private Sprite normalBg;        
+    [SerializeField] private Sprite blackMarketBg;   
+    
     //일반 상점
     private bool shopOpen = false;
     private int slotCount = 5; 
@@ -69,7 +74,8 @@ public class ShopUI : MonoBehaviour
             // 10% 확률로 암시장
             isBlackMarket = Random.value < blackMarketChance;
             Debug.Log(isBlackMarket ? "암시장 개방 할인 적용됨." : "일반 상점 개방.");
-            BlackMarketText.text = isBlackMarket ? "BlackMarket - 30% Discount!" : "";                  
+            BlackMarketText.text = isBlackMarket ? "BlackMarket - 30% Discount!" : "";      
+            ApplyBackgroundTheme();
             
             rerollCount = 0;
             UpdateRerollUI();
@@ -167,4 +173,17 @@ public class ShopUI : MonoBehaviour
         GenerateShop();
     }
     
+    void ApplyBackgroundTheme()
+    {
+        if (background == null) return;
+
+        if (isBlackMarket)
+        {
+            if (blackMarketBg != null) background.sprite = blackMarketBg;
+        }
+        else
+        {
+            if (normalBg != null) background.sprite = normalBg;
+        }
+    }
 }

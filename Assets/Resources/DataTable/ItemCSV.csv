@@ -1,31 +1,25 @@
 Index,ItemName,ItemGrade,UpgradeType,IconName,ItemTag,Description,,Price
-0,Ã¶Åõ±¸,Common,StatIncrease,Helmat,Tag01,Health Stats +50,,100
-1,Ã¶°©¿Ê,Uncommon,StatIncrease,Armor,Tag01,Defense Stats +5,,100
-2,°¢¹İ,Uncommon,StatIncrease,Leggings,Tag01,MoveSpeed +3,,100
-3,È¯µµ,Rare,StatIncrease,Hwando,Tag01,Power Stats +10,,300
-4,ÆÈÂî,Common,StatIncrease,Bracelet,Tag01,Critical Stats +5,,100
-5,Àü´ë,Rare,StatIncrease,test01,Tag01,Attack Speed Stats + 3,,300
-6,¸ñ°ÉÀÌ,Common,StatIncrease,Necklace,Tag02,Mana Stats + 5,,100
-7,°¢±Ã,Uncommon,AttackEnhance,Hornbow,Tag01,Homing,,200
-8,ÆøÆÈ È­»ìÃË,Uncommon,AttackEnhance,BlastArrowhead,Tag01,Explosive,,200
-9,Àû °üÅë È­»ìÃË,Uncommon,AttackEnhance,PiercingEnemy,Tag01,PiercingEnemy,,200
-10,º® °üÅë È­»ìÃË,Uncommon,AttackEnhance,PiercingWall,Tag01,PiercingWall,,200
-11,µ¶ ÁÖ¸Ó´Ï,Common,AttackEnhance,Poison,Tag01,Poision,,200
-12,ºÒ²É ºÎÀû,Uncommon,AttackEnhance,FlameAmulet,Tag01,Fire,,200
-13,¾óÀ½ ºÎÀû,Uncommon,AttackEnhance,IceAmulet,Tag01,Ice,,200
-14,AttackTest 09,Uncommon,AttackEnhance,test02,Tag01,Lightning,,200
-15,AttackTest 10,Uncommon,AttackEnhance,test02,Tag01,Bleed,,200
-16,Ã¶Åğ,Uncommon,AttackEnhance,Mace,Tag01,Stun,,200
-17,±Ø,Rare,AttackEnhance,test02,Tag01,Knockback,,200
-18,SkillTest 01,Rare,SkillUpgrade,test03,Tag01,Skill Change => Heal,,300
-19,SkillTest 02,Rare,SkillUpgrade,test03,Tag01,Skill Change => Sward Slash,,300
-20,SkillTest 03,Rare,SkillUpgrade,test03,Tag01,Skill Change => Adrenaline,,300
-21,¿À·Î¶ó,Epic,SubAttack,Aura,Tag02,SubAttack Zone,,400
-22,Èú·¯,Epic,SubAttack,Healer,Tag02,SubAttack Healer,,400
-23,SubTest 03,Epic,SubAttack,test04,Tag02,SubAttack Zone,,400
-24,¹Ù¶÷½Å,Legendary,Utility,WindShoes,Tag02,DoubleJump,,500
-25,¹Ù¶÷º§Æ®,Legendary,Utility,WindBelt,Tag02,Decrease DashCoolDawn,,500
-26,¹Ù¶÷Çï¸ä,Legendary,Utility,WindHelmat,Tag02,AddDashCount,,500
-27,BossItem 01,Boss,StatIncrease,test06,Tag02,Health Stats +200,,600
-28,BossItem 02,Boss,StatIncrease,test06,Tag02,Increase All Stats,,600
-29,BossItem 03,Boss,AttackEnhance,test06,Tag02,Bleed,,600
+0,ì² íˆ¬êµ¬,Common,StatIncrease,Helmat,CombatSet,Health Stats +50,,100
+1,ì² ê°‘ì˜·,Uncommon,StatIncrease,Armor,CombatSet,Defense Stats +5,,200
+2,ê°ë°˜,Uncommon,StatIncrease,Leggings,CombatSet,MoveSpeed +3,,200
+3,í™˜ë„,Rare,StatIncrease,Hwando,WeaponMaster,Power Stats +10,,300
+4,íŒ”ì°Œ,Common,StatIncrease,Bracelet,CombatSet,Critical Stats +5,,100
+5,ì „ëŒ€,Rare,StatIncrease,Leggings,CombatSet,Attack Speed Stats + 3,,300
+6,ëª©ê±¸ì´,Common,StatIncrease,Necklace,CombatSet,Mana Stats + 5,,100
+7,ê°ê¶,Uncommon,AttackEnhance,Hornbow,WeaponMaster,Homing,,200
+8,í­íŒ” í™”ì‚´ì´‰,Uncommon,AttackEnhance,BlastArrowhead,Tag01,Explosive,,200
+9,ì  ê´€í†µ í™”ì‚´ì´‰,Uncommon,AttackEnhance,PiercingEnemy,Tag01,PiercingEnemy,,200
+10,ë²½ ê´€í†µ í™”ì‚´ì´‰,Uncommon,AttackEnhance,PiercingWall,Tag01,PiercingWall,,200
+11,ë… ì£¼ë¨¸ë‹ˆ,Common,AttackEnhance,Poison,Tag01,Poision,,100
+12,ë¶ˆê½ƒ ë¶€ì ,Uncommon,AttackEnhance,FlameAmulet,Amulet,Fire,,200
+13,ì–¼ìŒ ë¶€ì ,Uncommon,AttackEnhance,IceAmulet,Amulet,Ice,,200
+14,ì² í‡´,Uncommon,AttackEnhance,Mace,WeaponMaster,Stun,,200
+15,ê·¹,Rare,AttackEnhance,test02,WeaponMaster,Knockback,,300
+16,ì˜¤ë¡œë¼,Epic,SubAttack,Aura,Tag02,SubAttack Zone,,400
+17,íëŸ¬,Rare,SubAttack,Healer,Tag02,SubAttack Healer,,300
+18,ë°”ëŒì‹ ,Boss,Utility,WindShoes,WindSet,DoubleJump,,600
+19,ë°”ëŒë²¨íŠ¸,Epic,Utility,WindBelt,WindSet,Decrease DashCoolDawn,,400
+20,ë°”ëŒí—¬ë©§,Legendary,Utility,WindHelmat,WindSet,AddDashCount,,500
+21,ë„ê¹¨ë¹„ ê°€ë©´,Boss,StatIncrease,GoblinMask,GoblinSet,Health Stats +200,,600
+22,ë„ê¹¨ë¹„ íŒ¨,Rare,StatIncrease,GoblinPae,GoblinSet,Increase All Stats,,300
+23,ë„ê¹¨ë¹„ ë°©ë§ì´,Epic,AttackEnhance,GoblinBat,GoblinSet,Bleed,,400
