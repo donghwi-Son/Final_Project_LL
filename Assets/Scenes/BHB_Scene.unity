@@ -27507,12 +27507,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1807928355}
     - target: {fileID: 4197135333529471089, guid: 0669b742f86635749a520b1886a3aa44, type: 3}
+      propertyPath: iconSpacing
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197135333529471089, guid: 0669b742f86635749a520b1886a3aa44, type: 3}
       propertyPath: fullMapPanel
       value: 
       objectReference: {fileID: 549304701}
     - target: {fileID: 4197135333529471089, guid: 0669b742f86635749a520b1886a3aa44, type: 3}
       propertyPath: miniMapOffset.x
-      value: 10
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197135333529471089, guid: 0669b742f86635749a520b1886a3aa44, type: 3}
+      propertyPath: miniMapOffset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6603486351857081579, guid: 0669b742f86635749a520b1886a3aa44, type: 3}
       propertyPath: m_Name

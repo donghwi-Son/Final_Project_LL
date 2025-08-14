@@ -3023,7 +3023,7 @@ GameObject:
   - component: {fileID: 2069648676082802853}
   - component: {fileID: 1352165714052830552}
   - component: {fileID: 6702024736006626352}
-  - component: {fileID: 2134128151855553217}
+  - component: {fileID: 7676201529347089814}
   m_Layer: 28
   m_Name: End Finish
   m_TagString: Finish
@@ -3128,7 +3128,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &2134128151855553217
+--- !u!114 &7676201529347089814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3137,12 +3137,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5726256626503046723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31e204037c16694dbfcfcdb36003cda, type: 3}
+  m_Script: {fileID: 11500000, guid: f48a85ef9feb38242aa9e2c7648e86eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 0, y: -1}
-  isBoss: 0
-  isReturning: 0
+  endFinishObject: {fileID: 5726256626503046723}
+  lobbySceneName: Lobby
+  playerTag: Player
 --- !u!1 &5979749265914515369
 GameObject:
   m_ObjectHideFlags: 0
