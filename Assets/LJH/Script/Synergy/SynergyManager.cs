@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SynergyManager : MonoBehaviour
 {
     public static SynergyManager Instance { get; private set; }
+    public static event System.Action<string> OnSynergyTagActivated;
     
     private Dictionary<ItemInfo.ItemTag,int> tagCounts = new();
     
@@ -76,7 +78,6 @@ public class SynergyManager : MonoBehaviour
                 break;
 
             case TagSynergyConfig.SynergyType.Utility:
-                // 아이템 로직과 동일 경로
                 PlayerManager.Instance.player.ApplyUtility(entry.utilityType, entry.bonus);
                 break;
 
@@ -84,5 +85,6 @@ public class SynergyManager : MonoBehaviour
                 Debug.LogWarning($"[Synergy] 알 수 없는 SynergyType: {entry.type}");
                 break;
         }
+        OnSynergyTagActivated?.Invoke(entry.tag.ToString());
     }
 }

@@ -157,7 +157,7 @@ MonoBehaviour:
     upgradeType: 1
     statType: 0
     statAmount: 0
-    attackEnhance: 8
+    attackEnhance: 10
     skillType: 0
     subAttackType: 0
     subAttackCooldown: 0
@@ -167,103 +167,43 @@ MonoBehaviour:
     upgradeType: 1
     statType: 0
     statAmount: 0
-    attackEnhance: 9
-    skillType: 0
-    subAttackType: 0
-    subAttackCooldown: 0
-    utilityType: 0
-    utilityAmount: 0
-  - index: 16
-    upgradeType: 1
-    statType: 0
-    statAmount: 0
-    attackEnhance: 10
-    skillType: 0
-    subAttackType: 0
-    subAttackCooldown: 0
-    utilityType: 0
-    utilityAmount: 0
-  - index: 17
-    upgradeType: 1
-    statType: 0
-    statAmount: 0
     attackEnhance: 11
     skillType: 0
     subAttackType: 0
     subAttackCooldown: 0
     utilityType: 0
     utilityAmount: 0
+  - index: 16
+    upgradeType: 3
+    statType: 0
+    statAmount: 0
+    attackEnhance: 10
+    skillType: 0
+    subAttackType: 1
+    subAttackCooldown: 1
+    utilityType: 0
+    utilityAmount: 0
+  - index: 17
+    upgradeType: 3
+    statType: 0
+    statAmount: 0
+    attackEnhance: 0
+    skillType: 0
+    subAttackType: 2
+    subAttackCooldown: 1
+    utilityType: 0
+    utilityAmount: 0
   - index: 18
-    upgradeType: 2
+    upgradeType: 4
     statType: 0
     statAmount: 0
     attackEnhance: 0
     skillType: 1
     subAttackType: 0
     subAttackCooldown: 0
-    utilityType: 0
-    utilityAmount: 0
-  - index: 19
-    upgradeType: 2
-    statType: 0
-    statAmount: 0
-    attackEnhance: 0
-    skillType: 2
-    subAttackType: 0
-    subAttackCooldown: 0
-    utilityType: 0
-    utilityAmount: 0
-  - index: 20
-    upgradeType: 2
-    statType: 0
-    statAmount: 0
-    attackEnhance: 0
-    skillType: 3
-    subAttackType: 0
-    subAttackCooldown: 0
-    utilityType: 0
-    utilityAmount: 0
-  - index: 21
-    upgradeType: 3
-    statType: 0
-    statAmount: 0
-    attackEnhance: 0
-    skillType: 0
-    subAttackType: 1
-    subAttackCooldown: 10
-    utilityType: 0
-    utilityAmount: 0
-  - index: 22
-    upgradeType: 3
-    statType: 0
-    statAmount: 0
-    attackEnhance: 0
-    skillType: 0
-    subAttackType: 2
-    subAttackCooldown: 0
-    utilityType: 0
-    utilityAmount: 0
-  - index: 23
-    upgradeType: 3
-    statType: 0
-    statAmount: 0
-    attackEnhance: 0
-    skillType: 0
-    subAttackType: 2
-    subAttackCooldown: 0
-    utilityType: 0
-    utilityAmount: 0
-  - index: 24
-    upgradeType: 4
-    statType: 0
-    statAmount: 0
-    attackEnhance: 0
-    skillType: 0
-    subAttackType: 0
-    subAttackCooldown: 0
     utilityType: 1
     utilityAmount: 1
-  - index: 25
+  - index: 19
     upgradeType: 4
     statType: 0
     statAmount: 0
@@ -272,8 +212,8 @@ MonoBehaviour:
     subAttackType: 0
     subAttackCooldown: 0
     utilityType: 2
-    utilityAmount: 5
-  - index: 26
+    utilityAmount: 3
+  - index: 20
     upgradeType: 4
     statType: 0
     statAmount: 0
@@ -282,28 +222,28 @@ MonoBehaviour:
     subAttackType: 0
     subAttackCooldown: 0
     utilityType: 3
-    utilityAmount: 2
-  - index: 27
+    utilityAmount: 1
+  - index: 21
     upgradeType: 0
     statType: 1
-    statAmount: 100
+    statAmount: 200
     attackEnhance: 0
     skillType: 0
-    subAttackType: 0
-    subAttackCooldown: 0
+    subAttackType: 1
+    subAttackCooldown: 10
     utilityType: 0
     utilityAmount: 0
-  - index: 28
+  - index: 22
     upgradeType: 0
     statType: 7
     statAmount: 1
     attackEnhance: 0
     skillType: 0
-    subAttackType: 0
+    subAttackType: 2
     subAttackCooldown: 0
     utilityType: 0
     utilityAmount: 0
-  - index: 29
+  - index: 23
     upgradeType: 1
     statType: 0
     statAmount: 0

@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 0712b7788a9f7d14a847b5aae3b817a5
+guid: d1253b6d43df95647931eda7273690e6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8784093253918358524
-    second: Test01_0
+      213: -5100006819786385272
+    second: GoblinBat_0
+  - first:
+      213: 4620627088669134611
+    second: GoblinBat_1
+  - first:
+      213: -2317606255965938732
+    second: GoblinBat_2
+  - first:
+      213: 3331099495880725
+    second: GoblinBat_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,12 +55,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Test01_0
+      name: GoblinBat_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 14
-        width: 99
-        height: 99
+        x: 0
+        y: 71
+        width: 1024
+        height: 953
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +137,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cfb75b9364e57e970800000000000000
-      internalID: 8784093253918358524
+      spriteID: 888109281d22939b0800000000000000
+      internalID: -5100006819786385272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinBat_1
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 927
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31fcba32bd3cf1040800000000000000
+      internalID: 4620627088669134611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinBat_2
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 943
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4db5defa36536dfd0800000000000000
+      internalID: -2317606255965938732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinBat_3
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 937
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 518d92a0e95db0000800000000000000
+      internalID: 3331099495880725
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Test01_0: 8784093253918358524
+      GoblinBat_0: -5100006819786385272
+      GoblinBat_1: 4620627088669134611
+      GoblinBat_2: -2317606255965938732
+      GoblinBat_3: 3331099495880725
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
