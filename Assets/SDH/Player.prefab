@@ -337,19 +337,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage:
-    baseValue: 0
+    baseValue: 10
     modifiers: 
   critChance:
     baseValue: 0
     modifiers: 
   critPower:
-    baseValue: 0
+    baseValue: 150
     modifiers: 
   maxHealth:
-    baseValue: 0
+    baseValue: 100
     modifiers: 
   defense:
-    baseValue: 0
+    baseValue: 1
     modifiers: 
   currentHealth: 0
   projectileType: 1
@@ -403,6 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mountPoint: {fileID: 0}
+  extraMountPoints: []
 --- !u!1 &5465563342313965802
 GameObject:
   m_ObjectHideFlags: 0
