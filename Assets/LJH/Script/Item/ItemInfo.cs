@@ -80,7 +80,10 @@ public class ItemInfo : ScriptableObject
     
     public enum ItemTag
     {
-        Tag01,
-        Tag02
+        CombatSet,
+        WindSet,
+        GoblinSet,
+        WeaponMaster,
+        Amulet
     }
 }

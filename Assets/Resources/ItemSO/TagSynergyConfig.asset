@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - tag: 0
-    threshold: 5
+    threshold: 6
     type: 1
     statType: 7
     bonus: 1
@@ -23,33 +23,33 @@ MonoBehaviour:
     utilityType: 0
   - tag: 1
     threshold: 3
-    type: 0
-    statType: 0
-    bonus: 222
+    type: 1
+    statType: 3
+    bonus: 5
     attackEnhance: 0
     skillType: 0
     utilityType: 0
-  - tag: 1
+  - tag: 2
     threshold: 3
     type: 1
-    statType: 0
-    bonus: 222
+    statType: 4
+    bonus: 30
     attackEnhance: 0
     skillType: 0
     utilityType: 0
-  - tag: 1
-    threshold: 3
+  - tag: 3
+    threshold: 4
     type: 1
-    statType: 0
-    bonus: 222
+    statType: 4
+    bonus: 10
     attackEnhance: 0
     skillType: 0
     utilityType: 0
-  - tag: 1
-    threshold: 3
-    type: 1
+  - tag: 4
+    threshold: 2
+    type: 2
     statType: 0
-    bonus: 222
-    attackEnhance: 0
+    bonus: 0
+    attackEnhance: 8
     skillType: 0
     utilityType: 0

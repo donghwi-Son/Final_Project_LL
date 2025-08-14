@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Resources/SubAttacks/Healer.prefab.meta
-guid: 012dad2fe4fc0c841b827b91787fd2b3
-========
-guid: 7903378859911064bb82930ba59b28d2
->>>>>>>> main:Assets/Resources/UI/PauseUI.prefab.meta
+guid: a7f22e41348c69a43bf43d4ea3f5119a
 PrefabImporter:
   externalObjects: {}
   userData: 

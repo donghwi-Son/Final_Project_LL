@@ -1,31 +1,49 @@
 fileFormatVersion: 2
-guid: 187017b1c41eb3847b3cdaa3c403e07b
+guid: bb09c0ac16192534599e38147f4db785
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7712330560731287409
-    second: IceAmulet_0
+      213: -6001417045792963059
+    second: GoldPanel_0
   - first:
-      213: 5508437681370964042
-    second: IceAmulet_1
+      213: -2197311764634715410
+    second: GoldPanel_1
   - first:
-      213: 7361799017809982629
-    second: IceAmulet_2
+      213: 4700158605305064863
+    second: GoldPanel_2
   - first:
-      213: 5807628134258217808
-    second: IceAmulet_3
+      213: -1670133961163695804
+    second: GoldPanel_3
   - first:
-      213: 7537435078557546644
-    second: IceAmulet_4
+      213: -6342109580226344626
+    second: GoldPanel_4
   - first:
-      213: -667091027850298964
-    second: IceAmulet_5
+      213: -7045603542590491797
+    second: GoldPanel_5
   - first:
-      213: 6039718713257290721
-    second: IceAmulet_6
+      213: 8543933426903980121
+    second: GoldPanel_6
   - first:
-      213: 4378856514273527967
-    second: IceAmulet_7
+      213: -2345740810954494846
+    second: GoldPanel_7
+  - first:
+      213: 388632147210428322
+    second: GoldPanel_8
+  - first:
+      213: 8832537013420706795
+    second: GoldPanel_9
+  - first:
+      213: 7551040458654873555
+    second: GoldPanel_10
+  - first:
+      213: 8177855954390996533
+    second: GoldPanel_11
+  - first:
+      213: -4234769598799285539
+    second: GoldPanel_12
+  - first:
+      213: -7295893864185735816
+    second: GoldPanel_13
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +76,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -67,12 +85,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1100
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -134,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IceAmulet_0
+      name: GoldPanel_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
-        width: 1024
-        height: 1517
+        y: 0
+        width: 1536
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +167,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f80f839773c48f490800000000000000
-      internalID: -7712330560731287409
+      spriteID: d0649846efea6bca0800000000000000
+      internalID: -6001417045792963059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IceAmulet_1
+      name: GoldPanel_1
       rect:
         serializedVersion: 2
-        x: 199
-        y: 959
-        width: 51
-        height: 55
+        x: 81
+        y: 1006
+        width: 8
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +189,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a402e71e2e6e17c40800000000000000
-      internalID: 5508437681370964042
+      spriteID: eea392887949181e0800000000000000
+      internalID: -2197311764634715410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IceAmulet_2
+      name: GoldPanel_2
       rect:
         serializedVersion: 2
-        x: 205
-        y: 1002
-        width: 18
-        height: 19
+        x: 83
+        y: 998
+        width: 6
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,19 +211,63 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5a43264c33d5a2660800000000000000
-      internalID: 7361799017809982629
+      spriteID: f9d243959515a3140800000000000000
+      internalID: 4700158605305064863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IceAmulet_3
+      name: GoldPanel_3
       rect:
         serializedVersion: 2
-        x: 193
-        y: 930
-        width: 9
+        x: 81
+        y: 990
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4499585d20e72d8e0800000000000000
+      internalID: -1670133961163695804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPanel_4
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 982
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e49c10050fc4cf7a0800000000000000
+      internalID: -6342109580226344626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPanel_5
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 991
+        width: 6
         height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -215,20 +277,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 053960a9407d89050800000000000000
-      internalID: 5807628134258217808
+      spriteID: b63f8af38ecf83e90800000000000000
+      internalID: -7045603542590491797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IceAmulet_4
+      name: GoldPanel_6
       rect:
         serializedVersion: 2
-        x: 199
-        y: 893
-        width: 39
-        height: 40
+        x: 1386
+        y: 108
+        width: 7
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +299,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 498bdf6d4495a9860800000000000000
-      internalID: 7537435078557546644
+      spriteID: 958923f1f26229670800000000000000
+      internalID: 8543933426903980121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IceAmulet_5
+      name: GoldPanel_7
       rect:
         serializedVersion: 2
-        x: 159
-        y: 835
-        width: 43
-        height: 32
+        x: 81
+        y: 38
+        width: 8
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +321,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ca9f12c9e340eb6f0800000000000000
-      internalID: -667091027850298964
+      spriteID: 28cabe32921427fd0800000000000000
+      internalID: -2345740810954494846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IceAmulet_6
+      name: GoldPanel_8
       rect:
         serializedVersion: 2
-        x: 175
-        y: 769
-        width: 28
-        height: 22
+        x: 81
+        y: 24
+        width: 8
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,20 +343,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1ebeafe7b2461d350800000000000000
-      internalID: 6039718713257290721
+      spriteID: 2af56caf0e2b46500800000000000000
+      internalID: 388632147210428322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IceAmulet_7
+      name: GoldPanel_9
       rect:
         serializedVersion: 2
-        x: 163
-        y: 631
-        width: 37
-        height: 32
+        x: 82
+        y: 30
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -303,8 +365,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f98cdafacc2d4cc30800000000000000
-      internalID: 4378856514273527967
+      spriteID: beb4e6eed99739a70800000000000000
+      internalID: 8832537013420706795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPanel_10
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 24
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d7f9be3a4faac860800000000000000
+      internalID: 7551040458654873555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPanel_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 8
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 536d9c199a49d7170800000000000000
+      internalID: 8177855954390996533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPanel_12
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 0
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd2f1f59c731b35c0800000000000000
+      internalID: -4234769598799285539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPanel_13
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 0
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 875d1429f27cfba90800000000000000
+      internalID: -7295893864185735816
       vertices: []
       indices: 
       edges: []
@@ -313,7 +463,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -322,15 +472,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      IceAmulet_0: -7712330560731287409
-      IceAmulet_1: 5508437681370964042
-      IceAmulet_2: 7361799017809982629
-      IceAmulet_3: 5807628134258217808
-      IceAmulet_4: 7537435078557546644
-      IceAmulet_5: -667091027850298964
-      IceAmulet_6: 6039718713257290721
-      IceAmulet_7: 4378856514273527967
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
