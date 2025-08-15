@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -19,8 +20,6 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private TMP_Text rerollCostText; 
     private int rerollCount = 0;
     private const int baseRerollCost = 50;
-
-    [Header("암시장")] [SerializeField] private TMP_Text BlackMarketText;
     
     [Header("배경")]
     [SerializeField] private Image background;      
@@ -48,6 +47,7 @@ public class ShopUI : MonoBehaviour
     void Start()
     {
         UpdateRerollUI();
+        var data = StageManager.Instance.GetStageDataByInstance(gameObject);
     }
 
     void OnDestroy()
@@ -59,8 +59,12 @@ public class ShopUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            ShopOpen();
-            Debug.Log("상점오픈");
+            Debug.Log($"[ShopUI] P pressed. inside={StoreMan.Instance.PlayerInside}");
+            if (StoreMan.Instance.PlayerInside)
+            {
+                Debug.Log("상점오픈");
+                ShopOpen();
+            }
         }
     }
 
@@ -74,7 +78,6 @@ public class ShopUI : MonoBehaviour
             // 10% 확률로 암시장
             isBlackMarket = Random.value < blackMarketChance;
             Debug.Log(isBlackMarket ? "암시장 개방 할인 적용됨." : "일반 상점 개방.");
-            BlackMarketText.text = isBlackMarket ? "BlackMarket - 30% Discount!" : "";      
             ApplyBackgroundTheme();
             
             rerollCount = 0;

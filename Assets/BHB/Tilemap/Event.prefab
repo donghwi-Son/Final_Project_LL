@@ -31695,6 +31695,7 @@ Transform:
   - {fileID: 2446812172365070722}
   - {fileID: 7444747966870964174}
   - {fileID: 4752512705117846049}
+  - {fileID: 5833430303012506387}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &933054608546282449
@@ -31711,6 +31712,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finishObject: {fileID: 5329436038535507442}
   bossFinishObject: {fileID: 0}
+  normalBox: {fileID: 0}
+  hardBox: {fileID: 0}
+  bossBox: {fileID: 0}
 --- !u!114 &2342154758796474660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35220,3 +35224,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &8381755883860905216
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2782312025053362560}
+    m_Modifications:
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 32.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166320467258272591, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+      propertyPath: m_Name
+      value: GoldStore
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+--- !u!4 &5833430303012506387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2640652431496480275, guid: 84bfbe77ce42ffc498c469bc778cd7fe, type: 3}
+  m_PrefabInstance: {fileID: 8381755883860905216}
+  m_PrefabAsset: {fileID: 0}

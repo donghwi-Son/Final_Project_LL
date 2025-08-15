@@ -12,6 +12,9 @@ public class RoomConditionManager : MonoBehaviour
 {
     public GameObject finishObject;       // 일반 Finish Group
     public GameObject bossFinishObject;   // Boss Finish Group
+    [SerializeField] private GameObject normalBox;
+    [SerializeField] private GameObject hardBox;
+    [SerializeField] private GameObject bossBox;
 
     private IRoomCondition condition;
     //private bool isBossRoom = false;
@@ -23,6 +26,24 @@ public class RoomConditionManager : MonoBehaviour
 
         if (finishObject != null) finishObject.SetActive(false);
         if (bossFinishObject != null) bossFinishObject.SetActive(false);
+        if (normalBox != null)
+        {
+            normalBox.SetActive(false);
+            normalBox.GetComponent<BoxCollider2D>().enabled = false;
+        }
+
+        if (hardBox != null)
+        {
+            hardBox.SetActive(false);
+            hardBox.GetComponent<BoxCollider2D>().enabled = false;
+        }
+
+        if (bossBox != null)
+        {
+            bossBox.SetActive(false);
+            bossBox.GetComponent<BoxCollider2D>().enabled = false;
+        }
+            
 
         // 여기 핵심
         GameObject root = transform.root.gameObject;
@@ -86,6 +107,8 @@ public class RoomConditionManager : MonoBehaviour
     {
         if (finishObject != null)
         {
+            normalBox.GetComponent<BoxCollider2D>().enabled = true;
+            normalBox.SetActive(true);
             finishObject.SetActive(true);
             finishActivated = true;
             Debug.Log("[RoomConditionManager] 일반 Finish 활성화 완료");
@@ -101,6 +124,9 @@ public class RoomConditionManager : MonoBehaviour
         if (bossFinishObject != null)
         {
             Debug.Log("[RoomConditionManager] bossFinishObject 확인: " + bossFinishObject.name);
+            
+            bossBox.GetComponent<BoxCollider2D>().enabled = true;
+            bossBox.SetActive(true);
 
             bossFinishObject.SetActive(true);
             finishActivated = true;
