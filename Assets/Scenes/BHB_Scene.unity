@@ -23295,7 +23295,7 @@ Transform:
   m_GameObject: {fileID: 1622195494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.09, y: 0, z: 0}
+  m_LocalPosition: {x: -29, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27508,7 +27508,7 @@ PrefabInstance:
       objectReference: {fileID: 1807928355}
     - target: {fileID: 4197135333529471089, guid: 0669b742f86635749a520b1886a3aa44, type: 3}
       propertyPath: iconSpacing
-      value: 125
+      value: 149
       objectReference: {fileID: 0}
     - target: {fileID: 4197135333529471089, guid: 0669b742f86635749a520b1886a3aa44, type: 3}
       propertyPath: fullMapPanel
