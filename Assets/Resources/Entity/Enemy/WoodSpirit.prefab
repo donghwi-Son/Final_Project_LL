@@ -194,7 +194,7 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 2
   idleTime: 1
-  battleTime: 0
+  combatTime: 3
   playerCheck: {fileID: 1178266456617497302}
   playerCheckRadius: 5
   whatIsPlayer:
@@ -231,7 +231,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   maxHealth:
-    baseValue: 100
+    baseValue: 20
     modifiers: 
   defense:
     baseValue: 1

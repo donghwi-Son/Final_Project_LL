@@ -26,21 +26,21 @@ public class PlayerController : Entity
     public float attackInterval => 1f / attackSpeed;
 
     //스테이트 및 컨트롤
-    public StateMachine<PlayerController> StateMachine;
-    public PlayerIdleState IdleState;
-    public PlayerMoveState MoveState;
-    public PlayerJumpState JumpState;
-    public PlayerAttackState AttackState;
-    public PlayerSpecialAttackState SpecialAttackState;
-    public PlayerSkillState SkillState;
-    public PlayerDashState DashState;
-    public PlayerDefendState DefendState;
-    public PlayerAirAttState AirAttState;
-    public PlayerDashAttState DashAttState;
-    public PlayerFallingState FallingState;
-    public PlayerHitState HitState;
-    public AttackManager AttackManager;
-    public PlayerStatus stats;
+    public StateMachine<PlayerController> StateMachine { get; private set; }
+    public PlayerIdleState IdleState { get; private set; }
+    public PlayerMoveState MoveState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
+    public PlayerSpecialAttackState SpecialAttackState { get; private set; }
+    public PlayerSkillState SkillState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
+    public PlayerDefendState DefendState { get; private set; }
+    public PlayerAirAttState AirAttState { get; private set; }
+    public PlayerDashAttState DashAttState { get; private set; }
+    public PlayerFallingState FallingState { get; private set; }
+    public PlayerHitState HitState { get; private set; }
+    public AttackManager AttackManager { get; private set; }
+    public PlayerStatus stats { get; private set; }
 
     //인풋 변수들
     public float XInput { get; private set; }
@@ -129,13 +129,13 @@ public class PlayerController : Entity
         FallingState = new PlayerFallingState(this, StateMachine, "Jump");
     }
 
-    void InitComponents()
+    private void InitComponents()
     {
         AttackManager = GetComponent<AttackManager>();
         stats = GetComponent<PlayerStatus>();
     }
 
-    void HandleInput()
+    private void HandleInput()
     {
         if (IsGetHitStun)
         {
