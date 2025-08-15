@@ -32,6 +32,7 @@ public class BossCrow : Enemy
     public float playerYLimit;
     private float lastDirX;
     private Vector2 moveDir;
+    public float dectedDistance;
 
     [Header("죽음 관련")]
     public float dyingTime;
@@ -93,6 +94,9 @@ public class BossCrow : Enemy
     {
         stateMachine.CurrentState.AnimationFinishTrigger();
     }
+
+    public override bool IsPlayerDetected()
+    => Physics2D.CircleCast(playerCheck.position, playerCheckRadius, Vector2.down * FacingDir, dectedDistance, whatIsPlayer);
 
     public void DetectPlayer()
     {

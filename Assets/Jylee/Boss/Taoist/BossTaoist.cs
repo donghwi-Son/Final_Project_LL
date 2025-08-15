@@ -44,6 +44,7 @@ public class BossTaoist : Enemy
     [Header("추적 관련")]
     public float moveDistance;
     public float moveDuration;
+    public float dectedDistance;
 
     public Transform playerTrans;
 
@@ -96,6 +97,9 @@ public class BossTaoist : Enemy
             BossSpecialTrigger();
         }
     }
+
+    public override bool IsPlayerDetected()
+    => Physics2D.CircleCast(playerCheck.position, playerCheckRadius, Vector2.down * FacingDir, dectedDistance, whatIsPlayer);
 
     public void DetectPlayer()
     {
