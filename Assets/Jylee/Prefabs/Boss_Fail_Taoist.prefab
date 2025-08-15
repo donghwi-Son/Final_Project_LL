@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7780564548142040368}
   - component: {fileID: 471863807821397616}
   - component: {fileID: 3188110364028094798}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: MeleeAttackCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 5006637130064359886}
   - component: {fileID: 9096564222964788036}
   - component: {fileID: 1053578782830381646}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: DashAttackCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,14 +412,15 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 0.5
   idleTime: 0
-  battleTime: 0
-  fallSpeed: 2
+  combatTime: 3
   playerCheck: {fileID: 8314698925035898205}
   playerCheckRadius: 12
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  playerCheckDistance: 0
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 576
   attackCheck: {fileID: 8314698925035898205}
   attackCheckRadius: 10
   attackDistance: 0
@@ -441,8 +442,15 @@ MonoBehaviour:
   beamPreheatTime: 2
   beamLockOnTime: 1
   beamDuration: 3
+  sAttackObj: {fileID: 2860647745609201837, guid: c20f4d46ec30b13499406fce81d5831e, type: 3}
+  singleAttackDelay: 0.5
+  doubleAttackDelay: 1
+  finalDelay: 2
+  singleAttackCount: 6
+  doubleAttackCount: 4
   moveDistance: 0.5
   moveDuration: 0.4
+  dectedDistance: 12
   playerTrans: {fileID: 0}
 --- !u!114 &1336227252189590335
 MonoBehaviour:

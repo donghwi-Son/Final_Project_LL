@@ -212,6 +212,7 @@ MonoBehaviour:
   turnCooldown: 0.5
   turnLerpSpeed: 5
   playerYLimit: 0
+  dectedDistance: 12
   dyingTime: 1
   dieForceX: 5
   dieForceY: 5
