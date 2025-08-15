@@ -11,17 +11,18 @@ public enum AttackMode
 
 public class AttackManager : MonoBehaviour
 {
-    PlayerController player;
-    Vector2 attOffset;
-    bool isRight;
-    float lastFireTime = -999f;
-    bool canFire = true;
-    public Transform firePoint;
-    public Transform attPos;
-    public Transform airAttPos;
-    Vector3 dashPos;
-    List<ICommonEffect> CEs = new List<ICommonEffect>();
-    List<IMeleeEffect> MEs = new List<IMeleeEffect>();
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform attPos;
+    [SerializeField] private Transform airAttPos;
+    [SerializeField] private LayerMask enemyLayer;
+    private PlayerController player;
+    private Vector2 attOffset;
+    private bool isRight;
+    private float lastFireTime = -999f;
+    private bool canFire = true;
+    private Vector3 dashPos;
+    private List<ICommonEffect> CEs = new List<ICommonEffect>();
+    private List<IMeleeEffect> MEs = new List<IMeleeEffect>();
 
     private void Awake()
     {
@@ -56,7 +57,6 @@ public class AttackManager : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mousePos - (Vector2)firePoint.position).normalized;
         projectile.Fire(firePoint.position, dir, player.stats.damage.GetValue()*3f, player.stats.projectileLifeTime, player.stats.shotSpeed);
-
     }
 
     public void Attack(AttackMode attmode, bool isRight)
@@ -99,7 +99,7 @@ public class AttackManager : MonoBehaviour
 
     public void AirAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.attackRange*1.5f, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.attackRange * 1.5f, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
@@ -112,7 +112,7 @@ public class AttackManager : MonoBehaviour
 
     public void SpecialMeleeAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.attackRange * 1.6f, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.attackRange * 1.6f, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
@@ -131,7 +131,7 @@ public class AttackManager : MonoBehaviour
     public void DashAttack(bool isright)
     {
         dashPos = transform.position + (isright ? Vector3.right : Vector3.left) * 3.3f + new Vector3 (0,0.75f);
-        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(dashPos, new Vector2(6.6f, 1.4f), 0f, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(dashPos, new Vector2(6.6f, 1.4f), 0f, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
@@ -144,7 +144,7 @@ public class AttackManager : MonoBehaviour
 
     public void MeleeAttack(float _rangeMod)
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.attackRange * _rangeMod, LayerMask.GetMask("Enemy"));
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.attackRange * _rangeMod, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드

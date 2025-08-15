@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 7457750759599180546}
   - component: {fileID: 3278024461262667090}
   - component: {fileID: 2845830642858488594}
+  - component: {fileID: 6356924531791941977}
   m_Layer: 7
   m_Name: Enemy_Baby_Crow
   m_TagString: Enemy
@@ -310,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 6934301789155590453}
-  groundCheckRadius: 0.3
+  groundCheckRadius: 0.1
   wallCheck: {fileID: 6934301789155590453}
   wallCheckDistance: 0.1
   groundLayer:
@@ -318,14 +319,15 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 5
   idleTime: 0
-  battleTime: 0
-  fallSpeed: 2
+  combatTime: 3
   playerCheck: {fileID: 6934301789155590453}
   playerCheckRadius: 0
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  playerCheckDistance: 0
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 0
   attackCheck: {fileID: 6934301789155590453}
   attackCheckRadius: 0
   attackDistance: 0
@@ -333,3 +335,33 @@ MonoBehaviour:
   lastTimeAttacked: 0
   playerTrans: {fileID: 0}
   rotationSpeed: 200
+--- !u!114 &6356924531791941977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8284890929279240609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284bafb19fac2074aae8788e718f5e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 10
+    modifiers: 
+  critChance:
+    baseValue: 0
+    modifiers: 
+  critPower:
+    baseValue: 0
+    modifiers: 
+  maxHealth:
+    baseValue: 5
+    modifiers: 
+  defense:
+    baseValue: 1
+    modifiers: 
+  currentHealth: 0
+  level: 1
+  percantageModifier: 0.4

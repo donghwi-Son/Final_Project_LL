@@ -295,8 +295,6 @@ MonoBehaviour:
   rollDuration: 0.3
   defendReduction: 0.5
   maxDashCount: 1
-  AttackManager: {fileID: 0}
-  stats: {fileID: 0}
   CanAirAttack: 1
   CanDoubleJump: 0
   IsGetHitStun: 0
@@ -325,6 +323,9 @@ MonoBehaviour:
   firePoint: {fileID: 3175198009254228142}
   attPos: {fileID: 4914405894045734775}
   airAttPos: {fileID: 7092994725689579274}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 384
 --- !u!114 &2627905978096707615
 MonoBehaviour:
   m_ObjectHideFlags: 0
