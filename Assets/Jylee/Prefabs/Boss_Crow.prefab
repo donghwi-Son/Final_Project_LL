@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 3946163173554294032}
   m_Layer: 8
   m_Name: Boss_Crow
-  m_TagString: NPC
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,14 +181,15 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 8
   idleTime: 0
-  battleTime: 0
-  fallSpeed: 2
+  combatTime: 3
   playerCheck: {fileID: 3519788255562297085}
   playerCheckRadius: 12
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  playerCheckDistance: 0
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 0
   attackCheck: {fileID: 3519788255562297085}
   attackCheckRadius: 0
   attackDistance: 0

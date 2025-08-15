@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 16
   cols: 9
-  roomSize: {x: 28.8456, y: 16.1808}
+  roomSize: {x: 70, y: 40}
   origin: {x: 0, y: 0, z: 0}
+  ySpawnOffsetFix: -10

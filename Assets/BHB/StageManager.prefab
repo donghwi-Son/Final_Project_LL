@@ -44,13 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49ff0f7132a1cc468498e545ddfdcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startRoomPrefab: {fileID: 7838725898838018904, guid: 7df0a4cebbf429648af774ac62ec1ba8, type: 3}
+  normalRoomPrefabs:
+  - {fileID: 7838725898838018904, guid: 98dbe9c160e75074bbeceb18972750d4, type: 3}
+  - {fileID: 7838725898838018904, guid: 980cf614f7a4e1e45a516e5720f180bf, type: 3}
+  - {fileID: 7838725898838018904, guid: 6837d4d5f78c3214f9d18850dec66099, type: 3}
+  hardRoomPrefabs:
+  - {fileID: 3640064922824565140, guid: 12276c2562469154cbfab368489270a9, type: 3}
+  - {fileID: 3640064922824565140, guid: ec0fc02cc24f4404288c4f45a5f6b08b, type: 3}
+  - {fileID: 3640064922824565140, guid: fa2740fe793850d4ba8624671ef81140, type: 3}
+  storeRoomPrefabs:
+  - {fileID: 4339767524800197598, guid: 21ab855bfd542874e9807e65f1a7333b, type: 3}
+  eventRoomPrefabs:
+  - {fileID: 5104878531306034708, guid: c8a30f05b9d775641b1f4137436c1b6a, type: 3}
+  bossRoomPrefab: {fileID: 121794868887034143, guid: a65c0d0985635be4e9fd75690dc7a480, type: 3}
+  generator: {fileID: 0}
+  miniMapManager: {fileID: 0}
   player: {fileID: 0}
-  playerController: {fileID: 0}
-  stageChoicePanel: {fileID: 0}
-  stopPanel: {fileID: 0}
-  stageIndex: 0
+  maxStageCount: 10
+  maxStageCounter: 10
   stageCounter: 0
-  Stages: []
-  startButton: {fileID: 0}
-  bossButton: {fileID: 0}
-  stageButtons: []
