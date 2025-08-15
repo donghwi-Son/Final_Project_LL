@@ -30188,7 +30188,9 @@ GameObject:
   - component: {fileID: 4248806292105378150}
   - component: {fileID: 7649244086115411436}
   - component: {fileID: 398206504785319659}
+  - component: {fileID: 5601420855689348175}
   - component: {fileID: 476377012123315876}
+  - component: {fileID: 5796649641110085326}
   m_Layer: 6
   m_Name: Stage_Start_Ground
   m_TagString: Ground
@@ -33287,8 +33289,73 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!50 &5601420855689348175
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7136284350786200724}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!19719996 &476377012123315876
 TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7136284350786200724}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 1
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
+--- !u!66 &5796649641110085326
+CompositeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -33322,9 +33389,150 @@ TilemapCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 476377012123315876}
+    m_ColliderPaths:
+    - - X: 360000000
+        Y: 331875008
+      - X: 360000000
+        Y: 340000000
+      - X: 420000000
+        Y: 340000000
+      - X: 420000000
+        Y: 333750016
+      - X: 423750016
+        Y: 330000000
+      - X: 435624992
+        Y: 330000000
+      - X: 440000000
+        Y: 331875008
+      - X: 440000000
+        Y: 340000000
+      - X: 545625024
+        Y: 340000000
+      - X: 550000000
+        Y: 341875008
+      - X: 550000000
+        Y: 350000000
+      - X: 555625024
+        Y: 350000000
+      - X: 560000000
+        Y: 351875008
+      - X: 560000000
+        Y: 360000000
+      - X: 565625024
+        Y: 360000000
+      - X: 570000000
+        Y: 361875008
+      - X: 570000000
+        Y: 370000000
+      - X: 130000000
+        Y: 370000000
+      - X: 130000000
+        Y: 363750016
+      - X: 133750000
+        Y: 360000000
+      - X: 140000000
+        Y: 360000000
+      - X: 140000000
+        Y: 353750016
+      - X: 143750000
+        Y: 350000000
+      - X: 150000000
+        Y: 350000000
+      - X: 150000000
+        Y: 343750016
+      - X: 153750000
+        Y: 340000000
+      - X: 340000000
+        Y: 340000000
+      - X: 340000000
+        Y: 333750016
+      - X: 343750016
+        Y: 330000000
+      - X: 355624992
+        Y: 330000000
+    - - X: 570000000
+        Y: 191875008
+      - X: 570000000
+        Y: 240000000
+      - X: 520000000
+        Y: 240000000
+      - X: 520000000
+        Y: 230000000
+      - X: 500000000
+        Y: 230000000
+      - X: 500000000
+        Y: 220000000
+      - X: 200000000
+        Y: 220000000
+      - X: 200000000
+        Y: 230000000
+      - X: 180000000
+        Y: 230000000
+      - X: 180000000
+        Y: 240000000
+      - X: 130000000
+        Y: 240000000
+      - X: 130000000
+        Y: 193750000
+      - X: 133750000
+        Y: 190000000
+      - X: 565625024
+        Y: 190000000
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 35.562492, y: 33}
+      - {x: 36, y: 33.18752}
+      - {x: 36.00003, y: 34}
+      - {x: 42, y: 33.999973}
+      - {x: 42.000008, y: 33.374996}
+      - {x: 42.37501, y: 33}
+      - {x: 43.562504, y: 33.000004}
+      - {x: 44, y: 33.18752}
+      - {x: 44.00003, y: 34}
+      - {x: 54.562508, y: 34.000004}
+      - {x: 55, y: 34.18752}
+      - {x: 55.000034, y: 35}
+      - {x: 55.562508, y: 35.000004}
+      - {x: 56, y: 35.18752}
+      - {x: 56.000034, y: 36}
+      - {x: 56.562508, y: 36.000004}
+      - {x: 57, y: 36.18752}
+      - {x: 56.99997, y: 37}
+      - {x: 13, y: 36.999973}
+      - {x: 13.000009, y: 36.374996}
+      - {x: 13.375011, y: 36}
+      - {x: 14, y: 35.999973}
+      - {x: 14.000009, y: 35.374996}
+      - {x: 14.375011, y: 35}
+      - {x: 15, y: 34.999973}
+      - {x: 15.000009, y: 34.374996}
+      - {x: 15.375011, y: 34}
+      - {x: 34, y: 33.999973}
+      - {x: 34.000008, y: 33.374996}
+      - {x: 34.37501, y: 33}
+    - - {x: 56.562496, y: 19}
+      - {x: 57, y: 19.18752}
+      - {x: 56.99997, y: 24}
+      - {x: 52, y: 23.999971}
+      - {x: 51.999973, y: 23}
+      - {x: 50, y: 22.999971}
+      - {x: 49.999973, y: 22}
+      - {x: 20, y: 22.000029}
+      - {x: 19.999971, y: 23}
+      - {x: 18, y: 23.000029}
+      - {x: 17.999971, y: 24}
+      - {x: 13, y: 23.999971}
+      - {x: 13.000009, y: 19.374992}
+      - {x: 13.375011, y: 19}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
+  m_CompositeGameObject: {fileID: 7136284350786200724}
 --- !u!1 &7838725898838018904
 GameObject:
   m_ObjectHideFlags: 0

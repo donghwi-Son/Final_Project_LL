@@ -148,6 +148,45 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -472,7 +511,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GoldPanel_0: -6001417045792963059
+      GoldPanel_1: -2197311764634715410
+      GoldPanel_10: 7551040458654873555
+      GoldPanel_11: 8177855954390996533
+      GoldPanel_12: -4234769598799285539
+      GoldPanel_13: -7295893864185735816
+      GoldPanel_2: 4700158605305064863
+      GoldPanel_3: -1670133961163695804
+      GoldPanel_4: -6342109580226344626
+      GoldPanel_5: -7045603542590491797
+      GoldPanel_6: 8543933426903980121
+      GoldPanel_7: -2345740810954494846
+      GoldPanel_8: 388632147210428322
+      GoldPanel_9: 8832537013420706795
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

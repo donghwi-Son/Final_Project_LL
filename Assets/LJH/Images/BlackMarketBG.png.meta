@@ -154,6 +154,45 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +561,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BlackMarketBG_0: 931520067691491884
+      BlackMarketBG_1: -8900581281763478994
+      BlackMarketBG_10: 2916250640276771181
+      BlackMarketBG_11: -6968271923332590130
+      BlackMarketBG_12: -2025714748779350425
+      BlackMarketBG_13: -7088162782846602392
+      BlackMarketBG_14: -9142781042119643443
+      BlackMarketBG_15: 5928681869507445863
+      BlackMarketBG_2: -5266299121696752778
+      BlackMarketBG_3: 6374069609406757517
+      BlackMarketBG_4: -2108072654931598288
+      BlackMarketBG_5: 5381660978757988380
+      BlackMarketBG_6: -8634248302538558276
+      BlackMarketBG_7: 4274128047744303406
+      BlackMarketBG_8: -2594259857227994145
+      BlackMarketBG_9: -2563993527802691559
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

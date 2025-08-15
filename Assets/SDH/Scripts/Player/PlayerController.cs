@@ -26,21 +26,21 @@ public class PlayerController : Entity
     public float attackInterval => 1f / attackSpeed;
 
     //스테이트 및 컨트롤
-    public StateMachine<PlayerController> StateMachine;
-    public PlayerIdleState IdleState;
-    public PlayerMoveState MoveState;
-    public PlayerJumpState JumpState;
-    public PlayerAttackState AttackState;
-    public PlayerSpecialAttackState SpecialAttackState;
-    public PlayerSkillState SkillState;
-    public PlayerDashState DashState;
-    public PlayerDefendState DefendState;
-    public PlayerAirAttState AirAttState;
-    public PlayerDashAttState DashAttState;
-    public PlayerFallingState FallingState;
-    public PlayerHitState HitState;
-    public AttackManager AttackManager;
-    public PlayerStatus stats;
+    public StateMachine<PlayerController> StateMachine { get; private set; }
+    public PlayerIdleState IdleState { get; private set; }
+    public PlayerMoveState MoveState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
+    public PlayerSpecialAttackState SpecialAttackState { get; private set; }
+    public PlayerSkillState SkillState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
+    public PlayerDefendState DefendState { get; private set; }
+    public PlayerAirAttState AirAttState { get; private set; }
+    public PlayerDashAttState DashAttState { get; private set; }
+    public PlayerFallingState FallingState { get; private set; }
+    public PlayerHitState HitState { get; private set; }
+    public AttackManager AttackManager { get; private set; }
+    public PlayerStatus stats { get; private set; }
 
     //인풋 변수들
     public float XInput { get; private set; }
@@ -127,15 +127,16 @@ public class PlayerController : Entity
         AirAttState = new PlayerAirAttState(this, StateMachine, "AirAttack");
         DashAttState = new PlayerDashAttState(this, StateMachine, "DashAttack");
         FallingState = new PlayerFallingState(this, StateMachine, "Jump");
+        HitState = new PlayerHitState(this, StateMachine, "Idle");
     }
 
-    void InitComponents()
+    private void InitComponents()
     {
         AttackManager = GetComponent<AttackManager>();
         stats = GetComponent<PlayerStatus>();
     }
 
-    void HandleInput()
+    private void HandleInput()
     {
         if (IsGetHitStun)
         {
@@ -229,6 +230,40 @@ public class PlayerController : Entity
             default:
                 Debug.LogWarning("알 수 없는 유틸리티 타입: " + type);
                 break;
+        }
+    }
+
+    public override void DamageImpact()
+    {
+        base.DamageImpact();
+
+        if (IsGetHitStun) return;
+        if (IsInvincible) return; // 무적 상태에서는 피격 처리하지 않음
+        if (IsPerfectDefend)
+        {
+            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경  
+            IsInvincible = true; // 무적 상태로 전환
+            Invoke("ResetMaterial", 0.3f);
+            Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
+        }
+        else if (IsNormalDefend)
+        {
+            // 일반 방어 상태에서는 피해를 반감
+            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경
+            IsInvincible = true; // 무적 상태로 전환
+            Invoke("ResetMaterial", 0.3f);
+            Invoke("ResetInvincible", 0.5f); // 무적 상태 해제 타이머 설정
+        }
+        else
+        {
+            IsGetHitStun = true;
+            IsInvincible = true; // 무적 상태로 전환
+            Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
+            GetKnockBack();
+            spriteRenderer.material = hitMaterial;
+            StateMachine.ChangeState(HitState);
+
+            Invoke("ResetMaterial", 0.3f);
         }
     }
 

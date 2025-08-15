@@ -191,10 +191,10 @@ MonoBehaviour:
   wallCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1073741888
   moveSpeed: 3
   idleTime: 1
-  battleTime: 0
+  combatTime: 3
   playerCheck: {fileID: 2600241771567903699}
   playerCheckRadius: 5
   whatIsPlayer:
@@ -202,7 +202,7 @@ MonoBehaviour:
     m_Bits: 512
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 1073742400
   attackCheck: {fileID: 2600241771567903699}
   attackCheckRadius: 2
   attackDistance: 2
@@ -230,7 +230,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   maxHealth:
-    baseValue: 100
+    baseValue: 8
     modifiers: 
   defense:
     baseValue: 1

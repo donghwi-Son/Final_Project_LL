@@ -14,6 +14,13 @@ public class WoodSpiritDeadState : State<WoodSpirit>
     public override void Execute()
     {
         base.Execute();
+
+        owner.SetZeroVelocity();
+
+        if (triggerCalled)
+        {
+            GameObject.Destroy(owner.gameObject);
+        }
     }
 
     public override void Exit()

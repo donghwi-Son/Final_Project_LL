@@ -10,6 +10,7 @@ public class PlayerJumpState : State<PlayerController>
     {
         base.Enter();
 
+        owner.rb.gravityScale = 1.0f;
         owner.rb.linearVelocity = new Vector2(owner.rb.linearVelocityX, owner.jumpForce);
     }
 
@@ -25,7 +26,7 @@ public class PlayerJumpState : State<PlayerController>
         {
             stateMachine.ChangeState(owner.AirAttState);
         }
-        else if (owner.rb.linearVelocityY < 0)
+        else if (owner.rb.linearVelocityY < 0 || Input.GetKeyUp(KeyCode.Space)) // 스페이스바를 떼면 낙하 상태로 전환
         {
             stateMachine.ChangeState(owner.FallingState);
         }
@@ -35,5 +36,7 @@ public class PlayerJumpState : State<PlayerController>
     public override void Exit()
     {
         base.Exit();
+
+        owner.rb.gravityScale = 2.5f;
     }
 }
