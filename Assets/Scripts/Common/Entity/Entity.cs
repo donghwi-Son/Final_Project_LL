@@ -9,7 +9,7 @@ public class Entity : MonoBehaviour
 
     [Header("Collision Check")]
     [SerializeField] protected Transform groundCheck; // 바닥 체크 위치
-    [SerializeField] protected float groundCheckRadius = 0.3f; // 바닥 체크 거리
+    [SerializeField] protected float groundCheckRadius = 0.1f; // 바닥 체크 거리
     [SerializeField] protected Transform wallCheck; // 벽 체크 위치
     [SerializeField] protected float wallCheckDistance = 0.1f; // 벽 체크 거리
     [SerializeField] protected LayerMask groundLayer; // 바닥 레이어
