@@ -37,4 +37,11 @@ public class EnemyBabyCrow : Enemy
 
         return angle;
     }
+
+    public override void Die()
+    {
+        base.Die();
+
+        Destroy(gameObject);
+    }
 }
