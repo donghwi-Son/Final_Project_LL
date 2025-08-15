@@ -173,12 +173,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 8969994251432568345}
-  groundCheckRadius: 0.3
+  groundCheckRadius: 0.1
   wallCheck: {fileID: 902607837740504428}
   wallCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1073741888
   moveSpeed: 8
   idleTime: 0
   combatTime: 3
@@ -189,7 +189,7 @@ MonoBehaviour:
     m_Bits: 512
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1073742400
   attackCheck: {fileID: 3519788255562297085}
   attackCheckRadius: 0
   attackDistance: 0
@@ -313,10 +313,10 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   maxHealth:
-    baseValue: 100
+    baseValue: 50
     modifiers: 
   defense:
-    baseValue: 0
+    baseValue: 1
     modifiers: 
   currentHealth: 0
   level: 1
