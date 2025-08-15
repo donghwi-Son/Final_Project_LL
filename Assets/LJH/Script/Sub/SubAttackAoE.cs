@@ -14,8 +14,8 @@ public class SubAttackAoE : SubAttackBase
         for (int i = 0; i < count; i++)
         {
             var col = hits[i];
-            if (col && col.TryGetComponent(out Enemy enemy))
-               // enemy.TakeDamage(damage);     //몬스터 데미ㅣ지 
+            if (col && col.TryGetComponent(out Enemy enemy)) 
+                //TakeDamage(damage);     //몬스터 데미ㅣ지 
             hits[i] = null;
         }
     }

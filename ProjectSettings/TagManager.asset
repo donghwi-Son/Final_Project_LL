@@ -12,6 +12,7 @@ TagManager:
   - Item
   - Ground
   - Structure
+  - StoreMan
   layers:
   - Default
   - TransparentFX

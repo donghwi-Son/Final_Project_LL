@@ -14,7 +14,7 @@ Index,ItemName,ItemGrade,UpgradeType,IconName,ItemTag,Description,,Price
 12,불꽃 부적,Uncommon,AttackEnhance,FlameAmulet,Amulet,Fire,,200
 13,얼음 부적,Uncommon,AttackEnhance,IceAmulet,Amulet,Ice,,200
 14,철퇴,Uncommon,AttackEnhance,Mace,WeaponMaster,Stun,,200
-15,극,Rare,AttackEnhance,test02,WeaponMaster,Knockback,,300
+15,극,Rare,AttackEnhance,Polearm,WeaponMaster,Knockback,,300
 16,오로라,Epic,SubAttack,Aura,Tag02,SubAttack Zone,,400
 17,힐러,Rare,SubAttack,Healer,Tag02,SubAttack Healer,,300
 18,바람신,Boss,Utility,WindShoes,WindSet,DoubleJump,,600

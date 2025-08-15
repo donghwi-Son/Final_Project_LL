@@ -418,34 +418,43 @@ public class StageManager : MonoBehaviour
     // 시작 방 연결 처리
     private void EnsureStartRoomSideConnections()
     {
-        foreach (var pair in placedRooms)
+        // 시작 방을 찾고
+        var startRoomEntry = placedRooms.FirstOrDefault(p => p.Value.isStartRoom);
+        // 시작 방이 없으면 메서드를 종료
+        if (startRoomEntry.Value == null) return;
+
+        Vector2Int startGrid = startRoomEntry.Key;
+        Vector2Int[] dirs = { Vector2Int.left, Vector2Int.right };
+
+        foreach (var dir in dirs)
         {
-            if (pair.Value.isStartRoom)
+            Vector2Int neighborGrid = startGrid + dir;
+
+            // 해당 위치에 방이 없으면 새 방을 생성
+            if (!placedRooms.ContainsKey(neighborGrid))
             {
-                Vector2Int startGrid = pair.Key;
-                Vector2Int[] dirs = { Vector2Int.left, Vector2Int.right };
+                // StageData 객체를 생성하고 딕셔너리에 추가
+                StageData neighborData = new StageData(neighborGrid.x, neighborGrid.y, StageType.Normal);
+                placedRooms[neighborGrid] = neighborData;
 
-                foreach (var dir in dirs)
+                // 새로 생성된 방의 프리팹을 인스턴스화하고 비활성화
+                GameObject prefab = GetPrefabByType(neighborData.type);
+                if (prefab != null)
                 {
-                    Vector2Int neighborGrid = startGrid + dir;
-
-                    if (!generator.IsInsideGrid(neighborGrid)) continue; // 그리드 초과 방지
-                    if (!placedRooms.ContainsKey(neighborGrid))
-                    {
-                        StageData neighbor = new StageData(neighborGrid.x, neighborGrid.y, StageType.Normal);
-                        placedRooms[neighborGrid] = neighbor;
-                    }
-
-                    var current = placedRooms[startGrid];
-                    var neighborRoom = placedRooms[neighborGrid];
-
-                    // 여기서 강제 연결
-                    current.Connect(neighborRoom, dir);
-                    neighborRoom.Connect(current, -dir);
+                    Vector3 worldPos = generator.GridToWorld(neighborGrid);
+                    GameObject instance = Instantiate(prefab, worldPos, Quaternion.identity);
+                    instance.SetActive(false);
+                    neighborData.instance = instance;
+                    neighborData.prefab = prefab;
                 }
-
-                break; // StartRoom은 하나뿐이므로 break
             }
+
+            // 시작 방과 이웃 방의 연결성을 강제로 설정
+            StageData startRoom = startRoomEntry.Value;
+            StageData neighborRoom = placedRooms[neighborGrid];
+
+            startRoom.Connect(neighborRoom, dir);
+            neighborRoom.Connect(startRoom, -dir);
         }
     }
 
