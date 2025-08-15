@@ -29,7 +29,11 @@ public class GoldChestShopUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            panel.SetActive(!panel.activeSelf);
+            Debug.Log($"[ShopUI] P pressed. inside={StoreMan.Instance.PlayerInside}");
+            if (StoreMan.Instance.PlayerInside)
+            {
+                panel.SetActive(!panel.activeSelf);
+            }
         }
     }
 
