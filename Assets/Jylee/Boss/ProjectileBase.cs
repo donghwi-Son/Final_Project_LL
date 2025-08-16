@@ -35,7 +35,7 @@ public class ProjectileBase : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // 플레이어 데미지 로직
-            parentsStats.DoDamage(collision.GetComponent<PlayerStatus>());
+            parentsStats.DoDamage(collision.GetComponent<PlayerStats>());
 
             if (onTriggerDestroy)
             {

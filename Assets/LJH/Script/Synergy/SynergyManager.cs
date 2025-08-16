@@ -60,11 +60,11 @@ public class SynergyManager : MonoBehaviour
             case TagSynergyConfig.SynergyType.Stats:
                 if (entry.statType == ItemInfo.StatType.AllStats)
                 {
-                    PlayerStatus.Instance.IncreaseAllStats(1);
+                    PlayerManager.Instance.player.Stats.IncreaseAllStats(1);
                 }
                 else
                 {
-                    PlayerStatus.Instance.ModifyStat(entry.statType, entry.bonus);
+                    PlayerManager.Instance.player.Stats.ModifyStat(entry.statType, entry.bonus);
                 }
                 break;
 

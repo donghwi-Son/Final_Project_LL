@@ -11,22 +11,22 @@ public class PlayerDashState : State<PlayerController>
         base.Enter();
         owner.IsInvincible = true;
         owner.lastDashTime = Time.time;
-        stateTimer = 0.7f;
-        owner.rb.linearVelocityX = 0f;
-        Dash();
+        stateTimer = owner.DashDuration;
     }
 
     public override void Execute()
     {
         base.Execute();
-        stateTimer -= Time.deltaTime;
+
+        owner.SetVelocity(owner.DashSpeed * owner.FacingDir, 0);
+
         if (stateTimer <= 0f)
         {
             stateMachine.ChangeState(owner.IdleState);
         }
-        if(owner.AttackInput)
+        else if(owner.AttackInput)
         {
-            stateMachine.ChangeState(owner.DashAttState);
+            stateMachine.ChangeState(owner.DashAtkState);
         }
     }
 
@@ -34,14 +34,5 @@ public class PlayerDashState : State<PlayerController>
     {
         base.Exit();
         owner.IsInvincible = false;
-    }
-
-    void Dash()
-    {
-        if(owner.XInput == 0)
-        {
-            owner.rb.AddForce(new Vector2(owner.IsFacingRight ? owner.dashPower : -owner.dashPower, 0), ForceMode2D.Impulse);
-        }    
-        owner.rb.AddForce(new Vector2(owner.XInput * owner.dashPower, 0), ForceMode2D.Impulse);
     }
 }

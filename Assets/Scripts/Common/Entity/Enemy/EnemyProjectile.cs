@@ -41,7 +41,7 @@ public class EnemyProjectile : MonoBehaviour
         {
             //여기에 플레이어 대미지 로직 추가
 
-            PlayerStatus playerStatus = collision.GetComponent<PlayerStatus>();
+            PlayerStats playerStatus = collision.GetComponent<PlayerStats>();
             if (playerStatus != null)
             {
                 playerStatus.TakeDamage(damage); //플레이어에게 대미지 적용

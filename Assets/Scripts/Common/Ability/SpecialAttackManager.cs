@@ -206,7 +206,7 @@ public class SpecialAttackManager : MonoBehaviour
             explosiveEffect.transform.position = enemy.transform.position;
             explosiveEffect.SetActive(true);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(enemy.transform.position, 0.5f, LayerMask.GetMask("Enemy"));
-            float dmg = PlayerStatus.Instance.damage.GetValue();
+            float dmg = PlayerManager.Instance.player.Stats.damage.GetValue();
             foreach (var collider in colliders)
             {
                     Debug.Log($"폭발 Enemy: {collider.gameObject.name}, Damage: {dmg}");

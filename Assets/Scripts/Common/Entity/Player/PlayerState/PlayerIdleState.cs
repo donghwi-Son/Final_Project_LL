@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerIdleState : State<PlayerController>
+public class PlayerIdleState : PlayerGroundedState
 {
     public PlayerIdleState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
@@ -9,46 +9,23 @@ public class PlayerIdleState : State<PlayerController>
     public override void Enter()
     {
         base.Enter();
+
         owner.SetZeroVelocity();
-        Debug.Log("Player Idle State Entered");
     }
 
     public override void Execute()
     {
         base.Execute();
-        if(owner.JumpInput && owner.IsGroundDetected())
+
+        if(owner.XInput == owner.FacingDir && owner.IsWallDetected())
         {
-            stateMachine.ChangeState(owner.JumpState);
+            return;
         }
-        if (owner.AttackInput && owner.IsGroundDetected())
-        {
-            stateMachine.ChangeState(owner.AttackState);
-        }
-        if (owner.XInput != 0 && owner.IsGroundDetected())
+
+        if (owner.XInput != 0)
         {
             stateMachine.ChangeState(owner.MoveState);
         }
-        if (owner.SpecialAttackInput && owner.IsGroundDetected() && owner.CanUseSpecialAttack)
-        {
-            stateMachine.ChangeState(owner.SpecialAttackState);
-        }
-        if (owner.SkillInput)
-        {
-            stateMachine.ChangeState(owner.SkillState);
-        }
-        if (owner.DashInput && owner.IsGroundDetected() && owner.CanUseDash)
-        {
-            stateMachine.ChangeState(owner.DashState);
-        }
-        if (owner.DefendInput)
-        {
-            stateMachine.ChangeState(owner.DefendState);
-        }
-        if (!owner.IsGroundDetected())
-        {
-            stateMachine.ChangeState(owner.FallingState);
-        }
-
     }
 
     public override void Exit()
