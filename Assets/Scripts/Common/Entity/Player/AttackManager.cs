@@ -29,11 +29,12 @@ public class AttackManager : MonoBehaviour
         player = GetComponent<PlayerController>();
     }
 
-    bool CanFireProjectile()
+    private bool CanFireProjectile()
     {
         return canFire && Time.time >= lastFireTime + player.AttackInterval;
     }
-    void FireProjectile()
+
+    private void FireProjectile()
     {
         if(!CanFireProjectile()) return;
 
@@ -50,7 +51,7 @@ public class AttackManager : MonoBehaviour
         lastFireTime = Time.time;
     }
 
-    void FireChargeProjectile()
+    private void FireChargeProjectile()
     {
         Projectile projectile = ProjectilePool.Instance.GetProjectile();
         if (projectile == null) return;

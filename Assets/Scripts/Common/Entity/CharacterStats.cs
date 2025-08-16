@@ -14,7 +14,7 @@ public class CharacterStats : MonoBehaviour
 
     public int currentHealth;
 
-    public System.Action onHealthChanged;
+    public System.Action OnHealthChanged;
 
     public bool IsDead { get; private set; }
 
@@ -73,16 +73,16 @@ public class CharacterStats : MonoBehaviour
         if (currentHealth > maxHealth.GetValue())
             currentHealth = maxHealth.GetValue();
 
-        if (onHealthChanged != null)
-            onHealthChanged();
+        if (OnHealthChanged != null)
+            OnHealthChanged();
     }
 
     protected virtual void DecreaseHealthBy(int _damage)
     {
         currentHealth -= _damage;
 
-        if (onHealthChanged != null)
-            onHealthChanged();
+        if (OnHealthChanged != null)
+            OnHealthChanged();
     }
 
     protected virtual void Die()
