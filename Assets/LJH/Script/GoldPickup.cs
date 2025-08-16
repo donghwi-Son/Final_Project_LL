@@ -6,6 +6,7 @@ public class GoldPickup : MonoBehaviour
 {
     private int value = 50;
     private bool canPickedUp = false;
+    
 
     public void SetValue(int amount)
     {
@@ -29,7 +30,7 @@ public class GoldPickup : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            PlayerGold.Instance.gold += value;
+            PlayerGold.Instance.AddGold(value);
             Destroy(gameObject);
         }
     }
