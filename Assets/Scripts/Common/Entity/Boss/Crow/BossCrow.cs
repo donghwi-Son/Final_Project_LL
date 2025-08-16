@@ -86,7 +86,7 @@ public class BossCrow : Enemy
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            stats.TakeDamage(10);
+            Stats.TakeDamage(10);
         }
     }
 
@@ -201,7 +201,7 @@ public class BossCrow : Enemy
         float laserAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
         GameObject projectile = Instantiate(rangeAttackObj, transform.position, Quaternion.Euler(0, 0, laserAngle-90)); // 보정각도 추가
-        projectile.GetComponent<ProjectileBase>().SetParentsStats(stats);
+        projectile.GetComponent<ProjectileBase>().SetParentsStats(Stats);
         projectile.GetComponent<ProjectileBase>().SetDirection(fireDirection);
     }
 
