@@ -143,10 +143,11 @@ public class PlayerAttackState : State<PlayerController>
                 owner.AttackManager.Attack(owner.attackMode, owner.IsFacingRight);
             }
         }
-        else if (owner.attackMode == AttackMode.Ranged && !isAutoFiring)
+        else if (owner.attackMode == AttackMode.Ranged)
         {
-            // 원거리 모드에서 즉시 떼는 경우 (자동발사가 시작되지 않은 경우)
+            // 원거리 모드에서 즉시 떼는 경우
             owner.AttackManager.Attack(owner.attackMode, owner.IsFacingRight);
+            AnimationFinishTrigger();
         }
 
         // 변수 초기화

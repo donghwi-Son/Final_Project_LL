@@ -35,7 +35,7 @@ public class BurstWisp : Enemy
     public override void Die()
     {
         base.Die();
-        StateMachine.ChangeState(AttackState);
+        StateMachine.ChangeState(DeadState);
     }
 
     public override void AnimationFinishTrigger()

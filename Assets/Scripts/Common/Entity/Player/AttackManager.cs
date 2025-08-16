@@ -60,9 +60,9 @@ public class AttackManager : MonoBehaviour
         projectile.Fire(firePoint.position, dir, player.Stats.damage.GetValue()*3f, player.Stats.projectileLifeTime, player.Stats.shotSpeed);
     }
 
-    public void Attack(AttackMode attmode, bool isRight)
+    public void Attack(AttackMode atkmode, bool isRight)
     {
-        switch (attmode)
+        switch (atkmode)
         {
             case AttackMode.Melee:
                 this.isRight = isRight;

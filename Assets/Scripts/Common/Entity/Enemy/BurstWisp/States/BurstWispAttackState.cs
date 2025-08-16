@@ -18,7 +18,7 @@ public class BurstWispAttackState : State<BurstWisp>
 
         if (triggerCalled)
         {
-            stateMachine.ChangeState(owner.DeadState);
+            owner.Die();
             return;
         }
     }
