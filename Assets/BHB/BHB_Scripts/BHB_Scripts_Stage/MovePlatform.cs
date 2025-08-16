@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MovePlatform : MonoBehaviour
@@ -42,7 +43,16 @@ public class MovePlatform : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            collision.transform.SetParent(null);
+            StartCoroutine(SetParentNull(collision.transform));
+        }
+    }
+
+    IEnumerator SetParentNull(Transform playerTransform)
+    {
+        yield return new WaitForEndOfFrame();
+        if (playerTransform != null)
+        {
+            playerTransform.SetParent(null);
         }
     }
 }

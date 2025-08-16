@@ -124,6 +124,12 @@ public class StageManager : MonoBehaviour
             stageCounter++; // 방문하지 않은 방으로 이동 시 증가
         }
 
+        // 플레이어 부모를 먼저 null로 설정
+        if (player.parent != null)
+        {
+            player.SetParent(null);
+        }
+
         // 런타임마다 생성되는 모든 방은 최초 비활성화 상태
         foreach (var room in placedRooms.Values)
         {
