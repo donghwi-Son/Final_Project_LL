@@ -90,7 +90,7 @@ public class BossTaoist : Enemy
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            stats.TakeDamage(10);
+            Stats.TakeDamage(10);
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -209,7 +209,7 @@ public class BossTaoist : Enemy
         float laserAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
         GameObject projectile = Instantiate(rangeAttackObj, rangeAttackPoint.position, Quaternion.Euler(0, 0, laserAngle - 90)); // 보정각도 추가
-        projectile.GetComponent<ProjectileBase>().SetParentsStats(stats);
+        projectile.GetComponent<ProjectileBase>().SetParentsStats(Stats);
         projectile.GetComponent<ProjectileBase>().SetDirection(fireDirection);
     }
 
@@ -242,7 +242,7 @@ public class BossTaoist : Enemy
         float laserAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
         GameObject beam = Instantiate(beamAttackObj, beamAttackPoint.position, Quaternion.Euler(0, 0, laserAngle));
-        beam.GetComponent<ProjectileBase>().SetParentsStats(stats);
+        beam.GetComponent<ProjectileBase>().SetParentsStats(Stats);
         beam.GetComponent<ProjectileBase>().SetDirection(fireDirection);
 
         BossBeamTrajectorySwitch(false);
@@ -258,7 +258,7 @@ public class BossTaoist : Enemy
         Vector3 newDir = new Vector3(playerTrans.position.x, playerTrans.position.y, playerTrans.position.z);
 
         GameObject sAtt = Instantiate(sAttackObj, newDir, Quaternion.Euler(0, 0, zAngle));
-        sAtt.GetComponent<TaoistSpecialAttack>().SetParentsStats(stats);
+        sAtt.GetComponent<TaoistSpecialAttack>().SetParentsStats(Stats);
     }
 
     public override void Die()

@@ -361,20 +361,20 @@ public class StageManager : MonoBehaviour
     // Finish 조건 업데이트
     private void TrySetupRoomCondition(GameObject roomInstance)
     {
-        IRoomCondition condition = roomInstance.GetComponentInChildren<IRoomCondition>();
+        //IRoomCondition condition = roomInstance.GetComponentInChildren<IRoomCondition>();
 
-        if (condition != null)
-        {
-            condition.Setup(roomInstance);
-        }
-        else
-        {
-            // 조건 스크립트가 없으면 기본 Finish 활성
-            foreach (var trigger in roomInstance.GetComponentsInChildren<FinishTrigger>())
-            {
-                trigger.gameObject.SetActive(true);
-            }
-        }
+        //if (condition != null)
+        //{
+        //    condition.Setup(roomInstance);
+        //}
+        //else
+        //{
+        //    // 조건 스크립트가 없으면 기본 Finish 활성
+        //    foreach (var trigger in roomInstance.GetComponentsInChildren<FinishTrigger>())
+        //    {
+        //        trigger.gameObject.SetActive(true);
+        //    }
+        //}
     }
 
 

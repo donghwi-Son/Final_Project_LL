@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public EnemyStats stats { get; private set; }
+    public EnemyStats Stats { get; private set; }
 
     [Header("이동 정보")]
     [SerializeField] protected float moveSpeed = 2f; // 적의 이동 속도
@@ -37,11 +37,13 @@ public class Enemy : Entity
 
     [HideInInspector] public float lastTimeAttacked;
 
+    public System.Action OnDie; // 적이 죽었을 때 호출되는 델리게이트
+
     protected override void Awake()
     {
         base.Awake();   
 
-        stats = GetComponent<EnemyStats>();
+        Stats = GetComponent<EnemyStats>();
 
         defaultMoveSpeed = MoveSpeed;
     }
@@ -126,5 +128,20 @@ public class Enemy : Entity
     public void SetRotationZero()
     {
         anim.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        OnDie?.Invoke(); // 적이 죽었을 때 호출되는 델리게이트 실행
+    }
+
+    private void OnDisable()
+    {
+        if (OnDie != null)
+        {
+            OnDie = null; // 델리게이트 초기화
+        }
     }
 }

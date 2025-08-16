@@ -62,5 +62,5 @@ MonoBehaviour:
   miniMapManager: {fileID: 0}
   player: {fileID: 0}
   maxStageCount: 10
-  maxStageCounter: 1
+  maxStageCounter: 10
   stageCounter: 0

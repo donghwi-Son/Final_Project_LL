@@ -17,6 +17,8 @@ public class Entity : MonoBehaviour
     public float FacingDir { get; private set; } = 1f;
     public bool IsFacingRight { get; protected set; } = true;
 
+    public System.Action OnFliped; // 방향 전환 시 호출되는 델리게이트
+
     protected virtual void Awake()
     {
         // 컴포넌트 초기화
@@ -78,6 +80,8 @@ public class Entity : MonoBehaviour
         FacingDir = -FacingDir;
         IsFacingRight = !IsFacingRight;
         transform.Rotate(0f, 180f, 0f);
+
+        OnFliped?.Invoke(); // 방향 전환 시 호출되는 델리게이트 실행
     }
 
     public virtual void FlipController(float _xVelocity)

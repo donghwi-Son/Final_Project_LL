@@ -76,7 +76,22 @@ public class PlayerAttackState : State<PlayerController>
         }
     }
 
-    void HandleMeleeChargeAttack()
+    public override void Exit()
+    {
+        base.Exit();
+
+        owner.anim.speed = 1f;
+        // 차지바 숨기기 (안전장치)
+        if (chargeBar != null)
+        {
+            chargeBar.HideChargeBar();
+        }
+
+        ComboCounter++;
+        lastTimeAttacked = Time.time;
+    }
+
+    private void HandleMeleeChargeAttack()
     {
         if (!CanCharge) return;
 
@@ -89,7 +104,7 @@ public class PlayerAttackState : State<PlayerController>
         }
     }
 
-    void HandleRangedAutoFire()
+    private void HandleRangedAutoFire()
     {
         if (!isAutoFiring)
         {
@@ -106,7 +121,7 @@ public class PlayerAttackState : State<PlayerController>
         }
     }
 
-    void HandleMouseButtonUp()
+    private void HandleMouseButtonUp()
     {
         isHolding = false;
         isAutoFiring = false;
@@ -137,20 +152,5 @@ public class PlayerAttackState : State<PlayerController>
         // 변수 초기화
         isHoldAttack = false;
         holdTime = 0f;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        owner.anim.speed = 1f;
-        // 차지바 숨기기 (안전장치)
-        if (chargeBar != null)
-        {
-            chargeBar.HideChargeBar();
-        }
-
-        ComboCounter++;
-        lastTimeAttacked = Time.time;
     }
 }
