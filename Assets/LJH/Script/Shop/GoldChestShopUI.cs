@@ -4,20 +4,28 @@ using UnityEngine.UI;
 
 public class GoldChestShopUI : MonoBehaviour
 {
-    [Header("UI Elements")]
+    [Header("UI")]
     [SerializeField] private Button smallChestButton;
     [SerializeField] private Button mediumChestButton;
     [SerializeField] private Button largeChestButton;
 
-    [Header("Chest Prefabs")]
+    [Header("상자 프리펩")]
     [SerializeField] private GameObject smallChestPrefab;
     [SerializeField] private GameObject mediumChestPrefab;
     [SerializeField] private GameObject largeChestPrefab;
 
-    [Header("Player Reference")]
-    [SerializeField] private Transform player; // 플레이어 위치
+    [Header("플레이어 위치")]
+    [SerializeField] private Transform player;
 
     [SerializeField] private GameObject panel;
+    
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField]private AudioClip clip;
+    
+    private float smallYOffset  = 0.40f;
+    private float mediumYOffset = 0.05f;
+    private float largeYOffset = 0.0001f;
+        
     private void Awake()
     {
         smallChestButton.onClick.AddListener(() => TryBuyChest(100, smallChestPrefab));
@@ -29,9 +37,10 @@ public class GoldChestShopUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Debug.Log($"[ShopUI] P pressed. inside={StoreMan.Instance.PlayerInside}");
-            if (StoreMan.Instance.PlayerInside)
+            
+            if (StoreMan.PlayerInside)
             {
+                audioSource.PlayOneShot(clip);
                 panel.SetActive(!panel.activeSelf);
             }
         }
@@ -47,7 +56,17 @@ public class GoldChestShopUI : MonoBehaviour
 
         PlayerGold.Instance.gold -= cost;
 
-        Vector3 dropPosition = player.position + player.right * 1.5f + Vector3.up * 0.5f;
+        float yOff = GetDropYOffset(chestPrefab);
+        Vector3 dropPosition = player.position + player.right * 5f + Vector3.down * yOff;
         Instantiate(chestPrefab, dropPosition, Quaternion.identity);
+    }
+    
+    private float GetDropYOffset(GameObject prefab)
+    {
+        if (prefab == smallChestPrefab)  return smallYOffset;
+        if (prefab == mediumChestPrefab) return mediumYOffset;
+        if (prefab == largeChestPrefab)  return largeYOffset;
+        
+        return smallYOffset;
     }
 }

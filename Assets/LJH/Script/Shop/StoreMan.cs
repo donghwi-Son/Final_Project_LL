@@ -3,26 +3,28 @@ using UnityEngine;
 
 public class StoreMan : MonoBehaviour
 {
-    public static StoreMan Instance { get; private set; }
-    public bool PlayerInside = false;
+    private static  int PlayerInsideCount = 0;
+    public static bool PlayerInside => PlayerInsideCount > 0;
+    private int localCount = 0;
     
-    void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-            PlayerInside = true;
+        if (!other.CompareTag("Player")) return;
+
+        localCount++;
+        if (localCount == 1)
+            PlayerInsideCount++;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-            PlayerInside = false;
+        if (!other.CompareTag("Player")) return;
+
+        if (localCount > 0)
+        {
+            localCount--;
+            if (localCount == 0)
+                PlayerInsideCount = Mathf.Max(0, PlayerInsideCount - 1);
+        }
     }
 }

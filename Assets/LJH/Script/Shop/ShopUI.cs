@@ -33,11 +33,14 @@ public class ShopUI : MonoBehaviour
     
     //암시장
     private bool isBlackMarket = false;
-    private const float blackMarketChance = 0.1f; // 10%
-    private const float blackMarketDiscountRate = 0.3f; // 30% 할인
+    private const float blackMarketChance = 0.1f;
+    private const float blackMarketDiscountRate = 0.3f;
 
-    [Header("Fixed Probabilities")]
+    [Header("확률 설정")]
     public RarityChance[] rarityChances; //등급와 % 입력
+    
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField]private AudioClip clip;
 
     void Awake()
     {
@@ -59,8 +62,7 @@ public class ShopUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log($"[ShopUI] P pressed. inside={StoreMan.Instance.PlayerInside}");
-            if (StoreMan.Instance.PlayerInside)
+            if (StoreMan.PlayerInside)
             {
                 Debug.Log("상점오픈");
                 ShopOpen();
@@ -72,6 +74,7 @@ public class ShopUI : MonoBehaviour
     {
         ShopPanel.SetActive(!shopOpen);
         shopOpen = !shopOpen;
+        audioSource.PlayOneShot(clip);
         Debug.Log(shopOpen+"오픈 함수");
         if (shopOpen)
         {
@@ -182,11 +185,11 @@ public class ShopUI : MonoBehaviour
 
         if (isBlackMarket)
         {
-            if (blackMarketBg != null) background.sprite = blackMarketBg;
+            background.sprite = blackMarketBg;
         }
         else
         {
-            if (normalBg != null) background.sprite = normalBg;
+            background.sprite = normalBg;
         }
     }
 }
