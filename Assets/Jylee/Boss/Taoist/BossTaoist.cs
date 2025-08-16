@@ -204,7 +204,7 @@ public class BossTaoist : Enemy
     public void BossRangeAttack()
     {
         // 플레이어 피벗이 하단이라 y값 보정
-        Vector3 playerDir = new Vector3(playerTrans.position.x, playerTrans.position.y + 1, playerTrans.position.z);
+        Vector3 playerDir = new Vector3(playerTrans.position.x, playerTrans.position.y, playerTrans.position.z);
         Vector2 fireDirection = (playerDir - rangeAttackPoint.position).normalized;
         float laserAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
@@ -221,7 +221,7 @@ public class BossTaoist : Enemy
     public void BossBeamTrajectoryUpdate()
     {
         // 플레이어 피벗이 하단이라 y값 보정
-        Vector3 playerDir = new Vector3(playerTrans.position.x, playerTrans.position.y + 1, playerTrans.position.z);
+        Vector3 playerDir = new Vector3(playerTrans.position.x, playerTrans.position.y, playerTrans.position.z);
         Vector2 fireDirection = (playerDir - beamAttackPoint.position).normalized;
         float baseAngle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
@@ -255,7 +255,7 @@ public class BossTaoist : Enemy
 
     public void BossSpecialAttack(float zAngle)
     {
-        Vector3 newDir = new Vector3(playerTrans.position.x, playerTrans.position.y + 1, playerTrans.position.z);
+        Vector3 newDir = new Vector3(playerTrans.position.x, playerTrans.position.y, playerTrans.position.z);
 
         GameObject sAtt = Instantiate(sAttackObj, newDir, Quaternion.Euler(0, 0, zAngle));
         sAtt.GetComponent<TaoistSpecialAttack>().SetParentsStats(stats);

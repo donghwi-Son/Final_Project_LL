@@ -239,6 +239,7 @@ MonoBehaviour:
   speed: 0
   lifeTime: 3
   toPlayer: 0
+  onTriggerDestroy: 0
 --- !u!50 &-5285613511716605112
 Rigidbody2D:
   serializedVersion: 5
