@@ -117,8 +117,6 @@ public class TaoistSpecialAttack : MonoBehaviour
         {
             // 플레이어 데미지 로직
             parentsStats.DoDamage(collision.GetComponent<PlayerStatus>());
-
-            Destroy(gameObject);
         }
     }
 }

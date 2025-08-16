@@ -8,6 +8,7 @@ public class ProjectileBase : MonoBehaviour
 
     [Header("투사체 속성")]
     public bool toPlayer;
+    public bool onTriggerDestroy = true;
 
     private Vector2 direction;
     private Rigidbody2D rb;
@@ -36,7 +37,10 @@ public class ProjectileBase : MonoBehaviour
             // 플레이어 데미지 로직
             parentsStats.DoDamage(collision.GetComponent<PlayerStatus>());
 
-            Destroy(gameObject);
+            if (onTriggerDestroy)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

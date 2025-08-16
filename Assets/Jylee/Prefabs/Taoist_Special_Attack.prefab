@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec1640a8365e1d439c06dca2dd7f622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHeightSpace: 1
+  playerHeightSpace: 0
   duration: 4
   stopTiming: 0.7
   activeTiming: 0.3
