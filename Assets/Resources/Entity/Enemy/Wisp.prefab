@@ -130,10 +130,11 @@ GameObject:
   - component: {fileID: 3834295576106383428}
   - component: {fileID: 2549002392064810839}
   - component: {fileID: 1921613405430780991}
+  - component: {fileID: 3965742014820432995}
   - component: {fileID: -6651051158900690681}
   m_Layer: 7
   m_Name: Wisp
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -248,7 +249,7 @@ MonoBehaviour:
   wallCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1073741888
+    m_Bits: 64
   moveSpeed: 3
   idleTime: 1
   combatTime: 3
@@ -259,12 +260,26 @@ MonoBehaviour:
     m_Bits: 512
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 1073742400
+    m_Bits: 576
   attackCheck: {fileID: 1646223157908553210}
   attackCheckRadius: 0
   attackDistance: 5
   attackCooldown: 1
   lastTimeAttacked: 0
+--- !u!114 &3965742014820432995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201702559513276343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5988c5f976b20a468b8b7b4f5cccb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 8ebca2afa8f1bb3418a009e090241def, type: 2}
 --- !u!114 &-6651051158900690681
 MonoBehaviour:
   m_ObjectHideFlags: 0

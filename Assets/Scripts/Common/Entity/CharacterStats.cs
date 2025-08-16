@@ -57,12 +57,13 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int _damage)
     {
+        if (IsDead) return;
+
         DecreaseHealthBy(_damage);
 
         GetComponent<Entity>().DamageImpact();
 
-        if (currentHealth < 0 && !IsDead)
-            Die();
+        if (currentHealth < 0) Die();
     }
 
 

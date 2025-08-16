@@ -14,7 +14,6 @@ public enum ProjectileType
 
 public class Projectile : MonoBehaviour
 {
-
     public ProjectileData projectileData;
     public event Action<Projectile> OnProjectiledestroyed;
     float statdmg;
@@ -24,7 +23,6 @@ public class Projectile : MonoBehaviour
     float sizeFactor = 0.7f;
     bool isPiercingEnemy = false;
     bool isPiercingWall = false;
-
 
     [Header("컴포넌트")]
     private Rigidbody2D rb;
@@ -38,7 +36,7 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         finalLifeTime -= Time.deltaTime;
         if(rb.linearVelocity.magnitude > finalSpeed)
@@ -61,8 +59,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-
-    void CalculateFinalStat(float statdmg, float statlf, float statshotspd)
+    private void CalculateFinalStat(float statdmg, float statlf, float statshotspd)
     {
         finalDamage = projectileData.damageMultiplier * statdmg;
         finalLifeTime = statlf;
@@ -71,7 +68,7 @@ public class Projectile : MonoBehaviour
 
     public void Fire(Vector2 pos, Vector2 dir, float statdmg, float statlf, float statshotspd)
     {
-        this.statdmg = statdmg;
+        this.statdmg = statdmg / 2f;
         CalculateFinalStat(statdmg, statlf, statshotspd);
         sizeFactor = 0.7f + statdmg * 0.05f;
         sizeFactor = Mathf.Clamp(sizeFactor, 0.7f, 2.0f);
@@ -116,6 +113,11 @@ public class Projectile : MonoBehaviour
         if (!hitEnemies.Contains(enemy))
         {
             hitEnemies.Add(enemy);
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            if(enemyScript != null)
+            {
+                enemyScript.Stats.TakeDamage((int)statdmg);
+            }
         }
     }
 
@@ -130,10 +132,12 @@ public class Projectile : MonoBehaviour
     }
 
     // 충돌 처리
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
         {
+            if (other.gameObject.GetComponent<Enemy>().Stats.IsDead) return;
+
             if(!HasHitEnemy(other.gameObject))
             {
                 //공격추가

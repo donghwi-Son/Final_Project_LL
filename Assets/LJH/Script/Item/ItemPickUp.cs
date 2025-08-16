@@ -10,6 +10,8 @@ public class ItemPickup : MonoBehaviour
     private float bounceDuration = 0.4f;
     private Vector3 _startPos;
 
+    [SerializeField] private LayerMask groundLayer; // 바닥 레이어
+
     void Awake()
     {
         _sr = GetComponentInChildren<SpriteRenderer>();
@@ -61,8 +63,7 @@ public class ItemPickup : MonoBehaviour
     
     private void SnapToGround()
     {
-        int groundMask = LayerMask.GetMask("Ground");
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 5f, groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 5f, groundLayer);
 
         if (hit.collider != null)
         {

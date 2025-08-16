@@ -92,8 +92,6 @@ public class PlayerController : Entity
     public float perfectDefendTime = 0.3f; // 완벽 방어 시간
     Vector2 mousePosition;
     public AttackMode attackMode = AttackMode.Melee; // 기본 공격 모드
-    public Material defaultMaterial;
-    public Material hitMaterial;
 
     protected override void Awake()
     {
@@ -255,21 +253,17 @@ public class PlayerController : Entity
     {
         base.DamageImpact();
 
-        if (IsGetHitStun || IsInvincible || Stats.IsDead) return; // 피격 상태가 아니고 무적 상태가 아니며, 죽지 않은 경우에만 피격 처리
+        if (IsGetHitStun || IsInvincible) return; // 피격 상태가 아니고 무적 상태가 아니며, 죽지 않은 경우에만 피격 처리
 
         if (IsPerfectDefend)
         {
-            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경
             IsInvincible = true; // 무적 상태로 전환
-            Invoke("ResetMaterial", 0.3f);
             Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
         }
         else if (IsNormalDefend)
         {
             // 일반 방어 상태에서는 피해를 반감
-            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경
             IsInvincible = true; // 무적 상태로 전환
-            Invoke("ResetMaterial", 0.3f);
             Invoke("ResetInvincible", 0.5f); // 무적 상태 해제 타이머 설정
         }
         else
@@ -278,10 +272,7 @@ public class PlayerController : Entity
             IsInvincible = true; // 무적 상태로 전환
             Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
             GetKnockBack();
-            spriteRenderer.material = hitMaterial;
             StateMachine.ChangeState(HitState);
-
-            Invoke("ResetMaterial", 0.3f);
         }
     }
 
@@ -291,9 +282,7 @@ public class PlayerController : Entity
         if (IsInvincible) return; // 무적 상태에서는 피격 처리하지 않음
         if (IsPerfectDefend)
         {
-            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경  
             IsInvincible = true; // 무적 상태로 전환
-            Invoke("ResetMaterial", 0.3f);
             Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
         }
         else if (IsNormalDefend)
@@ -301,9 +290,7 @@ public class PlayerController : Entity
             // 일반 방어 상태에서는 피해를 반감
             dmg = Mathf.CeilToInt(dmg * (1 - DefendReduction));
             Stats.TakeDamage(dmg);
-            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경
             IsInvincible = true; // 무적 상태로 전환
-            Invoke("ResetMaterial", 0.3f);
             Invoke("ResetInvincible", 0.5f); // 무적 상태 해제 타이머 설정
         }
         else
@@ -313,16 +300,8 @@ public class PlayerController : Entity
             Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
             Stats.TakeDamage(dmg);
             GetKnockBack();
-            spriteRenderer.material = hitMaterial;
             StateMachine.ChangeState(HitState);
-
-            Invoke("ResetMaterial", 0.3f);
         }
-    }
-
-    void ResetMaterial()
-    {
-        spriteRenderer.material = defaultMaterial; // 원래 머티리얼로 되돌림
     }
 
     void ResetInvincible()

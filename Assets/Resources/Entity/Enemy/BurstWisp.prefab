@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 2193726439953965828}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35, y: 0, z: 0}
+  m_LocalPosition: {x: 0.35, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,10 +74,11 @@ GameObject:
   - component: {fileID: 2831265212565606579}
   - component: {fileID: 4659693792422530173}
   - component: {fileID: 1814170694315999356}
+  - component: {fileID: 1059600230533420975}
   - component: {fileID: -8096972363588528597}
   m_Layer: 7
   m_Name: BurstWisp
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   wallCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1073741888
+    m_Bits: 64
   moveSpeed: 3
   idleTime: 1
   combatTime: 3
@@ -203,12 +204,26 @@ MonoBehaviour:
     m_Bits: 512
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 1073742400
+    m_Bits: 576
   attackCheck: {fileID: 2600241771567903699}
   attackCheckRadius: 2
   attackDistance: 2
   attackCooldown: 0
   lastTimeAttacked: 0
+--- !u!114 &1059600230533420975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127905198395134677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5988c5f976b20a468b8b7b4f5cccb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 8ebca2afa8f1bb3418a009e090241def, type: 2}
 --- !u!114 &-8096972363588528597
 MonoBehaviour:
   m_ObjectHideFlags: 0

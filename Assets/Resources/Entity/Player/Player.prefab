@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 2045396829249292687}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d89d634cdcccc434ebbdbdb8e55cb5ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: a581b13ced088f54bb03b7209e8b8d7a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 2158478693295737037}
   - component: {fileID: 2396234301566226701}
   - component: {fileID: 745451287114533313}
+  - component: {fileID: 8112198614615359457}
   - component: {fileID: 6798512586587846483}
   - component: {fileID: 2627905978096707615}
   - component: {fileID: 8102793639661579619}
@@ -283,7 +284,7 @@ MonoBehaviour:
   wallCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1073741888
+    m_Bits: 64
   moveSpeed: 5
   jumpForce: 12
   dashSpeed: 10
@@ -307,8 +308,20 @@ MonoBehaviour:
   DoubleJumpCount: 0
   perfectDefendTime: 0.5
   attackMode: 0
-  defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  hitMaterial: {fileID: 2100000, guid: 8ebca2afa8f1bb3418a009e090241def, type: 2}
+--- !u!114 &8112198614615359457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3008824646602292851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5988c5f976b20a468b8b7b4f5cccb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.3
+  hitMat: {fileID: 2100000, guid: 8ebca2afa8f1bb3418a009e090241def, type: 2}
 --- !u!114 &6798512586587846483
 MonoBehaviour:
   m_ObjectHideFlags: 0

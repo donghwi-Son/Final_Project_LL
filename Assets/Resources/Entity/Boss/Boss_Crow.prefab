@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 804809418605294872}
   - component: {fileID: 401718951766860043}
   - component: {fileID: 5399384873300768799}
+  - component: {fileID: 8987172380784848812}
   - component: {fileID: 3946163173554294032}
   m_Layer: 8
   m_Name: Boss_Crow
@@ -266,7 +267,7 @@ MonoBehaviour:
   wallCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1073741888
+    m_Bits: 64
   moveSpeed: 8
   idleTime: 0
   combatTime: 3
@@ -277,7 +278,7 @@ MonoBehaviour:
     m_Bits: 512
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 1073742400
+    m_Bits: 576
   attackCheck: {fileID: 3519788255562297085}
   attackCheckRadius: 0
   attackDistance: 0
@@ -379,6 +380,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.8781521, y: 3.6064153}
   m_EdgeRadius: 0
+--- !u!114 &8987172380784848812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016035473357344166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5988c5f976b20a468b8b7b4f5cccb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 8ebca2afa8f1bb3418a009e090241def, type: 2}
 --- !u!114 &3946163173554294032
 MonoBehaviour:
   m_ObjectHideFlags: 0
