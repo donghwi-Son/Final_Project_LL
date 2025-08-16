@@ -118,8 +118,12 @@ public class RoomConditionManager : MonoBehaviour
     {
         if (finishObject != null)
         {
-            lootBox.GetComponent<BoxCollider2D>().enabled = true;
-            lootBox.SetActive(true);
+            if(lootBox != null)
+            {
+                lootBox.GetComponent<BoxCollider2D>().enabled = true;
+                lootBox.SetActive(true);
+            }
+            
             finishObject.SetActive(true);
             finishActivated = true;
             Debug.Log("[RoomConditionManager] 일반 Finish 활성화 완료");
@@ -136,8 +140,11 @@ public class RoomConditionManager : MonoBehaviour
         {
             Debug.Log("[RoomConditionManager] bossFinishObject 확인: " + bossFinishObject.name);
             
-            lootBox.GetComponent<BoxCollider2D>().enabled = true;
-            lootBox.SetActive(true);
+            if (lootBox != null)
+            {
+                lootBox.GetComponent<BoxCollider2D>().enabled = true;
+                lootBox.SetActive(true);
+            }
 
             bossFinishObject.SetActive(true);
             finishActivated = true;
