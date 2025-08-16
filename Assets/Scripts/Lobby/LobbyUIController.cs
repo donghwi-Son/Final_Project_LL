@@ -28,10 +28,10 @@ public class LobbyUIController : MonoBehaviour
     {
         // 저장된 게임을 로드
         //GameManager.Instance.LoadPlayData(); // 플레이 데이터 로드
-        //UIManager.Instance.Fade(Color.black, 0f, 1f, 0.5f, 0f, false, () =>
-        //{
-        //    SceneLoader.Instance.LoadScene(SceneType.MainScene);
-        //});
+        UIManager.Instance.Fade(Color.black, 0f, 1f, 0.5f, 0f, false, () =>
+        {
+            SceneLoader.Instance.LoadScene(SceneType.InGame);
+        });
     }
 
     public void OnClickNewGameButton()
@@ -39,10 +39,10 @@ public class LobbyUIController : MonoBehaviour
         // 새로운 게임 시작
         //GameManager.Instance.ResetPlayData(); // 플레이 데이터 초기화
         //GameManager.Instance.LoadPlayData(); // 플레이 데이터 로드
-        //UIManager.Instance.Fade(Color.black, 0f, 1f, 0.5f, 0f, false, () =>
-        //{
-        //    SceneLoader.Instance.LoadScene(SceneType.InGame);
-        //});
+        UIManager.Instance.Fade(Color.black, 0f, 1f, 0.5f, 0f, false, () =>
+        {
+            SceneLoader.Instance.LoadScene(SceneType.InGame);
+        });
     }
 
     public void OnClickSettingsButton()

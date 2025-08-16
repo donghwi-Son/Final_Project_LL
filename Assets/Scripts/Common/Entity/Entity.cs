@@ -52,7 +52,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        
+
     }
 
     // 피격 관련 메서드

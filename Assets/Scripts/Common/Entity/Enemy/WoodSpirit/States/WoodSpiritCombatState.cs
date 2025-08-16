@@ -14,6 +14,7 @@ public class WoodSpiritCombatState : State<WoodSpirit>
         base.Enter();
 
         player = PlayerManager.Instance.player.transform;
+        stateTimer = owner.CombatTime;
     }
 
     public override void Execute()

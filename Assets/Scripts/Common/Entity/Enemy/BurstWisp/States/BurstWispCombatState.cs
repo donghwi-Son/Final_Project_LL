@@ -14,6 +14,7 @@ public class BurstWispCombatState : State<BurstWisp>
         base.Enter();
 
         player = PlayerManager.Instance.player.transform;
+        stateTimer = owner.CombatTime;
     }
 
     public override void Execute()
