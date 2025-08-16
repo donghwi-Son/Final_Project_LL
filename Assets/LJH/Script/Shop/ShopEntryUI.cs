@@ -14,8 +14,14 @@ public class ShopEntryUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private GameObject detailPanel;  
     [SerializeField] private TMP_Text   nameText;
     [SerializeField] private TMP_Text   descText;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip buySound;
 
     private ItemDefinition def;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void Setup(ItemDefinition def, bool isBlackMarket)
     {
@@ -43,6 +49,8 @@ public class ShopEntryUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             PlayerGold.Instance.gold -= price;
             PlayerInventory.Instance.OnItemAcquired(def.index);
+            ItemEffectFactory.ApplyEffect(def);
+            audioSource.PlayOneShot(buySound);
             
             // 인벤토리 UI 새로고침
             if (InventoryUI.Instance != null)

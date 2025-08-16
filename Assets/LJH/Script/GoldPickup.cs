@@ -42,5 +42,10 @@ public class GoldPickup : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.linearVelocity = Vector2.zero;
         }
+        if (other.CompareTag("Wall") && TryGetComponent<Rigidbody2D>(out var rb1))
+        {
+            rb1.bodyType = RigidbodyType2D.Kinematic;
+            rb1.linearVelocity = Vector2.zero;
+        }
     }
 }
