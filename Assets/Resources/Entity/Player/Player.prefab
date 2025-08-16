@@ -282,7 +282,7 @@ MonoBehaviour:
   wallCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1073741888
+    m_Bits: 64
   moveSpeed: 5
   jumpForce: 12
   dashSpeed: 10

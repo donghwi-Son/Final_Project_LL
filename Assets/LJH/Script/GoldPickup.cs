@@ -36,7 +36,7 @@ public class GoldPickup : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Ground") && TryGetComponent<Rigidbody2D>(out var rb))
+        if ((other.CompareTag("Ground") || other.CompareTag("Wall")) && TryGetComponent<Rigidbody2D>(out var rb))
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.linearVelocity = Vector2.zero;
