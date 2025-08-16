@@ -117,6 +117,13 @@ public class StageManager : MonoBehaviour
         Vector2Int prevGrid = currentGrid;
         currentGrid = nextGrid;
 
+        // 방문 여부에 따라 stageCounter 증가 여부 결정
+        StageData nextRoomData = placedRooms[nextGrid];
+        if (!nextRoomData.hasBeenVisited)
+        {
+            stageCounter++; // 방문하지 않은 방으로 이동 시 증가
+        }
+
         // 런타임마다 생성되는 모든 방은 최초 비활성화 상태
         foreach (var room in placedRooms.Values)
         {
@@ -126,14 +133,11 @@ public class StageManager : MonoBehaviour
 
         // 방에 플레이어가 들어갈 때마다 활성화
         StageData roomData = placedRooms[nextGrid];
-
-        // Start에서 좌우 null 오류 해결 부분
         if (roomData?.instance == null) return;
-
         if (roomData.instance != null)
             roomData.instance.SetActive(true);
 
-        // backDir(이전 방) 가장 먼저 계산 
+        // backDir(이전 방) 가장 먼저 계산
         Vector2Int? backDir = null;
         if (prevGrid != Vector2Int.zero && prevGrid != nextGrid)
         {
@@ -148,9 +152,7 @@ public class StageManager : MonoBehaviour
         Transform finishGroup = roomData.instance.transform.Find("Finish Group");
 
         // SpawnPoint 위치: backDir 기반 Entry Finish 사용
-        // 이전 방의 Finish와 반대되는 곳에 SpawnPoint가 놓여짐
         Transform spawn = null;
-
         if (backDir.HasValue && finishGroup != null)
         {
             string entryName = GetFinishName(backDir.Value, false);
@@ -166,14 +168,11 @@ public class StageManager : MonoBehaviour
             spawn = roomData.instance.transform.Find("SpawnPoint");
         }
 
-        // 끼임 방지용 오프셋 계산으로 플레이어가 다음 방으로 이동하면 튀어나오도록 스폰 포인트를 조정
+        // 끼임 방지용 오프셋 계산
         Vector3 spawnOffset = Vector3.zero;
-
         if (backDir.HasValue)
         {
             Vector2Int dir = backDir.Value;
-
-            // 방향에 따라 플레이어를 진입 방향 기준 약간 "앞으로" 이동
             if (dir == Vector2Int.up) spawnOffset = Vector3.down * 1f;
             else if (dir == Vector2Int.down) spawnOffset = Vector3.up * 1f;
             else if (dir == Vector2Int.left) spawnOffset = Vector3.right * 1f;
@@ -185,32 +184,27 @@ public class StageManager : MonoBehaviour
 
         // 보스 맵
         if (roomData.type == StageType.Boss)
-        { 
-            // 강제 Boss 미니맵 처리
+        {
             MiniMapManager.instance?.ShowOnlyBossRoom(roomData.GetGridPosition(), roomData.type);
             return;
         }
 
         // 미니맵 처리
         MiniMapManager.instance?.RevealRoom(nextGrid, roomData.type);
-
-        // 라인 처리 — MiniMapManager 쪽에서 진행
         if (backDir.HasValue)
         {
             MiniMapManager.instance?.ShowOnlyLineInDirection(nextGrid, roomData, backDir.Value);
         }
         MiniMapManager.instance?.ShowLinesFromThisRoom(nextGrid, roomData);
         MiniMapManager.instance.HighlightIcon(currentGrid);
-        
-        roomData.hasBeenVisited = true;
 
+        roomData.hasBeenVisited = true;
         TrySetupRoomCondition(roomData.instance);
 
         // Start Room이면 포탈 처리 생략
-        // Start Room은 매 게임마다 최초 입장 1번만 허용되게 막는 역할
         if (roomData.type == StageType.Start) return;
 
-        // Boss 조건 처리 먼저
+        // Boss 조건 처리
         if (stageCounter >= maxStageCounter)
         {
             if (finishGroup != null)
@@ -234,127 +228,42 @@ public class StageManager : MonoBehaviour
                     }
                 }
             }
-            return; // Boss 조건이면 나머지 처리 생략
+            return;
         }
 
         // 일반 Finish 활성화
-        // 기본적으로 각 방마다 상하좌우로 연결된 방 && 아직 거치지 않은 방을 확인하고 Finish 생성
-        // 만약, 상하좌우 연결된 새로운 방이 없고 이전 건너온 방들만 존재한다면 되돌아갈 수 있게 Finish 생성
         if (finishGroup != null)
         {
             foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
 
-            List<Vector2Int> candidateDirs = new();
             Vector2Int[] directions = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-
             foreach (var dir in directions)
             {
-                if (backDir.HasValue && dir == backDir.Value) continue;
-
                 if (roomData.type == StageType.Start && (dir == Vector2Int.up || dir == Vector2Int.down))
                     continue;
 
                 if (roomData.HasNeighbor(dir))
                 {
                     Vector2Int neighborGrid = nextGrid + dir;
-
-                    if (placedRooms.TryGetValue(neighborGrid, out var neighbor))
+                    if (placedRooms.ContainsKey(neighborGrid))
                     {
-                        // 아직 방문하지 않은 방이면 무조건 Finish 열기
-                        if (!neighbor.hasBeenVisited)
+                        string finishName = GetFinishName(dir, false);
+                        Transform finish = finishGroup.Find(finishName);
+                        if (finish != null)
                         {
-                            candidateDirs.Add(dir);
-                        }
-                    }
-                }
-            }
-
-            // Finish 생성 (개수 제한 없이 전부 활성화)
-            foreach (var dir in candidateDirs)
-            {
-                string finishName = GetFinishName(dir, false);
-                Transform finish = finishGroup.Find(finishName);
-                if (finish != null)
-                {
-                    finish.gameObject.SetActive(true);
-                    var trigger = finish.GetComponent<FinishTrigger>();
-                    if (trigger != null)
-                    {
-                        trigger.direction = dir;
-                        trigger.isBoss = false;
-                    }
-                }
-            }
-
-            // 보충
-            if (candidateDirs.Count < 2)
-            {
-                foreach (var dir in directions)
-                {
-                    if (backDir.HasValue && dir == backDir.Value) continue;
-                    if (candidateDirs.Contains(dir)) continue;
-
-                    Vector2Int neighborGrid = nextGrid + dir;
-                    if (roomData.HasNeighbor(dir) && placedRooms.ContainsKey(neighborGrid))
-                    {
-                        candidateDirs.Add(dir);
-                        if (candidateDirs.Count == 2) break;
-                    }
-                }
-            }
-
-            foreach (var dir in candidateDirs.OrderBy(_ => Random.value).Take(2))
-            {
-                string finishName = GetFinishName(dir, false);
-                Transform finish = finishGroup.Find(finishName);
-                if (finish != null)
-                {
-                    finish.gameObject.SetActive(true);
-                    var trigger = finish.GetComponent<FinishTrigger>();
-                    if (trigger != null)
-                    {
-                        trigger.direction = dir;
-                        trigger.isBoss = false;
-                    }
-                }
-            }
-
-            // 되돌아가는 방향 확실히 비활성화
-            if (backDir.HasValue)
-            {
-                string backName = GetFinishName(backDir.Value, false);
-                Transform backFinish = finishGroup.Find(backName);
-                if (backFinish != null)
-                    backFinish.gameObject.SetActive(false);
-            }
-
-            // 되돌아가기만 가능한 경우의 처리
-            // 되돌이 방향만 존재할 경우 (모든 후보가 방문됨)
-            if (candidateDirs.Count == 0 && backDir.HasValue)
-            {
-                Vector2Int backGrid = nextGrid + backDir.Value;
-
-                if (placedRooms.TryGetValue(backGrid, out var backRoom))
-                {
-                    if (backRoom.type != StageType.Start)
-                    {
-                        string backFinishName = GetFinishName(backDir.Value, false);
-                        Transform backFinish = finishGroup.Find(backFinishName);
-                        if (backFinish != null)
-                        {
-                            backFinish.gameObject.SetActive(true);
-                            var trigger = backFinish.GetComponent<FinishTrigger>();
+                            finish.gameObject.SetActive(true);
+                            var trigger = finish.GetComponent<FinishTrigger>();
                             if (trigger != null)
                             {
-                                trigger.direction = backDir.Value;
+                                trigger.direction = dir;
                                 trigger.isBoss = false;
-                                trigger.isReturning = true;
+                                // 되돌아가는 경우 isReturning 설정
+                                trigger.isReturning = backDir.HasValue && dir == backDir.Value;
                             }
                         }
                     }
                 }
             }
-
         }
     }
 
