@@ -45,13 +45,15 @@ public class EnemyStats : CharacterStats
     public override void TakeDamage(int _damage)
     {
         base.TakeDamage(_damage);
+
+        enemy.DamageImpact();
     }
 
     protected override void Die()
     {
         base.Die();
-        enemy.Die();
 
+        enemy.Die();
         //myDropSystem.GenerateDrop();
     }
 }

@@ -28,7 +28,7 @@ public class ItemEffectFactory : MonoBehaviour
             case ItemInfo.ItemUpgradeType.StatIncrease:
                 Debug.Log("스탯 증가 아이템 획득");
                 if (e.statType == ItemInfo.StatType.AllStats)
-                    PlayerStatus.Instance.IncreaseAllStats(1);
+                    PlayerManager.Instance.player.Stats.IncreaseAllStats(1);
                 else
                     ApplyStatIncrease(e.statType, e.statAmount);
                 success = true;
@@ -74,6 +74,6 @@ public class ItemEffectFactory : MonoBehaviour
     
     static void ApplyStatIncrease(ItemInfo.StatType statType, float amount)
     {
-        PlayerManager.Instance.player.GetComponent<PlayerStatus>().ModifyStat(statType, amount);
+        PlayerManager.Instance.player.GetComponent<PlayerStats>().ModifyStat(statType, amount);
     }
 }

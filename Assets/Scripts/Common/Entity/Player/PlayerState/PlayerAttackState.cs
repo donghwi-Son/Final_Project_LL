@@ -7,7 +7,7 @@ public class PlayerAttackState : State<PlayerController>
     private float lastTimeAttacked;
     private float comboWindow = 0.5f;
 
-    bool CanCharge => owner.stats.canChargeAttack;
+    bool CanCharge => owner.Stats.canChargeAttack;
     bool isHolding = false;
     float holdTime;
     float requiredHoldTime = 1f;
@@ -43,13 +43,15 @@ public class PlayerAttackState : State<PlayerController>
         if (CanCharge && owner.attackMode == AttackMode.Melee)
             chargeBar?.ShowChargeBar();
 
-        owner.anim.speed = owner.attackSpeed / 3f;
+        owner.anim.speed = owner.AttackSpeed / 3f;
         owner.SetZeroVelocity();
     }
 
     public override void Execute()
     {
         base.Execute();
+
+        Debug.Log(owner.rb.linearVelocity);
 
         if (Input.GetMouseButton(0) && isHolding)
         {
@@ -98,7 +100,7 @@ public class PlayerAttackState : State<PlayerController>
             isAutoFiring = true;
             lastAutoFireTime = Time.time;
         }
-        else if (Time.time >= lastAutoFireTime + owner.attackInterval)
+        else if (Time.time >= lastAutoFireTime + owner.AttackInterval)
         {
             // 자동 발사
             owner.AttackManager.Attack(owner.attackMode, owner.IsFacingRight);

@@ -3,46 +3,58 @@ using UnityEngine;
 public class PlayerController : Entity
 {
     [Header("Movement")]
-    public float moveSpeed = 5f;
-    public float jumpForce = 12f;
-    public float dashPower = 30f;
+    [SerializeField] private float moveSpeed = 5f;
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    [SerializeField] private float jumpForce = 12f;
+    public float JumpForce { get => jumpForce; }
+    [SerializeField] private float dashSpeed = 10f;
+    public float DashSpeed { get => dashSpeed; }
+    [SerializeField] private float dashDuration = 0.5f;
+    public float DashDuration { get => dashDuration; }
+    [SerializeField] private int maxDashCount = 1; // 최대 대시 횟수
+    public int MaxDashCount { get => maxDashCount; set => maxDashCount = value; }
 
     [Header("CoolDown")]
-    public float specialAttackCooldown = 5f;
-    public float dashCooldown = 3f;
-    public float skillCooldown = 3f;
+    [SerializeField] private float speicalAttackCooldown = 5f;
+    public float SpecialAttackCooldown { get => speicalAttackCooldown; set => speicalAttackCooldown = value; }
+    [SerializeField] private float dashCooldown = 3f;
+    public float DashCooldown { get => dashCooldown; set => dashCooldown = value; }
+    [SerializeField] private float skillCooldown = 3f;
+    public float SkillCooldown { get => skillCooldown; set => skillCooldown = value; }
 
     [Header("Offense")]
-    public float attackSpeed = 1f; // 공격 속도
-    public float attackRange = 1.5f; // 공격 범위
+    [SerializeField] private float attackSpeed = 1f; // 공격 속도
+    public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
+    [SerializeField] private float attackRange = 1.5f; // 공격 범위
+    public float AttackRange { get => attackRange; set => attackRange = value; }
 
     [Header("Defense")]
-    public float rollDistance = 3f;
-    public float rollDuration = 0.3f;
-    public float defendReduction = 0.5f;
+    [SerializeField] private float defendReduction = 0.5f; // 방어 시 피해 감소 비율
+    public float DefendReduction { get => defendReduction; set => defendReduction = value; }
 
-    public float maxDashCount = 1; // 최대 대시 횟수
+    public float AttackInterval => 1f / AttackSpeed;
 
-    public float attackInterval => 1f / attackSpeed;
+    public AttackManager AttackManager { get; private set; }
+    public PlayerStats Stats { get; private set; }
 
-    //스테이트 및 컨트롤
+    #region States
     public StateMachine<PlayerController> StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
-    public PlayerSpecialAttackState SpecialAttackState { get; private set; }
+    public PlayerSpecialAtkState SpecialAtkState { get; private set; }
     public PlayerSkillState SkillState { get; private set; }
     public PlayerDashState DashState { get; private set; }
     public PlayerDefendState DefendState { get; private set; }
-    public PlayerAirAttState AirAttState { get; private set; }
-    public PlayerDashAttState DashAttState { get; private set; }
-    public PlayerFallingState FallingState { get; private set; }
+    public PlayerAirAtkState AirAtkState { get; private set; }
+    public PlayerDashAtkState DashAtkState { get; private set; }
+    public PlayerFallState FallState { get; private set; }
     public PlayerHitState HitState { get; private set; }
-    public AttackManager AttackManager { get; private set; }
-    public PlayerStatus stats { get; private set; }
+    public PlayerDeadState DeadState { get; private set; }
+    #endregion
 
-    //인풋 변수들
+    #region Inputs
     public float XInput { get; private set; }
     public bool JumpInput { get; private set; }
     public bool AttackInput { get; private set; }
@@ -51,8 +63,9 @@ public class PlayerController : Entity
     public bool DashInput { get; private set; }
     public bool DefendInput { get; private set; }
     public bool MeleeChangeInput { get; private set; }
+    #endregion
 
-    //불체크값
+    #region Boolean Flags
     public bool CanAttack { get; private set; } = true;
     public bool CanUseSkill { get; private set; } = true;
     public bool CanAirAttack = true;
@@ -60,12 +73,13 @@ public class PlayerController : Entity
     public bool CanDoubleJump = false;
     public bool IsRolling { get; private set; }
     public bool IsDefending { get; private set; }
-    public bool CanUseDash => Time.time >= lastDashTime + dashCooldown;
-    public bool CanUseSpecialAttack => Time.time >= lastSpecialAttackTime + specialAttackCooldown;
+    public bool CanUseDash => Time.time >= lastDashTime + DashCooldown;
+    public bool CanUseSpecialAttack => Time.time >= lastSpecialAttackTime + SpecialAttackCooldown;
     public bool IsGetHitStun = false;
     public bool IsPerfectDefend = false; // 완벽 방어 여부
     public bool IsNormalDefend = false;
     public bool IsInvincible = false; // 무적 상태 여부
+    #endregion
 
     //타이머
     public float lastSpecialAttackTime = -999f;
@@ -112,7 +126,6 @@ public class PlayerController : Entity
         StateMachine.CurrentState.Execute();
     }
 
-
     void InitState()
     {
         StateMachine = new StateMachine<PlayerController>();
@@ -120,20 +133,21 @@ public class PlayerController : Entity
         MoveState = new PlayerMoveState(this, StateMachine, "Move");
         JumpState = new PlayerJumpState(this, StateMachine, "Jump");
         AttackState = new PlayerAttackState(this, StateMachine, "Attack");
-        SpecialAttackState = new PlayerSpecialAttackState(this, StateMachine, "SpecialAttack");
+        SpecialAtkState = new PlayerSpecialAtkState(this, StateMachine, "SpecialAttack");
         SkillState = new PlayerSkillState(this, StateMachine, "Skill");
         DefendState = new PlayerDefendState(this, StateMachine, "Defend");
         DashState = new PlayerDashState(this, StateMachine, "Dash");
-        AirAttState = new PlayerAirAttState(this, StateMachine, "AirAttack");
-        DashAttState = new PlayerDashAttState(this, StateMachine, "DashAttack");
-        FallingState = new PlayerFallingState(this, StateMachine, "Jump");
+        AirAtkState = new PlayerAirAtkState(this, StateMachine, "AirAttack");
+        DashAtkState = new PlayerDashAtkState(this, StateMachine, "DashAttack");
+        FallState = new PlayerFallState(this, StateMachine, "Jump");
         HitState = new PlayerHitState(this, StateMachine, "Idle");
+        DeadState = new PlayerDeadState(this, StateMachine, "Dead");
     }
 
     private void InitComponents()
     {
         AttackManager = GetComponent<AttackManager>();
-        stats = GetComponent<PlayerStatus>();
+        Stats = GetComponent<PlayerStats>();
     }
 
     private void HandleInput()
@@ -204,14 +218,14 @@ public class PlayerController : Entity
         DoubleJumpActive = true;
     }
 
-    public void AddDashCount(float count)
+    public void AddDashCount(int count)
     {
-        maxDashCount += count;
+        MaxDashCount += count;
     }
 
     public void DecreaseDashCooldown(float percent)
     {
-        dashCooldown *= 1f - percent / 100f; // 감소 비율 적용
+        DashCooldown *= 1f - percent / 100f; // 감소 비율 적용
     }
 
     public void ApplyUtility(ItemInfo.UtilityType type, float amount)
@@ -222,7 +236,7 @@ public class PlayerController : Entity
                 EnableDoubleJump();
                 break;
             case ItemInfo.UtilityType.AddDashCount:
-                AddDashCount(amount);
+                AddDashCount((int)amount);
                 break;
             case ItemInfo.UtilityType.DashCoolDown:
                 DecreaseDashCooldown(amount);
@@ -281,8 +295,8 @@ public class PlayerController : Entity
         else if (IsNormalDefend)
         {
             // 일반 방어 상태에서는 피해를 반감
-            dmg = Mathf.CeilToInt(dmg * (1 - defendReduction));
-            stats.TakeDamage(dmg);
+            dmg = Mathf.CeilToInt(dmg * (1 - DefendReduction));
+            Stats.TakeDamage(dmg);
             spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경
             IsInvincible = true; // 무적 상태로 전환
             Invoke("ResetMaterial", 0.3f);
@@ -293,7 +307,7 @@ public class PlayerController : Entity
             IsGetHitStun = true;
             IsInvincible = true; // 무적 상태로 전환
             Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정
-            stats.TakeDamage(dmg);
+            Stats.TakeDamage(dmg);
             GetKnockBack();
             spriteRenderer.material = hitMaterial;
             StateMachine.ChangeState(HitState);
@@ -319,6 +333,13 @@ public class PlayerController : Entity
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
+    public override void Die()
+    {
+        base.Die();
+
+        StateMachine.ChangeState(DeadState);
+    }
 
     // 간이 유틸리티 매니저 ===============
 

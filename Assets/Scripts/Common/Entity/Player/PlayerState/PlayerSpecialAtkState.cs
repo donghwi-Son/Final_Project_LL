@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerSpecialAttackState : State<PlayerController>
+public class PlayerSpecialAtkState : State<PlayerController>
 {
-    public PlayerSpecialAttackState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
+    public PlayerSpecialAtkState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 

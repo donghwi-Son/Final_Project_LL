@@ -31,7 +31,7 @@ public class AttackManager : MonoBehaviour
 
     bool CanFireProjectile()
     {
-        return canFire && Time.time >= lastFireTime + player.attackInterval;
+        return canFire && Time.time >= lastFireTime + player.AttackInterval;
     }
     void FireProjectile()
     {
@@ -45,7 +45,7 @@ public class AttackManager : MonoBehaviour
         var PEs = EffectManager.Instance.GetActiveProjectileEffects();
         var CEs = EffectManager.Instance.GetActiveCommonEffects();
         projectile.ApplyEffects(PEs, CEs);
-        projectile.Fire(firePoint.position, dir, player.stats.damage.GetValue(), player.stats.projectileLifeTime, player.stats.shotSpeed);
+        projectile.Fire(firePoint.position, dir, player.Stats.damage.GetValue(), player.Stats.projectileLifeTime, player.Stats.shotSpeed);
 
         lastFireTime = Time.time;
     }
@@ -56,7 +56,7 @@ public class AttackManager : MonoBehaviour
         if (projectile == null) return;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (mousePos - (Vector2)firePoint.position).normalized;
-        projectile.Fire(firePoint.position, dir, player.stats.damage.GetValue()*3f, player.stats.projectileLifeTime, player.stats.shotSpeed);
+        projectile.Fire(firePoint.position, dir, player.Stats.damage.GetValue()*3f, player.Stats.projectileLifeTime, player.Stats.shotSpeed);
     }
 
     public void Attack(AttackMode attmode, bool isRight)
@@ -83,7 +83,7 @@ public class AttackManager : MonoBehaviour
         }
         foreach (ICommonEffect effect in CEs)
         {
-            effect.OnHit(enemy, player.stats.damage.GetValue());
+            effect.OnHit(enemy, player.Stats.damage.GetValue());
         }
     }
 
@@ -99,12 +99,12 @@ public class AttackManager : MonoBehaviour
 
     public void AirAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.attackRange * 1.5f, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.AttackRange * 1.5f, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
             CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
-            player.stats.DoDamage(enemyStats);
+            player.Stats.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
@@ -112,12 +112,12 @@ public class AttackManager : MonoBehaviour
 
     public void SpecialMeleeAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.attackRange * 1.6f, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.AttackRange * 1.6f, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
             CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
-            player.stats.DoDamage(enemyStats);
+            player.Stats.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
@@ -136,7 +136,7 @@ public class AttackManager : MonoBehaviour
         {
             //적 공격 메소드
             CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
-            player.stats.DoDamage(enemyStats);
+            player.Stats.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }
@@ -144,12 +144,12 @@ public class AttackManager : MonoBehaviour
 
     public void MeleeAttack(float _rangeMod)
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.attackRange * _rangeMod, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.AttackRange * _rangeMod, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
             CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
-            player.stats.DoDamage(enemyStats);
+            player.Stats.DoDamage(enemyStats);
             ApplyMeleeEffect(enemy.gameObject);
             Debug.Log($"Hit Enemy: {enemy.name}");
         }

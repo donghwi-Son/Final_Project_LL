@@ -16,7 +16,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
         {
             if (hit.GetComponent<PlayerController>() != null)
             {
-                PlayerStatus _target = hit.GetComponent<PlayerStatus>();
+                PlayerStats _target = hit.GetComponent<PlayerStats>();
 
                 enemy.stats.DoDamage(_target);
             }

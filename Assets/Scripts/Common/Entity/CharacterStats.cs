@@ -16,7 +16,7 @@ public class CharacterStats : MonoBehaviour
 
     public System.Action onHealthChanged;
 
-    public bool isDead { get; private set; }
+    public bool IsDead { get; private set; }
 
     protected virtual void Start()
     {
@@ -59,9 +59,7 @@ public class CharacterStats : MonoBehaviour
     {
         DecreaseHealthBy(_damage);
 
-        GetComponent<Entity>().DamageImpact();
-
-        if (currentHealth < 0 && !isDead)
+        if (currentHealth < 0 && !IsDead)
             Die();
     }
 
@@ -87,7 +85,7 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Die()
     {
-        isDead = true;
+        IsDead = true;
     }
 
     #region Stat calculations

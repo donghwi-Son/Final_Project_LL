@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerFallingState : State<PlayerController>
+public class PlayerFallState : PlayerAirborneState
 {
-    public PlayerFallingState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
+    public PlayerFallState(PlayerController owner, StateMachine<PlayerController> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
 
@@ -18,22 +18,15 @@ public class PlayerFallingState : State<PlayerController>
         float xVel;
         if (!Mathf.Approximately(owner.XInput, 0f))
         {
-            xVel = owner.XInput * owner.moveSpeed;
+            xVel = owner.XInput * owner.MoveSpeed;
         }
         else
         {
             xVel = owner.rb.linearVelocity.x;
         }
         owner.SetVelocity(xVel, owner.rb.linearVelocityY);
-        if (owner.CanDoubleJump && owner.JumpInput && !owner.IsGroundDetected())
-        {
-            owner.DoubleJump();
-        }
-        else if (owner.AttackInput && owner.CanAirAttack)
-        {
-            stateMachine.ChangeState(owner.AirAttState);
-        }
-        else if (owner.IsGroundDetected())
+
+        if (owner.IsGroundDetected())
         {
             owner.CanAirAttack = true;
             stateMachine.ChangeState(owner.IdleState);

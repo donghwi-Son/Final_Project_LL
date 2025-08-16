@@ -26,7 +26,7 @@ public class PlayerUI : MonoBehaviour
         if (player == null) return;
 
         float timeSinceLastDash = Time.time - player.lastDashTime;
-        float cooldownProgress = timeSinceLastDash / player.dashCooldown;
+        float cooldownProgress = timeSinceLastDash / player.DashCooldown;
 
         // 쿨다운 이미지 업데이트
         if (DashCool != null)
@@ -45,8 +45,8 @@ public class PlayerUI : MonoBehaviour
     void UpdateHP()
     {
         if (player == null) return;
-        int currenthp = player.stats.currentHealth;
-        int MaxHP = player.stats.maxHealth.GetValue();
+        int currenthp = player.Stats.currentHealth;
+        int MaxHP = player.Stats.maxHealth.GetValue();
         hp.text = $"HP : {currenthp}/{MaxHP}";
         if (hpBar != null)
         {

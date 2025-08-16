@@ -11,8 +11,8 @@ public class PlayerHitState : State<PlayerController>
     public override void Enter()
     {
         base.Enter();
+
         stateTimer = HIT_STUN_DURATION;
-        Debug.Log("Player Hit State Entered");
     }
 
     public override void Execute()
@@ -30,7 +30,7 @@ public class PlayerHitState : State<PlayerController>
             }
             else
             {
-                stateMachine.ChangeState(owner.FallingState);
+                stateMachine.ChangeState(owner.FallState);
             }
         }
     }

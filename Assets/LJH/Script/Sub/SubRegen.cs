@@ -9,9 +9,9 @@ public class SubRegen : SubAttackBase
 
     protected override void OnEquipped()
     {
-        if (PlayerStatus.Instance != null)
+        if (PlayerManager.Instance.player != null)
         {
-            stats = PlayerStatus.Instance;
+            stats = PlayerManager.Instance.player.Stats;
             return;
         }
         
