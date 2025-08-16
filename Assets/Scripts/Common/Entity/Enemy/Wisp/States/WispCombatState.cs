@@ -14,6 +14,7 @@ public class WispCombatState : State<Wisp>
         base.Enter();
 
         player = PlayerManager.Instance.player.transform;
+        stateTimer = owner.CombatTime;
     }
 
     public override void Execute()

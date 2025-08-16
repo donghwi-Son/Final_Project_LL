@@ -31,6 +31,8 @@ public class PlayerController : Entity
     [Header("Defense")]
     [SerializeField] private float defendReduction = 0.5f; // 방어 시 피해 감소 비율
     public float DefendReduction { get => defendReduction; set => defendReduction = value; }
+    [SerializeField] private float defendDuration = 0.5f; // 방어 지속 시간
+    public float DefendDuration { get => defendDuration; set => defendDuration = value; }
 
     public float AttackInterval => 1f / AttackSpeed;
 
@@ -116,6 +118,8 @@ public class PlayerController : Entity
     {
         base.Update();
 
+        if(GameManager.Instance.IsPaused) return; // 게임이 일시 정지 상태일 때 업데이트 중지
+
         HandleInput();
         CheckGround();
         anim.SetFloat("yVelocity", rb.linearVelocityY);
@@ -126,7 +130,7 @@ public class PlayerController : Entity
         StateMachine.CurrentState.Execute();
     }
 
-    void InitState()
+    private void InitState()
     {
         StateMachine = new StateMachine<PlayerController>();
         IdleState = new PlayerIdleState(this, StateMachine, "Idle");
@@ -251,11 +255,11 @@ public class PlayerController : Entity
     {
         base.DamageImpact();
 
-        if (IsGetHitStun) return;
-        if (IsInvincible) return; // 무적 상태에서는 피격 처리하지 않음
+        if (IsGetHitStun || IsInvincible || Stats.IsDead) return; // 피격 상태가 아니고 무적 상태가 아니며, 죽지 않은 경우에만 피격 처리
+
         if (IsPerfectDefend)
         {
-            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경  
+            spriteRenderer.material = hitMaterial; // 피격 시 머티리얼 변경
             IsInvincible = true; // 무적 상태로 전환
             Invoke("ResetMaterial", 0.3f);
             Invoke("ResetInvincible", 1f); // 무적 상태 해제 타이머 설정

@@ -51,8 +51,6 @@ public class PlayerAttackState : State<PlayerController>
     {
         base.Execute();
 
-        Debug.Log(owner.rb.linearVelocity);
-
         if (Input.GetMouseButton(0) && isHolding)
         {
             if (owner.attackMode == AttackMode.Melee)

@@ -261,8 +261,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.018911839, y: 0}
-  m_Size: {x: 0.43264198, y: 1.8108805}
+  m_Offset: {x: -0.01, y: 0}
+  m_Size: {x: 0.45, y: 1.8}
   m_Direction: 0
 --- !u!114 &745451287114533313
 MonoBehaviour:
@@ -294,6 +294,7 @@ MonoBehaviour:
   attackSpeed: 3
   attackRange: 1.5
   defendReduction: 0.5
+  defendDuration: 0.5
   CanAirAttack: 1
   CanDoubleJump: 0
   IsGetHitStun: 0

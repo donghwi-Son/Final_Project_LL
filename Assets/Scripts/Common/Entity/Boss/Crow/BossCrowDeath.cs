@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BossCrowDeath : State<BossCrow>
 {
-    private float dyingDuration;
     private int stateType;
+
     public BossCrowDeath(BossCrow owner, StateMachine<BossCrow> stateMachine, string animBoolName) : base(owner, stateMachine, animBoolName)
     {
     }
@@ -12,7 +12,7 @@ public class BossCrowDeath : State<BossCrow>
     {
         base.Enter();
 
-        dyingDuration = owner.dyingTime;
+        stateTimer = owner.dyingTime;
         stateType = 1;
     }
 
@@ -20,10 +20,9 @@ public class BossCrowDeath : State<BossCrow>
     {
         base.Execute();
 
-        dyingDuration -= Time.deltaTime;
         if (stateType == 1)
         {
-            if (dyingDuration <= 0)
+            if (stateTimer <= 0)
             {
                 stateType = 2;
                 owner.anim.SetBool("IsDying", true);
@@ -31,19 +30,25 @@ public class BossCrowDeath : State<BossCrow>
                 owner.rb.gravityScale = 1f;
                 owner.rb.linearVelocity = new Vector2(owner.IsFacingRight ? owner.dieForceX : -owner.dieForceX, owner.dieForceY);
 
-                dyingDuration = 0.2f;
+                stateTimer = 0.2f;
             }
         }
         else if (stateType == 2)
         {
-            if (owner.IsGroundDetected() && dyingDuration <= 0)
+            if (owner.IsGroundDetected() && stateTimer <= 0)
             {
                 owner.SetZeroVelocity();
                 owner.rb.bodyType = RigidbodyType2D.Kinematic;
                 owner.anim.SetBool("IsDeath", true);
                 owner.anim.SetBool("IsDying", false);
                 stateType = 3;
+
+                stateTimer = 3f;
             }
+        }
+        else if(stateType == 3)
+        {
+            GameObject.Destroy(owner.gameObject);
         }
     }
 
