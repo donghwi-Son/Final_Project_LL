@@ -5,7 +5,9 @@ public class Entity : MonoBehaviour
     //컴포넌트
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
-    public SpriteRenderer spriteRenderer { get; private set; }
+
+    public EntityFX fx { get; private set; }
+    public SpriteRenderer sr { get; private set; }
 
     [Header("Collision Check")]
     [SerializeField] protected Transform groundCheck; // 바닥 체크 위치
@@ -23,8 +25,9 @@ public class Entity : MonoBehaviour
     {
         // 컴포넌트 초기화
         anim = GetComponentInChildren<Animator>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        fx = GetComponent<EntityFX>();
 
         // 땅체크 설정
         if (groundCheck == null)
@@ -60,7 +63,7 @@ public class Entity : MonoBehaviour
     // 피격 관련 메서드
     public virtual void DamageImpact()
     {
-
+        fx.StartCoroutine("FlashFX");
     }
 
     #region 충돌

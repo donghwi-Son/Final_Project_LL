@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         finalLifeTime -= Time.deltaTime;
         if(rb.linearVelocity.magnitude > finalSpeed)
@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    void CalculateFinalStat(float statdmg, float statlf, float statshotspd)
+    private void CalculateFinalStat(float statdmg, float statlf, float statshotspd)
     {
         finalDamage = projectileData.damageMultiplier * statdmg;
         finalLifeTime = statlf;
@@ -132,10 +132,12 @@ public class Projectile : MonoBehaviour
     }
 
     // 충돌 처리
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
         {
+            if (other.gameObject.GetComponent<Enemy>().Stats.IsDead) return;
+
             if(!HasHitEnemy(other.gameObject))
             {
                 //공격추가

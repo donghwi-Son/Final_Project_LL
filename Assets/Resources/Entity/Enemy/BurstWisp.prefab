@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 2831265212565606579}
   - component: {fileID: 4659693792422530173}
   - component: {fileID: 1814170694315999356}
+  - component: {fileID: 1059600230533420975}
   - component: {fileID: -8096972363588528597}
   m_Layer: 7
   m_Name: BurstWisp
@@ -209,6 +210,20 @@ MonoBehaviour:
   attackDistance: 2
   attackCooldown: 0
   lastTimeAttacked: 0
+--- !u!114 &1059600230533420975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127905198395134677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5988c5f976b20a468b8b7b4f5cccb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 8ebca2afa8f1bb3418a009e090241def, type: 2}
 --- !u!114 &-8096972363588528597
 MonoBehaviour:
   m_ObjectHideFlags: 0

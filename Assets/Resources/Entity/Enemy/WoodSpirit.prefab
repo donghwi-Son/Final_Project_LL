@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 3726199159181357984}
   - component: {fileID: 6390871455492103988}
   - component: {fileID: 6302362356345450120}
+  - component: {fileID: 1733722935355626133}
   - component: {fileID: 6374016064044086467}
   m_Layer: 7
   m_Name: WoodSpirit
@@ -210,6 +211,20 @@ MonoBehaviour:
   attackCooldown: 1
   lastTimeAttacked: 0
   maxVerticalOffset: 1
+--- !u!114 &1733722935355626133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604835728007414106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5988c5f976b20a468b8b7b4f5cccb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 8ebca2afa8f1bb3418a009e090241def, type: 2}
 --- !u!114 &6374016064044086467
 MonoBehaviour:
   m_ObjectHideFlags: 0
