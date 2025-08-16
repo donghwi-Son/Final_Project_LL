@@ -30993,7 +30993,7 @@ Transform:
   m_GameObject: {fileID: 3200586869811061481}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35, y: 22.7, z: 0}
+  m_LocalPosition: {x: 45.53, y: 22.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -31400,9 +31400,7 @@ MonoBehaviour:
   enemies: []
   finishObject: {fileID: 8321976770105617230}
   bossFinishObject: {fileID: 3200586869811061481}
-  normalBox: {fileID: 0}
-  hardBox: {fileID: 0}
-  bossBox: {fileID: 0}
+  lootBox: {fileID: 0}
 --- !u!1 &4631957031778844614
 GameObject:
   m_ObjectHideFlags: 0
