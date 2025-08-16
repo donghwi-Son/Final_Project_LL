@@ -139,6 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemIndex: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1073741888
 --- !u!50 &-7865227944773562789
 Rigidbody2D:
   serializedVersion: 5

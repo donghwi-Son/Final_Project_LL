@@ -266,7 +266,7 @@ MonoBehaviour:
   wallCheckDistance: 0.1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1073741888
+    m_Bits: 64
   moveSpeed: 8
   idleTime: 0
   combatTime: 3
@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Bits: 512
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 1073742400
+    m_Bits: 576
   attackCheck: {fileID: 3519788255562297085}
   attackCheckRadius: 0
   attackDistance: 0
