@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 3834295576106383428}
   - component: {fileID: 2549002392064810839}
   - component: {fileID: 1921613405430780991}
+  - component: {fileID: 3965742014820432995}
   - component: {fileID: -6651051158900690681}
   m_Layer: 7
   m_Name: Wisp
@@ -265,6 +266,20 @@ MonoBehaviour:
   attackDistance: 5
   attackCooldown: 1
   lastTimeAttacked: 0
+--- !u!114 &3965742014820432995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201702559513276343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5988c5f976b20a468b8b7b4f5cccb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 8ebca2afa8f1bb3418a009e090241def, type: 2}
 --- !u!114 &-6651051158900690681
 MonoBehaviour:
   m_ObjectHideFlags: 0
