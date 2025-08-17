@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerDeadState : State<PlayerController>
@@ -22,6 +23,7 @@ public class PlayerDeadState : State<PlayerController>
         if (triggerCalled)
         {
             // 게임 오버 로직
+            GameManager.Instance.OnGameOver();
         }
     }
 

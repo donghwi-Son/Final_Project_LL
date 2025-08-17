@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 85ba829d8282ede48a77ed3a54e881ec
+guid: 20ae590be314d1e4d9ace590d06da53b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 421433082138354416
-    second: GoldBox_Close_0
+      213: 5749913259660396600
+    second: GoldBox_Open_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,56 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GoldBox_Close_0
+      name: GoldBox_Open_0
       rect:
         serializedVersion: 2
-        x: 173
-        y: 220
-        width: 678
-        height: 578
+        x: 212
+        y: 181
+        width: 599
+        height: 681
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f26475c72b39d500800000000000000
-      internalID: 421433082138354416
+      spriteID: 838cd5335abcbcf40800000000000000
+      internalID: 5749913259660396600
       vertices: []
       indices: 
       edges: []
@@ -148,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      GoldBox_Close_0: 421433082138354416
+      GoldBox_Open_0: 5749913259660396600
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

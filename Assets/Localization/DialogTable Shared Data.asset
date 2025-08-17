@@ -14,7 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: DialogTable
   m_TableCollectionNameGuidString: 3eca914924059bf41bbfb71ca4092b52
-  m_Entries: []
+  m_Entries:
+  - m_Id: 16127912228106240
+    m_Key: GameOver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16128061004263424
+    m_Key: Boss1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16128726824857600
+    m_Key: Boss2
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

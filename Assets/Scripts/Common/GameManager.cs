@@ -5,6 +5,7 @@ using UnityEngine.Localization.Settings;
 public class GameManager : SingletonComponent<GameManager>
 {
     public bool IsPaused { get; private set; }
+    public bool IsGameOver { get; private set; }
 
     #region Singleton
     protected override void AwakeInstance()
@@ -69,5 +70,22 @@ public class GameManager : SingletonComponent<GameManager>
         {
             Time.timeScale = 1f; // 게임 시간 재개
         }
+    }
+
+    public void OnStartGame()
+    {
+        IsGameOver = false;
+    }
+
+    public void OnGameOver()
+    {
+        if (IsGameOver) return;
+
+        IsGameOver = true;
+
+        UIManager.Instance.CloseAllOpenUI(); // 모든 UI 닫기
+
+        var uiData = new UIBaseData();
+        UIManager.Instance.OpenUI<GameOverUI>(uiData);
     }
 }

@@ -43,12 +43,15 @@ public class BossCrowDeath : State<BossCrow>
                 owner.anim.SetBool("IsDying", false);
                 stateType = 3;
 
-                stateTimer = 3f;
+                stateTimer = 2f;
             }
         }
         else if(stateType == 3)
         {
-            GameObject.Destroy(owner.gameObject);
+            if (stateTimer <= 0)
+            {
+                GameObject.Destroy(owner.gameObject);
+            }
         }
     }
 
