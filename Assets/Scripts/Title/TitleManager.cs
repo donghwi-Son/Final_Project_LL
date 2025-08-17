@@ -36,9 +36,7 @@ public class TitleManager : MonoBehaviour
         // 유저 데이터 매니저를 통한 데이터 로드
         UserDataManager.Instance.LoadUserData();
 
-        //AudioManager.Instance.OnLoadUserData(); // 오디오 매니저에 유저 데이터 로드
-
-        //AchievementManager.Instance.LoadAchievementState(); // 업적 데이터 로드
+        AudioManager.Instance.OnLoadUserData(); // 오디오 매니저에 유저 데이터 로드
 
         //GameManager.Instance.LoadPlayData(); // 게임 매니저를 통한 플레이 데이터 로드
 
