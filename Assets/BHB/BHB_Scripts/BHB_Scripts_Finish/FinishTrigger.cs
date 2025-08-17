@@ -38,10 +38,11 @@ public class FinishTrigger : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!isBoss) return; 
 
-        if (isBoss && StageManager.Instance.stageCounter >= StageManager.Instance.maxStageCounter)
+        if (StageManager.Instance.stageCounter >= StageManager.Instance.maxStageCounter)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W)) 
             {
                 StageManager.Instance.ActivateBossRoomIfReady();
                 StageManager.Instance.MovePlayerToBossRoom();

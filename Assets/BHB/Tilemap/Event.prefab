@@ -31496,7 +31496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542b5e948a458274c8e58215e1163909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
+  enemyGroup: {fileID: 0}
   finishObject: {fileID: 5329436038535507442}
   bossFinishObject: {fileID: 0}
   lootBox: {fileID: 0}
