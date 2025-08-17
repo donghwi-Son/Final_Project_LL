@@ -57,13 +57,10 @@ public class StageManager : MonoBehaviour
         {
             Vector2Int grid = pair.Key;
             StageData data = pair.Value;
-
             GameObject prefab = GetPrefabByType(data.type);
             if (prefab == null) continue;
 
             Vector3 worldPos = generator.GridToWorld(grid);
-
-            // 처음에 생성된 방들을 전부 비활성화 상태
             GameObject instance = Instantiate(prefab, worldPos, Quaternion.identity);
             instance.SetActive(false); // 모두 비활성화
             data.instance = instance;
@@ -73,6 +70,33 @@ public class StageManager : MonoBehaviour
             if (data.isStartRoom)
             {
                 SetStartRoomFinishTwoDirections(data.instance);
+            }
+            else if (data.type == StageType.Event || data.type == StageType.Store)
+            {
+                // Event와 Store 방은 모든 연결된 Finish를 초기화 시 활성화
+                Transform finishGroup = data.instance.transform.Find("Finish Group");
+                if (finishGroup != null)
+                {
+                    Vector2Int[] directions = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+                    foreach (var dir in directions)
+                    {
+                        if (data.HasNeighbor(dir))
+                        {
+                            string finishName = GetFinishName(dir, false);
+                            Transform finish = finishGroup.Find(finishName);
+                            if (finish != null)
+                            {
+                                finish.gameObject.SetActive(true);
+                                var trigger = finish.GetComponent<FinishTrigger>();
+                                if (trigger != null)
+                                {
+                                    trigger.direction = dir;
+                                    trigger.isBoss = false;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             else
             {
@@ -91,8 +115,6 @@ public class StageManager : MonoBehaviour
         // 연결 처리
         EnsureStartRoomSideConnections();
         RoomConnector.ProcessConnections(placedRooms, generator, maxStageCount, stageCounter);
-
-        // 보스 방 미리 생성, 모든 방 이동 후에 발동
         PreloadBossRoom();
     }
 
@@ -123,6 +145,8 @@ public class StageManager : MonoBehaviour
         {
             stageCounter++; // 방문하지 않은 방으로 이동 시 증가
         }
+
+        if (nextRoomData.type == StageType.Boss) return;
 
         // 플레이어 부모를 먼저 null로 설정
         if (player.parent != null)
@@ -240,7 +264,11 @@ public class StageManager : MonoBehaviour
         // 일반 Finish 활성화
         if (finishGroup != null)
         {
-            foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
+            // Event와 Store 방은 Finish를 비활성화하지 않고 유지
+            if (roomData.type != StageType.Event && roomData.type != StageType.Store)
+            {
+                foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
+            }
 
             Vector2Int[] directions = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
             foreach (var dir in directions)
@@ -257,13 +285,25 @@ public class StageManager : MonoBehaviour
                         Transform finish = finishGroup.Find(finishName);
                         if (finish != null)
                         {
-                            finish.gameObject.SetActive(true);
+                            // Event와 Store 방은 이미 활성화된 상태 유지, 나머지는 조건에 따라 활성화
+                            if (roomData.type == StageType.Event || roomData.type == StageType.Store)
+                            {
+                                finish.gameObject.SetActive(true); // 보장용
+                            }
+                            else
+                            {
+                                StageData neighbor = placedRooms[neighborGrid];
+                                if (!neighbor.hasBeenVisited) // 방문하지 않은 방만 활성화
+                                {
+                                    finish.gameObject.SetActive(true);
+                                }
+                            }
+
                             var trigger = finish.GetComponent<FinishTrigger>();
                             if (trigger != null)
                             {
                                 trigger.direction = dir;
                                 trigger.isBoss = false;
-                                // 되돌아가는 경우 isReturning 설정
                                 trigger.isReturning = backDir.HasValue && dir == backDir.Value;
                             }
                         }
