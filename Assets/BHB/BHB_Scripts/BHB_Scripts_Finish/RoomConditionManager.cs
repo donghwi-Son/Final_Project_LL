@@ -8,22 +8,46 @@ public class RoomConditionManager : MonoBehaviour
     [SerializeField] private GameObject finishObject;       // 일반 Finish Group
     [SerializeField] private GameObject bossFinishObject;   // Boss Finish Group
     [SerializeField] private GameObject lootBox;
-
     private int count;
-
     //private bool isBossRoom = false;
     private bool finishActivated = false;
 
     private void Start()
     {
-        if (enemyGroup != null) count = enemyGroup.childCount;
-        if (finishObject != null) finishObject.SetActive(false);
-        if (bossFinishObject != null) bossFinishObject.SetActive(false);
-
-        if (lootBox != null)
+        var data = StageManager.Instance?.GetStageDataByInstance(gameObject);
+        if (data != null && (data.type == StageType.Event || data.type == StageType.Store))
         {
-            lootBox.SetActive(false);
-            lootBox.GetComponent<BoxCollider2D>().enabled = false;
+            // 상점/이벤트 방은 입장 즉시 Finish 활성화
+            if (finishObject != null)
+            {
+                finishObject.SetActive(true);
+                finishActivated = true;
+            }
+            if (lootBox != null)
+            {
+                lootBox.GetComponent<BoxCollider2D>().enabled = true;
+                lootBox.SetActive(true);
+            }
+        }
+        else
+        {
+            // 기타 방은 Finish와 LootBox 비활성화
+            if (enemyGroup != null) count = enemyGroup.childCount;
+            if (finishObject != null)
+            {
+                finishObject.SetActive(false);
+            }
+            if (lootBox != null)
+            {
+                lootBox.SetActive(false);
+                lootBox.GetComponent<BoxCollider2D>().enabled = false;
+            }
+        }
+
+        // 보스 포탈 초기 비활성화
+        if (bossFinishObject != null)
+        {
+            bossFinishObject.SetActive(false);
         }
 
         //var data = StageManager.Instance?.GetStageDataByInstance(root);
@@ -134,29 +158,19 @@ public class RoomConditionManager : MonoBehaviour
 
         if (bossFinishObject != null)
         {
-            Debug.Log("[RoomConditionManager] bossFinishObject 확인: " + bossFinishObject.name);
-            
             if (lootBox != null)
             {
                 lootBox.GetComponent<BoxCollider2D>().enabled = true;
                 lootBox.SetActive(true);
             }
-
             bossFinishObject.SetActive(true);
-
-            // 연결 추가
             var trigger = bossFinishObject.GetComponent<FinishTrigger>();
             if (trigger != null)
             {
                 trigger.direction = Vector2Int.zero;
                 trigger.isBoss = true;
             }
-
             finishActivated = true;
-            Debug.Log("[RoomConditionManager] Boss Finish 활성화 완료");
-
-            //DestroyAllWithTag("Enemy");
-            //DestroyAllWithTag("NPC");
         }
         else
         {
