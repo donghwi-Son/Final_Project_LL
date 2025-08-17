@@ -42,6 +42,8 @@ public class BossCrowStrikeAttack : State<BossCrow>
 
                 owner.anim.SetTrigger("OnStrike");
 
+                AudioManager.Instance.PlaySFX(SFX.Crow);
+
                 owner.StrikeColliderSwitch(true);
             }            
         }

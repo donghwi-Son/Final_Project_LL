@@ -104,6 +104,7 @@ public class BossCrow : Enemy
         {
             // 다음 동작
             stateMachine.ChangeState(idleState);
+            AudioManager.Instance.PlaySFX(SFX.Crow);
         }
     }
 
@@ -203,6 +204,8 @@ public class BossCrow : Enemy
         GameObject projectile = Instantiate(rangeAttackObj, transform.position, Quaternion.Euler(0, 0, laserAngle-90)); // 보정각도 추가
         projectile.GetComponent<ProjectileBase>().SetParentsStats(Stats);
         projectile.GetComponent<ProjectileBase>().SetDirection(fireDirection);
+
+        AudioManager.Instance.PlaySFX(SFX.Fire);
     }
 
     public void BossSpawnEnemy()
@@ -213,6 +216,7 @@ public class BossCrow : Enemy
             float yPos = Random.Range(0, spawnSpaceY);
 
             Instantiate(spawnEnemyObj, new Vector3(transform.position.x + xPos, transform.position.y + yPos), Quaternion.identity);
+            AudioManager.Instance.PlaySFX(SFX.Crow);
         }
     }
 
