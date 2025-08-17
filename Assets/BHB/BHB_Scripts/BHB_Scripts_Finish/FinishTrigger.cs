@@ -11,15 +11,6 @@ public class FinishTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        // 보스 이동 조건
-        if (isBoss && StageManager.Instance.stageCounter >= StageManager.Instance.maxStageCounter)
-        {
-            StageManager.Instance.ActivateBossRoomIfReady();
-            StageManager.Instance.MovePlayerToBossRoom();
-            StageManager.Instance.MoveToBossRoomCleanTransition();
-            return;
-        }
-
         Vector2Int current = StageManager.Instance.GetCurrentGrid();
         Vector2Int next = FindNextRoomInDirection(current, direction);
         StageData nextRoom = StageManager.Instance.GetRoomAt(next);
@@ -41,6 +32,22 @@ public class FinishTrigger : MonoBehaviour
         }
 
         StageManager.Instance.MovePlayerTo(next);
+    }
+
+    // 보스 이동 조건은 w키를 눌렀을 때
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        if (isBoss && StageManager.Instance.stageCounter >= StageManager.Instance.maxStageCounter)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                StageManager.Instance.ActivateBossRoomIfReady();
+                StageManager.Instance.MovePlayerToBossRoom();
+                StageManager.Instance.MoveToBossRoomCleanTransition();
+            }
+        }
     }
 
     // 직선 방향 방 찾기
