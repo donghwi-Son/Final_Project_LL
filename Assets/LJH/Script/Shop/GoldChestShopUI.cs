@@ -17,15 +17,10 @@ public class GoldChestShopUI : MonoBehaviour
     [SerializeField] private GameObject smallChestPrefab;
     [SerializeField] private GameObject mediumChestPrefab;
     [SerializeField] private GameObject largeChestPrefab;
-
-    [Header("플레이어 위치")]
-    [SerializeField] private Transform player;
+    
+    private Transform player => PlayerManager.Instance.player.transform;
 
     [SerializeField] private GameObject panel;
-    
-    [SerializeField]private AudioSource audioSource;
-    [SerializeField]private AudioClip clip;
-    [SerializeField]private AudioClip buyclip;
     
     private float smallYOffset  = 0.40f;
     private float mediumYOffset = 0.05f;
@@ -45,7 +40,7 @@ public class GoldChestShopUI : MonoBehaviour
             if (StoreMan.PlayerInside)
             {
                 panel.SetActive(!panel.activeSelf);
-                audioSource.PlayOneShot(clip);
+                AudioManager.Instance.PlaySFX(SFX.unhun);
             }
         }
     }
@@ -74,7 +69,7 @@ public class GoldChestShopUI : MonoBehaviour
         largeChestImage.color = color;
         
         StartCoroutine(Reset());
-        audioSource.PlayOneShot(buyclip);
+        AudioManager.Instance.PlaySFX(SFX.SpendMoney);
     }
     
     private float GetDropYOffset(GameObject prefab)

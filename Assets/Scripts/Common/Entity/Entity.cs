@@ -64,6 +64,7 @@ public class Entity : MonoBehaviour
     public virtual void DamageImpact()
     {
         fx.StartCoroutine("FlashFX");
+        AudioManager.Instance.PlaySFX(SFX.Hit);
     }
 
     #region 충돌

@@ -9,6 +9,8 @@ public class PlayerDeadState : State<PlayerController>
     public override void Enter()
     {
         base.Enter();
+
+        AudioManager.Instance.PlaySFX(SFX.PlayerDeath);
     }
 
     public override void Execute()

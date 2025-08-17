@@ -86,6 +86,7 @@ public class ProjectilePool : MonoBehaviour
                 for (int i = 0; i < 20; i++) // 초기 풀 크기 설정
                 {
                     GameObject obj = Instantiate(data.prefab);
+                    obj.transform.SetParent(transform); // 풀링 관리용으로 부모 설정
                     obj.SetActive(false);
                     Projectile projectile = obj.GetComponent<Projectile>();
                     projectile.OnProjectiledestroyed += ReturnProjectile;
@@ -102,6 +103,7 @@ public class ProjectilePool : MonoBehaviour
             if (data.type == type)
             {
                 GameObject obj = Instantiate(data.prefab);
+                obj.transform.SetParent(transform); // 풀링 관리용으로 부모 설정
                 obj.SetActive(false);
                 Projectile projectile = obj.GetComponent<Projectile>();
                 projectile.OnProjectiledestroyed += ReturnProjectile;

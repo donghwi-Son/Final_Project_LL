@@ -18,11 +18,6 @@ public class Box : MonoBehaviour
     [Header("골드 프리펩")]
     [SerializeField] private GameObject goldPrefab;
     
-    [Header("오디오")]
-    [SerializeField] private AudioClip openSound;
-    private AudioSource audioSource;
-
-    
     private Box box;
     public static event Action<Box, int> OnBoxOpened;
     
@@ -31,7 +26,6 @@ public class Box : MonoBehaviour
     void Awake()
     {
         if(box == null) box = GetComponent<Box>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     public void Open()
@@ -47,9 +41,8 @@ public class Box : MonoBehaviour
         int reward = entry.goldReward;
         Debug.Log($"골드 드랍: {reward}");
         
-        if (audioSource != null && openSound != null)
-            audioSource.PlayOneShot(openSound);
-        
+        AudioManager.Instance.PlaySFX(SFX.BoxOpen);
+
         var boxAni = GetComponent<BoxAni>();
         if (boxAni != null) boxAni.SetOpened();
 
