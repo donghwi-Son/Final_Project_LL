@@ -143,6 +143,15 @@ public class RoomConditionManager : MonoBehaviour
             }
 
             bossFinishObject.SetActive(true);
+
+            // 연결 추가
+            var trigger = bossFinishObject.GetComponent<FinishTrigger>();
+            if (trigger != null)
+            {
+                trigger.direction = Vector2Int.zero;
+                trigger.isBoss = true;
+            }
+
             finishActivated = true;
             Debug.Log("[RoomConditionManager] Boss Finish 활성화 완료");
 
