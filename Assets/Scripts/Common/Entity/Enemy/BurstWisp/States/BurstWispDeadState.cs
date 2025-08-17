@@ -9,6 +9,8 @@ public class BurstWispDeadState : State<BurstWisp>
     public override void Enter()
     {
         base.Enter();
+
+        AudioManager.Instance.PlaySFX(SFX.Boom);
     }
 
     public override void Execute()

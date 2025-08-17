@@ -38,6 +38,8 @@ public class WispAttackState : State<Wisp>
 
     private void Shoot()
     {
+        AudioManager.Instance.PlaySFX(SFX.Fire);
+
         //미사일 생성
         GameObject missile = GameObject.Instantiate(owner.Projectile, owner.transform.position, Quaternion.identity);
 

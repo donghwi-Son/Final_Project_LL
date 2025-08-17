@@ -9,6 +9,8 @@ public class WispDeadState : State<Wisp>
     public override void Enter()
     {
         base.Enter();
+
+        AudioManager.Instance.PlaySFX(SFX.WispDeath);
     }
 
     public override void Execute()

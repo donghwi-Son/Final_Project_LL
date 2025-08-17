@@ -39,9 +39,6 @@ public class ShopUI : MonoBehaviour
     [Header("확률 설정")]
     public RarityChance[] rarityChances; //등급와 % 입력
     
-    [SerializeField]private AudioSource audioSource;
-    [SerializeField]private AudioClip clip;
-    
     private bool stockGenerated = false;
 
     void Awake()
@@ -76,7 +73,7 @@ public class ShopUI : MonoBehaviour
     {
         ShopPanel.SetActive(!shopOpen);
         shopOpen = !shopOpen;
-        audioSource.PlayOneShot(clip);
+        AudioManager.Instance.PlaySFX(SFX.unhun);
         Debug.Log(shopOpen+"오픈 함수");
         if (shopOpen)
         {

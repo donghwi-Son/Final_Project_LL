@@ -9,6 +9,8 @@ public class WoodSpiritDeadState : State<WoodSpirit>
     public override void Enter()
     {
         base.Enter();
+
+        AudioManager.Instance.PlaySFX(SFX.TreeDeath);
     }
 
     public override void Execute()

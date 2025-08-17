@@ -98,9 +98,11 @@ public class AttackManager : MonoBehaviour
 
     }
 
-    public void AirAttack()
+    public void AirAttack(float _rangeMod)
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.AttackRange * 1.5f, enemyLayer);
+        AudioManager.Instance.PlaySFX(SFX.SwordSwing);
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.AttackRange * _rangeMod, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             //적 공격 메소드
@@ -111,18 +113,18 @@ public class AttackManager : MonoBehaviour
         }
     }
 
-    public void SpecialMeleeAttack()
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.AttackRange * 1.6f, enemyLayer);
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            //적 공격 메소드
-            CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
-            player.Stats.DoDamage(enemyStats);
-            ApplyMeleeEffect(enemy.gameObject);
-            Debug.Log($"Hit Enemy: {enemy.name}");
-        }
-    }
+    //public void SpecialMeleeAttack()
+    //{
+    //    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(airAttPos.position, player.AttackRange * 1.6f, enemyLayer);
+    //    foreach (Collider2D enemy in hitEnemies)
+    //    {
+    //        //적 공격 메소드
+    //        CharacterStats enemyStats = enemy.GetComponent<CharacterStats>();
+    //        player.Stats.DoDamage(enemyStats);
+    //        ApplyMeleeEffect(enemy.gameObject);
+    //        Debug.Log($"Hit Enemy: {enemy.name}");
+    //    }
+    //}
 
     public void SpecialRangedAttack()
     {
@@ -131,6 +133,8 @@ public class AttackManager : MonoBehaviour
 
     public void DashAttack(bool isright)
     {
+        AudioManager.Instance.PlaySFX(SFX.SwordSwing);
+
         dashPos = transform.position + (isright ? Vector3.right : Vector3.left) * 3.3f + new Vector3 (0,0.75f);
         Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(dashPos, new Vector2(6.6f, 1.4f), 0f, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
@@ -145,6 +149,8 @@ public class AttackManager : MonoBehaviour
 
     public void MeleeAttack(float _rangeMod)
     {
+        AudioManager.Instance.PlaySFX(SFX.SwordSwing);
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attPos.position, player.AttackRange * _rangeMod, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {

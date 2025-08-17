@@ -21,6 +21,9 @@ public class PauseUI : UIBase
         // 게임 일시 정지 해제
         GameManager.Instance.PauseGame(false);
 
+        // 모든 열린 UI 닫기
+        UIManager.Instance.CloseAllOpenUI();
+
         // 로비로 돌아가기
         UIManager.Instance.Fade(Color.black, 0f, 1f, 0.5f, 0f, false, () =>
         {
@@ -30,6 +33,13 @@ public class PauseUI : UIBase
 
     public void OnClickQuitButton()
     {
+        // 게임 일시 정지 해제
+        GameManager.Instance.PauseGame(false);
+
+        // 모든 열린 UI 닫기
+        UIManager.Instance.CloseAllOpenUI();
+
+        // 게임 종료
         UIManager.Instance.Fade(Color.black, 0f, 1f, 0.5f, 0f, false, () =>
         {
             GameManager.Instance.QuitGame();

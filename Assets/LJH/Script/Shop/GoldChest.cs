@@ -10,10 +10,6 @@ public class GoldChest : MonoBehaviour
     public GameObject goldPrefab;
     public Transform dropPoint;
     
-    [Header("오디오")]
-    [SerializeField] private AudioClip openSound;
-    private AudioSource audioSource;
-    
     [Header("이미지")]
     [SerializeField] private Sprite openedSprite;
     private SpriteRenderer sr;
@@ -23,7 +19,6 @@ public class GoldChest : MonoBehaviour
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetOpened()
@@ -38,8 +33,7 @@ public class GoldChest : MonoBehaviour
         isOpened = true;
         int amount = GetRandomGold();
         SpawnGold(amount);
-        if (audioSource != null && openSound != null)
-            audioSource.PlayOneShot(openSound);
+        AudioManager.Instance.PlaySFX(SFX.BoxOpen);
         SetOpened();
         StartCoroutine(DestroyAfterDelay(3f));
     }

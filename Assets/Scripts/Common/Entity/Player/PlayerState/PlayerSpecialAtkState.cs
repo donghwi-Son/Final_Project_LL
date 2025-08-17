@@ -14,7 +14,7 @@ public class PlayerSpecialAtkState : State<PlayerController>
         switch (owner.attackMode)
         {
             case AttackMode.Melee:
-                owner.AttackManager.SpecialMeleeAttack();
+                owner.AttackManager.AirAttack(1.6f);
                 break;
             case AttackMode.Ranged:
                 owner.AttackManager.SpecialRangedAttack();

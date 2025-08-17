@@ -12,7 +12,7 @@ public class PlayerAirAtkState : State<PlayerController>
 
         owner.CanDoubleJump = false;
         owner.CanAirAttack = false;
-        owner.AttackManager.AirAttack();
+        owner.AttackManager.AirAttack(1.5f);
     }
 
     public override void Execute()
