@@ -255,6 +255,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1173,7 +1186,48 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      End Portal Open_0: -9013480466962050287
+      End Portal Open_1: -5951465893144145165
+      End Portal Open_10: 5645395565785345636
+      End Portal Open_11: 5934221083385137883
+      End Portal Open_12: -5731642681084619445
+      End Portal Open_13: -1192260803509644055
+      End Portal Open_14: 2502678848142713630
+      End Portal Open_15: -3265771540842994610
+      End Portal Open_16: 2996877932842135656
+      End Portal Open_17: -358405513372501616
+      End Portal Open_18: 6380776326523153831
+      End Portal Open_19: -5563866999740683132
+      End Portal Open_2: 4101758247924072267
+      End Portal Open_20: 2242615433416338241
+      End Portal Open_21: 5165640367345361488
+      End Portal Open_22: 1457736253495920701
+      End Portal Open_23: -7678725575920021315
+      End Portal Open_24: -7290995486414246877
+      End Portal Open_25: 5335298695411347513
+      End Portal Open_26: -7426508410700016387
+      End Portal Open_27: 8165858855774307866
+      End Portal Open_28: -5511348588016967091
+      End Portal Open_29: 2904396390910179582
+      End Portal Open_3: 8098069700649775407
+      End Portal Open_30: 2270253631791042674
+      End Portal Open_31: 4491899651889538230
+      End Portal Open_32: -4430824806132475326
+      End Portal Open_33: 1715156239499205451
+      End Portal Open_34: -3000197712457341772
+      End Portal Open_35: -7616600502086013895
+      End Portal Open_36: -6680499965873470167
+      End Portal Open_37: -1861260279288265895
+      End Portal Open_38: -3003228442059769290
+      End Portal Open_39: -3074103085796612395
+      End Portal Open_4: -6761298249856769705
+      End Portal Open_40: -8923860675087826682
+      End Portal Open_5: 8892970835322241530
+      End Portal Open_6: -4558900400978708064
+      End Portal Open_7: -4790783078172379922
+      End Portal Open_8: -5824513772393894016
+      End Portal Open_9: 1390783697132053160
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
