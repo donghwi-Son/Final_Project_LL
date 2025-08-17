@@ -211,6 +211,8 @@ public class BossTaoist : Enemy
         GameObject projectile = Instantiate(rangeAttackObj, rangeAttackPoint.position, Quaternion.Euler(0, 0, laserAngle - 90)); // 보정각도 추가
         projectile.GetComponent<ProjectileBase>().SetParentsStats(Stats);
         projectile.GetComponent<ProjectileBase>().SetDirection(fireDirection);
+
+        AudioManager.Instance.PlaySFX(SFX.Boom);
     }
 
     public void BossBeamTrajectorySwitch(bool value)
@@ -244,6 +246,8 @@ public class BossTaoist : Enemy
         GameObject beam = Instantiate(beamAttackObj, beamAttackPoint.position, Quaternion.Euler(0, 0, laserAngle));
         beam.GetComponent<ProjectileBase>().SetParentsStats(Stats);
         beam.GetComponent<ProjectileBase>().SetDirection(fireDirection);
+
+        AudioManager.Instance.PlaySFX(SFX.Laser);
 
         BossBeamTrajectorySwitch(false);
     }

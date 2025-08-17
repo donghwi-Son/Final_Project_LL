@@ -27,7 +27,8 @@ public class BossTaoistBeamAttack : State<BossTaoist>
         {
             preheatTime -= Time.deltaTime;
             owner.BossBeamTrajectoryUpdate();
-            if(preheatTime <= 0)
+            owner.BossFlip();
+            if (preheatTime <= 0)
             {
                 stateType = 2;
             }
