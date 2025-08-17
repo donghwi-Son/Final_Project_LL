@@ -186,7 +186,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5459817805515854265}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 812431832883471405}
+        m_TargetAssemblyTypeName: LobbyUIController, Assembly-CSharp
+        m_MethodName: OnClickContinueButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2219886077523099126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,7 +1206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1330993454457026148}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 812431832883471405}
+        m_TargetAssemblyTypeName: LobbyUIController, Assembly-CSharp
+        m_MethodName: OnClickNewGameButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5517247181390363149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1339,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5132347200683960254}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 812431832883471405}
+        m_TargetAssemblyTypeName: LobbyUIController, Assembly-CSharp
+        m_MethodName: OnClickSettingsButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6102329454550756027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,4 +1696,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4108939340697501026}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 812431832883471405}
+        m_TargetAssemblyTypeName: LobbyUIController, Assembly-CSharp
+        m_MethodName: OnClickQuitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

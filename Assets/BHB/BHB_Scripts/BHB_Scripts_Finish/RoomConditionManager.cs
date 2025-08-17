@@ -1,18 +1,22 @@
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class RoomConditionManager : MonoBehaviour
 {
-    [SerializeField] private List<Enemy> enemies;           // 방에 있는 적들
+    [SerializeField] private Transform enemyGroup;          // 방에 있는 적들
     [SerializeField] private GameObject finishObject;       // 일반 Finish Group
     [SerializeField] private GameObject bossFinishObject;   // Boss Finish Group
     [SerializeField] private GameObject lootBox;
+
+    private int count;
 
     //private bool isBossRoom = false;
     private bool finishActivated = false;
 
     private void Start()
     {
+        if (enemyGroup != null) count = enemyGroup.childCount;
         if (finishObject != null) finishObject.SetActive(false);
         if (bossFinishObject != null) bossFinishObject.SetActive(false);
 
@@ -36,49 +40,38 @@ public class RoomConditionManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (enemies == null || enemies.Count == 0)
-        {
-            Debug.Log("[RoomConditionManager] 적 목록이 비어 있습니다.");
-            CreateNextRoom();
+        if (enemyGroup == null) return;
 
-            return;
-        }
-
-        foreach (var enemy in enemies)
+        foreach (Transform enemy in enemyGroup)
         {
-            if (enemy != null)
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            if (enemyScript != null)
             {
-                enemy.OnDie += OnEnemyDie;
+                enemyScript.OnDie += OnEnemyDie;
             }
         }
     }
 
     private void OnDisable()
     {
-        foreach (var enemy in enemies)
+        if (enemyGroup == null) return;
+
+        foreach (Transform enemy in enemyGroup)
         {
-            if (enemy != null)
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            if (enemyScript != null)
             {
-                enemy.OnDie -= OnEnemyDie;
+                enemyScript.OnDie -= OnEnemyDie;
             }
         }
     }
 
     private void OnEnemyDie()
     {
-        foreach (var enemy in enemies)
-        {
-            if (enemy != null && enemy.Stats.IsDead)
-            {
-                enemies.Remove(enemy);
-                Debug.Log($"[RoomConditionManager] 적 제거됨: {enemy.name}");
-
-                break;
-            }
-        }
+        count--;
 
         // 적이 모두 제거되었는지 확인
-        if (enemies.Count == 0 && !finishActivated)
+        if (count <= 0 && !finishActivated)
         {
             Debug.Log("[RoomConditionManager] 모든 적 제거됨, 다음 방 생성 조건 달성");
             CreateNextRoom();
