@@ -34059,6 +34059,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2782312025053362560}
     m_Modifications:
+    - target: {fileID: 1772100253799293492, guid: 85c29d46e97ffd64b9cb8c911a567f60, type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3516777340346542704, guid: 85c29d46e97ffd64b9cb8c911a567f60, type: 3}
       propertyPath: m_Name
       value: Boss Finish Group
