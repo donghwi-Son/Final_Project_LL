@@ -9,6 +9,8 @@ public class InGameUIController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsGameOver) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();

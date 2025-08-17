@@ -180,4 +180,20 @@ public class AudioManager : SingletonComponent<AudioManager>
             audioSourceItem.Value.volume = _volume;
         }
     }
+
+    public void MuteMusic(bool _mute)
+    {
+        foreach (var audioSourceItem in m_MusicPlayer)
+        {
+            audioSourceItem.Value.mute = _mute;
+        }
+    }
+
+    public void MuteSFX(bool _mute)
+    {
+        foreach (var audioSourceItem in m_SFXPlayer)
+        {
+            audioSourceItem.Value.mute = _mute;
+        }
+    }
 }
