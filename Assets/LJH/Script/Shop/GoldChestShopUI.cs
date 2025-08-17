@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,9 @@ public class GoldChestShopUI : MonoBehaviour
     [SerializeField] private Button smallChestButton;
     [SerializeField] private Button mediumChestButton;
     [SerializeField] private Button largeChestButton;
+    [SerializeField] private Image smallChestImage;
+    [SerializeField] private Image mediumChestImage;
+    [SerializeField] private Image largeChestImage;
 
     [Header("상자 프리펩")]
     [SerializeField] private GameObject smallChestPrefab;
@@ -21,6 +25,7 @@ public class GoldChestShopUI : MonoBehaviour
     
     [SerializeField]private AudioSource audioSource;
     [SerializeField]private AudioClip clip;
+    [SerializeField]private AudioClip buyclip;
     
     private float smallYOffset  = 0.40f;
     private float mediumYOffset = 0.05f;
@@ -37,11 +42,10 @@ public class GoldChestShopUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            
             if (StoreMan.PlayerInside)
             {
-                audioSource.PlayOneShot(clip);
                 panel.SetActive(!panel.activeSelf);
+                audioSource.PlayOneShot(clip);
             }
         }
     }
@@ -59,6 +63,18 @@ public class GoldChestShopUI : MonoBehaviour
         float yOff = GetDropYOffset(chestPrefab);
         Vector3 dropPosition = player.position + player.right * 5f + Vector3.down * yOff;
         Instantiate(chestPrefab, dropPosition, Quaternion.identity);
+
+        smallChestButton.interactable = false;
+        var color = smallChestImage.color;
+        color.a = 0.5f;
+        smallChestImage.color = color;
+        mediumChestButton.interactable = false;
+        mediumChestImage.color = color;
+        largeChestButton.interactable = false;
+        largeChestImage.color = color;
+        
+        StartCoroutine(Reset());
+        audioSource.PlayOneShot(buyclip);
     }
     
     private float GetDropYOffset(GameObject prefab)
@@ -68,5 +84,18 @@ public class GoldChestShopUI : MonoBehaviour
         if (prefab == largeChestPrefab)  return largeYOffset;
         
         return smallYOffset;
+    }
+
+    private IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(30f);
+        smallChestButton.interactable = true;
+        mediumChestButton.interactable = true;
+        largeChestButton.interactable = true;
+        var color = smallChestImage.color;
+        color.a = 1f;
+        smallChestImage.color = color;
+        mediumChestImage.color = color;
+        largeChestImage.color = color;
     }
 }

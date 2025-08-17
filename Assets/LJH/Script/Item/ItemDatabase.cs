@@ -56,7 +56,7 @@ public class ItemDatabase : MonoBehaviour
         Debug.Log($"[ItemDatabase] Loaded {_defs.Count} items.");
     }
     
-    public ItemDefinition GetDefinition(int idx)                                    //아이템 정보 조회하는 
+    public ItemDefinition GetDefinition(int idx)                                   
     {
         if (_defs != null && _defs.TryGetValue(idx, out var def))
             return def;
@@ -64,13 +64,11 @@ public class ItemDatabase : MonoBehaviour
         return null;
     }
     
-    // 전체 아이템 반환
     public IEnumerable<ItemDefinition> GetAllDefinitions()
     {
         return _defs.Values;
     }
-
-    // 특정 등급 아이템만 반환
+    
     public IEnumerable<ItemDefinition> GetDefinitionsByRarity(ItemInfo.ItemRarity rarity)
     {
         return _defs.Values.Where(d => d.rarity == rarity);
