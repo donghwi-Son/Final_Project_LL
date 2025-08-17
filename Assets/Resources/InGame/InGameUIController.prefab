@@ -1518,10 +1518,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SynergyToast
       objectReference: {fileID: 0}
-    - target: {fileID: 56978922859746606, guid: e510cd14bdea29244aa408d5b95ad717, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8660891961688846586, guid: e510cd14bdea29244aa408d5b95ad717, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1663,10 +1659,6 @@ PrefabInstance:
     - target: {fileID: 5680983218353631245, guid: afc675e7dfa51964d8f181be37c61457, type: 3}
       propertyPath: m_Name
       value: ItemToast
-      objectReference: {fileID: 0}
-    - target: {fileID: 5680983218353631245, guid: afc675e7dfa51964d8f181be37c61457, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
