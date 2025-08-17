@@ -23,10 +23,10 @@ public class FinishTrigger : MonoBehaviour
 
         if (targetRoom.type == StageType.Boss) return; 
 
-        if (!isReturning && targetRoom.type != StageType.Boss && !targetRoom.hasBeenVisited)
-        {
-            StageManager.Instance.stageCounter++;
-        }
+        //if (!isReturning && targetRoom.type != StageType.Boss && !targetRoom.hasBeenVisited)
+        //{
+        //    StageManager.Instance.stageCounter++;
+        //}
 
         if (nextRoom != null && nextRoom.type == StageType.Start) return;
 
