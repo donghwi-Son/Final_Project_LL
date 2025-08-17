@@ -9,6 +9,15 @@ public enum Music
 
 public enum SFX
 {
+    Hit,
+    SwordSwing,
+    Fire,
+    Boom,
+    PlayerDeath,
+    TreeDeath,
+    WispDeath,
+    Crow,
+    Laser,
     COUNT
 }
 

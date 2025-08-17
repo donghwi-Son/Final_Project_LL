@@ -23,6 +23,7 @@ public class BossTaoistDashAttack : State<BossTaoist>
             stateType = 2;
             owner.BossFlip();
             owner.DashAttackColliderSwitch(true);
+            AudioManager.Instance.PlaySFX(SFX.SwordSwing);
         }
         else if(stateType == 2)
         {

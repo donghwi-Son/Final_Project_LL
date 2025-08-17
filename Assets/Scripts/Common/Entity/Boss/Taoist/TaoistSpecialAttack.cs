@@ -58,6 +58,7 @@ public class TaoistSpecialAttack : MonoBehaviour
                 if (activeTiming <= 0)
                 {
                     BossBeamTrajectorySwitch(false);
+                    AudioManager.Instance.PlaySFX(SFX.Laser);
                     isActive = true;
                     cd.enabled = true;
                     sr.enabled = true;

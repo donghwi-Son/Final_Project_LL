@@ -24,6 +24,7 @@ public class BossTaoistMeleeAttack : State<BossTaoist>
             stateType = 2;
             triggerCalled = false;
             owner.MeleeAttackColliderSwitch(true);
+            AudioManager.Instance.PlaySFX(SFX.SwordSwing);
         }
         else if (stateType == 2 && triggerCalled)
         {

@@ -179,10 +179,10 @@ public class StageManager : MonoBehaviour
         if (backDir.HasValue)
         {
             Vector2Int dir = backDir.Value;
-            if (dir == Vector2Int.up) spawnOffset = Vector3.down * 1f;
-            else if (dir == Vector2Int.down) spawnOffset = Vector3.up * 1f;
-            else if (dir == Vector2Int.left) spawnOffset = Vector3.right * 1f;
-            else if (dir == Vector2Int.right) spawnOffset = Vector3.left * 1f;
+            if (dir == Vector2Int.up) spawnOffset = Vector3.down * 2f + Vector3.right * 1f;
+            else if (dir == Vector2Int.down) spawnOffset = Vector3.up * 2f;
+            else if (dir == Vector2Int.left) spawnOffset = Vector3.right * 2f;
+            else if (dir == Vector2Int.right) spawnOffset = Vector3.left * 2f;
         }
 
         // 최종 위치 이동
