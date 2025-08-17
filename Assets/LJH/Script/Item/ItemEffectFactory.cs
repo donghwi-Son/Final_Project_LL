@@ -42,7 +42,6 @@ public class ItemEffectFactory : MonoBehaviour
 
             case ItemInfo.ItemUpgradeType.SkillUpgrade:
                 Debug.Log("스킬 강화 아이템 획득");
-                // PlayerTest.Instance.AddSkill(e.skillType);
                 success = true;
                 break;
 
