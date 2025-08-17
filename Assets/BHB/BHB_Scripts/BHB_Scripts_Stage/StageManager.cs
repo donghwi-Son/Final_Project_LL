@@ -93,6 +93,15 @@ public class StageManager : MonoBehaviour
                                     trigger.direction = dir;
                                     trigger.isBoss = false;
                                 }
+
+                                // 타일맵 블록 비활성화
+                                string blockName = GetBlockName(dir);
+                                Transform block = data.instance.transform.Find(blockName);
+                                if (block != null)
+                                {
+                                    block.gameObject.SetActive(false);
+                                    Debug.Log($"[StageManager] Deactivated {blockName} for {data.type} room at {grid}");
+                                }
                             }
                         }
                     }
@@ -305,6 +314,15 @@ public class StageManager : MonoBehaviour
                                 trigger.direction = dir;
                                 trigger.isBoss = false;
                                 trigger.isReturning = backDir.HasValue && dir == backDir.Value;
+                            }
+
+                            // 타일맵 블록 비활성화
+                            string blockName = GetBlockName(dir);
+                            Transform block = roomData.instance.transform.Find(blockName);
+                            if (block != null && finish.gameObject.activeSelf)
+                            {
+                                block.gameObject.SetActive(false);
+                                Debug.Log($"[StageManager] Deactivated {blockName} for {roomData.type} room at {nextGrid}");
                             }
                         }
                     }
@@ -543,6 +561,16 @@ public class StageManager : MonoBehaviour
         if (dir == Vector2Int.down) return prefix + "Down Finish";
         if (dir == Vector2Int.left) return prefix + "Left Finish";
         if (dir == Vector2Int.right) return prefix + "Right Finish";
+        return null;
+    }
+
+    // 방향에 따른 타일맵 블록 이름 반환 함수
+    private string GetBlockName(Vector2Int dir)
+    {
+        if (dir == Vector2Int.up) return "Top Block";
+        if (dir == Vector2Int.down) return "Down Block";
+        if (dir == Vector2Int.left) return "Left Block";
+        if (dir == Vector2Int.right) return "Right Block";
         return null;
     }
 
