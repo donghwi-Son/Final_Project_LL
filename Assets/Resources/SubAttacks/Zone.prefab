@@ -52,6 +52,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   radius: 2.5
+  muzzle: {fileID: 3761819044473934108}
   damage: 10
 --- !u!212 &5879330563868191033
 SpriteRenderer:

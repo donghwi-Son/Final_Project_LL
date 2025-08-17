@@ -198,7 +198,7 @@ MonoBehaviour:
     statType: 0
     statAmount: 0
     attackEnhance: 0
-    skillType: 1
+    skillType: 0
     subAttackType: 0
     subAttackCooldown: 0
     utilityType: 1
@@ -212,7 +212,7 @@ MonoBehaviour:
     subAttackType: 0
     subAttackCooldown: 0
     utilityType: 2
-    utilityAmount: 3
+    utilityAmount: 30
   - index: 20
     upgradeType: 4
     statType: 0

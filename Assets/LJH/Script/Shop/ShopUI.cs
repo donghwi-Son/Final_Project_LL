@@ -41,6 +41,8 @@ public class ShopUI : MonoBehaviour
     
     [SerializeField]private AudioSource audioSource;
     [SerializeField]private AudioClip clip;
+    
+    private bool stockGenerated = false;
 
     void Awake()
     {
@@ -78,14 +80,22 @@ public class ShopUI : MonoBehaviour
         Debug.Log(shopOpen+"오픈 함수");
         if (shopOpen)
         {
-            // 10% 확률로 암시장
-            isBlackMarket = Random.value < blackMarketChance;
-            Debug.Log(isBlackMarket ? "암시장 개방 할인 적용됨." : "일반 상점 개방.");
-            ApplyBackgroundTheme();
-            
-            rerollCount = 0;
-            UpdateRerollUI();
-            GenerateShop();
+            if (!stockGenerated)
+            {
+                isBlackMarket = Random.value < blackMarketChance;
+                ApplyBackgroundTheme();
+
+                rerollCount = 0;
+                UpdateRerollUI();
+
+                GenerateShop();
+                stockGenerated = true;
+            }
+            else
+            {
+                ApplyBackgroundTheme();
+                UpdateRerollUI();
+            }
         }
     }
     
@@ -177,6 +187,7 @@ public class ShopUI : MonoBehaviour
         
         UpdateRerollUI();
         GenerateShop();
+        stockGenerated = true;
     }
     
     void ApplyBackgroundTheme()
