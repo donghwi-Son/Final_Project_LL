@@ -4,24 +4,26 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    public TMP_Text hp;
-    public Image hpBar;
-    public Image DashCool;
+    [SerializeField] private TMP_Text hp;
+    [SerializeField] private Image hpBar;
+    [SerializeField] private Image DashCool;
+    [SerializeField] private TextMeshProUGUI goldText;
 
     private PlayerController player;
 
-    void Start()
+    private void Start()
     {
         player = FindFirstObjectByType<PlayerController>();
-
     }
-    void Update()
+
+    private void Update()
     {
         UpdateCooldownUI();
         UpdateHP();
+        UpdateGold();
     }
 
-    void UpdateCooldownUI()
+    private void UpdateCooldownUI()
     {
         if (player == null) return;
 
@@ -42,7 +44,7 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    void UpdateHP()
+    private void UpdateHP()
     {
         if (player == null) return;
         int currenthp = player.Stats.currentHealth;
@@ -54,4 +56,10 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+    private void UpdateGold()
+    {
+        if (player == null) return;
+        int gold = PlayerGold.Instance.gold;
+        goldText.text = gold.ToString();
+    }
 }

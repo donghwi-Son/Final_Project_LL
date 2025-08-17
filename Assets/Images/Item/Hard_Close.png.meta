@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6508d33d483ab4741be39a81e9759f50
+guid: 53fc2f902512f4c4da783b58b6de5acc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3765068781827018883
-    second: Hard_Open_0
+      213: 3629519542027908496
+    second: Hard_Close_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,11 +109,50 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hard_Open_0
+      name: Hard_Close_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38056bfdb16304430800000000000000
-      internalID: 3765068781827018883
+      spriteID: 09579ef1bc4ae5230800000000000000
+      internalID: 3629519542027908496
       vertices: []
       indices: 
       edges: []
@@ -148,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hard_Open_0: 3765068781827018883
+      Hard_Close_0: 3629519542027908496
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

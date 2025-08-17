@@ -49,11 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542b5e948a458274c8e58215e1163909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyGroup: {fileID: 6708895353198931793}
   finishObject: {fileID: 5726256626503046723}
-  bossFinishObject: {fileID: 0}
-  normalBox: {fileID: 0}
-  hardBox: {fileID: 0}
-  bossBox: {fileID: 4971941640613570004}
+  bossFinishObject: {fileID: 5726256626503046723}
+  lootBox: {fileID: 4971941640613570004}
 --- !u!1 &124560473656893110
 GameObject:
   m_ObjectHideFlags: 0
