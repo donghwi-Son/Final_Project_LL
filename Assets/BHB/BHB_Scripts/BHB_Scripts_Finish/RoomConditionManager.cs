@@ -129,6 +129,9 @@ public class RoomConditionManager : MonoBehaviour
 
     public void ActivateBossFinish()
     {
+        // boss finish 조건을 추가
+        if (StageManager.Instance.stageCounter < StageManager.Instance.maxStageCounter) return;
+
         if (bossFinishObject != null)
         {
             Debug.Log("[RoomConditionManager] bossFinishObject 확인: " + bossFinishObject.name);
