@@ -49,7 +49,7 @@ public class ShopEntryUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             PlayerGold.Instance.gold -= price;
             PlayerInventory.Instance.OnItemAcquired(def.index);
-            ItemEffectFactory.ApplyEffect(def);
+            //ItemEffectFactory.ApplyEffect(def);
             audioSource.PlayOneShot(buySound);
             
             // 인벤토리 UI 새로고침
