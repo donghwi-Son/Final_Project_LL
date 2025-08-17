@@ -105,7 +105,13 @@ public class StageManager : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log($"[StageManager] No neighbor in direction {dir} for {data.type} room at {grid}");
+                            string finishName = GetFinishName(dir, false);
+                            Transform finish = finishGroup?.Find(finishName);
+                            if (finish != null)
+                            {
+                                finish.gameObject.SetActive(false);
+                                Debug.Log($"[StageManager] Deactivated {finishName} for {data.type} room at {grid} (no neighbor)");
+                            }
                         }
                     }
                 }
@@ -126,7 +132,6 @@ public class StageManager : MonoBehaviour
                 }
             }
 
-            // 모든 방에서 Boss Finish Group 비활성화
             Transform bossFinishGroup = data.instance.transform.Find("Boss Finish Group");
             if (bossFinishGroup != null)
             {
@@ -308,8 +313,23 @@ public class StageManager : MonoBehaviour
                                     trigger.isBoss = false;
                                     trigger.isReturning = backDir.HasValue && dir == backDir.Value;
                                 }
+                                Debug.Log($"[StageManager] Activated {finishName} for {roomData.type} room at {nextGrid}");
                             }
                         }
+                        else
+                        {
+                            Debug.LogWarning($"[StageManager] Finish {finishName} not found in {roomData.type} room at {nextGrid}");
+                        }
+                    }
+                }
+                else
+                {
+                    string finishName = GetFinishName(dir, false);
+                    Transform finish = finishGroup?.Find(finishName);
+                    if (finish != null)
+                    {
+                        finish.gameObject.SetActive(false);
+                        Debug.Log($"[StageManager] Deactivated {finishName} for {roomData.type} room at {nextGrid} (no neighbor)");
                     }
                 }
             }

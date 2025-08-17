@@ -16,9 +16,42 @@ public class RoomConditionManager : MonoBehaviour
         {
             if (finishObject != null)
             {
-                finishObject.SetActive(true);
+                // Finish Group의 개별 Finish를 방향별로 확인
+                Transform finishGroup = finishObject.transform;
+                Vector2Int[] directions = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+                foreach (var dir in directions)
+                {
+                    string finishName = GetFinishName(dir, false);
+                    Transform finish = finishGroup.Find(finishName);
+                    if (data.HasNeighbor(dir))
+                    {
+                        if (finish != null)
+                        {
+                            finish.gameObject.SetActive(true);
+                            var trigger = finish.GetComponent<FinishTrigger>();
+                            if (trigger != null)
+                            {
+                                trigger.direction = dir;
+                                trigger.isBoss = false;
+                            }
+                            Debug.Log($"[RoomConditionManager] Activated {finishName} for {data.type} room at {data.GetGridPosition()}");
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"[RoomConditionManager] Finish {finishName} not found in {data.type} room at {data.GetGridPosition()}");
+                        }
+                    }
+                    else
+                    {
+                        if (finish != null)
+                        {
+                            finish.gameObject.SetActive(false);
+                            Debug.Log($"[RoomConditionManager] Deactivated {finishName} for {data.type} room at {data.GetGridPosition()} (no neighbor)");
+                        }
+                    }
+                }
                 finishActivated = true;
-                Debug.Log($"[RoomConditionManager] Auto-activated Finish for {data.type} room");
+                Debug.Log($"[RoomConditionManager] Processed connected Finish objects for {data.type} room at {data.GetGridPosition()}");
             }
             else
             {
@@ -36,7 +69,6 @@ public class RoomConditionManager : MonoBehaviour
             if (finishObject != null)
             {
                 finishObject.SetActive(false);
-                Debug.Log("[RoomConditionManager] Deactivated finishObject for non-Event/Store room");
             }
             if (lootBox != null)
             {
@@ -48,7 +80,7 @@ public class RoomConditionManager : MonoBehaviour
         if (bossFinishObject != null)
         {
             bossFinishObject.SetActive(false);
-            Debug.Log("[RoomConditionManager] Boss Finish Object deactivated on Start");
+            Debug.Log($"[RoomConditionManager] Boss Finish Object deactivated on Start: {bossFinishObject.name}");
         }
         else
         {
@@ -110,7 +142,7 @@ public class RoomConditionManager : MonoBehaviour
             }
             else
             {
-                ActivateNormalFinish(); // 일반 방 클리어 시 무조건 ActivateNormalFinish 호출
+                ActivateNormalFinish();
             }
         }
         finishActivated = true;
@@ -142,7 +174,6 @@ public class RoomConditionManager : MonoBehaviour
             Debug.Log($"[RoomConditionManager] Boss Finish not activated: stageCounter ({StageManager.Instance.stageCounter}) < maxStageCounter ({StageManager.Instance.maxStageCounter})");
             return;
         }
-
         if (bossFinishObject != null)
         {
             Debug.Log($"[RoomConditionManager] bossFinishObject 확인: {bossFinishObject.name}");
@@ -165,5 +196,15 @@ public class RoomConditionManager : MonoBehaviour
         {
             Debug.LogWarning("[RoomConditionManager] Boss Finish 오브젝트가 null임");
         }
+    }
+
+    private string GetFinishName(Vector2Int dir, bool isBoss)
+    {
+        string prefix = isBoss ? "Boss " : "";
+        if (dir == Vector2Int.up) return prefix + "Top Finish";
+        if (dir == Vector2Int.down) return prefix + "Down Finish";
+        if (dir == Vector2Int.left) return prefix + "Left Finish";
+        if (dir == Vector2Int.right) return prefix + "Right Finish";
+        return null;
     }
 }
