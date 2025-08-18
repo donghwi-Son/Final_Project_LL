@@ -56,6 +56,7 @@ public class StageManager : MonoBehaviour
         origin = generator.origin;
         maxStageCount = maxStageCountFromInitializer;
         stageCounter = startingStageCounter;
+        Debug.Log($"[StageManager] InitializeStages: stageCounter={stageCounter}, maxStageCounter={maxStageCounter}");
 
         foreach (var pair in placedRooms)
         {
@@ -64,6 +65,7 @@ public class StageManager : MonoBehaviour
             GameObject prefab = GetPrefabByType(data.type);
             if (prefab == null)
             {
+                Debug.LogWarning($"[StageManager] No prefab for {data.type} at {grid}");
                 continue;
             }
 
@@ -98,6 +100,11 @@ public class StageManager : MonoBehaviour
                                     trigger.direction = dir;
                                     trigger.isBoss = false;
                                 }
+                                Debug.Log($"[StageManager] Activated {finishName} for {data.type} room at {grid}");
+                            }
+                            else
+                            {
+                                Debug.LogWarning($"[StageManager] Finish {finishName} not found in {data.type} room at {grid}");
                             }
                         }
                         else
@@ -107,9 +114,14 @@ public class StageManager : MonoBehaviour
                             if (finish != null)
                             {
                                 finish.gameObject.SetActive(false);
+                                Debug.Log($"[StageManager] Deactivated {finishName} for {data.type} room at {grid} (no neighbor)");
                             }
                         }
                     }
+                }
+                else
+                {
+                    Debug.LogWarning($"[StageManager] Finish Group not found in {data.type} room at {grid}");
                 }
             }
             else
@@ -137,6 +149,11 @@ public class StageManager : MonoBehaviour
                         trigger.direction = Vector2Int.zero;
                         trigger.isBoss = true;
                     }
+                    Debug.Log($"[StageManager] Force-deactivated Boss Finish 1 for room at {grid}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[StageManager] Boss Finish 1 not found in room at {grid}");
                 }
             }
         }
@@ -162,40 +179,39 @@ public class StageManager : MonoBehaviour
     // 플레이어가 이전 방에서 다음 방으로 이동하는 부분을 다루는 영역
     public void MovePlayerTo(Vector2Int nextGrid)
     {
-        if (!placedRooms.ContainsKey(nextGrid))
-        {
-            return;
-        }
-
+        if (!placedRooms.ContainsKey(nextGrid)) return;
         Vector2Int prevGrid = currentGrid;
         currentGrid = nextGrid;
 
         StageData nextRoomData = placedRooms[nextGrid];
-        if (!nextRoomData.hasBeenVisited && nextRoomData.type != StageType.Start)
+        if (!nextRoomData.hasBeenVisited)
         {
-            stageCounter++;
+            stageCounter++; // 방문하지 않은 방으로 이동 시 증가
         }
-
+        // 보스 맵
         if (nextRoomData.type == StageType.Boss)
         {
+            MiniMapManager.instance?.ShowOnlyBossRoom(nextRoomData.GetGridPosition(), nextRoomData.type);
             return;
         }
 
+        // 플레이어 부모를 먼저 null로 설정
         if (player.parent != null)
         {
             player.SetParent(null);
         }
-
+        // 런타임마다 생성되는 모든 방은 최초 비활성화 상태
         foreach (var room in placedRooms.Values)
         {
             if (room.instance != null)
                 room.instance.SetActive(false);
         }
-
+        // 방에 플레이어가 들어갈 때마다 활성화
         StageData roomData = placedRooms[nextGrid];
         if (roomData?.instance == null) return;
-        roomData.instance.SetActive(true);
-
+        if (roomData.instance != null)
+            roomData.instance.SetActive(true);
+        // backDir(이전 방) 가장 먼저 계산
         Vector2Int? backDir = null;
         if (prevGrid != Vector2Int.zero && prevGrid != nextGrid)
         {
@@ -205,9 +221,9 @@ public class StageManager : MonoBehaviour
                 backDir = new Vector2Int(-fromDir.x, -fromDir.y);
             }
         }
-
+        // FinishGroup 참조하여 자식인 상하좌우 Finish 활성화
         Transform finishGroup = roomData.instance.transform.Find("Finish Group");
-
+        // SpawnPoint 위치: backDir 기반 Entry Finish 사용
         Transform spawn = null;
         if (backDir.HasValue && finishGroup != null)
         {
@@ -218,12 +234,11 @@ public class StageManager : MonoBehaviour
                 spawn = entryFinish;
             }
         }
-
         if (spawn == null)
         {
             spawn = roomData.instance.transform.Find("SpawnPoint");
         }
-
+        // 끼임 방지용 오프셋 계산
         Vector3 spawnOffset = Vector3.zero;
         if (backDir.HasValue)
         {
@@ -233,15 +248,9 @@ public class StageManager : MonoBehaviour
             else if (dir == Vector2Int.left) spawnOffset = Vector3.right * 2f;
             else if (dir == Vector2Int.right) spawnOffset = Vector3.left * 2f;
         }
-
+        // 최종 위치 이동
         player.position = spawn != null ? spawn.position + spawnOffset : roomData.instance.transform.position;
-
-        if (roomData.type == StageType.Boss)
-        {
-            MiniMapManager.instance?.ShowOnlyBossRoom(roomData.GetGridPosition(), roomData.type);
-            return;
-        }
-
+        // 미니맵 처리
         MiniMapManager.instance?.RevealRoom(nextGrid, roomData.type);
         if (backDir.HasValue)
         {
@@ -249,25 +258,47 @@ public class StageManager : MonoBehaviour
         }
         MiniMapManager.instance?.ShowLinesFromThisRoom(nextGrid, roomData);
         MiniMapManager.instance.HighlightIcon(currentGrid);
-
         roomData.hasBeenVisited = true;
         TrySetupRoomCondition(roomData.instance);
-
-        if (roomData.type == StageType.Start) return;
-
+        // Start Room으로 되돌아가기 허용 (포탈 처리 생략 제거)
+        // if (roomData.type == StageType.Start) return;  <-- 제거
+        // Boss 조건 처리
+        if (stageCounter >= maxStageCounter)
+        {
+            if (finishGroup != null)
+                foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
+            Transform bossGroup = roomData.instance.transform.Find("Boss Finish Group");
+            if (bossGroup != null)
+            {
+                foreach (Transform child in bossGroup)
+                    child.gameObject.SetActive(false);
+                Transform bossFinish = bossGroup.Find("Boss Finish 1");
+                if (bossFinish != null)
+                {
+                    bossFinish.gameObject.SetActive(true);
+                    var trigger = bossFinish.GetComponent<FinishTrigger>();
+                    if (trigger != null)
+                    {
+                        trigger.direction = Vector2Int.zero;
+                        trigger.isBoss = true;
+                    }
+                }
+            }
+        }
+        // 일반 Finish 활성화
         if (finishGroup != null)
         {
+            // Event와 Store 방은 Finish를 비활성화하지 않고 유지
             if (roomData.type != StageType.Event && roomData.type != StageType.Store)
             {
                 foreach (Transform child in finishGroup) child.gameObject.SetActive(false);
             }
-
             Vector2Int[] directions = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
             foreach (var dir in directions)
             {
-                if (roomData.type == StageType.Start && (dir == Vector2Int.up || dir == Vector2Int.down))
-                    continue;
-
+                // Start 방에서 상하 방향도 허용 (제한 제거)
+                // if (roomData.type == StageType.Start && (dir == Vector2Int.up || dir == Vector2Int.down))
+                //     continue; <-- 제거
                 if (roomData.HasNeighbor(dir))
                 {
                     Vector2Int neighborGrid = nextGrid + dir;
@@ -290,15 +321,6 @@ public class StageManager : MonoBehaviour
                                 }
                             }
                         }
-                    }
-                }
-                else
-                {
-                    string finishName = GetFinishName(dir, false);
-                    Transform finish = finishGroup?.Find(finishName);
-                    if (finish != null)
-                    {
-                        finish.gameObject.SetActive(false);
                     }
                 }
             }
