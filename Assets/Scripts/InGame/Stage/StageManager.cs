@@ -36,6 +36,10 @@ public class StageManager : MonoBehaviour
     private Vector3 origin;
     private Vector2Int currentGrid;
 
+    public System.Action OnEnterBoss;
+    public string BossKey;
+    public GameObject BossObj;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -508,6 +512,8 @@ public class StageManager : MonoBehaviour
 
         Transform spawn = bossRoomData.instance.transform.Find("SpawnPoint");
         player.position = spawn != null ? spawn.position : bossRoomData.instance.transform.position;
+
+        OnEnterBoss?.Invoke();
     }
 
     // 보스 방 미리 생성해놓고 비활성화 시키기

@@ -16,20 +16,34 @@ public class EndFinishTrigger : MonoBehaviour
         cd = GetComponent<Collider2D>();
     }
 
-    void Start()
-    {
-        if (endFinishObject != null)
-        {
-            endFinishObject.SetActive(false);
-            cd.enabled = false;
-        }
-    }
+    //void Start()
+    //{
+    //    if (endFinishObject != null)
+    //    {
+    //        endFinishObject.SetActive(false);
+    //        cd.enabled = false;
+    //    }
+    //}
 
-    void Update()
-    {
-        if (activated) return;
+    //private void OnEnable()
+    //{
+    //    if (boss != null)
+    //    {
+    //        boss.GetComponent<Enemy>().OnDie += OnBossDie;
+    //    }
+    //}
 
-        if (boss == null)
+    //private void OnDisable()
+    //{
+    //    if (boss != null)
+    //    {
+    //        boss.GetComponent<Enemy>().OnDie -= OnBossDie;
+    //    }
+    //}
+
+    private void OnBossDie()
+    {
+        if (!activated)
         {
             endFinishObject.SetActive(true);
             cd.enabled = true;
