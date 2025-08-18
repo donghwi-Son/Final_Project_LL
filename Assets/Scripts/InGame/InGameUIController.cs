@@ -51,6 +51,7 @@ public class InGameUIController : MonoBehaviour
         if (bossUI != null)
         {
             bossUI.SetActive(true);
+            bossUI.GetComponent<BossUI>().Show();
         }
         else
         {

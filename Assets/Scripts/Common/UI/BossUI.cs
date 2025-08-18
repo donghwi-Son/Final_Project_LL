@@ -12,7 +12,7 @@ public class BossUI : MonoBehaviour
     [SerializeField] private GameObject boss;
     [SerializeField] private TextMeshProUGUI bossNameText;
 
-    private void Start()
+    public void Show()
     {
         hpObject.SetActive(false);
 
