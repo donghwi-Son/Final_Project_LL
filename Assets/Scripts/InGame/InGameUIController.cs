@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class InGameUIController : MonoBehaviour
 {
-    [SerializeField] private GameObject bossUI;
-
     private void Start()
     {
         UIManager.Instance.Fade(Color.black, 1f, 0f, 0.5f, 0f, true);
@@ -17,16 +15,6 @@ public class InGameUIController : MonoBehaviour
         {
             TogglePause();
         }
-    }
-
-    private void OnEnable()
-    {
-        StageManager.Instance.OnEnterBoss += ShowBossUI;
-    }
-
-    private void OnDisable()
-    {
-        StageManager.Instance.OnEnterBoss -= ShowBossUI;
     }
 
     private void TogglePause()
@@ -44,18 +32,5 @@ public class InGameUIController : MonoBehaviour
         }
 
         GameManager.Instance.PauseGame(pause);
-    }
-
-    private void ShowBossUI()
-    {
-        if (bossUI != null)
-        {
-            bossUI.SetActive(true);
-            bossUI.GetComponent<BossUI>().Show();
-        }
-        else
-        {
-            Debug.LogWarning("Boss UI is not assigned in InGameUIController.");
-        }
     }
 }

@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 
 // M 키 전체 미니맵 패널 UI 전담 클래스
 public class MiniMapManager : MonoBehaviour
