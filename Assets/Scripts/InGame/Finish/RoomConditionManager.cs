@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomConditionManager : MonoBehaviour
@@ -6,10 +7,12 @@ public class RoomConditionManager : MonoBehaviour
     [SerializeField] private GameObject finishObject;
     [SerializeField] private GameObject bossFinishObject;
     [SerializeField] private GameObject lootBox;
+    [SerializeField] private List<GameObject> boss;
+    [SerializeField] private bool isBossRoom = false;
     private int count;
     private bool finishActivated = false;
 
-    private void Start()
+    private void Awake()
     {
         var data = StageManager.Instance?.GetStageDataByInstance(gameObject);
         if (data != null && (data.type == StageType.Event || data.type == StageType.Store))
@@ -61,6 +64,42 @@ public class RoomConditionManager : MonoBehaviour
             {
                 lootBox.GetComponent<BoxCollider2D>().enabled = true;
                 lootBox.SetActive(true);
+            }
+        }
+        else if (isBossRoom)
+        {
+            count = 1; // 보스 방은 항상 1개의 적이 존재
+
+            int randomIndex = Random.Range(0, boss.Count);
+            GameObject selectedBoss = Instantiate(boss[randomIndex], enemyGroup.position, Quaternion.identity);
+
+            selectedBoss.transform.SetParent(enemyGroup, true);
+
+            StageManager.Instance.BossObj = selectedBoss;
+
+            switch (randomIndex)
+            {
+                case 0:
+                    StageManager.Instance.BossKey = "Boss1";
+                    Debug.Log("[RoomConditionManager] Boss: Crow");
+                    break;
+                case 1:
+                    StageManager.Instance.BossKey = "Boss2";
+                    Debug.Log("[RoomConditionManager] Boss: Taoist");
+                    break;
+                default:
+                    Debug.LogWarning("[RoomConditionManager] Unknown boss type selected");
+                    break;
+            }
+
+            if (bossFinishObject != null)
+            {
+                bossFinishObject.SetActive(false);
+            }
+            if (lootBox != null)
+            {
+                lootBox.SetActive(false);
+                lootBox.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
         else
